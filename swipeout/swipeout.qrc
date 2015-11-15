@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>ui/Main.qml</file>
+        <file>ui/MainPage.qml</file>
+        <file>ui/BlockItem.qml</file>
+        <file>ui/LevelSelectorPage.qml</file>
+        <file>ui/LevelSelectorItem.qml</file>
+        <file>ui/BoardPage.qml</file>
+    </qresource>
+</RCC>
+

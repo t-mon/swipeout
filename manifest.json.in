@@ -1,0 +1,15 @@
+{
+    "name": "swipeout.t-mon",
+    "description": "description of swipeout",
+    "architecture": "@CLICK_ARCH@",
+    "title": "Swipeout",
+    "hooks": {
+        "swipeout": {
+            "apparmor": "swipeout/swipeout.apparmor",
+            "desktop": "swipeout/swipeout.desktop"
+        }
+    },
+    "version": "0.1.0",
+    "maintainer": "Simon Stürz <stuerz.simon@gmail.com>",
+    "framework": "ubuntu-sdk-15.04"
+}

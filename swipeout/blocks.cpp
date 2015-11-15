@@ -10,13 +10,20 @@ QList<Block *> Blocks::blocks()
     return m_blocks;
 }
 
-Block *Blocks::block(int id)
+Block *Blocks::get(int id)
 {
     foreach (Block *block, m_blocks) {
         if (block->id() == id)
             return block;
     }
     return NULL;
+}
+
+void Blocks::resetBlockPositions()
+{
+    foreach (Block *block, m_blocks) {
+        block->resetPosition();
+    }
 }
 
 int Blocks::rowCount(const QModelIndex &parent) const
@@ -57,7 +64,7 @@ QHash<int, QByteArray> Blocks::roleNames() const
     QHash<int, QByteArray> roles;
     roles[IdRole] = "blockId";
     roles[XRole] = "blockX";
-    roles[XRole] = "blockY";
+    roles[YRole] = "blockY";
     roles[WidthRole] = "blockWidth";
     roles[HeightRole] = "blockHeigth";
     return roles;

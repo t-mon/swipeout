@@ -7,6 +7,7 @@
 #include <QDir>
 
 #include "gameengine.h"
+#include "block.h"
 
 int main(int argc, char *argv[])
 {
@@ -25,6 +26,7 @@ int main(int argc, char *argv[])
     parser.process(app);
 
     qmlRegisterType<GameEngine>("Swipeout", 1, 0, "GameEngine");
+    qmlRegisterUncreatableType<Board>("Swipeout", 1, 0, "Board", "Can't create this in QML. Get it from the GameEngine.");
     qmlRegisterUncreatableType<Level>("Swipeout", 1, 0, "Level", "Can't create this in QML. Get it from Levels.");
     qmlRegisterUncreatableType<Levels>("Swipeout", 1, 0, "Levels", "Can't create this in QML. Get it from the GameEngine.");
     qmlRegisterUncreatableType<Block>("Swipeout", 1, 0, "Block", "Can't create this in QML. Get it from Blocks.");

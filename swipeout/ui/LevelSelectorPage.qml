@@ -19,9 +19,9 @@ Page {
             height: levelGrid.cellHeight
             levelId: model.levelId
             onSelected: {
-                var level = gameEngine.levels.level(levelId)
+                var level = gameEngine.levels.get(levelId)
                 pageStack.push(Qt.resolvedUrl("BoardPage.qml"), { level: level } )
-                //gameEngine.startGame(model.levelId)
+                gameEngine.loadLevel(model.levelId)
             }
         }
     }

@@ -6,7 +6,8 @@
 
 GameEngine::GameEngine(QObject *parent) :
     QObject(parent),
-    m_levels(new Levels(this))
+    m_levels(new Levels(this)),
+    m_board(new Board(this))
 {
     qDebug() << "Created game engine";
 }
@@ -26,6 +27,18 @@ void GameEngine::setLevelDir(const QString &levelDir)
 Levels *GameEngine::levels()
 {
     return m_levels;
+}
+
+Board *GameEngine::board()
+{
+    return m_board;
+}
+
+void GameEngine::loadLevel(const int &id)
+{
+    qDebug() << "Start level" << id;
+    Level *level = m_levels->get(id);
+    m_board->loadLevel(level);
 }
 
 void GameEngine::loadLevels()
@@ -62,12 +75,12 @@ void GameEngine::loadLevels()
         foreach (const QVariant &blockVariant, levelData.value("blocks").toList()) {
             QVariantMap blockData = blockVariant.toMap();
             qDebug() << "      -> loading block" << blockData.value("id").toInt() << "...";
-            Block *block = new Block(level);
-            block->setId(blockData.value("id").toInt());
-            block->setX(blockData.value("x").toInt());
-            block->setY(blockData.value("y").toInt());
-            block->setWidth(blockData.value("width").toInt());
-            block->setHeight(blockData.value("height").toInt());
+            Block *block = new Block(blockData.value("id").toInt(),
+                                     blockData.value("x").toInt(),
+                                     blockData.value("y").toInt(),
+                                     blockData.value("height").toInt(),
+                                     blockData.value("width").toInt(),
+                                     level);
             level->addBlock(block);
         }
 

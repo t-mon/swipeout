@@ -21,7 +21,7 @@ public:
     explicit Levels(QObject *parent = 0);
 
     QList<Level *> levels();
-    Q_INVOKABLE Level *level(int id);
+    Q_INVOKABLE Level *get(int id);
 
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;

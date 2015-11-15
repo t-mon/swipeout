@@ -10,7 +10,7 @@ QList<Level *> Levels::levels()
     return m_levels;
 }
 
-Level *Levels::level(int id)
+Level *Levels::get(int id)
 {
     foreach (Level *level, m_levels) {
         if (level->id() == id)

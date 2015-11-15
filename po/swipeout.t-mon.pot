@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-15 16:10+0100\n"
+"POT-Creation-Date: 2015-11-15 22:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,12 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:7
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:7
-#: /home/timon/development/swipeout/build-swipeout-Desktop-Debug/swipeout.desktop.h:1
-msgid "Swipeout"
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:16
+msgid "Reset board"
 msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelSelectorPage.qml:7
 msgid "Levels"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:7
+#: /home/timon/development/swipeout/build-swipeout-Desktop-Debug/swipeout.desktop.h:1
+msgid "Swipeout"
 msgstr ""

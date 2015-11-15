@@ -1,6 +1,14 @@
 #include "block.h"
 
-Block::Block(QObject *parent) : QObject(parent)
+Block::Block(const int &id, const int &x, const int &y, const int &height, const int &width, QObject *parent) :
+    QObject(parent),
+    m_id(id),
+    m_startX(x),
+    m_x(x),
+    m_startY(y),
+    m_y(y),
+    m_height(height),
+    m_width(width)
 {
 
 }
@@ -15,6 +23,11 @@ void Block::setId(const int &id)
     m_id = id;
 }
 
+int Block::startX() const
+{
+    return m_startX;
+}
+
 int Block::x() const
 {
     return m_x;
@@ -23,6 +36,12 @@ int Block::x() const
 void Block::setX(const int &x)
 {
     m_x = x;
+    emit xChanged();
+}
+
+int Block::startY() const
+{
+    return m_startY;
 }
 
 int Block::y() const
@@ -33,6 +52,7 @@ int Block::y() const
 void Block::setY(const int &y)
 {
     m_y = y;
+    emit yChanged();
 }
 
 int Block::width() const
@@ -53,5 +73,12 @@ int Block::height() const
 void Block::setHeight(const int &height)
 {
     m_height = height;
+}
+
+void Block::resetPosition()
+{
+    setX(m_startX);
+    setY(m_startY);
+    emit positionResetted();
 }
 

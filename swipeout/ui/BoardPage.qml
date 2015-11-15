@@ -3,39 +3,65 @@ import Ubuntu.Components 1.3
 import Swipeout 1.0
 
 Page {
-    id: boardPage
-    title: i18n.tr("Swipeout")
+    id: root
+    title: i18n.tr(level.name)
 
-    property var level: 0
+    property var level: null
+    property real borderWidth: units.gu(1.5)
+    property real cellSize: Math.min(width / level.width , height / level.height)
 
-    property real gridSizeX: level.width
-    property real gridSizeY: level.height
-    property real cellSize: Math.min(width / gridSizeX, height / gridSizeY)
-
-    UbuntuShape {
-        id: board
-        anchors.centerIn: parent
-        anchors.margins: units.gu(2)
-        width:  gridSizeX * cellSize
-        height:  gridSizeY * cellSize
-
-        backgroundColor: UbuntuColors.warmGrey
-
-        Repeater {
-            anchors.fill: parent
-            model: level.blocks
-            delegate: BlockItem {
-                cellSize: boardPage.cellSize
-                blockId: model.blockId
-                blockX: model.blockX
-                blockY: model.blockY
-                blockWidth: model.blockWidth
-                blockHeight: model.blockHeigth
-            }
+    head.actions: Action {
+        id: addDeviceAction
+        iconName: "reload"
+        text: i18n.tr("Reset board")
+        onTriggered: {
+            gameEngine.board.resetBoard()
+            //for (int i = 0; i < )
 
         }
+    }
 
 
+    Column {
+        anchors.centerIn: parent
+        UbuntuShape {
+            id: boardBackground
+            width: level.width * cellSize
+            height: level.height * cellSize
 
+            backgroundColor: UbuntuColors.darkGrey
+
+            UbuntuShape {
+                id: board
+                anchors.fill: parent
+                anchors.margins: borderWidth
+                backgroundColor: UbuntuColors.warmGrey
+
+                Rectangle {
+                    id: exitShape
+                    color: board.backgroundColor
+                    width: 2 * borderWidth
+                    height: Math.min(parent.width / level.width , parent.height / level.height)
+                    anchors.right: parent.right
+                    anchors.rightMargin: -borderWidth
+                    anchors.top: parent.top
+                    anchors.topMargin: level.blocks.get(0).y * height
+                }
+
+                Repeater {
+                    id: blockRepeater
+                    anchors.fill: parent
+                    model: level.blocks
+                    delegate: BlockItem {
+                        cellSize: Math.min(board.width / level.width , board.height / level.height)
+                        block: level.blocks.get(model.blockId)
+                    }
+                }
+            }
+        }
+
+        Text {
+            text: gameEngine.board.moveCount
+        }
     }
 }

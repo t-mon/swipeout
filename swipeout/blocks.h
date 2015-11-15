@@ -22,7 +22,8 @@ public:
     explicit Blocks(QObject *parent = 0);
 
     QList<Block *> blocks();
-    Q_INVOKABLE Block *block(int id);
+    Q_INVOKABLE Block *get(int id);
+    Q_INVOKABLE void resetBlockPositions();
 
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;

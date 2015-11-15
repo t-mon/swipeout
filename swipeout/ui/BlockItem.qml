@@ -5,19 +5,48 @@ import Swipeout 1.0
 Item {
     id: root
     property real cellSize
-    property int blockId
-    property int blockWidth
-    property int blockHeight
-    property int blockX
-    property int blockY
+    property var block: null
+
+
+    Connections {
+        target: block
+        onPositionResetted: {
+            blockShape.x = block.startX * cellSize
+            blockShape.y = block.startY * cellSize
+        }
+    }
 
     UbuntuShape {
-        width: blockWidth * cellSize
-        height: blockHeight * cellSize
-        color: "#888888"
+        id: blockShape
+        width: block.width * cellSize
+        height: block.height * cellSize
+        color: block.id == 0 ? UbuntuColors.red : "#888888"
 
-        x: blockX * app.cellSize
-        y: blockY * app.cellSize
+        x: block.x * cellSize
+        y: block.y * cellSize
+
+        Behavior on x {
+            id: xBehavior
+            enabled: false
+            NumberAnimation {
+                duration: 200
+                easing.type: Easing.InOutQuad
+            }
+        }
+
+        Behavior on y {
+            id: yBehavior
+            enabled: false
+            NumberAnimation {
+                duration: 200
+                easing.type: Easing.InOutQuad
+            }
+        }
+
+        Text {
+            anchors.centerIn: parent
+            text: blockId
+        }
 
         MouseArea {
             id: elementMouseArea
@@ -32,21 +61,31 @@ Item {
 
             onPressed: {
                 console.log("calculate limits")
-                if (width > height) {
-                    // check x limits
+                xBehavior.enabled = false
+                yBehavior.enabled = false
 
+                if (block.width > block.height) {
+                    elementMouseArea.drag.minimumX = gameEngine.board.calculateLeftLimit(block.id) * root.cellSize
+                    elementMouseArea.drag.maximumX = gameEngine.board.calculateRightLimit(block.id) * root.cellSize
                 } else {
-                    // check y limits
-
+                    elementMouseArea.drag.minimumY = gameEngine.board.calculateUpperLimit(block.id) * root.cellSize
+                    elementMouseArea.drag.maximumY = gameEngine.board.calculateLowerLimit(block.id) * root.cellSize
                 }
             }
-        }
 
-        onXChanged: {
-            //console.log("x ="+ x)
-        }
-        onYChanged: {
-            //console.log("y ="+ x)
+            onReleased: {
+                if (block.width > block.height) {
+                    xBehavior.enabled = true
+                    var newX = Math.round(blockShape.x / cellSize)
+                    gameEngine.board.moveBlockX(block.id, newX)
+                    blockShape.x = newX * cellSize
+                } else {
+                    yBehavior.enabled = true
+                    var newY = Math.round(blockShape.y / cellSize)
+                    gameEngine.board.moveBlockY(block.id, newY)
+                    blockShape.y = newY * cellSize
+                }
+            }
         }
     }
 }

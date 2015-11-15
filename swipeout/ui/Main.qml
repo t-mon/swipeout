@@ -15,7 +15,6 @@ MainView {
         levelDir: levelDirectory
     }
 
-
     PageStack {
         id: pageStack
         anchors.fill: parent

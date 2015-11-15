@@ -5,6 +5,13 @@
     "height": 6,
     "blocks": [
         {
+            "id": 0,
+            "width": 2,
+            "height": 1,
+            "x": 0,
+            "y": 3
+        },
+        {
             "id": 1,
             "width": 2,
             "height": 1,

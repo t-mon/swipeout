@@ -49,38 +49,47 @@ void BoardCell::setBlockId(const int &blockId)
     m_blockId = blockId;
 }
 
-Board::Board(QObject *parent) :
-    QObject(parent)
+bool BoardCell::operator==(const BoardCell &other)
 {
+    return x() == other.x() && y() == other.y() && blockId() == other.blockId();
+}
 
+Board::Board(QObject *parent) :
+    QObject(parent),
+    m_level(0)
+{
 }
 
 void Board::clearLevel()
 {
-    qDebug() << "Clear board";
-    m_board.clear();
-    m_board.resize(0);
+    qDebug() << " -> Clear board";
+    m_boardGrid.clear();
+    if (m_level)
+        m_level->destroyBlocks();
     setMoveCount(0);
 }
 
-void Board::resetBoard()
+void Board::restartLevel()
 {
     if (m_level) {
         setMoveCount(0);
         m_level->blocks()->resetBlockPositions();
     }
+    m_moveStack.clear();
     initBoard();
 }
 
 void Board::loadLevel(Level *level)
 {
     clearLevel();
+    qDebug() << "Start level" << level->id();
 
     m_level = level;
-    m_level->blocks()->resetBlockPositions();
+    m_level->loadBlocks();
+    emit levelChanged();
 
     initBoard();
-    printBoard();
+    printBoard(m_boardGrid);
 }
 
 Level *Board::level()
@@ -98,12 +107,12 @@ int Board::calculateLeftLimit(const int &blockId)
     Block *block = m_level->blocks()->get(blockId);
     int leftLimit = 0;
     for (int i = block->x() - 1; i >= 0; i--) {
-        if (m_board[i][block->y()].blockId() != -1) {
+        if (m_boardGrid[i][block->y()].blockId() != -1) {
             leftLimit = i + 1;
             break;
         }
     }
-    qDebug() << "left limit" << leftLimit;
+    //qDebug() << "left limit" << leftLimit;
     return leftLimit;
 }
 
@@ -114,7 +123,7 @@ int Board::calculateRightLimit(const int &blockId)
     bool freePath = true;
     int rightLimit = m_level->width() - block->width();
     for (int i = block->x() + block->width(); i < m_level->width(); i++) {
-        if (m_board[i][block->y()].blockId() != -1) {
+        if (m_boardGrid[i][block->y()].blockId() != -1) {
             rightLimit = i - block->width();
             freePath = false;
             break;
@@ -124,7 +133,7 @@ int Board::calculateRightLimit(const int &blockId)
     if (block->id() == 0 && freePath)
         rightLimit += 2;
 
-    qDebug() << "right limit" << rightLimit;
+    //qDebug() << "right limit" << rightLimit;
     return rightLimit;
 }
 
@@ -133,12 +142,12 @@ int Board::calculateUpperLimit(const int &blockId)
     Block *block = m_level->blocks()->get(blockId);
     int upperLimit = 0;
     for (int i = block->y() - 1; i >= 0; i--) {
-        if (m_board[block->x()][i].blockId() != -1) {
+        if (m_boardGrid[block->x()][i].blockId() != -1) {
             upperLimit = i + 1;
             break;
         }
     }
-    qDebug() << "upper limit" << upperLimit;
+    //qDebug() << "upper limit" << upperLimit;
     return  upperLimit;
 }
 
@@ -147,13 +156,81 @@ int Board::calculateLowerLimit(const int &blockId)
     Block *block = m_level->blocks()->get(blockId);
     int lowerLimit = m_level->height() - block->height();
     for (int i = block->y() + block->height(); i < m_level->height(); i++) {
-        if (m_board[block->x()][i].blockId() != -1) {
+        if (m_boardGrid[block->x()][i].blockId() != -1) {
             lowerLimit = i - block->height();
             break;
         }
     }
-    qDebug() << "lower limit" << lowerLimit;
+    //qDebug() << "lower limit" << lowerLimit;
     return lowerLimit;
+}
+
+void Board::moveBlock(const int &id, const int &delta, const bool &fromUndo)
+{
+    Block *block = m_level->blocks()->get(id);
+
+    if (block->orientation() == Block::Horizontal) {
+        moveBlockX(id, block->x() + delta);
+    } else {
+        moveBlockY(id, block->y() + delta);
+    }
+
+    if (!fromUndo && delta != 0)
+        m_moveStack.push(Move(id, delta));
+}
+
+void Board::undoMove()
+{
+    if (m_moveStack.isEmpty())
+        return;
+
+    qDebug() << "Undo move:" ;
+    Move move = m_moveStack.pop();
+    int undoDelta = move.delta() * -1;
+
+    moveBlock(move.id(), undoDelta, true);
+}
+
+void Board::printBoard(const QVector<QVector<BoardCell> > &boardGrid)
+{
+    QString output("------------------------------\n");
+    for (int y = 0; y < boardGrid.length(); y++) {
+        for (int x = 0; x < boardGrid[y].length(); x++) {
+            if (boardGrid[x][y].blockId() == -1)
+                output.append(" x");
+            else
+                output.append(" " + QString::number(boardGrid[x][y].blockId()));
+        }
+        output.append("\n");
+    }
+    qDebug() << output;
+}
+
+void Board::initBoard()
+{
+    m_boardGrid.clear();
+    m_boardGrid.resize(m_level->width());
+    for (int x = 0; x < m_level->width(); x++) {
+        QVector<BoardCell> line;
+        line.resize(m_level->height());
+        for (int y = 0; y < m_level->height(); y++) {
+            line[y] = (BoardCell(x, y));
+        }
+        m_boardGrid[x] = line;
+    }
+
+    // set blocks
+    foreach (Block *block, m_level->blocks()->blocks()) {
+        if (block->width() > block->height()) {
+            for (int i = 0; i < block->width(); i++) {
+                m_boardGrid[block->x()  + i][block->y()].setBlockId(block->id());
+            }
+        } else {
+            for (int i = 0; i < block->height(); i++) {
+                m_boardGrid[block->x()][block->y() + i].setBlockId(block->id());
+            }
+        }
+    }
 }
 
 void Board::moveBlockX(const int &id, const int &newX)
@@ -161,6 +238,7 @@ void Board::moveBlockX(const int &id, const int &newX)
     Block *block = m_level->blocks()->get(id);
 
     if (newX < 0 || newX + block->width() > m_level->width()) {
+        qDebug() << "Level completed with" << m_moveCount << "moves!!";
         emit levelCompleted();
         return;
     }
@@ -168,17 +246,19 @@ void Board::moveBlockX(const int &id, const int &newX)
     if (block->x() == newX)
         return;
 
+    // remove old block position
     for (int i = 0; i < block->width(); i++) {
-        m_board[block->x()  + i][block->y()].setBlockId(-1);
+        m_boardGrid[block->x()  + i][block->y()].setBlockId(-1);
     }
     qDebug() << "move block" << id <<  " -> x = " << newX;
     block->setX(newX);
 
+    // add new block position
     for (int i = 0; i < block->width(); i++) {
-        m_board[block->x()  + i][block->y()].setBlockId(block->id());
+        m_boardGrid[block->x()  + i][block->y()].setBlockId(block->id());
     }
 
-    printBoard();
+    printBoard(m_boardGrid);
     setMoveCount(m_moveCount + 1);
 }
 
@@ -190,62 +270,21 @@ void Board::moveBlockY(const int &id, const int &newY)
         return;
 
     for (int i = 0; i < block->height(); i++) {
-        m_board[block->x()][block->y()  + i].setBlockId(-1);
+        m_boardGrid[block->x()][block->y()  + i].setBlockId(-1);
     }
     qDebug() << "move block to y = " << newY;
     block->setY(newY);
 
     for (int i = 0; i < block->height(); i++) {
-        m_board[block->x()][block->y()  + i].setBlockId(block->id());
+        m_boardGrid[block->x()][block->y()  + i].setBlockId(block->id());
     }
 
-    printBoard();
+    printBoard(m_boardGrid);
     setMoveCount(m_moveCount + 1);
-}
-
-void Board::initBoard()
-{
-    m_board.clear();
-    m_board.resize(m_level->width());
-    for (int x = 0; x < m_level->width(); x++) {
-        QVector<BoardCell> line;
-        line.resize(m_level->height());
-        for (int y = 0; y < m_level->height(); y++) {
-            line[y] = (BoardCell(x, y));
-        }
-        m_board[x] = line;
-    }
-    // set blocks
-    foreach (Block *block, m_level->blocks()->blocks()) {
-        if (block->width() > block->height()) {
-            for (int i = 0; i < block->width(); i++) {
-                m_board[block->x()  + i][block->y()].setBlockId(block->id());
-            }
-        } else {
-            for (int i = 0; i < block->height(); i++) {
-                m_board[block->x()][block->y() + i].setBlockId(block->id());
-            }
-        }
-    }
 }
 
 void Board::setMoveCount(const int &moveCount)
 {
     m_moveCount = moveCount;
     emit moveCountChanged();
-}
-
-void Board::printBoard()
-{
-    QString output("------------------------------\n");
-    for (int y = 0; y < m_board.length(); y++) {
-        for (int x = 0; x < m_board[y].length(); x++) {
-            if (m_board[x][y].blockId() == -1)
-                output.append(" x");
-            else
-                output.append(" " + QString::number(m_board[x][y].blockId()));
-        }
-        output.append("\n");
-    }
-    qDebug() << output;
 }

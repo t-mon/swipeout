@@ -37,8 +37,12 @@ class Level : public QObject
 public:
     explicit Level(QObject *parent = 0);
 
+    QVariantList blockData() const;
+    void setBlockData(const QVariantList &blockData);
+
     Blocks *blocks();
-    void addBlock(Block *block);
+    void loadBlocks();
+    void destroyBlocks();
 
     QString name() const;
     void setName(const QString &name);
@@ -53,6 +57,7 @@ public:
     void setHeight(const int &height);
 
 private:
+    QVariantList m_blockData;
     Blocks *m_blocks;
     QString m_name;
     int m_id;

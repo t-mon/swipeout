@@ -25,6 +25,14 @@ Blocks::Blocks(QObject *parent) :
 {
 }
 
+Blocks::Blocks(Blocks *other):
+    QAbstractListModel(other->parent())
+{
+    foreach (Block *block, other->blocks()) {
+        addBlock(new Block(block));
+    }
+}
+
 QList<Block *> Blocks::blocks()
 {
     return m_blocks;
@@ -37,6 +45,11 @@ Block *Blocks::get(int id)
             return block;
     }
     return NULL;
+}
+
+int Blocks::count() const
+{
+    return m_blocks.count();
 }
 
 void Blocks::resetBlockPositions()
@@ -68,6 +81,8 @@ QVariant Blocks::data(const QModelIndex &index, int role) const
         return block->height();
     } else if (role == WidthRole) {
         return block->width();
+    } else if (role == ColorRole) {
+        return block->color();
     }
     return QVariant();
 }
@@ -79,6 +94,14 @@ void Blocks::addBlock(Block *block)
     endInsertRows();
 }
 
+void Blocks::deleteAllBlocks()
+{
+    beginResetModel();
+    qDeleteAll(m_blocks);
+    m_blocks.clear();
+    endResetModel();
+}
+
 QHash<int, QByteArray> Blocks::roleNames() const
 {
     QHash<int, QByteArray> roles;
@@ -87,5 +110,6 @@ QHash<int, QByteArray> Blocks::roleNames() const
     roles[YRole] = "blockY";
     roles[WidthRole] = "blockWidth";
     roles[HeightRole] = "blockHeigth";
+    roles[ColorRole] = "blockColor";
     return roles;
 }

@@ -36,19 +36,24 @@ public:
         XRole,
         YRole,
         WidthRole,
-        HeightRole
+        HeightRole,
+        ColorRole
     };
 
     explicit Blocks(QObject *parent = 0);
+    Blocks(Blocks *other);
 
     QList<Block *> blocks();
     Q_INVOKABLE Block *get(int id);
+    Q_INVOKABLE int count() const;
+
     Q_INVOKABLE void resetBlockPositions();
 
     int rowCount(const QModelIndex & parent = QModelIndex()) const;
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
 
     void addBlock(Block* block);
+    void deleteAllBlocks();
 
 protected:
     QHash<int, QByteArray> roleNames() const;

@@ -1,29 +1,63 @@
 {
     "name": "Level 1",
     "id": 1,
-    "width": 8,
-    "height": 8,
-    "exitLine": 3,
+    "width": 6,
+    "height": 6,
     "blocks": [
         {
             "id": 0,
             "width": 2,
             "height": 1,
-            "x": 0,
-            "y": 3
+            "x": 1,
+            "y": 2
         },
         {
             "id": 1,
             "width": 1,
-            "height": 3,
-            "x": 4,
-            "y": 2
+            "height": 2,
+            "x": 0,
+            "y": 4
         },
         {
             "id": 2,
+            "width": 1,
+            "height": 3,
+            "x": 0,
+            "y": 1
+        },
+        {
+            "id": 3,
+            "width": 2,
+            "height": 1,
+            "x": 0,
+            "y": 0
+        },
+        {
+            "id": 4,
+            "width": 1,
+            "height": 3,
+            "x": 3,
+            "y": 1
+        },
+        {
+            "id": 5,
+            "width": 1,
+            "height": 3,
+            "x": 5,
+            "y": 0
+        },
+        {
+            "id": 6,
             "width": 3,
             "height": 1,
-            "x": 1,
+            "x": 2,
+            "y": 5
+        },
+        {
+            "id": 7,
+            "width": 2,
+            "height": 1,
+            "x": 4,
             "y": 4
         }
     ]

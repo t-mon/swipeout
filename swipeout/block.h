@@ -22,6 +22,7 @@
 #define BLOCK_H
 
 #include <QObject>
+#include <QColor>
 
 class Block : public QObject
 {
@@ -29,14 +30,22 @@ class Block : public QObject
     Q_PROPERTY(int id READ id CONSTANT)
     Q_PROPERTY(int x READ x WRITE setX NOTIFY xChanged)
     Q_PROPERTY(int y READ y WRITE setY NOTIFY yChanged)
+    Q_PROPERTY(QColor color READ color NOTIFY colorChanged)
     Q_PROPERTY(int startX READ startX CONSTANT)
     Q_PROPERTY(int startY READ startY CONSTANT)
     Q_PROPERTY(int width READ width CONSTANT)
     Q_PROPERTY(int height READ height CONSTANT)
 
-
 public:
+    enum Orientation {
+        Horizontal,
+        Vertical
+    };
+
     explicit Block(const int &id,  const int &x, const int &y, const int &height, const int &width, QObject *parent = 0);
+    Block(Block* other);
+
+    Orientation orientation() const;
 
     int id() const;
     void setId(const int &id);
@@ -55,6 +64,8 @@ public:
     int height()const;
     void setHeight(const int &height);
 
+    QColor color() const;
+
     void resetPosition();
 
 private:
@@ -66,9 +77,14 @@ private:
     int m_height;
     int m_width;
 
+    QColor m_color;
+
+    void setColor();
+
 signals:
     void xChanged();
     void yChanged();
+    void colorChanged();
     void positionResetted();
 
 };

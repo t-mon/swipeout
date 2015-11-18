@@ -23,6 +23,7 @@
 
 #include <QObject>
 #include <QVector>
+#include <QStack>
 
 #include "level.h"
 
@@ -37,12 +38,26 @@ public:
     int blockId() const;
     void setBlockId(const int &blockId);
 
+    bool operator==(const BoardCell &other);
+
 private:
     int m_x;
     int m_y;
     int m_blockId;
 };
 
+class Move
+{
+public:
+    Move(const int &id = 0, const int &delta = 0): m_id(id), m_delta(delta) {}
+
+    int id() const { return m_id; }
+    int delta() const { return m_delta; }
+
+private:
+    int m_id;
+    int m_delta;
+};
 
 class Board : public QObject
 {
@@ -54,30 +69,36 @@ public:
     explicit Board(QObject *parent = 0);
 
     void clearLevel();
-    Q_INVOKABLE void resetBoard();
+    Q_INVOKABLE void restartLevel();
     void loadLevel(Level *level);
 
     Level *level();
 
     int moveCount() const;
 
-    QVector<QVector<BoardCell> > m_board;
-
     Q_INVOKABLE int calculateLeftLimit(const int &blockId);
     Q_INVOKABLE int calculateRightLimit(const int &blockId);
     Q_INVOKABLE int calculateUpperLimit(const int &blockId);
     Q_INVOKABLE int calculateLowerLimit(const int &blockId);
 
-    Q_INVOKABLE void moveBlockX(const int &id, const int &newX);
-    Q_INVOKABLE void moveBlockY(const int &id, const int &newY);
+    Q_INVOKABLE void moveBlock(const int &id, const int &delta, const bool &fromUndo = false);
+    Q_INVOKABLE void undoMove();
+
+    static void printBoard(const QVector<QVector<BoardCell> > &boardGrid);
 
 private:
+    QVector<QVector<BoardCell> > m_boardGrid;
     Level *m_level;
     int m_moveCount;
 
+    QStack<Move> m_moveStack;
+
     void initBoard();
+
+    void moveBlockX(const int &id, const int &newX);
+    void moveBlockY(const int &id, const int &newY);
+
     void setMoveCount(const int &moveCount);
-    void printBoard();
 
 signals:
     void moveCountChanged();

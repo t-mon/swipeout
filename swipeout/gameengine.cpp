@@ -19,6 +19,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 #include "gameengine.h"
+#include "boardsolver.h"
 
 #include <QDir>
 #include <QDebug>
@@ -54,11 +55,24 @@ Board *GameEngine::board()
     return m_board;
 }
 
-void GameEngine::loadLevel(const int &id)
+bool GameEngine::startLevel(const int &id)
 {
-    qDebug() << "Start level" << id;
     Level *level = m_levels->get(id);
+    if (!level) {
+        qWarning() << "Could not find level" << id;
+        return false;
+    }
+
     m_board->loadLevel(level);
+    return true;
+}
+
+void GameEngine::solveBoard()
+{
+    BoardSolver *solver = new BoardSolver(m_board, this);
+    connect(solver, &BoardSolver::solutionFound, this, &GameEngine::onSolverFinished);
+    connect(solver, &BoardSolver::finished, solver, &QObject::deleteLater);
+    solver->start();
 }
 
 void GameEngine::loadLevels()
@@ -91,19 +105,12 @@ void GameEngine::loadLevels()
         level->setId(levelData.value("id").toInt());
         level->setHeight(levelData.value("height").toInt());
         level->setWidth(levelData.value("width").toInt());
-
-        foreach (const QVariant &blockVariant, levelData.value("blocks").toList()) {
-            QVariantMap blockData = blockVariant.toMap();
-            qDebug() << "      -> loading block" << blockData.value("id").toInt() << "...";
-            Block *block = new Block(blockData.value("id").toInt(),
-                                     blockData.value("x").toInt(),
-                                     blockData.value("y").toInt(),
-                                     blockData.value("height").toInt(),
-                                     blockData.value("width").toInt(),
-                                     level);
-            level->addBlock(block);
-        }
-
+        level->setBlockData(levelData.value("blocks").toList());
         m_levels->addLevel(level);
     }
+}
+
+void GameEngine::onSolverFinished(const QStack<Move> &solution)
+{
+
 }

@@ -27,8 +27,15 @@ MainView {
     objectName: "mainView"
     applicationName: "swipeout.t-mon"
 
+    property bool debug: true
+
     height: units.gu(70)
     width: units.gu(40)
+
+    Component.onCompleted: {
+        i18n.domain = "swipeout.t-mon"
+        Theme.name = "Ubuntu.Components.Themes.SuruDark"
+    }
 
     GameEngine {
         id: gameEngine

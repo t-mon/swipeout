@@ -32,7 +32,7 @@ Item {
         anchors.fill: parent
         anchors.margins: units.gu(1)
 
-        Text {
+        Label {
             anchors.centerIn: parent
             text: levelId
         }

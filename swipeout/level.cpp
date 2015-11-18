@@ -20,6 +20,8 @@
 
 #include "level.h"
 
+#include "QDebug"
+
 Level::Level(QObject *parent) :
     QObject(parent),
     m_blocks(new Blocks(this))
@@ -27,14 +29,43 @@ Level::Level(QObject *parent) :
 
 }
 
+QVariantList Level::blockData() const
+{
+    return m_blockData;
+}
+
+void Level::setBlockData(const QVariantList &blockData)
+{
+    m_blockData = blockData;
+}
+
 Blocks *Level::blocks()
 {
     return m_blocks;
 }
 
-void Level::addBlock(Block *block)
+void Level::loadBlocks()
 {
-    m_blocks->addBlock(block);
+    if (m_blocks->count() > 0)
+        m_blocks->deleteAllBlocks();
+
+    foreach (const QVariant &blockVariant, m_blockData) {
+        QVariantMap blockData = blockVariant.toMap();
+        qDebug() << "      -> loading block" << blockData.value("id").toInt() << "...";
+        Block *block = new Block(blockData.value("id").toInt(),
+                                 blockData.value("x").toInt(),
+                                 blockData.value("y").toInt(),
+                                 blockData.value("height").toInt(),
+                                 blockData.value("width").toInt(),
+                                 this);
+        m_blocks->addBlock(block);
+    }
+}
+
+void Level::destroyBlocks()
+{
+    qDebug() << " -> Destroy Blocks of level" << id();
+    m_blocks->deleteAllBlocks();
 }
 
 QString Level::name() const

@@ -11,7 +11,8 @@ SOURCES += main.cpp \
     levels.cpp \
     block.cpp \
     blocks.cpp \
-    board.cpp
+    board.cpp \
+    boardsolver.cpp
 
 RESOURCES += swipeout.qrc
 
@@ -33,5 +34,6 @@ HEADERS += \
     levels.h \
     block.h \
     blocks.h \
-    board.h
+    board.h \
+    boardsolver.h
 

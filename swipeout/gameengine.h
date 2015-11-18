@@ -42,7 +42,8 @@ public:
     Levels *levels();
     Board *board();
 
-    Q_INVOKABLE void loadLevel(const int &id);
+    Q_INVOKABLE bool startLevel(const int &id);
+    Q_INVOKABLE void solveBoard();
 
 private:
     QString m_levelDir;
@@ -50,6 +51,9 @@ private:
     Board *m_board;
 
     void loadLevels();
+
+private slots:
+    void onSolverFinished(const QStack<Move> &solution);
 
 signals:
     void levelDirChanged();

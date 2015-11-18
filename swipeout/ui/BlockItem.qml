@@ -34,13 +34,19 @@ Item {
             blockShape.x = block.startX * cellSize
             blockShape.y = block.startY * cellSize
         }
+        onXChanged: {
+            blockShape.x = block.x * cellSize
+        }
+        onYChanged: {
+            blockShape.y = block.y * cellSize
+        }
     }
 
     UbuntuShape {
         id: blockShape
         width: block.width * cellSize
         height: block.height * cellSize
-        color: block.id == 0 ? UbuntuColors.red : "#888888"
+        backgroundColor: block.color
 
         x: block.x * cellSize
         y: block.y * cellSize
@@ -63,7 +69,8 @@ Item {
             }
         }
 
-        Text {
+        Label {
+            visible: app.debug
             anchors.centerIn: parent
             text: blockId
         }
@@ -80,7 +87,6 @@ Item {
             drag.maximumY: board.height - height
 
             onPressed: {
-                console.log("calculate limits")
                 xBehavior.enabled = false
                 yBehavior.enabled = false
 
@@ -97,12 +103,12 @@ Item {
                 if (block.width > block.height) {
                     xBehavior.enabled = true
                     var newX = Math.round(blockShape.x / cellSize)
-                    gameEngine.board.moveBlockX(block.id, newX)
+                    gameEngine.board.moveBlock(block.id, newX - block.x)
                     blockShape.x = newX * cellSize
                 } else {
                     yBehavior.enabled = true
                     var newY = Math.round(blockShape.y / cellSize)
-                    gameEngine.board.moveBlockY(block.id, newY)
+                    gameEngine.board.moveBlock(block.id, newY - block.y)
                     blockShape.y = newY * cellSize
                 }
             }

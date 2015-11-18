@@ -30,7 +30,28 @@ Block::Block(const int &id, const int &x, const int &y, const int &height, const
     m_height(height),
     m_width(width)
 {
+    setColor();
+}
 
+Block::Block(Block *other) :
+    QObject(other->parent()),
+    m_id(other->id()),
+    m_startX(other->startX()),
+    m_x(other->x()),
+    m_startY(other->startY()),
+    m_y(other->y()),
+    m_height(other->height()),
+    m_width(other->width())
+{
+    setColor();
+}
+
+Block::Orientation Block::orientation() const
+{
+    if (m_height > m_width) {
+        return Vertical;
+    }
+    return Horizontal;
 }
 
 int Block::id() const
@@ -95,10 +116,61 @@ void Block::setHeight(const int &height)
     m_height = height;
 }
 
+QColor Block::color() const
+{
+    return m_color;
+}
+
 void Block::resetPosition()
 {
     setX(m_startX);
     setY(m_startY);
     emit positionResetted();
+}
+
+void Block::setColor()
+{
+    switch (m_id) {
+    case 0:
+        m_color = QColor("#DD4814");
+        break;
+    case 1:
+        m_color = QColor("#9E7D96");
+        break;
+    case 2:
+        m_color = QColor("#411934");
+        break;
+    case 3:
+        m_color = QColor("#77216F");
+        break;
+    case 4:
+        m_color = QColor("#6E3C61");
+        break;
+    case 5:
+        m_color = QColor("#5E2750");
+        break;
+    case 6:
+        m_color = QColor("#77216F");
+        break;
+    case 7:
+        m_color = QColor("#772953");
+        break;
+    case 8:
+        m_color = QColor("#F1B5A1");
+        break;
+    case 9:
+        m_color = QColor("#BB90B7");
+        break;
+    case 10:
+        m_color = QColor("#EA9172");
+        break;
+    case 11:
+        m_color = QColor("#F4C8B8");
+        break;
+    default:
+        break;
+    }
+
+    emit colorChanged();
 }
 

@@ -22,9 +22,11 @@
 #define GAMEENGINE_H
 
 #include <QObject>
+#include <QFuture>
 
 #include "levels.h"
 #include "board.h"
+#include "boardsolver.h"
 
 class GameEngine : public QObject
 {
@@ -49,11 +51,13 @@ private:
     QString m_levelDir;
     Levels *m_levels;
     Board *m_board;
+    BoardSolver *m_solver;
+    QFutureWatcher<QStack<Move> > *m_watcher;
 
     void loadLevels();
 
 private slots:
-    void onSolverFinished(const QStack<Move> &solution);
+    void onSolverFinished();
 
 signals:
     void levelDirChanged();

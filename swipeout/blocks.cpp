@@ -25,11 +25,11 @@ Blocks::Blocks(QObject *parent) :
 {
 }
 
-Blocks::Blocks(Blocks *other):
-    QAbstractListModel(other->parent())
+Blocks::Blocks(Blocks *other, QObject *parent = 0):
+    QAbstractListModel(parent)
 {
     foreach (Block *block, other->blocks()) {
-        addBlock(new Block(block));
+        addBlock(new Block(block, parent));
     }
 }
 

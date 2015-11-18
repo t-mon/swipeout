@@ -55,8 +55,8 @@ Item {
             id: xBehavior
             enabled: false
             NumberAnimation {
-                duration: 200
-                easing.type: Easing.InOutQuad
+                duration: 100
+                easing.type: Easing.OutQuad
             }
         }
 
@@ -64,8 +64,8 @@ Item {
             id: yBehavior
             enabled: false
             NumberAnimation {
-                duration: 200
-                easing.type: Easing.InOutQuad
+                duration: 100
+                easing.type: Easing.OutQuad
             }
         }
 

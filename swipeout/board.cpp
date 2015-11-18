@@ -238,6 +238,7 @@ void Board::moveBlockX(const int &id, const int &newX)
     Block *block = m_level->blocks()->get(id);
 
     if (newX < 0 || newX + block->width() > m_level->width()) {
+        setMoveCount(m_moveCount + 1);
         qDebug() << "Level completed with" << m_moveCount << "moves!!";
         emit levelCompleted();
         return;

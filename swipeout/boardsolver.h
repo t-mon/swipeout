@@ -53,13 +53,16 @@ private:
 };
 
 
-class BoardSolver : public QThread
+class BoardSolver : public QObject
 {
     Q_OBJECT
 public:
-    BoardSolver(Board *board, QObject *parent = 0);
+    BoardSolver(QObject *parent = 0);
+
+    QStack<Move> calculateSolution(Board *board);
 
 private:
+    QObject *m_object;
     Blocks *m_blocks;
     int m_width;
     int m_height;
@@ -70,14 +73,11 @@ private:
     QList<Node *> m_closedList;
 
     void expand(Node *currentNode);
-    void insertInOpenList(Node *node);
-    void removeFromOpenList(Node *node);
 
     bool inOpenList(Node *node);
     bool inClosedList(Node *node);
 
-protected:
-    void run() override;
+    void cleanUp();
 
 signals:
     void solutionFound(const QStack<Move> &solution);

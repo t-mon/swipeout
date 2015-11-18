@@ -1,5 +1,5 @@
 [Desktop Entry]
-_Name=Swipeout
+Name=Swipeout
 Exec=swipeout
 Icon=swipeout/swipeout.png
 Terminal=false

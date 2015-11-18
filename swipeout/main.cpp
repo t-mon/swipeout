@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
         }
         view.engine()->rootContext()->setContextProperty("levelDirectory", dataDir.path() + "/");
     } else {
-        view.engine()->rootContext()->setContextProperty("levelDirectory",QCoreApplication::applicationDirPath() + "/../../../levels/");
+        view.engine()->rootContext()->setContextProperty("levelDirectory",QCoreApplication::applicationDirPath() + "/../../../swipeout/levels/");
     }
     view.engine()->rootContext()->setContextProperty("version", app.applicationVersion());
     view.setSource(QUrl(QStringLiteral("qrc:///ui/Main.qml")));

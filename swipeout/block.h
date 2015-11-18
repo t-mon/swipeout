@@ -43,7 +43,7 @@ public:
     };
 
     explicit Block(const int &id,  const int &x, const int &y, const int &height, const int &width, QObject *parent = 0);
-    Block(Block* other);
+    Block(Block* other, QObject *parent = 0);
 
     Orientation orientation() const;
 

@@ -24,13 +24,18 @@
 #include <QDir>
 #include <QDebug>
 #include <QJsonDocument>
+#include <QtConcurrent/QtConcurrent>
 
 GameEngine::GameEngine(QObject *parent) :
     QObject(parent),
     m_levels(new Levels(this)),
-    m_board(new Board(this))
+    m_board(new Board(this)),
+    m_solver(new BoardSolver(this)),
+    m_watcher(new QFutureWatcher<QStack<Move> >(this))
 {
     qDebug() << "Created game engine";
+
+    connect(m_watcher, SIGNAL(finished()), this, SLOT(onSolverFinished()));
 }
 
 QString GameEngine::levelDir() const
@@ -69,10 +74,7 @@ bool GameEngine::startLevel(const int &id)
 
 void GameEngine::solveBoard()
 {
-    BoardSolver *solver = new BoardSolver(m_board, this);
-    connect(solver, &BoardSolver::solutionFound, this, &GameEngine::onSolverFinished);
-    connect(solver, &BoardSolver::finished, solver, &QObject::deleteLater);
-    solver->start();
+    m_watcher->setFuture(QtConcurrent::run(m_solver, &BoardSolver::calculateSolution, m_board));
 }
 
 void GameEngine::loadLevels()
@@ -110,8 +112,9 @@ void GameEngine::loadLevels()
     }
 }
 
-void GameEngine::onSolverFinished(const QStack<Move> &solution)
+void GameEngine::onSolverFinished()
 {
+    QStack<Move> solution = m_watcher->future().result();
     if (solution.isEmpty()) {
         qWarning() << "No solution found";
     } else {

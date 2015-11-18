@@ -41,7 +41,7 @@ public:
     };
 
     explicit Blocks(QObject *parent = 0);
-    Blocks(Blocks *other);
+    Blocks(Blocks *other, QObject *parent);
 
     QList<Block *> blocks();
     Q_INVOKABLE Block *get(int id);

@@ -33,8 +33,8 @@ Block::Block(const int &id, const int &x, const int &y, const int &height, const
     setColor();
 }
 
-Block::Block(Block *other) :
-    QObject(other->parent()),
+Block::Block(Block *other, QObject *parent) :
+    QObject(parent),
     m_id(other->id()),
     m_startX(other->startX()),
     m_x(other->x()),

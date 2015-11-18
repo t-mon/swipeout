@@ -116,10 +116,16 @@ bool Node::operator==(Node *other)
 
 
 
-BoardSolver::BoardSolver(Board *board, QObject *parent) :
-    QThread(parent)
+BoardSolver::BoardSolver(QObject *parent) :
+    QObject(parent)
 {
-    m_blocks = new Blocks(board->level()->blocks());
+}
+
+QStack<Move> BoardSolver::calculateSolution(Board *board)
+{
+    m_object = new QObject();
+
+    m_blocks = new Blocks(board->level()->blocks(), m_object);
     m_width = board->level()->width();
     m_height = board->level()->height();
 
@@ -129,10 +135,8 @@ BoardSolver::BoardSolver(Board *board, QObject *parent) :
     qDeleteAll(m_closedList);
     m_closedList.clear();
 
-    qDebug() << "Solver initialized";
-
     // create start node
-    m_startNode = new Node(this);
+    m_startNode = new Node(m_object);
     m_startNode->setG(0);
     m_startNode->setBlocks(m_blocks, m_width, m_height);
 
@@ -141,6 +145,35 @@ BoardSolver::BoardSolver(Board *board, QObject *parent) :
     // inset start node in the open list
     m_openList.append(m_startNode);
 
+    qDebug() << " --> Start solving board";
+    Node *currentNode;
+
+    QStack<Move> solution;
+
+    // A* Search algorithm
+    // openList is empty (no path found)
+    while (!m_openList.isEmpty() || currentNode->h() != 0) {
+        currentNode = m_openList.takeFirst();
+        m_closedList.append(currentNode);
+
+        // check if Block can be moved to exit
+        if (currentNode->h() == 0) {
+            if (currentNode->blocks()->get(0)->x() + currentNode->blocks()->get(0)->width() == m_width) {
+                solution.push_front(currentNode->move());
+                while (currentNode->parentNode() != 0) {
+                    currentNode = currentNode->parentNode();
+                    if (currentNode->boardGrid() != m_startNode->boardGrid()) {
+                        solution.push_front(currentNode->move());
+                    }
+                }
+                cleanUp();
+                return solution;
+            }
+        }
+        expand(currentNode);
+    }
+    cleanUp();
+    return solution;
 }
 
 void BoardSolver::expand(Node *currentNode)
@@ -165,9 +198,9 @@ void BoardSolver::expand(Node *currentNode)
             //qDebug() << "block" << block->id() << "-> delta x+:" << rightDelta;
             // create right movements for each + delta
             for (int i = 1; i <= abs(rightDelta); ++i) {
-                Node *node = new Node(this);
+                Node *node = new Node(m_object);
                 node->setG(currentNode->g() + 1);
-                Blocks *blocks = new Blocks(currentNode->blocks());
+                Blocks *blocks = new Blocks(currentNode->blocks(), m_object);
                 Block *movedBlock = blocks->get(block->id());
                 movedBlock->setX(movedBlock->x() + i);
                 node->setMove(Move(block->id(), i));
@@ -188,9 +221,9 @@ void BoardSolver::expand(Node *currentNode)
 
             // create left movements for each - delta
             for (int i = 1; i <= abs(leftDelta); ++i) {
-                Node *node = new Node(this);
+                Node *node = new Node(m_object);
                 node->setG(currentNode->g() + 1);
-                Blocks *blocks = new Blocks(currentNode->blocks());
+                Blocks *blocks = new Blocks(currentNode->blocks(), m_object);
                 Block *movedBlock = blocks->get(block->id());
                 movedBlock->setX(movedBlock->x() - i);
                 node->setMove(Move(block->id(), i *(-1)));
@@ -214,9 +247,9 @@ void BoardSolver::expand(Node *currentNode)
 
             // create down movements for each + delta
             for (int i = 1; i <= abs(lowerDelta); ++i) {
-                Node *node = new Node(this);
+                Node *node = new Node(m_object);
                 node->setG(currentNode->g() + 1);
-                Blocks *blocks = new Blocks(currentNode->blocks());
+                Blocks *blocks = new Blocks(currentNode->blocks(), m_object);
                 Block *movedBlock = blocks->get(block->id());
                 movedBlock->setY(movedBlock->y() + i);
                 node->setMove(Move(block->id(), i));
@@ -237,9 +270,9 @@ void BoardSolver::expand(Node *currentNode)
 
             // create up movements for each - delta
             for (int i = 1; i <= abs(upperDelta); ++i) {
-                Node *node = new Node(this);
+                Node *node = new Node(m_object);
                 node->setG(currentNode->g() + 1);
-                Blocks *blocks = new Blocks(currentNode->blocks());
+                Blocks *blocks = new Blocks(currentNode->blocks(), m_object);
                 Block *movedBlock = blocks->get(block->id());
                 movedBlock->setY(movedBlock->y() - i);
                 node->setMove(Move(block->id(), i *(-1)));
@@ -271,31 +304,6 @@ void BoardSolver::expand(Node *currentNode)
     qSort(m_openList.begin(), m_openList.end(), openListLessThan);
 }
 
-void BoardSolver::insertInOpenList(Node *node)
-{
-    if (m_openList.isEmpty()) {
-        m_openList.append(node);
-        return;
-    }
-
-    for (int i = 0; i < m_openList.count(); i++) {
-        if (m_openList.at(i)->f() >= node->f()) {
-            m_openList.insert(i, node);
-            return;
-        }
-    }
-}
-
-void BoardSolver::removeFromOpenList(Node *node)
-{
-    for (int i = 0; i < m_openList.count(); ++i) {
-        if (m_openList.at(i) == node) {
-            m_openList.removeAt(i);
-            return;
-        }
-    }
-}
-
 bool BoardSolver::inOpenList(Node *node)
 {
     foreach (Node *n, m_openList) {
@@ -316,42 +324,15 @@ bool BoardSolver::inClosedList(Node *node)
     return false;
 }
 
-void BoardSolver::run()
+void BoardSolver::cleanUp()
 {
-    qDebug() << " --> Start solving board";
+    qDeleteAll(m_openList);
+    m_openList.clear();
 
-    Node *currentNode;
+    qDeleteAll(m_closedList);
+    m_closedList.clear();
 
-    // A* Search algorithm
-    // openList is empty (no path found)
-    while (!m_openList.isEmpty() || currentNode->h() != 0) {
-        currentNode = m_openList.takeFirst();
-        m_closedList.append(currentNode);
-
-        expand(currentNode);
-
-        // check if Block can be moved to exit
-        if (currentNode->h() == 0) {
-            // check if
-            if (currentNode->blocks()->get(0)->x() + currentNode->blocks()->get(0)->width() == m_width) {
-                QStack<Move> solution;
-
-                solution.push_front(currentNode->move());
-                QStack<Node *> finalSteps;
-                while (currentNode->parentNode() != 0) {
-                    currentNode = currentNode->parentNode();
-                    if (currentNode->boardGrid() != m_startNode->boardGrid()) {
-                        solution.push_front(currentNode->move());
-                        finalSteps.prepend(currentNode);
-                    }
-                }
-                emit solutionFound(solution);
-                return;
-            }
-        }
-    }
-
-    emit solutionFound(QStack<Move>());
+    delete m_object;
 }
 
 bool openListLessThan(Node *a, Node *b)

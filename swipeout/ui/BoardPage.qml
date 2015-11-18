@@ -90,6 +90,9 @@ Page {
         }
 
         Row {
+            anchors.left: parent.left
+            anchors.leftMargin: units.gu(1)
+            spacing: units.gu(1)
             Button {
                 text: i18n.tr("Undo")
                 onClicked: gameEngine.board.undoMove()
@@ -100,6 +103,12 @@ Page {
                 text: i18n.tr("Solve")
                 onClicked: gameEngine.solveBoard()
             }
+
+            Button {
+                visible: app.debug && gameEngine.board.solutionAvailable
+                text: i18n.tr("Show solution");
+                onClicked: gameEngine.board.showSolution()
+            }
         }
     }
 
@@ -108,7 +117,7 @@ Page {
         Dialog {
             id: completedDialog
             title: i18n.tr("Level completed!")
-            text: i18n.tr("Moves: " + gameEngine.board.moveCount)
+            text: i18n.tr("You took " + gameEngine.board.moveCount + " moves.")
 
             Button {
                 id: nextButton

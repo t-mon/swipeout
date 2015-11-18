@@ -41,9 +41,7 @@ Item {
             id: levelMouseArea
             anchors.fill: parent
             onClicked: {
-                //if (unlocked) {
-                    root.selected()
-                //}
+                root.selected()
             }
         }
     }

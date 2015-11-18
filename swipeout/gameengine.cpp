@@ -74,6 +74,7 @@ bool GameEngine::startLevel(const int &id)
 
 void GameEngine::solveBoard()
 {
+    m_timestamp = QDateTime::currentDateTime();
     m_watcher->setFuture(QtConcurrent::run(m_solver, &BoardSolver::calculateSolution, m_board));
 }
 
@@ -114,13 +115,22 @@ void GameEngine::loadLevels()
 
 void GameEngine::onSolverFinished()
 {
+    QDateTime time = QDateTime::fromMSecsSinceEpoch(QDateTime::currentMSecsSinceEpoch() - m_timestamp.toMSecsSinceEpoch());
     QStack<Move> solution = m_watcher->future().result();
     if (solution.isEmpty()) {
+        qDebug() << "----------------------------------";
         qWarning() << "No solution found";
+        qDebug() << "----------------------------------";
     } else {
-        qDebug() << "Solution found! Can be solved in " << solution.count() << "moves!";
+        qDebug() << "----------------------------------";
+        qDebug() << "Solution found!";
         foreach (const Move &move, solution) {
             qDebug() << "    " << move.id() << " -> " << move.delta();
         }
+        qDebug() << "----------------------------------";
+        qDebug() << "Solvable in" <<  solution.count() << "moves!";
+        qDebug() << "Process time:" << time.toString("mm:ss.zzz");
+        qDebug() << "----------------------------------";
     }
+    m_board->setSolution(solution);
 }

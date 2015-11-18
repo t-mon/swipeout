@@ -23,6 +23,7 @@
 
 #include <QObject>
 #include <QFuture>
+#include <QDateTime>
 
 #include "levels.h"
 #include "board.h"
@@ -53,6 +54,8 @@ private:
     Board *m_board;
     BoardSolver *m_solver;
     QFutureWatcher<QStack<Move> > *m_watcher;
+
+    QDateTime m_timestamp;
 
     void loadLevels();
 

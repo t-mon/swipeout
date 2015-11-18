@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-18 18:14+0100\n"
+"POT-Creation-Date: 2015-11-18 21:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,23 +22,30 @@ msgid "Restart level"
 msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:48
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:111
 msgid "Moves: "
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:94
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:97
 msgid "Undo"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:100
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:103
 msgid "Solve"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:110
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:109
+msgid "Show solution"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:119
 msgid "Level completed!"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:115
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:120
+msgid "You took "
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:124
 msgid "Next level"
 msgstr ""
 

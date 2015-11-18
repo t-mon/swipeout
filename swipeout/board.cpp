@@ -21,6 +21,7 @@
 #include "board.h"
 
 #include <QDebug>
+#include <QTimer>
 
 BoardCell::BoardCell(const int &x, const int &y, const int &blockId):
     m_x(x),
@@ -64,6 +65,9 @@ void Board::clearLevel()
 {
     qDebug() << " -> Clear board";
     m_boardGrid.clear();
+    m_solution.clear();
+    emit solutionAvailableChanged();
+
     if (m_level)
         m_level->destroyBlocks();
     setMoveCount(0);
@@ -71,6 +75,9 @@ void Board::clearLevel()
 
 void Board::restartLevel()
 {
+    m_solution.clear();
+    emit solutionAvailableChanged();
+
     if (m_level) {
         setMoveCount(0);
         m_level->blocks()->resetBlockPositions();
@@ -191,6 +198,22 @@ void Board::undoMove()
     moveBlock(move.id(), undoDelta, true);
 }
 
+void Board::showSolution()
+{
+    automaticMove();
+}
+
+bool Board::solutionAvailable() const
+{
+    return !m_solution.isEmpty();
+}
+
+void Board::setSolution(const QStack<Move> &solution)
+{
+    m_solution = solution;
+    emit solutionAvailableChanged();
+}
+
 void Board::printBoard(const QVector<QVector<BoardCell> > &boardGrid)
 {
     QString output("------------------------------\n");
@@ -288,4 +311,13 @@ void Board::setMoveCount(const int &moveCount)
 {
     m_moveCount = moveCount;
     emit moveCountChanged();
+}
+
+void Board::automaticMove()
+{
+    if (!m_solution.isEmpty()) {
+        Move move = m_solution.takeFirst();
+        moveBlock(move.id(), move.delta());
+        QTimer::singleShot(1000, this, SLOT(automaticMove()));
+    }
 }

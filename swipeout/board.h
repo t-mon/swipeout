@@ -64,6 +64,7 @@ class Board : public QObject
     Q_OBJECT
     Q_PROPERTY(Level* level READ level NOTIFY levelChanged)
     Q_PROPERTY(int moveCount READ moveCount NOTIFY moveCountChanged)
+    Q_PROPERTY(bool solutionAvailable READ solutionAvailable NOTIFY solutionAvailableChanged)
 
 public:
     explicit Board(QObject *parent = 0);
@@ -84,6 +85,11 @@ public:
     Q_INVOKABLE void moveBlock(const int &id, const int &delta, const bool &fromUndo = false);
     Q_INVOKABLE void undoMove();
 
+    Q_INVOKABLE void showSolution();
+
+    bool solutionAvailable() const;
+    void setSolution(const QStack<Move> &solution);
+
     static void printBoard(const QVector<QVector<BoardCell> > &boardGrid);
 
 private:
@@ -92,6 +98,7 @@ private:
     int m_moveCount;
 
     QStack<Move> m_moveStack;
+    QStack<Move> m_solution;
 
     void initBoard();
 
@@ -100,10 +107,14 @@ private:
 
     void setMoveCount(const int &moveCount);
 
+private slots:
+    void automaticMove();
+
 signals:
     void moveCountChanged();
     void levelCompleted();
     void levelChanged();
+    void solutionAvailableChanged();
 };
 
 #endif // BOARD_H

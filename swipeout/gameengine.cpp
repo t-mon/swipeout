@@ -31,10 +31,10 @@ GameEngine::GameEngine(QObject *parent) :
     m_levels(new Levels(this)),
     m_board(new Board(this)),
     m_solver(new BoardSolver(this)),
-    m_watcher(new QFutureWatcher<QStack<Move> >(this))
+    m_watcher(new QFutureWatcher<QStack<Move> >(this)),
+    m_solverRunning(false)
 {
     qDebug() << "Created game engine";
-
     connect(m_watcher, SIGNAL(finished()), this, SLOT(onSolverFinished()));
 }
 
@@ -75,7 +75,13 @@ bool GameEngine::startLevel(const int &id)
 void GameEngine::solveBoard()
 {
     m_timestamp = QDateTime::currentDateTime();
+    setSolverRunning(true);
     m_watcher->setFuture(QtConcurrent::run(m_solver, &BoardSolver::calculateSolution, m_board));
+}
+
+bool GameEngine::solverRunning() const
+{
+    return m_solverRunning;
 }
 
 void GameEngine::loadLevels()
@@ -113,8 +119,15 @@ void GameEngine::loadLevels()
     }
 }
 
+void GameEngine::setSolverRunning(const bool &solverRunning)
+{
+    m_solverRunning = solverRunning;
+    emit solverRunningChanged();
+}
+
 void GameEngine::onSolverFinished()
 {
+    setSolverRunning(false);
     QDateTime time = QDateTime::fromMSecsSinceEpoch(QDateTime::currentMSecsSinceEpoch() - m_timestamp.toMSecsSinceEpoch());
     QStack<Move> solution = m_watcher->future().result();
     if (solution.isEmpty()) {

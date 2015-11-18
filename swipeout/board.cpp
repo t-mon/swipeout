@@ -318,6 +318,6 @@ void Board::automaticMove()
     if (!m_solution.isEmpty()) {
         Move move = m_solution.takeFirst();
         moveBlock(move.id(), move.delta());
-        QTimer::singleShot(1000, this, SLOT(automaticMove()));
+        QTimer::singleShot(500, this, SLOT(automaticMove()));
     }
 }

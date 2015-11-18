@@ -35,6 +35,7 @@ class GameEngine : public QObject
     Q_PROPERTY(Levels *levels READ levels NOTIFY levelsChanged)
     Q_PROPERTY(Board *board READ board NOTIFY levelsChanged)
     Q_PROPERTY(QString levelDir READ levelDir WRITE setLevelDir NOTIFY levelDirChanged)
+    Q_PROPERTY(bool solverRunning READ solverRunning NOTIFY solverRunningChanged)
 
 public:
     explicit GameEngine(QObject *parent = 0);
@@ -48,6 +49,8 @@ public:
     Q_INVOKABLE bool startLevel(const int &id);
     Q_INVOKABLE void solveBoard();
 
+    bool solverRunning() const;
+
 private:
     QString m_levelDir;
     Levels *m_levels;
@@ -56,8 +59,11 @@ private:
     QFutureWatcher<QStack<Move> > *m_watcher;
 
     QDateTime m_timestamp;
+    bool m_solverRunning;
 
     void loadLevels();
+
+    void setSolverRunning(const bool &solverRunning);
 
 private slots:
     void onSolverFinished();
@@ -65,6 +71,7 @@ private slots:
 signals:
     void levelDirChanged();
     void levelsChanged();
+    void solverRunningChanged();
 
 };
 

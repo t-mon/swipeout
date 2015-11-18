@@ -53,7 +53,6 @@ Item {
 
         Behavior on x {
             id: xBehavior
-            enabled: false
             NumberAnimation {
                 duration: 100
                 easing.type: Easing.OutQuad
@@ -62,7 +61,6 @@ Item {
 
         Behavior on y {
             id: yBehavior
-            enabled: false
             NumberAnimation {
                 duration: 100
                 easing.type: Easing.OutQuad

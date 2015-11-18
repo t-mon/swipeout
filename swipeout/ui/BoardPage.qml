@@ -102,6 +102,10 @@ Page {
                 visible: app.debug
                 text: i18n.tr("Solve")
                 onClicked: gameEngine.solveBoard()
+                ActivityIndicator {
+                    id: solverIndicator
+                    running: gameEngine.solverRunning
+                }
             }
 
             Button {

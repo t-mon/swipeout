@@ -123,8 +123,6 @@ BoardSolver::BoardSolver(Board *board, QObject *parent) :
     m_width = board->level()->width();
     m_height = board->level()->height();
 
-    m_solutionPath.clear();
-
     qDeleteAll(m_openList);
     m_openList.clear();
 
@@ -336,21 +334,19 @@ void BoardSolver::run()
         if (currentNode->h() == 0) {
             // check if
             if (currentNode->blocks()->get(0)->x() + currentNode->blocks()->get(0)->width() == m_width) {
-                m_solutionPath.push_front(currentNode->move());
+                QStack<Move> solution;
+
+                solution.push_front(currentNode->move());
                 QStack<Node *> finalSteps;
                 while (currentNode->parentNode() != 0) {
                     currentNode = currentNode->parentNode();
                     if (currentNode->boardGrid() != m_startNode->boardGrid()) {
-                        m_solutionPath.push_front(currentNode->move());
+                        solution.push_front(currentNode->move());
                         finalSteps.prepend(currentNode);
                     }
                 }
-
-                qDebug() << "Solution found! Can be solved in " << m_solutionPath.count() << "moves!";
-                foreach (Node *node, finalSteps) {
-                    qDebug() << "    " << node->move().id() << " -> " << node->move().delta() << " g(" << node->g() << ") + h (" <<  node->h() << ") = f(" << node->f() << ")";
-                }
-                emit solutionFound(m_solutionPath);
+                emit solutionFound(solution);
+                return;
             }
         }
     }

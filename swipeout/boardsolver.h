@@ -40,7 +40,6 @@ public:
 
     bool operator==(Node *other);
 
-
 private:
     Move m_move;
 
@@ -61,8 +60,6 @@ public:
     BoardSolver(Board *board, QObject *parent = 0);
 
 private:
-    QStack<Move> m_solutionPath;
-
     Blocks *m_blocks;
     int m_width;
     int m_height;
@@ -72,8 +69,6 @@ private:
     QList<Node *> m_openList;
     QList<Node *> m_closedList;
 
-    bool solve(Board *board);
-
     void expand(Node *currentNode);
     void insertInOpenList(Node *node);
     void removeFromOpenList(Node *node);
@@ -82,10 +77,10 @@ private:
     bool inClosedList(Node *node);
 
 protected:
-    void run();
+    void run() override;
 
 signals:
-    void solutionFound(QStack<Move> solution);
+    void solutionFound(const QStack<Move> &solution);
 
 };
 

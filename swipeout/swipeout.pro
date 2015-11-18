@@ -5,6 +5,9 @@ load(ubuntu-click)
 
 QT += qml quick
 
+QMAKE_CXXFLAGS += -Werror
+CONFIG += c++11
+
 SOURCES += main.cpp \
     gameengine.cpp \
     level.cpp \

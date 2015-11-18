@@ -112,5 +112,12 @@ void GameEngine::loadLevels()
 
 void GameEngine::onSolverFinished(const QStack<Move> &solution)
 {
-
+    if (solution.isEmpty()) {
+        qWarning() << "No solution found";
+    } else {
+        qDebug() << "Solution found! Can be solved in " << solution.count() << "moves!";
+        foreach (const Move &move, solution) {
+            qDebug() << "    " << move.id() << " -> " << move.delta();
+        }
+    }
 }

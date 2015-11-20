@@ -25,11 +25,12 @@ import Swipeout 1.0
 
 Page {
     id: root
-    title: i18n.tr(level.name)
+    title: i18n.tr("Level creator")
 
-    property var level: gameEngine.board.level
+    property var creator: gameEngine.levelCreator
+    property var level: creator.board.level
     property real borderWidth: units.gu(1.5)
-    property real cellSize: Math.min(width / level.width , height / level.height)
+    property real cellSize: Math.min(width / creator.width , height / creator.height)
 
     head.actions: [
         Action {
@@ -41,37 +42,19 @@ Page {
         Action {
             id: addDeviceAction
             iconName: "reload"
-            text: i18n.tr("Restart level")
-            onTriggered: gameEngine.board.restartLevel()
+            text: i18n.tr("Create level")
+            onTriggered: creator.createRandomLevel()
         }
     ]
 
     Column {
         anchors.centerIn: parent
-        spacing: units.gu(1)
-
-        UbuntuShape {
-            anchors.horizontalCenter: boardBackground.horizontalCenter
-            height: units.gu(5)
-            width: units.gu(20)
-            backgroundColor: "#88888888"
-
-            Row {
-                anchors.centerIn: parent
-                Label {
-                    text: i18n.tr("Moves: ")
-                }
-                Label {
-                    text: gameEngine.board.moveCount
-                    font.bold: true
-                }
-            }
-        }
+        spacing: units.gu(2)
 
         UbuntuShape {
             id: boardBackground
-            width: level.width * cellSize
-            height: level.height * cellSize
+            width: creator.width * cellSize
+            height: creator.height * cellSize
 
             backgroundColor: "#88888888"
 
@@ -85,11 +68,11 @@ Page {
                     id: exitShape
                     color: boardArea.backgroundColor
                     width: 2 * borderWidth
-                    height: Math.min(parent.width / level.width , parent.height / level.height)
+                    height: Math.min(parent.width / creator.width , parent.height / creator.height)
                     anchors.right: parent.right
                     anchors.rightMargin: -borderWidth
                     anchors.top: parent.top
-                    anchors.topMargin: level.blocks.get(0).y * height
+                    anchors.topMargin: 2 * height
                 }
 
                 Repeater {
@@ -97,8 +80,8 @@ Page {
                     anchors.fill: parent
                     model: level.blocks
                     delegate: BlockItem {
-                        cellSize: Math.min(boardArea.width / level.width , boardArea.height / level.height)
-                        board: gameEngine.board
+                        cellSize: Math.min(boardArea.width / creator.width , boardArea.height / creator.height)
+                        board: creator.board
                         block: level.blocks.get(model.blockId)
                     }
                 }
@@ -109,17 +92,16 @@ Page {
             anchors.left: parent.left
             anchors.leftMargin: units.gu(1)
             spacing: units.gu(1)
+
             Button {
-                text: i18n.tr("Undo")
-                color: "#88888888"
-                onClicked: gameEngine.board.undoMove()
+                text: i18n.tr("Save");
+                onClicked: creator.saveLevel()
             }
 
             Button {
                 visible: app.debug
                 text: i18n.tr("Solve")
-                color: "#88888888"
-                onClicked: gameEngine.solveBoard()
+                onClicked: gameEngine.solveCreatorBoard()
                 ActivityIndicator {
                     id: solverIndicator
                     running: gameEngine.solverRunning
@@ -127,38 +109,10 @@ Page {
             }
 
             Button {
-                visible: app.debug && gameEngine.board.solutionAvailable
+                visible: app.debug && creator.board.solutionAvailable
                 text: i18n.tr("Show solution");
-                color: "#88888888"
-                onClicked: gameEngine.board.showSolution()
+                onClicked: creator.board.showSolution()
             }
-        }
-    }
-
-    Component {
-        id: completedComponent
-        Dialog {
-            id: completedDialog
-            title: i18n.tr("Level completed!")
-            text: i18n.tr("You took " + gameEngine.board.moveCount + " moves.")
-
-            Button {
-                id: nextButton
-                text: i18n.tr("Next level")
-                onClicked: {
-                    PopupUtils.close(completedDialog)
-                    if (!gameEngine.startLevel(level.id + 1)) {
-                        pageStack.pop()
-                    }
-                }
-            }
-        }
-    }
-
-    Connections {
-        target: gameEngine.board
-        onLevelCompleted: {
-            PopupUtils.open(completedComponent)
         }
     }
 }

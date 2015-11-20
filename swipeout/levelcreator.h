@@ -18,30 +18,50 @@
  *                                                                         *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-import QtQuick 2.4
-import Ubuntu.Components 1.3
-import Swipeout 1.0
+#ifndef LEVELCREATOR_H
+#define LEVELCREATOR_H
 
-Page {
-    id: root
-    title: i18n.tr("Levels")
+#include <QObject>
 
-    GridView {
-        id: levelGrid
-        anchors.fill: parent
-        anchors.margins: units.gu(1)
-        cellWidth: units.gu(10)
-        cellHeight: units.gu(10)
-        model: gameEngine.levels
+#include "board.h"
+#include "blocks.h"
 
-        delegate: LevelSelectorItem {
-            width: levelGrid.cellWidth
-            height: levelGrid.cellHeight
-            levelId: model.levelId
-            onSelected: {
-                gameEngine.startLevel(model.levelId)
-                pageStack.push(Qt.resolvedUrl("BoardPage.qml"))
-            }
-        }
-    }
-}
+class LevelCreator : public QObject
+{
+    Q_OBJECT
+    Q_PROPERTY(Board *board READ board CONSTANT)
+    Q_PROPERTY(int width READ width WRITE setWidth NOTIFY widthChanged)
+    Q_PROPERTY(int height READ height WRITE setHeight NOTIFY heightChanged)
+
+public:
+    explicit LevelCreator(QObject *parent = 0);
+
+    int width() const;
+    void setWidth(const int &width);
+
+    int height() const;
+    void setHeight(const int &height);
+
+    Q_INVOKABLE void createRandomLevel();
+    Q_INVOKABLE void saveLevel();
+
+    Board *board();
+
+private:
+    int m_width;
+    int m_height;
+
+    Board *m_board;
+    Level *m_level;
+    QVector<QVector<BoardCell> > m_boardGrid;
+
+    void initGrid();
+
+signals:
+    void widthChanged();
+    void heightChanged();
+    void blocksChanged();
+
+};
+
+#endif // LEVELCREATOR_H

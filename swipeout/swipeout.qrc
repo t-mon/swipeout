@@ -6,6 +6,8 @@
         <file>ui/LevelSelectorPage.qml</file>
         <file>ui/LevelSelectorItem.qml</file>
         <file>ui/BoardPage.qml</file>
+        <file>ui/LevelCreator.qml</file>
+        <file>ui/LoadLevelPage.qml</file>
     </qresource>
 </RCC>
 

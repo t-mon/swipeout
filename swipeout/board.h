@@ -71,7 +71,7 @@ public:
 
     void clearLevel();
     Q_INVOKABLE void restartLevel();
-    void loadLevel(Level *level);
+    void loadLevel(Level *level, const bool &fromCreator = false);
 
     Level *level();
 

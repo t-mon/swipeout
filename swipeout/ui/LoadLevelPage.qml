@@ -24,7 +24,7 @@ import Swipeout 1.0
 
 Page {
     id: root
-    title: i18n.tr("Levels")
+    title: i18n.tr("Load level")
 
     GridView {
         id: levelGrid
@@ -32,7 +32,7 @@ Page {
         anchors.margins: units.gu(1)
         cellWidth: units.gu(10)
         cellHeight: units.gu(10)
-        model: gameEngine.levels
+        model: gameEngine.loadedLevels
 
         delegate: LevelSelectorItem {
             width: levelGrid.cellWidth

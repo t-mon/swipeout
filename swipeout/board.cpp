@@ -55,6 +55,7 @@ bool BoardCell::operator==(const BoardCell &other)
     return x() == other.x() && y() == other.y() && blockId() == other.blockId();
 }
 
+
 Board::Board(QObject *parent) :
     QObject(parent),
     m_level(0)
@@ -86,14 +87,20 @@ void Board::restartLevel()
     initBoard();
 }
 
-void Board::loadLevel(Level *level)
+void Board::loadLevel(Level *level, const bool &fromCreator)
 {
-    clearLevel();
-    qDebug() << "Start level" << level->id();
+    if (fromCreator) {
+        qDebug() << "Set creator level" << level->id();
+        m_level = level;
+        emit levelChanged();
+    } else {
+        clearLevel();
+        qDebug() << "Start level" << level->id();
 
-    m_level = level;
-    m_level->loadBlocks();
-    emit levelChanged();
+        m_level = level;
+        m_level->loadBlocks();
+        emit levelChanged();
+    }
 
     initBoard();
     printBoard(m_boardGrid);

@@ -24,11 +24,14 @@
 #include <QDir>
 #include <QDebug>
 #include <QJsonDocument>
+#include <QGuiApplication>
 #include <QtConcurrent/QtConcurrent>
 
 GameEngine::GameEngine(QObject *parent) :
     QObject(parent),
     m_levels(new Levels(this)),
+    m_loadedLevels(new Levels(this)),
+    m_levelCreator(new LevelCreator(this)),
     m_board(new Board(this)),
     m_solver(new BoardSolver(this)),
     m_watcher(new QFutureWatcher<QStack<Move> >(this)),
@@ -47,12 +50,23 @@ void GameEngine::setLevelDir(const QString &levelDir)
 {
     m_levelDir = levelDir;
     loadLevels();
+    loadCreatedLevels();
     emit levelDirChanged();
 }
 
 Levels *GameEngine::levels()
 {
     return m_levels;
+}
+
+Levels *GameEngine::loadedLevels()
+{
+    return m_loadedLevels;
+}
+
+LevelCreator *GameEngine::levelCreator()
+{
+    return m_levelCreator;
 }
 
 Board *GameEngine::board()
@@ -62,7 +76,13 @@ Board *GameEngine::board()
 
 bool GameEngine::startLevel(const int &id)
 {
-    Level *level = m_levels->get(id);
+    Level *level = 0;
+    if (m_levels->containsLevel(id)) {
+        level = m_levels->get(id);
+    } else if (m_loadedLevels->containsLevel(id)) {
+        level = m_loadedLevels->get(id);
+    }
+
     if (!level) {
         qWarning() << "Could not find level" << id;
         return false;
@@ -75,8 +95,61 @@ bool GameEngine::startLevel(const int &id)
 void GameEngine::solveBoard()
 {
     m_timestamp = QDateTime::currentDateTime();
+    m_solverBoard = m_board;
     setSolverRunning(true);
     m_watcher->setFuture(QtConcurrent::run(m_solver, &BoardSolver::calculateSolution, m_board));
+}
+
+void GameEngine::solveCreatorBoard()
+{
+    m_timestamp = QDateTime::currentDateTime();
+    setSolverRunning(true);
+    m_solverBoard = m_levelCreator->board();
+    m_watcher->setFuture(QtConcurrent::run(m_solver, &BoardSolver::calculateSolution, m_levelCreator->board()));
+}
+
+void GameEngine::loadCreatedLevels()
+{
+    QString fileDir = QStandardPaths::locate(QStandardPaths::ConfigLocation, QString(), QStandardPaths::LocateDirectory) + QGuiApplication::applicationName();
+
+    //qDebug() << "Loading levels from" << fileDir;
+
+    QDir dir(fileDir);
+    dir.setFilter(QDir::Files);
+    dir.setSorting(QDir::Name);
+
+    QFileInfoList levelFiles = dir.entryInfoList();
+    foreach (const QFileInfo &levelFileInfo, levelFiles) {
+        if (!levelFileInfo.fileName().startsWith("level") || !levelFileInfo.fileName().endsWith(".json"))
+            continue;
+
+        QFile levelFile(levelFileInfo.absoluteFilePath());
+        if (!levelFile.open(QFile::ReadOnly)) {
+            qDebug() << "Cannot open level file for reading:" << levelFileInfo.absoluteFilePath();
+            continue;
+        }
+
+        QJsonParseError error;
+        QJsonDocument jsonDoc = QJsonDocument::fromJson(levelFile.readAll(), &error);
+        if (error.error != QJsonParseError::NoError) {
+            qDebug() << "Cannot parse level file:" << error.errorString();
+            continue;
+        }
+
+        QVariantMap levelData = jsonDoc.toVariant().toMap();
+        if (levelAlreadyLoaded(levelData.value("id").toInt()))
+            continue;
+
+        qDebug() << "   -> loading level" << levelData.value("id").toInt() << "...";
+        Level *level = new Level(this);
+        level->setName(levelData.value("name").toString());
+        level->setId(levelData.value("id").toInt());
+        level->setHeight(levelData.value("height").toInt());
+        level->setWidth(levelData.value("width").toInt());
+        level->setBlockData(levelData.value("blocks").toList());
+        level->setMinimalMoveCount(levelData.value("minimalMoveCount").toInt());
+        m_loadedLevels->addLevel(level);
+    }
 }
 
 bool GameEngine::solverRunning() const
@@ -86,7 +159,7 @@ bool GameEngine::solverRunning() const
 
 void GameEngine::loadLevels()
 {
-    qDebug() << "loading levels from" << m_levelDir;
+    qDebug() << "Loading levels from" << m_levelDir;
 
     QDir dir(m_levelDir);
     dir.setFilter(QDir::Files);
@@ -94,6 +167,9 @@ void GameEngine::loadLevels()
 
     QFileInfoList levelFiles = dir.entryInfoList();
     foreach (const QFileInfo &levelFileInfo, levelFiles) {
+        if (!levelFileInfo.fileName().startsWith("level") || !levelFileInfo.fileName().endsWith(".json"))
+            continue;
+
         QFile levelFile(levelFileInfo.absoluteFilePath());
         if (!levelFile.open(QFile::ReadOnly)) {
             qDebug() << "Cannot open level file for reading:" << levelFileInfo.absoluteFilePath();
@@ -115,8 +191,19 @@ void GameEngine::loadLevels()
         level->setHeight(levelData.value("height").toInt());
         level->setWidth(levelData.value("width").toInt());
         level->setBlockData(levelData.value("blocks").toList());
+        level->setMinimalMoveCount(levelData.value("minimalMoveCount").toInt());
         m_levels->addLevel(level);
     }
+}
+
+bool GameEngine::levelAlreadyLoaded(const int &id)
+{
+    foreach (Level *level, m_loadedLevels->levels()) {
+        if (level->id() == id) {
+            return true;
+        }
+    }
+    return false;
 }
 
 void GameEngine::setSolverRunning(const bool &solverRunning)
@@ -132,7 +219,8 @@ void GameEngine::onSolverFinished()
     QStack<Move> solution = m_watcher->future().result();
     if (solution.isEmpty()) {
         qDebug() << "----------------------------------";
-        qWarning() << "No solution found";
+        qDebug() << "No solution found";
+        qDebug() << "Process time:" << time.toString("mm:ss.zzz");
         qDebug() << "----------------------------------";
     } else {
         qDebug() << "----------------------------------";
@@ -145,5 +233,6 @@ void GameEngine::onSolverFinished()
         qDebug() << "Process time:" << time.toString("mm:ss.zzz");
         qDebug() << "----------------------------------";
     }
-    m_board->setSolution(solution);
+    m_solverBoard->level()->setMinimalMoveCount(solution.count());
+    m_solverBoard->setSolution(solution);
 }

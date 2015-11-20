@@ -152,7 +152,7 @@ QStack<Move> BoardSolver::calculateSolution(Board *board)
 
     // A* Search algorithm
     // openList is empty (no path found)
-    while (!m_openList.isEmpty() || currentNode->h() != 0) {
+    while (!m_openList.isEmpty()) {
         currentNode = m_openList.takeFirst();
         m_closedList.append(currentNode);
 

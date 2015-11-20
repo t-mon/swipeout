@@ -39,6 +39,16 @@ Level *Levels::get(int id)
     return NULL;
 }
 
+bool Levels::containsLevel(const int &id)
+{
+    foreach (Level *level, m_levels) {
+        if (level->id() == id) {
+            return true;
+        }
+    }
+    return false;
+}
+
 int Levels::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
@@ -59,6 +69,8 @@ QVariant Levels::data(const QModelIndex &index, int role) const
         return level->width();
     } else if (role == HeightRole) {
         return level->height();
+    } else if (role == MinimalMoveCountRole) {
+        return level->minimalMoveCount();
     }
     return QVariant();
 }
@@ -91,6 +103,7 @@ QHash<int, QByteArray> Levels::roleNames() const
     roles[NameRole] = "levelName";
     roles[WidthRole] = "levelWidth";
     roles[HeightRole] = "levelHeigth";
+    roles[MinimalMoveCountRole] = "minimalMoveCount";
     return roles;
 }
 

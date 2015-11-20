@@ -31,6 +31,7 @@ Item {
     UbuntuShape {
         anchors.fill: parent
         anchors.margins: units.gu(1)
+        backgroundColor: "#88888888"
 
         Label {
             anchors.centerIn: parent

@@ -26,6 +26,7 @@ Item {
     id: root
     property real cellSize
     property var block: null
+    property var board: null
 
 
     Connections {
@@ -67,12 +68,6 @@ Item {
             }
         }
 
-        Label {
-            visible: app.debug
-            anchors.centerIn: parent
-            text: blockId
-        }
-
         MouseArea {
             id: elementMouseArea
             anchors.fill: parent
@@ -89,11 +84,11 @@ Item {
                 yBehavior.enabled = false
 
                 if (block.width > block.height) {
-                    elementMouseArea.drag.minimumX = gameEngine.board.calculateLeftLimit(block.id) * root.cellSize
-                    elementMouseArea.drag.maximumX = gameEngine.board.calculateRightLimit(block.id) * root.cellSize
+                    elementMouseArea.drag.minimumX = board.calculateLeftLimit(block.id) * root.cellSize
+                    elementMouseArea.drag.maximumX = board.calculateRightLimit(block.id) * root.cellSize
                 } else {
-                    elementMouseArea.drag.minimumY = gameEngine.board.calculateUpperLimit(block.id) * root.cellSize
-                    elementMouseArea.drag.maximumY = gameEngine.board.calculateLowerLimit(block.id) * root.cellSize
+                    elementMouseArea.drag.minimumY = board.calculateUpperLimit(block.id) * root.cellSize
+                    elementMouseArea.drag.maximumY = board.calculateLowerLimit(block.id) * root.cellSize
                 }
             }
 
@@ -101,16 +96,23 @@ Item {
                 if (block.width > block.height) {
                     xBehavior.enabled = true
                     var newX = Math.round(blockShape.x / cellSize)
-                    gameEngine.board.moveBlock(block.id, newX - block.x)
+                    board.moveBlock(block.id, newX - block.x)
                     blockShape.x = newX * cellSize
                 } else {
                     yBehavior.enabled = true
                     var newY = Math.round(blockShape.y / cellSize)
-                    gameEngine.board.moveBlock(block.id, newY - block.y)
+                    board.moveBlock(block.id, newY - block.y)
                     blockShape.y = newY * cellSize
                 }
             }
         }
+
+            Label {
+                visible: app.debug
+                anchors.centerIn: parent
+                text: blockId
+            }
+
     }
 }
 

@@ -3,6 +3,7 @@
     "id": 1,
     "width": 6,
     "height": 6,
+    "minimalMoveCount": 8,
     "blocks": [
         {
             "id": 0,

@@ -26,12 +26,33 @@ Page {
     id: root
     title: i18n.tr("Swipeout")
 
-    Button {
+    Column {
+        spacing: units.gu(2)
         anchors.centerIn: parent
-        text: "Play"
-        onClicked: {
-            push(Qt.resolvedUrl("LevelSelectorPage.qml"))
+
+        Button {
+            text: "Play"
+            color: "#88888888"
+            onClicked: {
+                push(Qt.resolvedUrl("LevelSelectorPage.qml"))
+            }
+        }
+
+        Button {
+            text: "Load level"
+            color: "#88888888"
+            onClicked: {
+                gameEngine.loadCreatedLevels()
+                push(Qt.resolvedUrl("LoadLevelPage.qml"))
+            }
+        }
+
+        Button {
+            text: "Create level"
+            color: "#88888888"
+            onClicked: {
+                push(Qt.resolvedUrl("LevelCreator.qml"))
+            }
         }
     }
-
 }

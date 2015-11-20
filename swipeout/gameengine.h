@@ -26,14 +26,17 @@
 #include <QDateTime>
 
 #include "levels.h"
+#include "levelcreator.h"
 #include "board.h"
 #include "boardsolver.h"
 
 class GameEngine : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(Levels *levels READ levels NOTIFY levelsChanged)
-    Q_PROPERTY(Board *board READ board NOTIFY levelsChanged)
+    Q_PROPERTY(Levels *levels READ levels CONSTANT)
+    Q_PROPERTY(Levels *loadedLevels READ loadedLevels CONSTANT)
+    Q_PROPERTY(LevelCreator *levelCreator READ levelCreator CONSTANT)
+    Q_PROPERTY(Board *board READ board CONSTANT)
     Q_PROPERTY(QString levelDir READ levelDir WRITE setLevelDir NOTIFY levelDirChanged)
     Q_PROPERTY(bool solverRunning READ solverRunning NOTIFY solverRunningChanged)
 
@@ -44,24 +47,33 @@ public:
     void setLevelDir(const QString &levelDir);
 
     Levels *levels();
+    Levels *loadedLevels();
+    LevelCreator *levelCreator();
     Board *board();
 
     Q_INVOKABLE bool startLevel(const int &id);
     Q_INVOKABLE void solveBoard();
+    Q_INVOKABLE void solveCreatorBoard();
+
+    Q_INVOKABLE void loadCreatedLevels();
 
     bool solverRunning() const;
 
 private:
     QString m_levelDir;
     Levels *m_levels;
+    Levels *m_loadedLevels;
+    LevelCreator *m_levelCreator;
     Board *m_board;
     BoardSolver *m_solver;
     QFutureWatcher<QStack<Move> > *m_watcher;
 
     QDateTime m_timestamp;
     bool m_solverRunning;
+    Board *m_solverBoard;
 
     void loadLevels();
+    bool levelAlreadyLoaded(const int &id);
 
     void setSolverRunning(const bool &solverRunning);
 
@@ -70,7 +82,6 @@ private slots:
 
 signals:
     void levelDirChanged();
-    void levelsChanged();
     void solverRunningChanged();
 
 };

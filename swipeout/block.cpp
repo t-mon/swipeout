@@ -130,46 +130,94 @@ void Block::resetPosition()
 
 void Block::setColor()
 {
+    if (m_id == 0) {
+        m_color = QColor("#8d8d8d");
+    } else {
+        m_color = QColor("#3d3d3d");
+    }
+    return;
+
     switch (m_id) {
     case 0:
-        m_color = QColor("#DD4814");
+        m_color = QColor("#eee4da");
         break;
     case 1:
-        m_color = QColor("#9E7D96");
+        m_color = QColor("#ede0c8");
         break;
     case 2:
-        m_color = QColor("#411934");
+        m_color = QColor("#f2b179");
         break;
     case 3:
-        m_color = QColor("#77216F");
+        m_color = QColor("#f59563");
         break;
     case 4:
-        m_color = QColor("#6E3C61");
+        m_color = QColor("#f67c5f");
         break;
     case 5:
-        m_color = QColor("#5E2750");
+        m_color = QColor("#f65e3b");
         break;
     case 6:
-        m_color = QColor("#77216F");
+        m_color = QColor("#edcf72");
         break;
     case 7:
-        m_color = QColor("#772953");
+        m_color = QColor("#edcc61");
         break;
     case 8:
-        m_color = QColor("#F1B5A1");
+        m_color = QColor("#edc850");
         break;
     case 9:
-        m_color = QColor("#BB90B7");
+        m_color = QColor("#edc53f");
         break;
     case 10:
-        m_color = QColor("#EA9172");
+        m_color = QColor("#edc22e");
         break;
     case 11:
-        m_color = QColor("#F4C8B8");
+        m_color = QColor("#3c3a32");
         break;
     default:
         break;
     }
+
+//    switch (m_id) {
+//    case 0:
+//        m_color = QColor("#DD4814");
+//        break;
+//    case 1:
+//        m_color = QColor("#9E7D96");
+//        break;
+//    case 2:
+//        m_color = QColor("#411934");
+//        break;
+//    case 3:
+//        m_color = QColor("#77216F");
+//        break;
+//    case 4:
+//        m_color = QColor("#6E3C61");
+//        break;
+//    case 5:
+//        m_color = QColor("#5E2750");
+//        break;
+//    case 6:
+//        m_color = QColor("#77216F");
+//        break;
+//    case 7:
+//        m_color = QColor("#772953");
+//        break;
+//    case 8:
+//        m_color = QColor("#F1B5A1");
+//        break;
+//    case 9:
+//        m_color = QColor("#BB90B7");
+//        break;
+//    case 10:
+//        m_color = QColor("#EA9172");
+//        break;
+//    case 11:
+//        m_color = QColor("#F4C8B8");
+//        break;
+//    default:
+//        break;
+//    }
 
     emit colorChanged();
 }

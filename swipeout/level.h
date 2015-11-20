@@ -33,6 +33,7 @@ class Level : public QObject
     Q_PROPERTY(int id READ id CONSTANT)
     Q_PROPERTY(int width READ width CONSTANT)
     Q_PROPERTY(int height READ height CONSTANT)
+    Q_PROPERTY(int minimalMoveCount READ minimalMoveCount CONSTANT)
 
 public:
     explicit Level(QObject *parent = 0);
@@ -56,6 +57,9 @@ public:
     int height() const;
     void setHeight(const int &height);
 
+    int minimalMoveCount() const;
+    void setMinimalMoveCount(const int &minimalMoveCount);
+
 private:
     QVariantList m_blockData;
     Blocks *m_blocks;
@@ -63,6 +67,7 @@ private:
     int m_id;
     int m_width;
     int m_height;
+    int m_minimalMoveCount;
 
 };
 

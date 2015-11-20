@@ -24,7 +24,11 @@
 
 Level::Level(QObject *parent) :
     QObject(parent),
-    m_blocks(new Blocks(this))
+    m_blocks(new Blocks(this)),
+    m_name("Level"),
+    m_width(6),
+    m_height(6),
+    m_minimalMoveCount(0)
 {
 
 }
@@ -106,5 +110,15 @@ int Level::height() const
 void Level::setHeight(const int &height)
 {
     m_height = height;
+}
+
+int Level::minimalMoveCount() const
+{
+    return m_minimalMoveCount;
+}
+
+void Level::setMinimalMoveCount(const int &minimalMoveCount)
+{
+    m_minimalMoveCount = minimalMoveCount;
 }
 

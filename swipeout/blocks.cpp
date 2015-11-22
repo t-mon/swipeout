@@ -94,12 +94,20 @@ void Blocks::addBlock(Block *block)
     endInsertRows();
 }
 
+void Blocks::removeBlock(Block *block)
+{
+    int index = m_blocks.indexOf(block);
+    beginRemoveRows(QModelIndex(), index, index);
+    m_blocks.removeAt(index);
+    endRemoveRows();
+    block->deleteLater();
+}
+
 void Blocks::deleteAllBlocks()
 {
-    beginResetModel();
-    qDeleteAll(m_blocks);
-    m_blocks.clear();
-    endResetModel();
+    foreach (Block *block, m_blocks) {
+        removeBlock(block);
+    }
 }
 
 QHash<int, QByteArray> Blocks::roleNames() const

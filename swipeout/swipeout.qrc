@@ -2,12 +2,19 @@
     <qresource prefix="/">
         <file>ui/Main.qml</file>
         <file>ui/MainPage.qml</file>
+        <file>ui/AboutPage.qml</file>
         <file>ui/BlockItem.qml</file>
         <file>ui/LevelSelectorPage.qml</file>
         <file>ui/LevelSelectorItem.qml</file>
         <file>ui/BoardPage.qml</file>
         <file>ui/LevelCreator.qml</file>
         <file>ui/LoadLevelPage.qml</file>
+        <file>ui/LevelCreatorDeleteTool.qml</file>
+        <file>ui/LevelCreatorTowHorizontalTool.qml</file>
+        <file>ui/LevelCreatorTowVerticalTool.qml</file>
+        <file>ui/LevelCreatorThreeHorizontalTool.qml</file>
+        <file>ui/LevelCreatorThreeVerticalTool.qml</file>
+        <file>ui/SolveDialog.qml</file>
     </qresource>
 </RCC>
 

@@ -133,7 +133,7 @@ void Block::setColor()
     if (m_id == 0) {
         m_color = QColor("#8d8d8d");
     } else {
-        m_color = QColor("#3d3d3d");
+        m_color = QColor("#333333");
     }
     return;
 

@@ -34,8 +34,13 @@ LevelCreator::LevelCreator(QObject *parent) :
     m_width(6),
     m_height(6),
     m_board(new Board(this)),
-    m_level(0)
+    m_level(new Level(this)),
+    m_deleteToolSelected(false),
+    m_twoHorizontalToolSelected(false),
+    m_twoVerticalToolSelected(false),
+    m_addMode(false)
 {
+    initLevel();
     qsrand(QDateTime::currentMSecsSinceEpoch());
 }
 
@@ -63,23 +68,12 @@ void LevelCreator::setHeight(const int &height)
 
 void LevelCreator::createRandomLevel()
 {
-    if (!m_level)
-        m_level = new Level(this);
-
-    m_level->destroyBlocks();
-
-    m_level->setId((int)(qrand() % (99999 - 999 + 1) + 999));
-    m_level->setName("Random " + QString::number(m_level->id()));
-    m_level->setHeight(m_height);
-    m_level->setWidth(m_width);
+    initLevel();
 
     qDebug() << "------------------------------------";
     qDebug() << "Create random level: " << m_level->name();
 
-    // add start block
-    m_level->blocks()->addBlock(new Block(0, (int)(qrand() % 2), 2, 1, 2, m_level));
-
-    initGrid();
+    updateGrid();
 
     QList<Block *> blocks;
 
@@ -105,73 +99,31 @@ void LevelCreator::createRandomLevel()
 
     // positioning all blocks
     foreach (Block *block, blocks) {
-
         if (block->orientation() == Block::Vertical) {
-            QList<QPoint> possiblePositions;
+            QList<QPoint> positions = possiblePositions(block);
 
-            for (int y = 0; y < m_boardGrid.length(); y++) {
-                for (int x = 0; x < m_boardGrid[y].length(); x++) {
-                    // check if cell is free
-                    if (m_boardGrid[x][y].blockId() == -1) {
-                        // check if enough space for block
-                        if (block->height() + y <= m_height) {
-                            bool free = true;
-                            for (int i = 0; i < block->height(); i++) {
-                                if (m_boardGrid[x][y + i].blockId() != -1) {
-                                    free = false;
-                                    break;
-                                }
-                            }
-
-                            if (free)
-                                possiblePositions.append(QPoint(x,y));
-                        }
-                    }
-                }
-            }
-
-            int index = qrand() % possiblePositions.length();
-            QPoint finalPosition = possiblePositions.at(index);
-            block->setX(finalPosition.x());
-            block->setY(finalPosition.y());
-            m_level->blocks()->addBlock(block);
-            initGrid();
-        } else if (block->orientation() == Block::Horizontal) {
-            QList<QPoint> possiblePositions;
-
-            for (int y = 0; y < m_boardGrid.length(); y++) {
-                for (int x = 0; x < m_boardGrid[y].length(); x++) {
-                    // check if cell is free
-                    if (m_boardGrid[x][y].blockId() == -1) {
-                        // dont place it in the same row as the 0 block
-                        if (block->y() != m_level->blocks()->get(0)->y()) {
-                            // check if enough space for block
-                            if (block->width() + x <= m_width) {
-                                bool free = true;
-                                for (int i = 0; i < block->width(); i++) {
-                                    if (m_boardGrid[x + i][y].blockId() != -1) {
-                                        free = false;
-                                        break;
-                                    }
-                                }
-
-                                if (free)
-                                    possiblePositions.append(QPoint(x,y));
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (possiblePositions.isEmpty()) {
+            if (positions.isEmpty()) {
                 block->deleteLater();
             } else {
-                int index = qrand() % possiblePositions.length();
-                QPoint finalPosition = possiblePositions.at(index);
+                int index = qrand() % positions.length();
+                QPoint finalPosition = positions.at(index);
                 block->setX(finalPosition.x());
                 block->setY(finalPosition.y());
                 m_level->blocks()->addBlock(block);
-                initGrid();
+                updateGrid();
+            }
+        } else if (block->orientation() == Block::Horizontal) {
+            QList<QPoint> positions = possiblePositions(block);
+
+            if (positions.isEmpty()) {
+                block->deleteLater();
+            } else {
+                int index = qrand() % positions.length();
+                QPoint finalPosition = positions.at(index);
+                block->setX(finalPosition.x());
+                block->setY(finalPosition.y());
+                m_level->blocks()->addBlock(block);
+                updateGrid();
             }
         }
     }
@@ -191,7 +143,6 @@ void LevelCreator::saveLevel()
     levelMap.insert("id", m_level->id());
     levelMap.insert("height", m_level->height());
     levelMap.insert("width", m_level->width());
-    levelMap.insert("minimalMoveCount", m_level->minimalMoveCount());
 
     QVariantList blockList;
     foreach (Block *block, m_level->blocks()->blocks()) {
@@ -205,6 +156,16 @@ void LevelCreator::saveLevel()
     }
     levelMap.insert("blocks", blockList);
 
+    QVariantList solutionList;
+    for (int i = 0; i < m_level->solution().count(); i++) {
+        QVariantMap moveMap;
+        moveMap.insert("step", i);
+        moveMap.insert("block", m_level->solution().at(i).id());
+        moveMap.insert("delta", m_level->solution().at(i).delta());
+        solutionList.append(moveMap);
+    }
+    levelMap.insert("solution", solutionList);
+
     QString path(QStandardPaths::locate(QStandardPaths::ConfigLocation, QString(), QStandardPaths::LocateDirectory) + QGuiApplication::applicationName());
     QDir dir(path);
     if(!dir.exists()) {
@@ -213,7 +174,6 @@ void LevelCreator::saveLevel()
             return;
         }
     }
-
 
     QFile levelFile;
     levelFile.setFileName(path + "/level-" + QString::number(m_level->id()) + ".json");
@@ -228,12 +188,161 @@ void LevelCreator::saveLevel()
     qDebug() << "Level saved successfully" << levelFile.fileName();
 }
 
+void LevelCreator::createBlock(const int &index)
+{
+    QPoint coordinates = getCoordinates(index);
+    qDebug() << "create block" << index << " -> " << coordinates.x() <<  coordinates.y();
+
+    Block *block = 0;
+
+    if (twoVerticalToolSelected()) {
+        block = new Block(m_level->blocks()->count() + 1, coordinates.x(), coordinates.y(), 2, 1, m_level);
+    } else if (twoHorizontalToolSelected()) {
+        block = new Block(m_level->blocks()->count() + 1, coordinates.x(), coordinates.y(), 1, 2, m_level);
+    } else if (threeHorizontalToolSelected()) {
+        block = new Block(m_level->blocks()->count() + 1, coordinates.x(), coordinates.y(), 1, 3, m_level);
+    } else if (threeVerticalToolSelected()) {
+        block = new Block(m_level->blocks()->count() + 1, coordinates.x(), coordinates.y(), 3, 1, m_level);
+    } else {
+        clearToolSelections();
+        return;
+    }
+
+    QList<QPoint> possitions = possiblePositions(block);
+
+    if (!possitions.contains(coordinates)) {
+        clearToolSelections();
+        return;
+    }
+
+    m_level->blocks()->addBlock(block);
+    updateGrid();
+    clearToolSelections();
+}
+
+void LevelCreator::removeBlock(const int &id)
+{
+    if (id == 0) {
+        clearToolSelections();
+        return;
+    }
+
+    qDebug() << "Remove block" << id;
+    Block * block = m_level->blocks()->get(id);
+    m_level->blocks()->removeBlock(block);
+    clearToolSelections();
+    updateGrid();
+    m_board->loadLevel(m_level, true);
+    m_board->clearSolution();
+    Board::printBoard(m_boardGrid);
+}
+
+void LevelCreator::clearBoard()
+{
+    initLevel();
+    clearToolSelections();
+}
+
+bool LevelCreator::deleteToolSelected() const
+{
+    return m_deleteToolSelected;
+}
+
+void LevelCreator::setDeleteToolSelected(const bool &selected)
+{
+    clearToolSelections();
+    m_deleteToolSelected = selected;
+    emit deleteToolSelectedChanged();
+}
+
+bool LevelCreator::twoHorizontalToolSelected() const
+{
+    return m_twoHorizontalToolSelected;
+}
+
+void LevelCreator::setTwoHorizontalToolSelected(const bool &selected)
+{
+    clearToolSelections();
+    setAddMode(selected);
+    m_twoHorizontalToolSelected = selected;
+    emit twoHorizontalToolSelectedChanged();
+}
+
+bool LevelCreator::twoVerticalToolSelected() const
+{
+    return m_twoVerticalToolSelected;
+}
+
+void LevelCreator::setTwoVerticalToolSelected(const bool &selected)
+{
+    clearToolSelections();
+    setAddMode(selected);
+    m_twoVerticalToolSelected = selected;
+    emit twoVerticalToolSelectedChanged();
+}
+
+bool LevelCreator::threeHorizontalToolSelected() const
+{
+    return m_threeHorizontalToolSelected;
+}
+
+void LevelCreator::setThreeHorizontalToolSelected(const bool &selected)
+{
+    clearToolSelections();
+    setAddMode(selected);
+    m_threeHorizontalToolSelected = selected;
+    emit threeHorizontalToolSelectedChanged();
+}
+
+bool LevelCreator::threeVerticalToolSelected() const
+{
+    return m_threeVerticalToolSelected;
+}
+
+void LevelCreator::setThreeVerticalToolSelected(const bool &selected)
+{
+    clearToolSelections();
+    setAddMode(selected);
+    m_threeVerticalToolSelected = selected;
+    emit threeVerticalToolSelectedChanged();
+}
+
+bool LevelCreator::addMode() const
+{
+    return m_addMode;
+}
+
+void LevelCreator::setAddMode(const bool &addMode)
+{
+    m_addMode = addMode;
+    emit addModeChanged();
+}
+
 Board *LevelCreator::board()
 {
     return m_board;
 }
 
-void LevelCreator::initGrid()
+void LevelCreator::initLevel()
+{
+    clearToolSelections();
+
+    m_level->setId((int)(qrand() % (99999 - 999 + 1) + 999));
+    m_level->setName("Random " + QString::number(m_level->id()));
+    m_level->setHeight(m_height);
+    m_level->setWidth(m_width);
+    m_board->clearSolution();
+
+    m_level->destroyBlocks();
+
+    // add start block
+    m_level->blocks()->addBlock(new Block(0, (int)(qrand() % 2), 2, 1, 2, m_level));
+    m_board->loadLevel(m_level, true);
+    updateGrid();
+
+}
+
+void LevelCreator::updateGrid()
 {
     m_boardGrid.clear();
     m_boardGrid.resize(m_width);
@@ -258,6 +367,94 @@ void LevelCreator::initGrid()
             }
         }
     }
+}
+
+QPoint LevelCreator::getCoordinates(const int &index)
+{
+    int i = 0;
+    for (int y = 0; y < m_boardGrid.length(); y++) {
+        for (int x = 0; x < m_boardGrid[y].length(); x++) {
+            if (i == index) {
+                return QPoint(x, y);
+            } else {
+                i++;
+            }
+        }
+    }
+    return QPoint();
+}
+
+QList<QPoint> LevelCreator::possiblePositions(Block *block)
+{
+    QList<QPoint> possiblePositions;
+    if (block->orientation() == Block::Vertical) {
+        for (int y = 0; y < m_boardGrid.length(); y++) {
+            for (int x = 0; x < m_boardGrid[y].length(); x++) {
+                // check if cell is free
+                if (m_boardGrid[x][y].blockId() == -1) {
+                    // check if enough space for block
+                    if (block->height() + y <= m_height) {
+                        bool free = true;
+                        for (int i = 0; i < block->height(); i++) {
+                            if (m_boardGrid[x][y + i].blockId() != -1) {
+                                free = false;
+                                break;
+                            }
+                        }
+
+                        if (free)
+                            possiblePositions.append(QPoint(x,y));
+                    }
+                }
+            }
+        }
+    } else if (block->orientation() == Block::Horizontal) {
+        for (int y = 0; y < m_boardGrid.length(); y++) {
+            for (int x = 0; x < m_boardGrid[y].length(); x++) {
+                // check if cell is free
+                if (m_boardGrid[x][y].blockId() == -1) {
+                    // dont place it in the same row as the 0 block
+                    if (y != m_level->blocks()->get(0)->y()) {
+                        // check if enough space for block
+                        if (block->width() + x <= m_width) {
+                            bool free = true;
+                            for (int i = 0; i < block->width(); i++) {
+                                if (m_boardGrid[x + i][y].blockId() != -1) {
+                                    free = false;
+                                    break;
+                                }
+                            }
+
+                            if (free)
+                                possiblePositions.append(QPoint(x,y));
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return possiblePositions;
+}
+
+void LevelCreator::clearToolSelections()
+{
+    m_deleteToolSelected = false;
+    emit deleteToolSelectedChanged();
+
+    m_twoHorizontalToolSelected = false;
+    emit twoHorizontalToolSelectedChanged();
+
+    m_twoVerticalToolSelected = false;
+    emit twoVerticalToolSelectedChanged();
+
+    m_threeHorizontalToolSelected = false;
+    emit threeHorizontalToolSelectedChanged();
+
+    m_threeVerticalToolSelected = false;
+    emit threeVerticalToolSelectedChanged();
+
+    setAddMode(false);
 }
 
 

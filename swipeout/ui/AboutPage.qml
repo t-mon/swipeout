@@ -1,6 +1,3 @@
-#ifndef BLOCKS_H
-#define BLOCKS_H
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                         *
  *  Copyright (C) 2015 Simon Stuerz <stuerz.simon@gmail.com>               *
@@ -21,47 +18,13 @@
  *                                                                         *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#include <QObject>
-#include <QAbstractListModel>
+import QtQuick 2.4
+import Ubuntu.Components 1.3
+import Swipeout 1.0
 
-#include "block.h"
+Page {
+    id: root
+    title: i18n.tr("About")
 
-class Blocks : public QAbstractListModel
-{
-    Q_OBJECT
 
-public:
-    enum BlockRole {
-        IdRole,
-        XRole,
-        YRole,
-        WidthRole,
-        HeightRole,
-        ColorRole
-    };
-
-    explicit Blocks(QObject *parent = 0);
-    Blocks(Blocks *other, QObject *parent);
-
-    QList<Block *> blocks();
-    Q_INVOKABLE Block *get(int id);
-    Q_INVOKABLE int count() const;
-
-    Q_INVOKABLE void resetBlockPositions();
-
-    int rowCount(const QModelIndex & parent = QModelIndex()) const;
-    QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
-
-    void addBlock(Block* block);
-    void removeBlock(Block* block);
-    void deleteAllBlocks();
-
-protected:
-    QHash<int, QByteArray> roleNames() const;
-
-private:
-    QList<Block *> m_blocks;
-
-};
-
-#endif // BLOCKS_H
+}

@@ -16,9 +16,11 @@ SOURCES += main.cpp \
     blocks.cpp \
     board.cpp \
     boardsolver.cpp \
-    levelcreator.cpp
+    levelcreator.cpp \
+    move.cpp
 
-RESOURCES += swipeout.qrc
+RESOURCES += swipeout.qrc \
+             images.qrc
 
 QML_FILES += $$files(*.qml,true) \
              $$files(*.js,true)
@@ -40,5 +42,6 @@ HEADERS += \
     blocks.h \
     board.h \
     boardsolver.h \
-    levelcreator.h
+    levelcreator.h \
+    move.h
 

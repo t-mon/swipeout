@@ -79,6 +79,12 @@ Item {
             drag.minimumY: 0
             drag.maximumY: board.height - height
 
+            onClicked: {
+                if (gameEngine.levelCreator.deleteToolSelected) {
+                    gameEngine.levelCreator.removeBlock(block.id)
+                }
+            }
+
             onPressed: {
                 xBehavior.enabled = false
                 yBehavior.enabled = false
@@ -107,11 +113,11 @@ Item {
             }
         }
 
-            Label {
-                visible: app.debug
-                anchors.centerIn: parent
-                text: blockId
-            }
+        Label {
+            visible: app.debug
+            anchors.centerIn: parent
+            text: blockId
+        }
 
     }
 }

@@ -26,13 +26,23 @@ Page {
     id: root
     title: i18n.tr("Swipeout")
 
+    head.actions: Action {
+        id: infoAction
+        iconName: "info"
+        text: i18n.tr("About")
+        onTriggered: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
+    }
+
     Column {
-        spacing: units.gu(2)
+        spacing: units.gu(3)
         anchors.centerIn: parent
 
         Button {
             text: "Play"
+            font.bold:true
             color: "#88888888"
+            width: units.gu(20)
+            height: units.gu(10)
             onClicked: {
                 push(Qt.resolvedUrl("LevelSelectorPage.qml"))
             }
@@ -41,6 +51,8 @@ Page {
         Button {
             text: "Load level"
             color: "#88888888"
+            width: units.gu(20)
+            height: units.gu(10)
             onClicked: {
                 gameEngine.loadCreatedLevels()
                 push(Qt.resolvedUrl("LoadLevelPage.qml"))
@@ -50,6 +62,8 @@ Page {
         Button {
             text: "Create level"
             color: "#88888888"
+            width: units.gu(20)
+            height: units.gu(10)
             onClicked: {
                 push(Qt.resolvedUrl("LevelCreator.qml"))
             }

@@ -166,6 +166,7 @@ QStack<Move> BoardSolver::calculateSolution(Board *board)
                         solution.push_front(currentNode->move());
                     }
                 }
+
                 cleanUp();
                 return solution;
             }
@@ -203,7 +204,7 @@ void BoardSolver::expand(Node *currentNode)
                 Blocks *blocks = new Blocks(currentNode->blocks(), m_object);
                 Block *movedBlock = blocks->get(block->id());
                 movedBlock->setX(movedBlock->x() + i);
-                node->setMove(Move(block->id(), i));
+                node->setMove(Move(block->id(), node->g(), i));
                 node->setBlocks(blocks, m_width, m_height);
                 movements.append(node);
             }
@@ -226,7 +227,7 @@ void BoardSolver::expand(Node *currentNode)
                 Blocks *blocks = new Blocks(currentNode->blocks(), m_object);
                 Block *movedBlock = blocks->get(block->id());
                 movedBlock->setX(movedBlock->x() - i);
-                node->setMove(Move(block->id(), i *(-1)));
+                node->setMove(Move(block->id(), node->g(), i *(-1)));
                 node->setBlocks(blocks, m_width, m_height);
                 movements.append(node);
             }
@@ -252,7 +253,7 @@ void BoardSolver::expand(Node *currentNode)
                 Blocks *blocks = new Blocks(currentNode->blocks(), m_object);
                 Block *movedBlock = blocks->get(block->id());
                 movedBlock->setY(movedBlock->y() + i);
-                node->setMove(Move(block->id(), i));
+                node->setMove(Move(block->id(), node->g(), i));
                 node->setBlocks(blocks, m_width, m_height);
                 movements.append(node);
             }
@@ -275,7 +276,7 @@ void BoardSolver::expand(Node *currentNode)
                 Blocks *blocks = new Blocks(currentNode->blocks(), m_object);
                 Block *movedBlock = blocks->get(block->id());
                 movedBlock->setY(movedBlock->y() - i);
-                node->setMove(Move(block->id(), i *(-1)));
+                node->setMove(Move(block->id(), node->g(), i *(-1)));
                 node->setBlocks(blocks, m_width, m_height);
                 movements.append(node);
             }

@@ -20,6 +20,7 @@
 
 #include "gameengine.h"
 #include "boardsolver.h"
+#include "move.h"
 
 #include <QDir>
 #include <QDebug>
@@ -147,7 +148,22 @@ void GameEngine::loadCreatedLevels()
         level->setHeight(levelData.value("height").toInt());
         level->setWidth(levelData.value("width").toInt());
         level->setBlockData(levelData.value("blocks").toList());
-        level->setMinimalMoveCount(levelData.value("minimalMoveCount").toInt());
+
+        // load solution moves
+        QList<Move> moves;
+        foreach (const QVariant &moveData, levelData.value("solution").toList()) {
+            QVariantMap moveMap = moveData.toMap();
+            Move move(moveMap.value("block").toInt(), moveMap.value("step").toInt(), moveMap.value("delta").toInt());
+            moves.append(move);
+        }
+        qSort(moves.begin(), moves.end(), compareMove);
+
+        QStack<Move> solution;
+        for (int i = 0; i < moves.count(); i++) {
+            solution.push(moves.at(i));
+        }
+        level->setSolution(solution);
+
         m_loadedLevels->addLevel(level);
     }
 }
@@ -191,7 +207,22 @@ void GameEngine::loadLevels()
         level->setHeight(levelData.value("height").toInt());
         level->setWidth(levelData.value("width").toInt());
         level->setBlockData(levelData.value("blocks").toList());
-        level->setMinimalMoveCount(levelData.value("minimalMoveCount").toInt());
+
+        // load solution moves
+        QList<Move> moves;
+        foreach (const QVariant &moveData, levelData.value("solution").toList()) {
+            QVariantMap moveMap = moveData.toMap();
+            Move move(moveMap.value("block").toInt(), moveMap.value("step").toInt(), moveMap.value("delta").toInt());
+            moves.append(move);
+        }
+        qSort(moves.begin(), moves.end(), compareMove);
+
+        QStack<Move> solution;
+        for (int i = 0; i < moves.count(); i++) {
+            solution.push(moves.at(i));
+        }
+        level->setSolution(solution);
+
         m_levels->addLevel(level);
     }
 }
@@ -226,13 +257,13 @@ void GameEngine::onSolverFinished()
         qDebug() << "----------------------------------";
         qDebug() << "Solution found!";
         foreach (const Move &move, solution) {
-            qDebug() << "    " << move.id() << " -> " << move.delta();
+            qDebug() << "    " << move.step() << "|" << move.id() << " -> " << move.delta();
         }
         qDebug() << "----------------------------------";
         qDebug() << "Solvable in" <<  solution.count() << "moves!";
         qDebug() << "Process time:" << time.toString("mm:ss.zzz");
         qDebug() << "----------------------------------";
     }
-    m_solverBoard->level()->setMinimalMoveCount(solution.count());
+    m_solverBoard->level()->setSolution(solution);
     m_solverBoard->setSolution(solution);
 }

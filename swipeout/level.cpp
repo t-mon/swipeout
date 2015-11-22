@@ -27,8 +27,7 @@ Level::Level(QObject *parent) :
     m_blocks(new Blocks(this)),
     m_name("Level"),
     m_width(6),
-    m_height(6),
-    m_minimalMoveCount(0)
+    m_height(6)
 {
 
 }
@@ -70,6 +69,7 @@ void Level::destroyBlocks()
 {
     qDebug() << " -> Destroy Blocks of level" << id();
     m_blocks->deleteAllBlocks();
+    m_solution.clear();
 }
 
 QString Level::name() const
@@ -112,13 +112,24 @@ void Level::setHeight(const int &height)
     m_height = height;
 }
 
-int Level::minimalMoveCount() const
+bool Level::solutionAvailable() const
 {
-    return m_minimalMoveCount;
+    return !m_solution.isEmpty();
 }
 
-void Level::setMinimalMoveCount(const int &minimalMoveCount)
+QStack<Move> Level::solution() const
 {
-    m_minimalMoveCount = minimalMoveCount;
+    return m_solution;
 }
 
+void Level::clearSolution()
+{
+    m_solution.clear();
+    emit solutionAvailableChanged();
+}
+
+void Level::setSolution(const QStack<Move> &solution)
+{
+    m_solution = solution;
+    emit solutionAvailableChanged();
+}

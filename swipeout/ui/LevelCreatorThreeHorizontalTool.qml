@@ -1,6 +1,3 @@
-#ifndef BLOCKS_H
-#define BLOCKS_H
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                         *
  *  Copyright (C) 2015 Simon Stuerz <stuerz.simon@gmail.com>               *
@@ -21,47 +18,30 @@
  *                                                                         *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-#include <QObject>
-#include <QAbstractListModel>
+import QtQuick 2.4
+import Ubuntu.Components 1.3
+import Swipeout 1.0
 
-#include "block.h"
+Item {
+    id: root
 
-class Blocks : public QAbstractListModel
-{
-    Q_OBJECT
+    property bool selected: gameEngine.levelCreator.threeHorizontalToolSelected
 
-public:
-    enum BlockRole {
-        IdRole,
-        XRole,
-        YRole,
-        WidthRole,
-        HeightRole,
-        ColorRole
-    };
+    UbuntuShape {
+        anchors.fill: parent
+        anchors.margins: units.gu(0.5)
+        backgroundColor: !selected ? "#88888888" : "#55555555"
 
-    explicit Blocks(QObject *parent = 0);
-    Blocks(Blocks *other, QObject *parent);
 
-    QList<Block *> blocks();
-    Q_INVOKABLE Block *get(int id);
-    Q_INVOKABLE int count() const;
+        Image {
+            id: image
+            anchors.fill: parent
+            source: "qrc:///images/threeHorizontal.svg"
+        }
 
-    Q_INVOKABLE void resetBlockPositions();
-
-    int rowCount(const QModelIndex & parent = QModelIndex()) const;
-    QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
-
-    void addBlock(Block* block);
-    void removeBlock(Block* block);
-    void deleteAllBlocks();
-
-protected:
-    QHash<int, QByteArray> roleNames() const;
-
-private:
-    QList<Block *> m_blocks;
-
-};
-
-#endif // BLOCKS_H
+        MouseArea {
+            anchors.fill: parent
+            onClicked: gameEngine.levelCreator.threeHorizontalToolSelected = !selected
+        }
+    }
+}

@@ -116,18 +116,7 @@ Page {
             }
 
             Button {
-                visible: app.debug
-                text: i18n.tr("Solve")
-                color: "#88888888"
-                onClicked: gameEngine.solveBoard()
-                ActivityIndicator {
-                    id: solverIndicator
-                    running: gameEngine.solverRunning
-                }
-            }
-
-            Button {
-                visible: app.debug && gameEngine.board.solutionAvailable
+                visible: app.debug && gameEngine.board.level.solutionAvailable
                 text: i18n.tr("Show solution");
                 color: "#88888888"
                 onClicked: gameEngine.board.showSolution()

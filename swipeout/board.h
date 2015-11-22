@@ -46,19 +46,6 @@ private:
     int m_blockId;
 };
 
-class Move
-{
-public:
-    Move(const int &id = 0, const int &delta = 0): m_id(id), m_delta(delta) {}
-
-    int id() const { return m_id; }
-    int delta() const { return m_delta; }
-
-private:
-    int m_id;
-    int m_delta;
-};
-
 class Board : public QObject
 {
     Q_OBJECT
@@ -89,6 +76,7 @@ public:
 
     bool solutionAvailable() const;
     void setSolution(const QStack<Move> &solution);
+    void clearSolution();
 
     static void printBoard(const QVector<QVector<BoardCell> > &boardGrid);
 

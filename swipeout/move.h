@@ -1,6 +1,3 @@
-#ifndef BLOCKS_H
-#define BLOCKS_H
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *                                                                         *
  *  Copyright (C) 2015 Simon Stuerz <stuerz.simon@gmail.com>               *
@@ -21,47 +18,27 @@
  *                                                                         *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
+#ifndef MOVE_H
+#define MOVE_H
+
 #include <QObject>
-#include <QAbstractListModel>
+#include <QDebug>
 
-#include "block.h"
-
-class Blocks : public QAbstractListModel
+class Move
 {
-    Q_OBJECT
-
 public:
-    enum BlockRole {
-        IdRole,
-        XRole,
-        YRole,
-        WidthRole,
-        HeightRole,
-        ColorRole
-    };
+    Move(const int &id = 0, const int &step = 0, const int &delta = 0);
 
-    explicit Blocks(QObject *parent = 0);
-    Blocks(Blocks *other, QObject *parent);
-
-    QList<Block *> blocks();
-    Q_INVOKABLE Block *get(int id);
-    Q_INVOKABLE int count() const;
-
-    Q_INVOKABLE void resetBlockPositions();
-
-    int rowCount(const QModelIndex & parent = QModelIndex()) const;
-    QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
-
-    void addBlock(Block* block);
-    void removeBlock(Block* block);
-    void deleteAllBlocks();
-
-protected:
-    QHash<int, QByteArray> roleNames() const;
+    int id() const;
+    int step() const;
+    int delta() const;
 
 private:
-    QList<Block *> m_blocks;
-
+    int m_id;
+    int m_step;
+    int m_delta;
 };
 
-#endif // BLOCKS_H
+bool compareMove(const Move &move1, const Move &move2);
+
+#endif // MOVE_H

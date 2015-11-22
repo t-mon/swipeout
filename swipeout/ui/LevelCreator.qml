@@ -25,7 +25,7 @@ import Swipeout 1.0
 
 Page {
     id: root
-    title: i18n.tr("Level creator")
+    title: "Level " + level.id
 
     property var creator: gameEngine.levelCreator
     property var level: creator.board.level
@@ -40,16 +40,59 @@ Page {
             onTriggered: app.debug = !app.debug
         },
         Action {
+            id: clearAction
+            iconName: "delete"
+            text: i18n.tr("Clear board")
+            onTriggered: creator.clearBoard()
+        },
+        Action {
             id: addDeviceAction
             iconName: "reload"
-            text: i18n.tr("Create level")
+            text: i18n.tr("Create random level")
             onTriggered: creator.createRandomLevel()
         }
     ]
 
     Column {
         anchors.centerIn: parent
-        spacing: units.gu(2)
+        spacing: units.gu(1)
+        Row {
+            id: toolRow
+            anchors.left: parent.left
+            anchors.leftMargin: units.gu(1)
+            anchors.right: parent.right
+            anchors.rightMargin: units.gu(1)
+
+            LevelCreatorDeleteTool {
+                id: deleteTool
+                width: parent.width / 5
+                height: width
+            }
+            LevelCreatorTowHorizontalTool {
+                id: twoHorizontalTool
+                width: parent.width / 5
+                height: width
+            }
+
+            LevelCreatorThreeHorizontalTool {
+                id: threeHorizontalTool
+                width: parent.width / 5
+                height: width
+            }
+
+            LevelCreatorTowVerticalTool {
+                id: twoVerticalTool
+                width: parent.width / 5
+                height: width
+            }
+
+            LevelCreatorThreeVerticalTool {
+                id: threeVerticalTool
+                width: parent.width / 5
+                height: width
+            }
+
+        }
 
         UbuntuShape {
             id: boardBackground
@@ -86,6 +129,36 @@ Page {
                     }
                 }
             }
+
+            UbuntuShape {
+                id: addingArea
+                anchors.fill: parent
+                anchors.margins: borderWidth
+                backgroundColor: "transparent"
+
+                Grid {
+                    columns: creator.width
+                    visible: gameEngine.levelCreator.addMode
+                    Repeater {
+                        id: fieldRepeater
+                        model: level.width * level.height
+                        delegate: Rectangle {
+                            height: Math.min(addingArea.width / creator.width , addingArea.height / creator.height)
+                            width: height
+                            color: "transparent"
+                            border.color: "#aaaaaaaa"
+
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked:  {
+                                    creator.createBlock(index)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
         }
 
         Row {
@@ -96,21 +169,19 @@ Page {
             Button {
                 text: i18n.tr("Save");
                 onClicked: creator.saveLevel()
+                color: "#88888888"
             }
 
             Button {
-                visible: app.debug
                 text: i18n.tr("Solve")
-                onClicked: gameEngine.solveCreatorBoard()
-                ActivityIndicator {
-                    id: solverIndicator
-                    running: gameEngine.solverRunning
-                }
+                onClicked: PopupUtils.open(Qt.resolvedUrl("SolveDialog.qml"))
+                color: "#88888888"
             }
 
             Button {
-                visible: app.debug && creator.board.solutionAvailable
+                visible: creator.board.level.solutionAvailable
                 text: i18n.tr("Show solution");
+                color: "#88888888"
                 onClicked: creator.board.showSolution()
             }
         }

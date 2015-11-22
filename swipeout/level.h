@@ -22,8 +22,12 @@
 #define LEVEL_H
 
 #include <QObject>
+#include <QStack>
 
 #include "blocks.h"
+#include "move.h"
+
+class Move;
 
 class Level : public QObject
 {
@@ -33,7 +37,7 @@ class Level : public QObject
     Q_PROPERTY(int id READ id CONSTANT)
     Q_PROPERTY(int width READ width CONSTANT)
     Q_PROPERTY(int height READ height CONSTANT)
-    Q_PROPERTY(int minimalMoveCount READ minimalMoveCount CONSTANT)
+    Q_PROPERTY(bool solutionAvailable READ solutionAvailable NOTIFY solutionAvailableChanged)
 
 public:
     explicit Level(QObject *parent = 0);
@@ -57,17 +61,24 @@ public:
     int height() const;
     void setHeight(const int &height);
 
-    int minimalMoveCount() const;
-    void setMinimalMoveCount(const int &minimalMoveCount);
+    bool solutionAvailable() const;
+
+    QStack<Move> solution() const;
+    void clearSolution();
+    void setSolution(const QStack<Move> &solution);
 
 private:
     QVariantList m_blockData;
     Blocks *m_blocks;
+    QStack<Move> m_solution;
+
     QString m_name;
     int m_id;
     int m_width;
     int m_height;
-    int m_minimalMoveCount;
+
+signals:
+    void solutionAvailableChanged();
 
 };
 

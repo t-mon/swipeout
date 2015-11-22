@@ -66,11 +66,10 @@ void Board::clearLevel()
 {
     qDebug() << " -> Clear board";
     m_boardGrid.clear();
-    m_solution.clear();
-    emit solutionAvailableChanged();
 
     if (m_level)
         m_level->destroyBlocks();
+
     setMoveCount(0);
 }
 
@@ -102,7 +101,9 @@ void Board::loadLevel(Level *level, const bool &fromCreator)
         emit levelChanged();
     }
 
+
     initBoard();
+    setSolution(m_level->solution());
     printBoard(m_boardGrid);
 }
 
@@ -183,14 +184,17 @@ void Board::moveBlock(const int &id, const int &delta, const bool &fromUndo)
 {
     Block *block = m_level->blocks()->get(id);
 
+    if (delta == 0)
+        return;
+
     if (block->orientation() == Block::Horizontal) {
         moveBlockX(id, block->x() + delta);
     } else {
         moveBlockY(id, block->y() + delta);
     }
 
-    if (!fromUndo && delta != 0)
-        m_moveStack.push(Move(id, delta));
+    if (!fromUndo)
+        m_moveStack.push(Move(id, moveCount(), delta));
 }
 
 void Board::undoMove()
@@ -207,6 +211,7 @@ void Board::undoMove()
 
 void Board::showSolution()
 {
+    m_solution = m_level->solution();
     automaticMove();
 }
 
@@ -218,6 +223,14 @@ bool Board::solutionAvailable() const
 void Board::setSolution(const QStack<Move> &solution)
 {
     m_solution = solution;
+    emit solutionAvailableChanged();
+}
+
+void Board::clearSolution()
+{
+    m_solution.clear();
+    if (m_level)
+        m_level->clearSolution();
     emit solutionAvailableChanged();
 }
 
@@ -303,7 +316,7 @@ void Board::moveBlockY(const int &id, const int &newY)
     for (int i = 0; i < block->height(); i++) {
         m_boardGrid[block->x()][block->y()  + i].setBlockId(-1);
     }
-    qDebug() << "move block to y = " << newY;
+    qDebug() << "move block" << id <<  " -> y = " << newY;
     block->setY(newY);
 
     for (int i = 0; i < block->height(); i++) {

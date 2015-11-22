@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-21 00:57+0100\n"
+"POT-Creation-Date: 2015-11-22 22:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:27
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:32
+msgid "About"
+msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:38
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:39
@@ -26,46 +31,32 @@ msgstr ""
 msgid "Restart level"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:62
-msgid "Moves: "
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:70
+msgid "MOVES"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:113
-msgid "Undo"
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:89
+msgid "RECORD"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:120
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:103
-msgid "Solve"
-msgstr ""
-
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:131
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:113
-msgid "Show solution"
-msgstr ""
-
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:142
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:207
 msgid "Level completed!"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:143
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:208
 msgid "You took "
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:147
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:212
 msgid "Next level"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:28
-msgid "Level creator"
-msgstr ""
-
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:45
-msgid "Create level"
+msgid "Clear board"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:97
-msgid "Save"
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:51
+msgid "Create random level"
 msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelSelectorPage.qml:27

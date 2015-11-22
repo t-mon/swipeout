@@ -208,6 +208,7 @@ void LevelCreator::createBlock(const int &index)
     }
 
     QList<QPoint> possitions = possiblePositions(block);
+    qDebug() << "found possible places" << possitions;
 
     if (!possitions.contains(coordinates)) {
         clearToolSelections();
@@ -230,6 +231,7 @@ void LevelCreator::removeBlock(const int &id)
     qDebug() << "Remove block" << id;
     Block * block = m_level->blocks()->get(id);
     m_level->blocks()->removeBlock(block);
+    m_board->updateBoardGrid();
     block->deleteLater();
     clearToolSelections();
     Board::printBoard(m_board->boardGrid());
@@ -238,6 +240,7 @@ void LevelCreator::removeBlock(const int &id)
 void LevelCreator::clearBoard()
 {
     initLevel();
+    m_board->updateBoardGrid();
     clearToolSelections();
 }
 
@@ -339,6 +342,7 @@ void LevelCreator::initLevel()
     // add start block
     m_level->blocks()->addBlock(new Block(0, (int)(qrand() % 3), 2, 1, 2, m_level));
     m_board->loadLevel(m_level);
+    m_board->updateBoardGrid();
 }
 
 QPoint LevelCreator::getCoordinates(const int &index)

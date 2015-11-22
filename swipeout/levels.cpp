@@ -69,8 +69,8 @@ QVariant Levels::data(const QModelIndex &index, int role) const
         return level->width();
     } else if (role == HeightRole) {
         return level->height();
-    } else if (role == SolutionAvailableRole) {
-        return level->solutionAvailable();
+    } else if (role == SolutionCountRole) {
+        return level->solutionCount();
     }
     return QVariant();
 }
@@ -82,6 +82,7 @@ void Levels::addLevel(Level *level)
     endInsertRows();
     QModelIndex i = index(m_levels.indexOf(level));
     emit dataChanged(i, i);
+    sortLevels();
 }
 
 void Levels::resetLevelSettings()
@@ -103,7 +104,7 @@ QHash<int, QByteArray> Levels::roleNames() const
     roles[NameRole] = "levelName";
     roles[WidthRole] = "levelWidth";
     roles[HeightRole] = "levelHeigth";
-    roles[SolutionAvailableRole] = "solutionAvailable";
+    roles[SolutionCountRole] = "solutionCount";
     return roles;
 }
 

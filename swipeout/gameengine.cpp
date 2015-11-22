@@ -31,7 +31,7 @@
 GameEngine::GameEngine(QObject *parent) :
     QObject(parent),
     m_levels(new Levels(this)),
-    m_loadedLevels(new Levels(this)),
+    m_createdLevels(new Levels(this)),
     m_levelCreator(new LevelCreator(this)),
     m_board(new Board(this)),
     m_solver(new BoardSolver(this)),
@@ -62,7 +62,7 @@ Levels *GameEngine::levels()
 
 Levels *GameEngine::loadedLevels()
 {
-    return m_loadedLevels;
+    return m_createdLevels;
 }
 
 LevelCreator *GameEngine::levelCreator()
@@ -75,13 +75,13 @@ Board *GameEngine::board()
     return m_board;
 }
 
-bool GameEngine::startLevel(const int &id)
+bool GameEngine::startLevel(const int &id, const bool &created)
 {
     Level *level = 0;
-    if (m_levels->containsLevel(id)) {
+    if (!created) {
         level = m_levels->get(id);
-    } else if (m_loadedLevels->containsLevel(id)) {
-        level = m_loadedLevels->get(id);
+    } else {
+        level = m_createdLevels->get(id);
     }
 
     if (!level) {
@@ -96,24 +96,24 @@ bool GameEngine::startLevel(const int &id)
 void GameEngine::solveBoard()
 {
     m_timestamp = QDateTime::currentDateTime();
-    m_solverBoard = m_board;
-    setSolverRunning(true);
-    m_watcher->setFuture(QtConcurrent::run(m_solver, &BoardSolver::calculateSolution, m_board));
-}
-
-void GameEngine::solveCreatorBoard()
-{
-    m_timestamp = QDateTime::currentDateTime();
     setSolverRunning(true);
     m_solverBoard = m_levelCreator->board();
+    foreach (Block *block, m_solverBoard->level()->blocks()->blocks()) {
+        block->setStartX(block->x());
+        block->setStartY(block->y());
+    }
     m_watcher->setFuture(QtConcurrent::run(m_solver, &BoardSolver::calculateSolution, m_levelCreator->board()));
+}
+
+void GameEngine::stopSolvingBoard()
+{
+    qDebug() << "Cancel solving process.";
+    m_solver->stopSolver();
 }
 
 void GameEngine::loadCreatedLevels()
 {
     QString fileDir = QStandardPaths::locate(QStandardPaths::ConfigLocation, QString(), QStandardPaths::LocateDirectory) + QGuiApplication::applicationName();
-
-    //qDebug() << "Loading levels from" << fileDir;
 
     QDir dir(fileDir);
     dir.setFilter(QDir::Files);
@@ -138,10 +138,12 @@ void GameEngine::loadCreatedLevels()
         }
 
         QVariantMap levelData = jsonDoc.toVariant().toMap();
-        if (levelAlreadyLoaded(levelData.value("id").toInt()))
+        if (levelAlreadyLoaded(levelData.value("id").toInt())) {
+            qWarning() << "Level" << levelData.value("id").toInt() << "already loaded -> skipping";
             continue;
+        }
 
-        qDebug() << "   -> loading level" << levelData.value("id").toInt() << "...";
+        qDebug() << "   -> loading created level" << levelData.value("id").toInt() << "...";
         Level *level = new Level(this);
         level->setName(levelData.value("name").toString());
         level->setId(levelData.value("id").toInt());
@@ -163,9 +165,9 @@ void GameEngine::loadCreatedLevels()
             solution.push(moves.at(i));
         }
         level->setSolution(solution);
-
-        m_loadedLevels->addLevel(level);
+        m_createdLevels->addLevel(level);
     }
+    m_levelCreator->onLevelCountChanged(m_createdLevels->levels().count());
 }
 
 bool GameEngine::solverRunning() const
@@ -208,6 +210,13 @@ void GameEngine::loadLevels()
         level->setWidth(levelData.value("width").toInt());
         level->setBlockData(levelData.value("blocks").toList());
 
+        // load record / completed
+        QSettings settings;
+        settings.beginGroup(level->name());
+        level->setCompleted(settings.value("completed", false).toBool());
+        level->setRecord(settings.value("record", 0).toInt());
+        settings.endGroup();
+
         // load solution moves
         QList<Move> moves;
         foreach (const QVariant &moveData, levelData.value("solution").toList()) {
@@ -229,7 +238,7 @@ void GameEngine::loadLevels()
 
 bool GameEngine::levelAlreadyLoaded(const int &id)
 {
-    foreach (Level *level, m_loadedLevels->levels()) {
+    foreach (Level *level, m_createdLevels->levels()) {
         if (level->id() == id) {
             return true;
         }
@@ -266,4 +275,7 @@ void GameEngine::onSolverFinished()
     }
     m_solverBoard->level()->setSolution(solution);
     m_solverBoard->setSolution(solution);
+
+    emit solutionReady(time.toString("mm:ss.zzz"));
 }
+

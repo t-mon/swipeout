@@ -27,7 +27,9 @@ Level::Level(QObject *parent) :
     m_blocks(new Blocks(this)),
     m_name("Level"),
     m_width(6),
-    m_height(6)
+    m_height(6),
+    m_completed(false),
+    m_record(0)
 {
 
 }
@@ -69,7 +71,6 @@ void Level::destroyBlocks()
 {
     qDebug() << " -> Destroy Blocks of level" << id();
     m_blocks->deleteAllBlocks();
-    m_solution.clear();
 }
 
 QString Level::name() const
@@ -112,9 +113,32 @@ void Level::setHeight(const int &height)
     m_height = height;
 }
 
-bool Level::solutionAvailable() const
+bool Level::completed() const
 {
-    return !m_solution.isEmpty();
+    return m_completed;
+}
+
+bool Level::completedPerfect() const
+{
+    return m_solution.count() == m_record;
+}
+
+void Level::setCompleted(const bool &completed)
+{
+    m_completed = completed;
+    emit completedChanged();
+}
+
+int Level::record() const
+{
+    return m_record;
+}
+
+void Level::setRecord(const int &record)
+{
+    m_record = record;
+    emit recordChanged();
+    emit completedPerfectChanged();
 }
 
 QStack<Move> Level::solution() const
@@ -122,14 +146,19 @@ QStack<Move> Level::solution() const
     return m_solution;
 }
 
+int Level::solutionCount() const
+{
+    return m_solution.count();
+}
+
 void Level::clearSolution()
 {
     m_solution.clear();
-    emit solutionAvailableChanged();
+    emit solutionCountChanged();
 }
 
 void Level::setSolution(const QStack<Move> &solution)
 {
     m_solution = solution;
-    emit solutionAvailableChanged();
+    emit solutionCountChanged();
 }

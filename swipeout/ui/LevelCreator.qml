@@ -46,7 +46,7 @@ Page {
             onTriggered: creator.clearBoard()
         },
         Action {
-            id: addDeviceAction
+            id: createRandomAction
             iconName: "reload"
             text: i18n.tr("Create random level")
             onTriggered: creator.createRandomLevel()
@@ -68,7 +68,7 @@ Page {
                 width: parent.width / 5
                 height: width
             }
-            LevelCreatorTowHorizontalTool {
+            LevelCreatorTwoHorizontalTool {
                 id: twoHorizontalTool
                 width: parent.width / 5
                 height: width
@@ -80,7 +80,7 @@ Page {
                 height: width
             }
 
-            LevelCreatorTowVerticalTool {
+            LevelCreatorTwoVerticalTool {
                 id: twoVerticalTool
                 width: parent.width / 5
                 height: width
@@ -161,28 +161,71 @@ Page {
 
         }
 
-        Row {
+        Item {
+            id: buttons
             anchors.left: parent.left
-            anchors.leftMargin: units.gu(1)
-            spacing: units.gu(1)
+            anchors.leftMargin: units.gu(2)
+            anchors.right: parent.right
+            anchors.rightMargin: units.gu(2)
+            height: parent.width / 4
 
-            Button {
-                text: i18n.tr("Save");
-                onClicked: creator.saveLevel()
-                color: "#88888888"
-            }
+            Row {
+                id: buttonRow
+                anchors.fill: parent
 
-            Button {
-                text: i18n.tr("Solve")
-                onClicked: PopupUtils.open(Qt.resolvedUrl("SolveDialog.qml"))
-                color: "#88888888"
-            }
+                Item {
+                    width: parent.width / 4
+                    height: width
 
-            Button {
-                visible: creator.board.level.solutionAvailable
-                text: i18n.tr("Show solution");
-                color: "#88888888"
-                onClicked: creator.board.showSolution()
+                    UbuntuShape {
+                        anchors.fill: parent
+                        anchors.margins: units.gu(0.5)
+                        backgroundColor: solveMouseArea.pressed ? "#44444444" : "#88888888"
+
+                        Icon {
+                            anchors.fill: parent
+                            anchors.margins: units.gu(2)
+                            name: "find"
+                        }
+
+                        MouseArea {
+                            id: solveMouseArea
+                            anchors.fill: parent
+                            onClicked: {
+                                gameEngine.solveBoard()
+                                PopupUtils.open(Qt.resolvedUrl("SolveDialog.qml"))
+                            }
+                        }
+                    }
+                }
+
+                Item {
+                    width: parent.width / 4
+                    height: width
+
+                    visible: creator.board.solutionAvailable
+
+                    UbuntuShape {
+                        anchors.fill: parent
+                        anchors.margins: units.gu(0.5)
+                        backgroundColor: saveMouseArea.pressed ? "#44444444" : "#88888888"
+
+                        Icon {
+                            anchors.fill: parent
+                            anchors.margins: units.gu(2)
+                            name: "save"
+                        }
+
+                        MouseArea {
+                            id: saveMouseArea
+                            anchors.fill: parent
+                            onClicked:  {
+                                creator.saveLevel()
+                                gameEngine.loadCreatedLevels()
+                            }
+                        }
+                    }
+                }
             }
         }
     }

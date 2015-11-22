@@ -22,6 +22,7 @@
 
 #include <QDebug>
 #include <QTimer>
+#include <QSettings>
 
 BoardCell::BoardCell(const int &x, const int &y, const int &blockId):
     m_x(x),
@@ -56,9 +57,11 @@ bool BoardCell::operator==(const BoardCell &other)
 }
 
 
-Board::Board(QObject *parent) :
+Board::Board(QObject *parent, const bool &creatorBoard) :
     QObject(parent),
-    m_level(0)
+    m_creatorBoard(creatorBoard),
+    m_level(0),
+    m_showSolutionRunning(false)
 {
 }
 
@@ -75,20 +78,17 @@ void Board::clearLevel()
 
 void Board::restartLevel()
 {
-    m_solution.clear();
-    emit solutionAvailableChanged();
-
     if (m_level) {
         setMoveCount(0);
         m_level->blocks()->resetBlockPositions();
     }
     m_moveStack.clear();
-    initBoard();
+    updateBoardGrid();
 }
 
-void Board::loadLevel(Level *level, const bool &fromCreator)
+void Board::loadLevel(Level *level)
 {
-    if (fromCreator) {
+    if (m_creatorBoard) {
         qDebug() << "Set creator level" << level->id();
         m_level = level;
         emit levelChanged();
@@ -101,8 +101,7 @@ void Board::loadLevel(Level *level, const bool &fromCreator)
         emit levelChanged();
     }
 
-
-    initBoard();
+    updateBoardGrid();
     setSolution(m_level->solution());
     printBoard(m_boardGrid);
 }
@@ -127,7 +126,6 @@ int Board::calculateLeftLimit(const int &blockId)
             break;
         }
     }
-    //qDebug() << "left limit" << leftLimit;
     return leftLimit;
 }
 
@@ -148,7 +146,6 @@ int Board::calculateRightLimit(const int &blockId)
     if (block->id() == 0 && freePath)
         rightLimit += 2;
 
-    //qDebug() << "right limit" << rightLimit;
     return rightLimit;
 }
 
@@ -162,7 +159,6 @@ int Board::calculateUpperLimit(const int &blockId)
             break;
         }
     }
-    //qDebug() << "upper limit" << upperLimit;
     return  upperLimit;
 }
 
@@ -176,7 +172,6 @@ int Board::calculateLowerLimit(const int &blockId)
             break;
         }
     }
-    //qDebug() << "lower limit" << lowerLimit;
     return lowerLimit;
 }
 
@@ -215,6 +210,16 @@ void Board::showSolution()
     automaticMove();
 }
 
+bool Board::showSolutionRunning() const
+{
+    return m_showSolutionRunning;
+}
+
+int Board::solutionCount() const
+{
+    return m_solution.count();
+}
+
 bool Board::solutionAvailable() const
 {
     return !m_solution.isEmpty();
@@ -224,14 +229,23 @@ void Board::setSolution(const QStack<Move> &solution)
 {
     m_solution = solution;
     emit solutionAvailableChanged();
+    emit solutionCountChanged();
 }
 
 void Board::clearSolution()
 {
     m_solution.clear();
     if (m_level)
-        m_level->clearSolution();
+        if (m_creatorBoard)
+            m_level->clearSolution();
+
     emit solutionAvailableChanged();
+    emit solutionCountChanged();
+}
+
+QVector<QVector<BoardCell> > Board::boardGrid() const
+{
+    return m_boardGrid;
 }
 
 void Board::printBoard(const QVector<QVector<BoardCell> > &boardGrid)
@@ -249,7 +263,7 @@ void Board::printBoard(const QVector<QVector<BoardCell> > &boardGrid)
     qDebug() << output;
 }
 
-void Board::initBoard()
+void Board::updateBoardGrid()
 {
     m_boardGrid.clear();
     m_boardGrid.resize(m_level->width());
@@ -274,6 +288,7 @@ void Board::initBoard()
             }
         }
     }
+    emit gridChanged();
 }
 
 void Board::moveBlockX(const int &id, const int &newX)
@@ -282,8 +297,7 @@ void Board::moveBlockX(const int &id, const int &newX)
 
     if (newX < 0 || newX + block->width() > m_level->width()) {
         setMoveCount(m_moveCount + 1);
-        qDebug() << "Level completed with" << m_moveCount << "moves!!";
-        emit levelCompleted();
+        onLevelCompleted();
         return;
     }
 
@@ -304,6 +318,7 @@ void Board::moveBlockX(const int &id, const int &newX)
 
     printBoard(m_boardGrid);
     setMoveCount(m_moveCount + 1);
+    updateBoardGrid();
 }
 
 void Board::moveBlockY(const int &id, const int &newY)
@@ -325,6 +340,7 @@ void Board::moveBlockY(const int &id, const int &newY)
 
     printBoard(m_boardGrid);
     setMoveCount(m_moveCount + 1);
+    updateBoardGrid();
 }
 
 void Board::setMoveCount(const int &moveCount)
@@ -336,8 +352,47 @@ void Board::setMoveCount(const int &moveCount)
 void Board::automaticMove()
 {
     if (!m_solution.isEmpty()) {
+
+        if (!m_showSolutionRunning) {
+            m_showSolutionRunning = true;
+            emit showSolutionRunningChanged();
+        }
+
         Move move = m_solution.takeFirst();
         moveBlock(move.id(), move.delta());
-        QTimer::singleShot(500, this, SLOT(automaticMove()));
+        QTimer::singleShot(300, this, SLOT(automaticMove()));
+    } else {
+        m_showSolutionRunning = false;
+        emit showSolutionRunningChanged();
     }
+}
+
+void Board::onLevelCompleted()
+{
+    qDebug() << "Level completed with" << m_moveCount << "moves!!";
+
+    QSettings settings;
+    settings.beginGroup(m_level->name());
+
+    // set completed
+    if (!settings.value("completed", false).toBool()) {
+        m_level->setCompleted(true);
+        settings.setValue("completed", true);
+        qDebug() << "Level completed first time!! " << m_level->record();
+    }
+
+    // set record
+    int record = settings.value("record", 0).toInt();
+    if (record == 0)
+        record = 9999;
+
+    if (m_moveCount < record) {
+        m_level->setRecord(m_moveCount);
+        settings.setValue("record", m_moveCount);
+        qDebug() << "New record!! " << m_level->record();
+    }
+
+    settings.endGroup();
+
+    emit levelCompleted();
 }

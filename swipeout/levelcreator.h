@@ -56,7 +56,6 @@ public:
     Q_INVOKABLE void removeBlock(const int &id);
 
     Q_INVOKABLE void clearBoard();
-
     Q_INVOKABLE void clearToolSelections();
 
     bool deleteToolSelected() const;
@@ -74,11 +73,13 @@ public:
     bool threeVerticalToolSelected() const;
     void setThreeVerticalToolSelected(const bool &selected);
 
-
     bool addMode() const;
     void setAddMode(const bool &addMode);
 
     Board *board();
+
+public slots:
+    void onLevelCountChanged(const int &count);
 
 private:
     int m_width;
@@ -86,7 +87,6 @@ private:
 
     Board *m_board;
     Level *m_level;
-    QVector<QVector<BoardCell> > m_boardGrid;
 
     bool m_deleteToolSelected;
     bool m_twoHorizontalToolSelected;
@@ -97,10 +97,12 @@ private:
     bool m_addMode;
 
     void initLevel();
-    void updateGrid();
 
     QPoint getCoordinates(const int &index);
     QList<QPoint> possiblePositions(Block *block);
+
+private slots:
+    void onGridChanged();
 
 signals:
     void widthChanged();

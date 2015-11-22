@@ -29,9 +29,8 @@ Page {
     GridView {
         id: levelGrid
         anchors.fill: parent
-        anchors.margins: units.gu(1)
-        cellWidth: units.gu(10)
-        cellHeight: units.gu(10)
+        cellWidth: width / 4
+        cellHeight: cellWidth
         model: gameEngine.loadedLevels
 
         delegate: LevelSelectorItem {
@@ -39,7 +38,7 @@ Page {
             height: levelGrid.cellHeight
             levelId: model.levelId
             onSelected: {
-                gameEngine.startLevel(model.levelId)
+                gameEngine.startLevel(model.levelId, true)
                 pageStack.push(Qt.resolvedUrl("BoardPage.qml"))
             }
         }

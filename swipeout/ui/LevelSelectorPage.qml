@@ -29,9 +29,8 @@ Page {
     GridView {
         id: levelGrid
         anchors.fill: parent
-        anchors.margins: units.gu(1)
-        cellWidth: units.gu(10)
-        cellHeight: units.gu(10)
+        cellWidth: width / 4
+        cellHeight: cellWidth
         model: gameEngine.levels
 
         delegate: LevelSelectorItem {

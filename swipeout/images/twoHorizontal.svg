@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="48.774876"
+     inkscape:cx="8.3687745"
      inkscape:cy="288.38441"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -45,7 +45,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -55,20 +55,20 @@
      id="layer1"
      transform="translate(0,-552.36209)">
     <rect
-       style="opacity:1;fill:#aaaaaa;fill-opacity:0.66666667;fill-rule:evenodd;stroke:#888888;stroke-width:9.37499809;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.53333285"
+       style="opacity:1;fill:#444444;fill-opacity:0.26666667;fill-rule:evenodd;stroke:#888888;stroke-width:17.00031281;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.53333285"
        id="rect4155"
-       width="140.62498"
-       height="140.62498"
-       x="104.68748"
-       y="732.04956"
-       ry="18.85994" />
+       width="132.99966"
+       height="132.99966"
+       x="108.50015"
+       y="735.86224"
+       ry="17.837271" />
     <rect
-       style="opacity:1;fill:#aaaaaa;fill-opacity:0.66666667;fill-rule:evenodd;stroke:#888888;stroke-width:9.37499809;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.53333285"
+       style="opacity:1;fill:#444444;fill-opacity:0.26666667;fill-rule:evenodd;stroke:#888888;stroke-width:17.00031662;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.53333285"
        id="rect4155-1"
-       width="140.62497"
-       height="140.62497"
-       x="254.68747"
-       y="732.04956"
-       ry="18.859938" />
+       width="132.99966"
+       height="132.99966"
+       x="258.50012"
+       y="735.86224"
+       ry="17.837269" />
   </g>
 </svg>

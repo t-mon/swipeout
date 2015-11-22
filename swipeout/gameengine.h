@@ -51,9 +51,10 @@ public:
     LevelCreator *levelCreator();
     Board *board();
 
-    Q_INVOKABLE bool startLevel(const int &id);
+    Q_INVOKABLE bool startLevel(const int &id, const bool &created = false);
     Q_INVOKABLE void solveBoard();
-    Q_INVOKABLE void solveCreatorBoard();
+    Q_INVOKABLE void stopSolvingBoard();
+
 
     Q_INVOKABLE void loadCreatedLevels();
 
@@ -62,7 +63,7 @@ public:
 private:
     QString m_levelDir;
     Levels *m_levels;
-    Levels *m_loadedLevels;
+    Levels *m_createdLevels;
     LevelCreator *m_levelCreator;
     Board *m_board;
     BoardSolver *m_solver;
@@ -83,6 +84,7 @@ private slots:
 signals:
     void levelDirChanged();
     void solverRunningChanged();
+    void solutionReady(const QString &runTime);
 
 };
 

@@ -1,0 +1,22 @@
+{
+    "blocks": [
+        {
+            "height": 1,
+            "id": 0,
+            "width": 2,
+            "x": 1,
+            "y": 2
+        }
+    ],
+    "height": 6,
+    "id": 40,
+    "name": "Level 40",
+    "solution": [
+        {
+            "block": 0,
+            "delta": 3,
+            "step": 0
+        }
+    ],
+    "width": 6
+}

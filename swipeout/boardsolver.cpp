@@ -125,6 +125,10 @@ QStack<Move> BoardSolver::calculateSolution(Board *board)
 {
     m_object = new QObject();
 
+    m_cancelMutex.lock();
+    m_cancel = false;
+    m_cancelMutex.unlock();
+
     m_blocks = new Blocks(board->level()->blocks(), m_object);
     m_width = board->level()->width();
     m_height = board->level()->height();
@@ -153,6 +157,13 @@ QStack<Move> BoardSolver::calculateSolution(Board *board)
     // A* Search algorithm
     // openList is empty (no path found)
     while (!m_openList.isEmpty()) {
+        m_cancelMutex.lock();
+        if (m_cancel) {
+            m_cancelMutex.unlock();
+            return solution;
+        }
+        m_cancelMutex.unlock();
+
         currentNode = m_openList.takeFirst();
         m_closedList.append(currentNode);
 
@@ -175,6 +186,13 @@ QStack<Move> BoardSolver::calculateSolution(Board *board)
     }
     cleanUp();
     return solution;
+}
+
+void BoardSolver::stopSolver()
+{
+    m_cancelMutex.lock();
+    m_cancel = true;
+    m_cancelMutex.unlock();
 }
 
 void BoardSolver::expand(Node *currentNode)

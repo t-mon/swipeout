@@ -34,7 +34,7 @@ Item {
 
         Icon {
             anchors.fill: parent
-            anchors.margins: units.gu(2)
+            anchors.margins: units.gu(1)
             name: "delete"
         }
 

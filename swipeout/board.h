@@ -51,14 +51,16 @@ class Board : public QObject
     Q_OBJECT
     Q_PROPERTY(Level* level READ level NOTIFY levelChanged)
     Q_PROPERTY(int moveCount READ moveCount NOTIFY moveCountChanged)
+    Q_PROPERTY(int solutionCount READ solutionCount NOTIFY solutionCountChanged)
     Q_PROPERTY(bool solutionAvailable READ solutionAvailable NOTIFY solutionAvailableChanged)
+    Q_PROPERTY(bool showSolutionRunning READ showSolutionRunning NOTIFY showSolutionRunningChanged)
 
 public:
-    explicit Board(QObject *parent = 0);
+    explicit Board(QObject *parent = 0, const bool &creatorBoard = false);
 
     void clearLevel();
     Q_INVOKABLE void restartLevel();
-    void loadLevel(Level *level, const bool &fromCreator = false);
+    void loadLevel(Level *level);
 
     Level *level();
 
@@ -73,14 +75,21 @@ public:
     Q_INVOKABLE void undoMove();
 
     Q_INVOKABLE void showSolution();
+    bool showSolutionRunning() const;
+
+    int solutionCount() const;
 
     bool solutionAvailable() const;
     void setSolution(const QStack<Move> &solution);
     void clearSolution();
 
+    QVector<QVector<BoardCell> > boardGrid() const;
+    void updateBoardGrid();
+
     static void printBoard(const QVector<QVector<BoardCell> > &boardGrid);
 
 private:
+    bool m_creatorBoard;
     QVector<QVector<BoardCell> > m_boardGrid;
     Level *m_level;
     int m_moveCount;
@@ -88,7 +97,7 @@ private:
     QStack<Move> m_moveStack;
     QStack<Move> m_solution;
 
-    void initBoard();
+    bool m_showSolutionRunning;
 
     void moveBlockX(const int &id, const int &newX);
     void moveBlockY(const int &id, const int &newY);
@@ -97,12 +106,16 @@ private:
 
 private slots:
     void automaticMove();
+    void onLevelCompleted();
 
 signals:
     void moveCountChanged();
     void levelCompleted();
     void levelChanged();
     void solutionAvailableChanged();
+    void solutionCountChanged();
+    void showSolutionRunningChanged();
+    void gridChanged();
 };
 
 #endif // BOARD_H

@@ -29,6 +29,16 @@ Item {
     property var board: null
 
 
+    Component.onCompleted: createAnimation.start()
+
+    NumberAnimation on opacity {
+        id: createAnimation
+        from: 0
+        to: 1
+        easing.type: Easing.OutQuad
+        duration: 400
+    }
+
     Connections {
         target: block
         onPositionResetted: {

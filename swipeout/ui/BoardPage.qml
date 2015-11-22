@@ -50,23 +50,53 @@ Page {
         anchors.centerIn: parent
         spacing: units.gu(1)
 
-        UbuntuShape {
-            anchors.horizontalCenter: boardBackground.horizontalCenter
-            height: units.gu(5)
-            width: units.gu(20)
-            backgroundColor: "#88888888"
+        Row {
+            anchors.left: parent.left
+            anchors.leftMargin: units.gu(1)
+            anchors.right: parent.right
+            anchors.rightMargin: units.gu(1)
 
-            Row {
-                anchors.centerIn: parent
-                Label {
-                    text: i18n.tr("Moves: ")
+            spacing: width / 3
+
+            UbuntuShape {
+                width: parent.width / 3
+                height: width * 3 / 5
+                backgroundColor: "#88888888"
+
+                Column {
+                    anchors.centerIn: parent
+                    Label {
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: i18n.tr("MOVES")
+                    }
+                    Label {
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        font.bold: true
+                        text: gameEngine.board.moveCount
+                    }
                 }
-                Label {
-                    text: gameEngine.board.moveCount
-                    font.bold: true
+            }
+
+            UbuntuShape {
+                width: parent.width / 3
+                height: width * 3 / 5
+                backgroundColor: "#88888888"
+
+                Column {
+                    anchors.centerIn: parent
+                    Label {
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        text: i18n.tr("RECORD")
+                    }
+                    Label {
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        font.bold: true
+                        text: (level.record != 9999 ? level.record : "-") + " / " + level.solutionCount
+                    }
                 }
             }
         }
+
 
         UbuntuShape {
             id: boardBackground
@@ -108,18 +138,64 @@ Page {
         Row {
             anchors.left: parent.left
             anchors.leftMargin: units.gu(1)
-            spacing: units.gu(1)
-            Button {
-                text: i18n.tr("Undo")
-                color: "#88888888"
-                onClicked: gameEngine.board.undoMove()
+            anchors.right: parent.right
+            anchors.rightMargin: units.gu(1)
+
+            Item {
+                width: parent.width / 2
+                height: width / 3
+
+                UbuntuShape {
+                    anchors.fill: parent
+                    anchors.margins: units.gu(0.5)
+                    backgroundColor: solveMouseArea.pressed ? "#44444444" : "#88888888"
+
+                    Icon {
+                        anchors.fill: parent
+                        anchors.margins: units.gu(1)
+                        name: "undo"
+                    }
+
+                    MouseArea {
+                        id: solveMouseArea
+                        anchors.fill: parent
+                        onClicked: {
+                            if (!gameEngine.board.showSolutionRunning) {
+                                gameEngine.board.undoMove()
+                            }
+                        }
+                    }
+                }
             }
 
-            Button {
-                visible: app.debug && gameEngine.board.level.solutionAvailable
-                text: i18n.tr("Show solution");
-                color: "#88888888"
-                onClicked: gameEngine.board.showSolution()
+
+            Item {
+                width: parent.width / 2
+                height: width / 3
+                visible: app.debug
+
+                UbuntuShape {
+                    anchors.fill: parent
+                    anchors.margins: units.gu(0.5)
+                    backgroundColor: showSolutionMouseArea.pressed ? "#44444444" : "#88888888"
+
+                    Icon {
+                        anchors.fill: parent
+                        anchors.margins: units.gu(1)
+                        name: "help"
+                    }
+
+                    MouseArea {
+                        id: showSolutionMouseArea
+                        anchors.fill: parent
+                        onClicked: {
+                            if (!gameEngine.board.showSolutionRunning) {
+                                gameEngine.board.restartLevel()
+                                gameEngine.board.showSolution()
+                            }
+                        }
+                    }
+                }
             }
         }
     }

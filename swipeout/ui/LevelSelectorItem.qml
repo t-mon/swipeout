@@ -25,17 +25,28 @@ import Swipeout 1.0
 Item {
     id: root
     property int levelId: levelId
+    property var level: gameEngine.levels.get(levelId)
 
     signal selected()
 
     UbuntuShape {
         anchors.fill: parent
         anchors.margins: units.gu(1)
-        backgroundColor: "#88888888"
+        backgroundColor: level.completed && level.completedPerfect ? "green" : level.completed ? "orange" : "#88888888"
 
-        Label {
+        Column {
             anchors.centerIn: parent
-            text: levelId
+
+            Label {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: levelId
+                font.bold: true
+            }
+
+//            Label {
+//                anchors.horizontalCenter: parent.horizontalCenter
+//                text: level.record == 0 ? "-" : level.record
+//            }
         }
 
         MouseArea {

@@ -36,7 +36,7 @@ public:
         IdRole,
         WidthRole,
         HeightRole,
-        SolutionAvailableRole
+        SolutionCountRole
     };
 
     explicit Levels(QObject *parent = 0);

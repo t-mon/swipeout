@@ -21,22 +21,79 @@
 import QtQuick 2.4
 import Ubuntu.Components 1.3
 import Ubuntu.Components.Popups 1.3
+import Ubuntu.Components.ListItems 1.3
 import Swipeout 1.0
 
 Dialog {
     id: root
-    text: "Solver"
+    title: "Level Solver"
 
-    ActivityIndicator { running: gameEngine.solverRunning }
+    property bool solutionFound: false
 
-    Button {
-        text: "Solve"
-        onClicked: gameEngine.solveCreatorBoard()
+    text: gameEngine.solverRunning ? "Solving..." : "Solver done!"
+
+    ThinDivider { }
+
+    Text {
+        id: runTimeText
+        visible: !gameEngine.solverRunning && solutionFound
+        horizontalAlignment: Text.AlignHCenter
+        text: ""
     }
 
-    Button {
-        text: "Cancel"
-        onClicked: PopupUtils.close(root)
+    Text {
+        id: solutionText
+        visible: !gameEngine.solverRunning
+        horizontalAlignment: Text.AlignHCenter
+        text: ""
     }
 
+    Text {
+        id: moveText
+        visible: !gameEngine.solverRunning
+        horizontalAlignment: Text.AlignHCenter
+        font.pixelSize: units.gu(5)
+        font.bold: true
+        text: ""
+    }
+
+    ActivityIndicator {
+        visible: gameEngine.solverRunning
+        running: gameEngine.solverRunning
+    }
+
+    ThinDivider { }
+
+//    Button {
+//        visible: solutionFound
+//        text: "Show solution"
+//        onClicked: {
+//            PopupUtils.close(root)
+//            gameEngine.levelCreator.board.showSolution()
+//        }
+//    }
+
+    Button {
+        text: gameEngine.solverRunning ? "Cancel" : "Close"
+        onClicked: {
+            if (gameEngine.solverRunning)
+                gameEngine.stopSolvingBoard()
+            PopupUtils.close(root)
+        }
+    }
+
+    Connections {
+        target: gameEngine
+        onSolutionReady: {
+            runTimeText.text = "Runtime: " + runTime
+            var moveCount = gameEngine.levelCreator.board.level.solutionCount
+            if (moveCount == 0) {
+                solutionText.text = "No solution found!"
+            } else {
+                solutionFound = true
+                solutionText.text = "Solution found!\n\nPerfect solution:"
+                moveText.text = moveCount
+            }
+        }
+    }
 }

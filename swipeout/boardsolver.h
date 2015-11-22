@@ -2,8 +2,8 @@
 #define BOARDSOLVER_H
 
 #include <QObject>
-#include <QThread>
 #include <QList>
+#include <QMutex>
 
 #include "board.h"
 #include "block.h"
@@ -60,6 +60,7 @@ public:
     BoardSolver(QObject *parent = 0);
 
     QStack<Move> calculateSolution(Board *board);
+    void stopSolver();
 
 private:
     QObject *m_object;
@@ -78,6 +79,9 @@ private:
     bool inClosedList(Node *node);
 
     void cleanUp();
+
+    QMutex m_cancelMutex;
+    bool m_cancel;
 
 signals:
     void solutionFound(const QStack<Move> &solution);

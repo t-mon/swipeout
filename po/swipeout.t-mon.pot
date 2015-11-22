@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-22 01:38+0100\n"
+"POT-Creation-Date: 2015-11-22 22:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,28 +31,23 @@ msgstr ""
 msgid "Restart level"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:62
-msgid "Moves: "
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:70
+msgid "MOVES"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:113
-msgid "Undo"
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:89
+msgid "RECORD"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:120
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:183
-msgid "Show solution"
-msgstr ""
-
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:131
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:207
 msgid "Level completed!"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:132
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:208
 msgid "You took "
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:136
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:212
 msgid "Next level"
 msgstr ""
 
@@ -62,14 +57,6 @@ msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:51
 msgid "Create random level"
-msgstr ""
-
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:170
-msgid "Save"
-msgstr ""
-
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:176
-msgid "Solve"
 msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelSelectorPage.qml:27

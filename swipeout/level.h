@@ -37,7 +37,10 @@ class Level : public QObject
     Q_PROPERTY(int id READ id CONSTANT)
     Q_PROPERTY(int width READ width CONSTANT)
     Q_PROPERTY(int height READ height CONSTANT)
-    Q_PROPERTY(bool solutionAvailable READ solutionAvailable NOTIFY solutionAvailableChanged)
+    Q_PROPERTY(int solutionCount READ solutionCount NOTIFY solutionCountChanged)
+    Q_PROPERTY(bool completed READ completed NOTIFY completedChanged)
+    Q_PROPERTY(bool completedPerfect READ completedPerfect NOTIFY completedPerfectChanged)
+    Q_PROPERTY(int record READ record NOTIFY recordChanged)
 
 public:
     explicit Level(QObject *parent = 0);
@@ -61,9 +64,15 @@ public:
     int height() const;
     void setHeight(const int &height);
 
-    bool solutionAvailable() const;
+    bool completed() const;
+    bool completedPerfect() const;
+    void setCompleted(const bool &completed);
+
+    int record() const;
+    void setRecord(const int &record);
 
     QStack<Move> solution() const;
+    int solutionCount() const;
     void clearSolution();
     void setSolution(const QStack<Move> &solution);
 
@@ -77,8 +86,14 @@ private:
     int m_width;
     int m_height;
 
+    bool m_completed;
+    int m_record;
+
 signals:
-    void solutionAvailableChanged();
+    void solutionCountChanged();
+    void completedChanged();
+    void completedPerfectChanged();
+    void recordChanged();
 
 };
 

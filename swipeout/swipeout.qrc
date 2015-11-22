@@ -10,8 +10,8 @@
         <file>ui/LevelCreator.qml</file>
         <file>ui/LoadLevelPage.qml</file>
         <file>ui/LevelCreatorDeleteTool.qml</file>
-        <file>ui/LevelCreatorTowHorizontalTool.qml</file>
-        <file>ui/LevelCreatorTowVerticalTool.qml</file>
+        <file>ui/LevelCreatorTwoHorizontalTool.qml</file>
+        <file>ui/LevelCreatorTwoVerticalTool.qml</file>
         <file>ui/LevelCreatorThreeHorizontalTool.qml</file>
         <file>ui/LevelCreatorThreeVerticalTool.qml</file>
         <file>ui/SolveDialog.qml</file>

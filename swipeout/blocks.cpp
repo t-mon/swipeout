@@ -100,7 +100,6 @@ void Blocks::removeBlock(Block *block)
     beginRemoveRows(QModelIndex(), index, index);
     m_blocks.removeAt(index);
     endRemoveRows();
-    block->deleteLater();
 }
 
 void Blocks::deleteAllBlocks()

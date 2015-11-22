@@ -69,6 +69,12 @@ int Block::startX() const
     return m_startX;
 }
 
+void Block::setStartX(const int &startX)
+{
+    m_startX = startX;
+    emit startXChanged();
+}
+
 int Block::x() const
 {
     return m_x;
@@ -83,6 +89,12 @@ void Block::setX(const int &x)
 int Block::startY() const
 {
     return m_startY;
+}
+
+void Block::setStartY(const int &startY)
+{
+    m_startY = startY;
+    emit startYChanged();
 }
 
 int Block::y() const

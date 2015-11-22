@@ -51,10 +51,14 @@ public:
     void setId(const int &id);
 
     int startX() const;
+    void setStartX(const int &startX);
+
     int x()const;
     void setX(const int &x);
 
     int startY() const;
+    void setStartY(const int &startY);
+
     int y()const;
     void setY(const int &y);
 
@@ -83,7 +87,9 @@ private:
 
 signals:
     void xChanged();
+    void startXChanged();
     void yChanged();
+    void startYChanged();
     void colorChanged();
     void positionResetted();
 

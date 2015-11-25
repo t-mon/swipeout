@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-22 22:35+0100\n"
+"POT-Creation-Date: 2015-11-24 22:50+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,16 +39,8 @@ msgstr ""
 msgid "RECORD"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:207
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:206
 msgid "Level completed!"
-msgstr ""
-
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:208
-msgid "You took "
-msgstr ""
-
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:212
-msgid "Next level"
 msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:45
@@ -57,10 +49,6 @@ msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:51
 msgid "Create random level"
-msgstr ""
-
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelSelectorPage.qml:27
-msgid "Levels"
 msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/LoadLevelPage.qml:27

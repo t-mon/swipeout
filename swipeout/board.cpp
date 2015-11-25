@@ -56,7 +56,6 @@ bool BoardCell::operator==(const BoardCell &other)
     return x() == other.x() && y() == other.y() && blockId() == other.blockId();
 }
 
-
 Board::Board(QObject *parent, const bool &creatorBoard) :
     QObject(parent),
     m_creatorBoard(creatorBoard),
@@ -73,6 +72,8 @@ void Board::clearLevel()
     if (m_level)
         m_level->destroyBlocks();
 
+    m_level = 0;
+
     setMoveCount(0);
 }
 
@@ -88,6 +89,7 @@ void Board::restartLevel()
 
 void Board::loadLevel(Level *level)
 {
+
     if (m_creatorBoard) {
         qDebug() << "Set creator level" << level->id();
         m_level = level;
@@ -101,8 +103,8 @@ void Board::loadLevel(Level *level)
         emit levelChanged();
     }
 
-    updateBoardGrid();
     setSolution(m_level->solution());
+    restartLevel();
     printBoard(m_boardGrid);
 }
 
@@ -207,7 +209,16 @@ void Board::undoMove()
 void Board::showSolution()
 {
     m_solution = m_level->solution();
-    automaticMove();
+
+    // store current positions
+    foreach (Block *block, m_level->blocks()->blocks()) {
+        m_currentPositions.insert(block->id(), QPoint(block->x(), block->y()));
+    }
+
+    m_level->blocks()->resetBlockPositions();
+
+    // start showing the solution
+    QTimer::singleShot(400, this, SLOT(automaticMove()));
 }
 
 bool Board::showSolutionRunning() const
@@ -352,7 +363,6 @@ void Board::setMoveCount(const int &moveCount)
 void Board::automaticMove()
 {
     if (!m_solution.isEmpty()) {
-
         if (!m_showSolutionRunning) {
             m_showSolutionRunning = true;
             emit showSolutionRunningChanged();
@@ -360,8 +370,16 @@ void Board::automaticMove()
 
         Move move = m_solution.takeFirst();
         moveBlock(move.id(), move.delta());
-        QTimer::singleShot(300, this, SLOT(automaticMove()));
+        QTimer::singleShot(400, this, SLOT(automaticMove()));
     } else {
+        // finished, reset the position
+        foreach (Block *block, m_level->blocks()->blocks()) {
+            QPoint position = m_currentPositions.value(block->id());
+            block->setX(position.x());
+            block->setY(position.y());
+        }
+        updateBoardGrid();
+
         m_showSolutionRunning = false;
         emit showSolutionRunningChanged();
     }
@@ -372,6 +390,7 @@ void Board::onLevelCompleted()
     qDebug() << "Level completed with" << m_moveCount << "moves!!";
 
     QSettings settings;
+    settings.beginGroup(m_level->levelPackName());
     settings.beginGroup(m_level->name());
 
     // set completed
@@ -392,6 +411,7 @@ void Board::onLevelCompleted()
         qDebug() << "New record!! " << m_level->record();
     }
 
+    settings.endGroup();
     settings.endGroup();
 
     emit levelCompleted();

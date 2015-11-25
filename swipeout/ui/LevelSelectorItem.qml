@@ -24,8 +24,7 @@ import Swipeout 1.0
 
 Item {
     id: root
-    property int levelId: levelId
-    property var level: gameEngine.levels.get(levelId)
+    property var level: null
 
     signal selected()
 
@@ -39,23 +38,18 @@ Item {
 
             Label {
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: levelId
+                text: level.id
                 font.bold: true
             }
-
-//            Label {
-//                anchors.horizontalCenter: parent.horizontalCenter
-//                text: level.record == 0 ? "-" : level.record
-//            }
         }
 
         MouseArea {
             id: levelMouseArea
             anchors.fill: parent
             onClicked: {
-                root.selected()
+                gameEngine.board.loadLevel(level)
+                pageStack.push(Qt.resolvedUrl("BoardPage.qml"))
             }
         }
     }
-
 }

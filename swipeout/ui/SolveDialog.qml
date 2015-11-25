@@ -30,7 +30,7 @@ Dialog {
 
     property bool solutionFound: false
 
-    text: gameEngine.solverRunning ? "Solving..." : "Solver done!"
+    text: gameEngine.solverRunning ? "Solving..." : "Level solved!"
 
     ThinDivider { }
 
@@ -52,7 +52,7 @@ Dialog {
         id: moveText
         visible: !gameEngine.solverRunning
         horizontalAlignment: Text.AlignHCenter
-        font.pixelSize: units.gu(5)
+        font.pixelSize: units.gu(4)
         font.bold: true
         text: ""
     }
@@ -64,20 +64,31 @@ Dialog {
 
     ThinDivider { }
 
-//    Button {
-//        visible: solutionFound
-//        text: "Show solution"
-//        onClicked: {
-//            PopupUtils.close(root)
-//            gameEngine.levelCreator.board.showSolution()
-//        }
-//    }
+    Button {
+        visible: !gameEngine.solverRunning && solutionFound
+        text: "Save"
+        onClicked: {
+            gameEngine.levelCreator.saveLevel()
+            gameEngine.loadCreatedLevels()
+            onClicked: PopupUtils.close(root)
+        }
+    }
+
+    Button {
+        visible: !gameEngine.solverRunning && solutionFound
+        text: "Show solution"
+        onClicked: {
+            PopupUtils.close(root)
+            gameEngine.levelCreator.board.showSolution()
+        }
+    }
 
     Button {
         text: gameEngine.solverRunning ? "Cancel" : "Close"
         onClicked: {
             if (gameEngine.solverRunning)
                 gameEngine.stopSolvingBoard()
+
             PopupUtils.close(root)
         }
     }
@@ -88,7 +99,7 @@ Dialog {
             runTimeText.text = "Runtime: " + runTime
             var moveCount = gameEngine.levelCreator.board.level.solutionCount
             if (moveCount == 0) {
-                solutionText.text = "No solution found!"
+                solutionText.text = "No solution!"
             } else {
                 solutionFound = true
                 solutionText.text = "Solution found!\n\nPerfect solution:"

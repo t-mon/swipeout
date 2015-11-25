@@ -48,7 +48,9 @@ int main(int argc, char *argv[])
     qmlRegisterType<GameEngine>("Swipeout", 1, 0, "GameEngine");
     qmlRegisterUncreatableType<Board>("Swipeout", 1, 0, "Board", "Can't create this in QML. Get it from the GameEngine.");
     qmlRegisterUncreatableType<Level>("Swipeout", 1, 0, "Level", "Can't create this in QML. Get it from Levels.");
-    qmlRegisterUncreatableType<Levels>("Swipeout", 1, 0, "Levels", "Can't create this in QML. Get it from the GameEngine.");
+    qmlRegisterUncreatableType<Levels>("Swipeout", 1, 0, "Levels", "Can't create this in QML. Get it from the LevelPack.");
+    qmlRegisterUncreatableType<LevelPack>("Swipeout", 1, 0, "LevelPack", "Can't create this in QML. Get it from the LevelPacks.");
+    qmlRegisterUncreatableType<LevelPacks>("Swipeout", 1, 0, "LevelPacks", "Can't create this in QML. Get it from the GameEngine.");
     qmlRegisterUncreatableType<LevelCreator>("Swipeout", 1, 0, "LevelCreator", "Can't create this in QML. Get it from the GameEngine.");
     qmlRegisterUncreatableType<Block>("Swipeout", 1, 0, "Block", "Can't create this in QML. Get it from Blocks.");
     qmlRegisterUncreatableType<Blocks>("Swipeout", 1, 0, "Blocks", "Can't create this in QML. Get it from the Level.");

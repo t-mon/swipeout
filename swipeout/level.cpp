@@ -69,7 +69,6 @@ void Level::loadBlocks()
 
 void Level::destroyBlocks()
 {
-    qDebug() << " -> Destroy Blocks of level" << id();
     m_blocks->deleteAllBlocks();
 }
 
@@ -81,6 +80,16 @@ QString Level::name() const
 void Level::setName(const QString &name)
 {
     m_name = name;
+}
+
+QString Level::levelPackName() const
+{
+    return m_levelPackName;
+}
+
+void Level::setLevelPackName(const QString &levelPackName)
+{
+    m_levelPackName = levelPackName;
 }
 
 int Level::id() const

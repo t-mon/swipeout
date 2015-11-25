@@ -42,9 +42,9 @@ Page {
             font.bold:true
             color: "#88888888"
             width: units.gu(20)
-            height: units.gu(10)
+            height: units.gu(7)
             onClicked: {
-                push(Qt.resolvedUrl("LevelSelectorPage.qml"))
+                push(Qt.resolvedUrl("LevelPacksPage.qml"))
             }
         }
 
@@ -52,7 +52,7 @@ Page {
             text: "Load level"
             color: "#88888888"
             width: units.gu(20)
-            height: units.gu(10)
+            height: units.gu(7)
             onClicked: {
                 gameEngine.loadCreatedLevels()
                 push(Qt.resolvedUrl("LoadLevelPage.qml"))
@@ -63,7 +63,7 @@ Page {
             text: "Create level"
             color: "#88888888"
             width: units.gu(20)
-            height: units.gu(10)
+            height: units.gu(7)
             onClicked: {
                 push(Qt.resolvedUrl("LevelCreator.qml"))
             }

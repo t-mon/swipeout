@@ -55,6 +55,9 @@ public:
     QString name() const;
     void setName(const QString &name);
 
+    QString levelPackName() const;
+    void setLevelPackName(const QString &levelPackName);
+
     int id() const;
     void setId(const int &id);
 
@@ -82,6 +85,7 @@ private:
     QStack<Move> m_solution;
 
     QString m_name;
+    QString m_levelPackName;
     int m_id;
     int m_width;
     int m_height;

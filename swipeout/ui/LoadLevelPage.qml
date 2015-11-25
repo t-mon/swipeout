@@ -36,9 +36,9 @@ Page {
         delegate: LevelSelectorItem {
             width: levelGrid.cellWidth
             height: levelGrid.cellHeight
-            levelId: model.levelId
+            level: gameEngine.loadedLevels.get(model.levelId)
             onSelected: {
-                gameEngine.startLevel(model.levelId, true)
+                gameEngine.board.loadLevel(gameEngine.loadedLevels.get(levelId))
                 pageStack.push(Qt.resolvedUrl("BoardPage.qml"))
             }
         }

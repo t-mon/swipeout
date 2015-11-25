@@ -52,6 +52,7 @@ public:
     void addLevel(Level* level);
     void resetLevelSettings();
     void sortLevels();
+    void deleteAllLevels();
 
 protected:
     QHash<int, QByteArray> roleNames() const;

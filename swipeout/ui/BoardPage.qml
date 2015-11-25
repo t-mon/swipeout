@@ -91,7 +91,7 @@ Page {
                     Label {
                         anchors.horizontalCenter: parent.horizontalCenter
                         font.bold: true
-                        text: (level.record != 9999 ? level.record : "-") + " / " + level.solutionCount
+                        text: (level.record != 0 ? level.record : "-") + " / " + level.solutionCount
                     }
                 }
             }
@@ -190,7 +190,6 @@ Page {
                         anchors.fill: parent
                         onClicked: {
                             if (!gameEngine.board.showSolutionRunning) {
-                                gameEngine.board.restartLevel()
                                 gameEngine.board.showSolution()
                             }
                         }
@@ -205,18 +204,66 @@ Page {
         Dialog {
             id: completedDialog
             title: i18n.tr("Level completed!")
-            text: i18n.tr("You took " + gameEngine.board.moveCount + " moves.")
+            text: gameEngine.board.moveCount + " / " + level.solutionCount
 
-            Button {
-                id: nextButton
-                text: i18n.tr("Next level")
-                onClicked: {
-                    PopupUtils.close(completedDialog)
-                    if (!gameEngine.startLevel(level.id + 1)) {
-                        pageStack.pop()
+
+            Rectangle {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                height: parent.width / 4
+
+                color: "transparent"
+
+                Button {
+                    anchors.left: parent.left
+                    width: parent.width / 4
+                    height: width
+                    Icon {
+                        anchors.fill: parent
+                        anchors.margins: units.gu(2)
+                        name: "back"
+                    }
+
+                    onClicked: {
+                        PopupUtils.close(completedDialog)
+                    }
+                }
+
+                Button {
+                    anchors.centerIn: parent
+                    width: parent.width / 4
+                    height: width
+                    Icon {
+                        anchors.fill: parent
+                        anchors.margins: units.gu(2)
+                        name: "browser-tabs"
+                    }
+
+                    onClicked: {
+                        PopupUtils.close(completedDialog)
+                        pop()
+                    }
+                }
+
+                Button {
+                    anchors.right: parent.right
+                    width: parent.width / 4
+                    height: width
+
+                    Icon {
+                        anchors.fill: parent
+                        anchors.margins: units.gu(2)
+                        name: "next"
+                    }
+
+                    onClicked: {
+                        PopupUtils.close(completedDialog)
                     }
                 }
             }
+
+
+
         }
     }
 

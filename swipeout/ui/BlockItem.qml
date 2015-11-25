@@ -19,6 +19,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 import QtQuick 2.4
+import QtFeedback 5.0
 import Ubuntu.Components 1.3
 import Swipeout 1.0
 
@@ -36,7 +37,17 @@ Item {
         from: 0
         to: 1
         easing.type: Easing.OutQuad
-        duration: 400
+        duration: 300
+    }
+
+    HapticsEffect {
+        id: rumbleEffect
+        attackIntensity: 0.1
+        attackTime: 100
+        intensity: 0.2
+        duration: 50
+        fadeTime: 50
+        fadeIntensity: 0.0
     }
 
     Connections {
@@ -51,6 +62,19 @@ Item {
         onYChanged: {
             blockShape.y = block.y * cellSize
         }
+    }
+
+    Connections {
+        target: blockShape
+        onXChanged: {
+            if (blockShape.x == elementMouseArea.drag.minimumX || blockShape.x == elementMouseArea.drag.maximumX)
+                rumbleEffect.start()
+        }
+        onYChanged:  {
+            if (blockShape.y == elementMouseArea.drag.minimumY || blockShape.y == elementMouseArea.drag.maximumY)
+                rumbleEffect.start()
+        }
+
     }
 
     UbuntuShape {
@@ -78,9 +102,13 @@ Item {
             }
         }
 
+
+
         MouseArea {
             id: elementMouseArea
             anchors.fill: parent
+
+            visible: !board.showSolutionRunning
 
             drag.target: parent
             drag.axis: width > height ? Drag.XAxis : Drag.YAxis
@@ -123,11 +151,11 @@ Item {
             }
         }
 
-        Label {
-            visible: app.debug
-            anchors.centerIn: parent
-            text: blockId
-        }
+//        Label {
+//            visible: app.debug
+//            anchors.centerIn: parent
+//            text: blockId
+//        }
 
     }
 }

@@ -220,8 +220,7 @@ Page {
                             id: saveMouseArea
                             anchors.fill: parent
                             onClicked:  {
-                                creator.saveLevel()
-                                gameEngine.loadCreatedLevels()
+                                 PopupUtils.open(Qt.resolvedUrl("SaveDialog.qml"))
                             }
                         }
                     }

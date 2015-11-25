@@ -17,7 +17,9 @@ SOURCES += main.cpp \
     board.cpp \
     boardsolver.cpp \
     levelcreator.cpp \
-    move.cpp
+    move.cpp \
+    levelpack.cpp \
+    levelpacks.cpp
 
 RESOURCES += swipeout.qrc \
              images.qrc
@@ -43,5 +45,7 @@ HEADERS += \
     board.h \
     boardsolver.h \
     levelcreator.h \
-    move.h
+    move.h \
+    levelpack.h \
+    levelpacks.h
 

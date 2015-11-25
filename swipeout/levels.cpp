@@ -80,8 +80,6 @@ void Levels::addLevel(Level *level)
     beginInsertRows(QModelIndex(), m_levels.count(), m_levels.count());
     m_levels.append(level);
     endInsertRows();
-    QModelIndex i = index(m_levels.indexOf(level));
-    emit dataChanged(i, i);
     sortLevels();
 }
 
@@ -94,6 +92,14 @@ void Levels::sortLevels()
 {
     beginResetModel();
     qSort(m_levels.begin(), m_levels.end(), compareLevel);
+    endResetModel();
+}
+
+void Levels::deleteAllLevels()
+{
+    beginResetModel();
+    qDeleteAll(m_levels);
+    m_levels.clear();
     endResetModel();
 }
 

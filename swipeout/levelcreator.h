@@ -85,6 +85,8 @@ private:
     int m_width;
     int m_height;
 
+    int m_blockCountId;
+
     Board *m_board;
     Level *m_level;
 

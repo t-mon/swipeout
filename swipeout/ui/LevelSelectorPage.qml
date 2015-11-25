@@ -24,23 +24,22 @@ import Swipeout 1.0
 
 Page {
     id: root
-    title: i18n.tr("Levels")
+    title: levelPack.name
+    property var levelPack: gameEngine.levelPack
 
     GridView {
         id: levelGrid
         anchors.fill: parent
-        cellWidth: width / 4
+        anchors.leftMargin: units.gu(0.5)
+        anchors.rightMargin: units.gu(0.5)
+        cellWidth: app.landscape ? width / 8 : width / 4
         cellHeight: cellWidth
-        model: gameEngine.levels
+        model: levelPack.levels
 
         delegate: LevelSelectorItem {
             width: levelGrid.cellWidth
             height: levelGrid.cellHeight
-            levelId: model.levelId
-            onSelected: {
-                gameEngine.startLevel(model.levelId)
-                pageStack.push(Qt.resolvedUrl("BoardPage.qml"))
-            }
+            level: levelPack.levels.get(model.levelId)
         }
     }
 }

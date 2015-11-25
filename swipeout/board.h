@@ -24,6 +24,7 @@
 #include <QObject>
 #include <QVector>
 #include <QStack>
+#include <QPoint>
 
 #include "level.h"
 
@@ -60,7 +61,7 @@ public:
 
     void clearLevel();
     Q_INVOKABLE void restartLevel();
-    void loadLevel(Level *level);
+    Q_INVOKABLE void loadLevel(Level *level);
 
     Level *level();
 
@@ -96,6 +97,8 @@ private:
 
     QStack<Move> m_moveStack;
     QStack<Move> m_solution;
+
+    QHash<int, QPoint> m_currentPositions;
 
     bool m_showSolutionRunning;
 

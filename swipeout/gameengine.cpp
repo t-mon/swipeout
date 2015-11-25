@@ -30,7 +30,8 @@
 
 GameEngine::GameEngine(QObject *parent) :
     QObject(parent),
-    m_levels(new Levels(this)),
+    m_levelPack(0),
+    m_levelPacks(new LevelPacks(this)),
     m_createdLevels(new Levels(this)),
     m_levelCreator(new LevelCreator(this)),
     m_board(new Board(this)),
@@ -50,19 +51,19 @@ QString GameEngine::levelDir() const
 void GameEngine::setLevelDir(const QString &levelDir)
 {
     m_levelDir = levelDir;
-    loadLevels();
+    loadLevelPacks();
     loadCreatedLevels();
     emit levelDirChanged();
 }
 
-Levels *GameEngine::levels()
+LevelPack *GameEngine::levelPack()
 {
-    return m_levels;
+    return m_levelPack;
 }
 
-Levels *GameEngine::loadedLevels()
+LevelPacks *GameEngine::levelPacks()
 {
-    return m_createdLevels;
+    return m_levelPacks;
 }
 
 LevelCreator *GameEngine::levelCreator()
@@ -75,22 +76,30 @@ Board *GameEngine::board()
     return m_board;
 }
 
-bool GameEngine::startLevel(const int &id, const bool &created)
+void GameEngine::loadLevelPack(const QString &name)
 {
-    Level *level = 0;
-    if (!created) {
-        level = m_levels->get(id);
-    } else {
-        level = m_createdLevels->get(id);
+    LevelPack *levelPack = m_levelPacks->get(name);
+
+    if (!levelPack) {
+        qWarning() << "Could not find level pack" << name;
+        return;
     }
 
-    if (!level) {
-        qWarning() << "Could not find level" << id;
-        return false;
+    // check if already loaded
+    if (levelPack == m_levelPack) {
+        qWarning() << "Level pack" << name << "already loaded";
+        return;
     }
 
-    m_board->loadLevel(level);
-    return true;
+    m_board->clearLevel();
+
+    if (m_levelPack)
+        m_levelPack->unloadLevels();
+
+    m_levelPack = levelPack;
+    emit levelPackChanged();
+
+    m_levelPack->loadLevels();
 }
 
 void GameEngine::solveBoard()
@@ -109,6 +118,11 @@ void GameEngine::stopSolvingBoard()
 {
     qDebug() << "Cancel solving process.";
     m_solver->stopSolver();
+}
+
+Levels *GameEngine::loadedLevels()
+{
+    return m_createdLevels;
 }
 
 void GameEngine::loadCreatedLevels()
@@ -175,64 +189,17 @@ bool GameEngine::solverRunning() const
     return m_solverRunning;
 }
 
-void GameEngine::loadLevels()
+void GameEngine::loadLevelPacks()
 {
-    qDebug() << "Loading levels from" << m_levelDir;
-
+    qDebug() << "Loading level packs" << m_levelDir;
     QDir dir(m_levelDir);
-    dir.setFilter(QDir::Files);
+    dir.setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
     dir.setSorting(QDir::Name);
 
     QFileInfoList levelFiles = dir.entryInfoList();
     foreach (const QFileInfo &levelFileInfo, levelFiles) {
-        if (!levelFileInfo.fileName().startsWith("level") || !levelFileInfo.fileName().endsWith(".json"))
-            continue;
-
-        QFile levelFile(levelFileInfo.absoluteFilePath());
-        if (!levelFile.open(QFile::ReadOnly)) {
-            qDebug() << "Cannot open level file for reading:" << levelFileInfo.absoluteFilePath();
-            continue;
-        }
-
-        QJsonParseError error;
-        QJsonDocument jsonDoc = QJsonDocument::fromJson(levelFile.readAll(), &error);
-        if (error.error != QJsonParseError::NoError) {
-            qDebug() << "Cannot parse level file:" << error.errorString();
-            continue;
-        }
-
-        QVariantMap levelData = jsonDoc.toVariant().toMap();
-        qDebug() << "   -> loading level" << levelData.value("id").toInt() << "...";
-        Level *level = new Level(this);
-        level->setName(levelData.value("name").toString());
-        level->setId(levelData.value("id").toInt());
-        level->setHeight(levelData.value("height").toInt());
-        level->setWidth(levelData.value("width").toInt());
-        level->setBlockData(levelData.value("blocks").toList());
-
-        // load record / completed
-        QSettings settings;
-        settings.beginGroup(level->name());
-        level->setCompleted(settings.value("completed", false).toBool());
-        level->setRecord(settings.value("record", 0).toInt());
-        settings.endGroup();
-
-        // load solution moves
-        QList<Move> moves;
-        foreach (const QVariant &moveData, levelData.value("solution").toList()) {
-            QVariantMap moveMap = moveData.toMap();
-            Move move(moveMap.value("block").toInt(), moveMap.value("step").toInt(), moveMap.value("delta").toInt());
-            moves.append(move);
-        }
-        qSort(moves.begin(), moves.end(), compareMove);
-
-        QStack<Move> solution;
-        for (int i = 0; i < moves.count(); i++) {
-            solution.push(moves.at(i));
-        }
-        level->setSolution(solution);
-
-        m_levels->addLevel(level);
+        qDebug() << levelFileInfo.fileName();
+        m_levelPacks->addLevelPack(new LevelPack(m_levelDir, levelFileInfo.fileName(), this));
     }
 }
 

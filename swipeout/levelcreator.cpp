@@ -33,6 +33,7 @@ LevelCreator::LevelCreator(QObject *parent) :
     QObject(parent),
     m_width(6),
     m_height(6),
+    m_blockCountId(0),
     m_board(new Board(this, true)),
     m_level(new Level(this)),
     m_deleteToolSelected(false),
@@ -100,7 +101,6 @@ void LevelCreator::createRandomLevel()
     foreach (Block *block, blocks) {
         if (block->orientation() == Block::Vertical) {
             QList<QPoint> positions = possiblePositions(block);
-
             if (positions.isEmpty()) {
                 block->deleteLater();
             } else {
@@ -108,6 +108,8 @@ void LevelCreator::createRandomLevel()
                 QPoint finalPosition = positions.at(index);
                 block->setX(finalPosition.x());
                 block->setY(finalPosition.y());
+                block->setStartX(finalPosition.x());
+                block->setStartY(finalPosition.y());
                 m_level->blocks()->addBlock(block);
                 m_board->updateBoardGrid();
             }
@@ -121,6 +123,8 @@ void LevelCreator::createRandomLevel()
                 QPoint finalPosition = positions.at(index);
                 block->setX(finalPosition.x());
                 block->setY(finalPosition.y());
+                block->setStartX(finalPosition.x());
+                block->setStartY(finalPosition.y());
                 m_level->blocks()->addBlock(block);
                 m_board->updateBoardGrid();
             }
@@ -129,10 +133,12 @@ void LevelCreator::createRandomLevel()
 
     qDebug() << " All blocks";
     foreach (Block *block, m_level->blocks()->blocks()) {
-        qDebug() << " -> Block" << block->id() << ":" << block->width() << "x" << block->height();
+        qDebug() << " -> Block" << block->id() << "(" << block->x() << "," << block->y() << ")";
     }
 
     m_board->loadLevel(m_level);
+    m_board->updateBoardGrid();
+    m_blockCountId = m_level->blocks()->count();
 }
 
 void LevelCreator::saveLevel()
@@ -194,21 +200,22 @@ void LevelCreator::createBlock(const int &index)
 
     Block *block = 0;
 
+    m_blockCountId += 1;
+
     if (twoVerticalToolSelected()) {
-        block = new Block(m_level->blocks()->count() + 1, coordinates.x(), coordinates.y(), 2, 1, m_level);
+        block = new Block(m_blockCountId, coordinates.x(), coordinates.y(), 2, 1, m_level);
     } else if (twoHorizontalToolSelected()) {
-        block = new Block(m_level->blocks()->count() + 1, coordinates.x(), coordinates.y(), 1, 2, m_level);
+        block = new Block(m_blockCountId, coordinates.x(), coordinates.y(), 1, 2, m_level);
     } else if (threeHorizontalToolSelected()) {
-        block = new Block(m_level->blocks()->count() + 1, coordinates.x(), coordinates.y(), 1, 3, m_level);
+        block = new Block(m_blockCountId, coordinates.x(), coordinates.y(), 1, 3, m_level);
     } else if (threeVerticalToolSelected()) {
-        block = new Block(m_level->blocks()->count() + 1, coordinates.x(), coordinates.y(), 3, 1, m_level);
+        block = new Block(m_blockCountId, coordinates.x(), coordinates.y(), 3, 1, m_level);
     } else {
         clearToolSelections();
         return;
     }
 
     QList<QPoint> possitions = possiblePositions(block);
-    qDebug() << "found possible places" << possitions;
 
     if (!possitions.contains(coordinates)) {
         clearToolSelections();
@@ -231,15 +238,16 @@ void LevelCreator::removeBlock(const int &id)
     qDebug() << "Remove block" << id;
     Block * block = m_level->blocks()->get(id);
     m_level->blocks()->removeBlock(block);
-    m_board->updateBoardGrid();
-    block->deleteLater();
     clearToolSelections();
+    m_board->updateBoardGrid();
     Board::printBoard(m_board->boardGrid());
+    block->deleteLater();
 }
 
 void LevelCreator::clearBoard()
 {
     initLevel();
+    m_blockCountId = 0;
     m_board->updateBoardGrid();
     clearToolSelections();
 }
@@ -415,7 +423,6 @@ QList<QPoint> LevelCreator::possiblePositions(Block *block)
 
 void LevelCreator::onGridChanged()
 {
-    qDebug() << "grid changed";
     clearToolSelections();
     m_board->clearSolution();
 }

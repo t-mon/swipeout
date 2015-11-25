@@ -28,6 +28,7 @@ MainView {
     applicationName: "swipeout.t-mon"
 
     property bool debug: false
+    property bool landscape: height < width
 
     height: units.gu(70)
     width: units.gu(40)

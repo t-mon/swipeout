@@ -11,7 +11,10 @@ class LevelPacks : public QAbstractListModel
     Q_OBJECT
 public:
     enum LevelRole {
-        NameRole
+        NameRole,
+        LevelCountRole,
+        CompletedCountRole,
+        CompletedPerfectCountRole
     };
 
     explicit LevelPacks(QObject *parent = 0);

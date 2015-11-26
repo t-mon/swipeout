@@ -40,7 +40,11 @@ Item {
 
         MouseArea {
             anchors.fill: parent
-            onClicked: gameEngine.levelCreator.deleteToolSelected = !selected
+            onClicked: {
+                if (!gameEngine.levelCreator.board.showSolutionRunning)
+                    gameEngine.levelCreator.deleteToolSelected = !selected
+
+            }
         }
     }
 }

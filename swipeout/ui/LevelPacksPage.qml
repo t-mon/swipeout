@@ -31,13 +31,73 @@ Page {
     UbuntuListView {
         id: levelGrid
         anchors.fill: parent
+        spacing: units.gu(2)
         model: gameEngine.levelPacks
 
-        delegate: Standard {
-            text: model.name
-            onClicked: {
-                gameEngine.loadLevelPack(model.name)
-                pageStack.push(Qt.resolvedUrl("LevelSelectorPage.qml"))
+        delegate: UbuntuShape {
+            anchors.left: parent.left
+            anchors.leftMargin: units.gu(2)
+            anchors.right: parent.right
+            anchors.rightMargin: units.gu(2)
+            height: units.gu(8)
+
+            backgroundColor: "#88888888"
+
+            property var levelPack: gameEngine.levelPacks.get(model.name)
+
+            Label {
+                anchors.left: parent.left
+                anchors.leftMargin: units.gu(2)
+                anchors.verticalCenter: parent.verticalCenter
+                text: model.name
+                font.bold: true
+            }
+
+            Item {
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                anchors.right: parent.right
+
+                width: parent.width / 3
+
+                Column {
+                    anchors.fill: parent
+
+                    UbuntuShape {
+                        width: parent.width
+                        height: parent.height / 2
+                        backgroundColor: completedColor
+
+                        Label {
+                            anchors.centerIn: parent
+                            text: levelPack.completedCount + " / " + model.levelCount
+                        }
+                    }
+
+                    UbuntuShape {
+                        width: parent.width
+                        height: parent.height / 2
+                        backgroundColor: completedPerfectColor
+
+                        Label {
+                            anchors.centerIn: parent
+                            text: levelPack.completedPerfectCount + " / " + model.levelCount
+                        }
+                    }
+                }
+
+
+
+
+            }
+
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    gameEngine.loadLevelPack(model.name)
+                    pageStack.push(Qt.resolvedUrl("LevelSelectorPage.qml"))
+                }
             }
         }
     }

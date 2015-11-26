@@ -29,6 +29,39 @@ Levels *LevelPack::levels()
     return m_levels;
 }
 
+int LevelPack::levelCount() const
+{
+    return m_levelCount;
+}
+
+void LevelPack::setLevelCount(const int &levelCount)
+{
+    m_levelCount = levelCount;
+    emit levelCountChanged();
+}
+
+int LevelPack::completedCount() const
+{
+    return m_completedCount;
+}
+
+void LevelPack::setCompletedCount(const int &completedCount)
+{
+    m_completedCount = completedCount;
+    emit completedCountChanged();
+}
+
+int LevelPack::completedPerfectCount() const
+{
+    return m_completedPerfectCount;
+}
+
+void LevelPack::setCompletedPerfectCount(const int &completedPerfectCount)
+{
+    m_completedPerfectCount = completedPerfectCount;
+    emit completedPerfectCountChanged();
+}
+
 void LevelPack::loadLevels()
 {
     qDebug() << "Loading level pack"<< m_name <<  "from" << m_levelDir;
@@ -88,9 +121,9 @@ void LevelPack::loadLevels()
             solution.push(moves.at(i));
         }
         level->setSolution(solution);
-
         m_levels->addLevel(level);
     }
+    calculateStatistic();
 }
 
 void LevelPack::unloadLevels()
@@ -99,3 +132,23 @@ void LevelPack::unloadLevels()
     m_levels->deleteAllLevels();
 }
 
+void LevelPack::calculateStatistic()
+{
+    qDebug() << "Calculate statistics";
+    setLevelCount(m_levels->levels().count());
+    int completed = 0;
+    int completedPerfect = 0;
+
+    foreach (Level *level, m_levels->levels()) {
+        if (level->completed())
+            completed++;
+
+        if (level->completedPerfect())
+            completedPerfect++;
+    }
+    qDebug() << "   completed        " << completed << "/" << m_levels->levels().count();
+    qDebug() << "   completed perfect" << completedPerfect << "/" << m_levels->levels().count();
+
+    setCompletedCount(completed);
+    setCompletedPerfectCount(completedPerfect);
+}

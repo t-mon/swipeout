@@ -370,7 +370,7 @@ void Board::automaticMove()
 
         Move move = m_solution.takeFirst();
         moveBlock(move.id(), move.delta());
-        QTimer::singleShot(400, this, SLOT(automaticMove()));
+        QTimer::singleShot(500, this, SLOT(automaticMove()));
     } else {
         // finished, reset the position
         foreach (Block *block, m_level->blocks()->blocks()) {

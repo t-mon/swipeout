@@ -31,7 +31,7 @@ Item {
     UbuntuShape {
         anchors.fill: parent
         anchors.margins: units.gu(1)
-        backgroundColor: level.completed && level.completedPerfect ? "green" : level.completed ? "orange" : "#88888888"
+        backgroundColor: level.completed && level.completedPerfect ? completedPerfectColor : level.completed ? completedColor : uncompletedColor
 
         Column {
             anchors.centerIn: parent

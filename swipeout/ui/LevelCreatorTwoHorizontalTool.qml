@@ -40,7 +40,11 @@ Item {
 
         MouseArea {
             anchors.fill: parent
-            onClicked: gameEngine.levelCreator.twoHorizontalToolSelected = !selected
+            onClicked: {
+                if (!gameEngine.levelCreator.board.showSolutionRunning)
+                    gameEngine.levelCreator.twoHorizontalToolSelected = !selected
+
+            }
         }
     }
 }

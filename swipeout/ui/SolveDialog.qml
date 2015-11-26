@@ -52,7 +52,7 @@ Dialog {
         id: moveText
         visible: !gameEngine.solverRunning
         horizontalAlignment: Text.AlignHCenter
-        font.pixelSize: units.gu(4)
+        font.pixelSize: units.gu(5)
         font.bold: true
         text: ""
     }

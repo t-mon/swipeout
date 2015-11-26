@@ -35,21 +35,9 @@ Page {
     head.actions: [
         Action {
             id: settingsAction
-            iconName: "settings"
-            text: i18n.tr("Debug")
+            iconName: "info"
+            text: i18n.tr("Info")
             onTriggered: app.debug = !app.debug
-        },
-        Action {
-            id: clearAction
-            iconName: "delete"
-            text: i18n.tr("Clear board")
-            onTriggered: creator.clearBoard()
-        },
-        Action {
-            id: createRandomAction
-            iconName: "reload"
-            text: i18n.tr("Create random level")
-            onTriggered: creator.createRandomLevel()
         }
     ]
 
@@ -151,7 +139,9 @@ Page {
                             MouseArea {
                                 anchors.fill: parent
                                 onClicked:  {
-                                    creator.createBlock(index)
+                                    if (!creator.board.showSolutionRunning)
+                                        creator.createBlock(index)
+
                                 }
                             }
                         }
@@ -164,17 +154,71 @@ Page {
         Item {
             id: buttons
             anchors.left: parent.left
-            anchors.leftMargin: units.gu(2)
+            anchors.leftMargin: units.gu(1)
             anchors.right: parent.right
-            anchors.rightMargin: units.gu(2)
-            height: parent.width / 4
+            anchors.rightMargin: units.gu(1)
+            height: parent.width / 5
 
             Row {
                 id: buttonRow
                 anchors.fill: parent
 
                 Item {
-                    width: parent.width / 4
+                    width: parent.width / 5
+                    height: width
+
+                    UbuntuShape {
+                        anchors.fill: parent
+                        anchors.margins: units.gu(0.5)
+                        backgroundColor: deleteMouseArea.pressed ? "#44444444" : "#88888888"
+
+                        Icon {
+                            anchors.fill: parent
+                            anchors.margins: units.gu(1)
+                            name: "delete"
+                        }
+
+                        MouseArea {
+                            id: deleteMouseArea
+                            anchors.fill: parent
+                            onClicked: {
+                                if (!creator.board.showSolutionRunning)
+                                    creator.clearBoard()
+
+                            }
+                        }
+                    }
+                }
+
+                Item {
+                    width: parent.width / 5
+                    height: width
+
+                    UbuntuShape {
+                        anchors.fill: parent
+                        anchors.margins: units.gu(0.5)
+                        backgroundColor: createRandomLevelMouseArea.pressed ? "#44444444" : "#88888888"
+
+                        Icon {
+                            anchors.fill: parent
+                            anchors.margins: units.gu(1)
+                            name: "view-refresh"
+                        }
+
+                        MouseArea {
+                            id: createRandomLevelMouseArea
+                            anchors.fill: parent
+                            onClicked: {
+                                if (!creator.board.showSolutionRunning)
+                                    creator.createRandomLevel()
+
+                            }
+                        }
+                    }
+                }
+
+                Item {
+                    width: parent.width / 5
                     height: width
 
                     UbuntuShape {
@@ -184,23 +228,25 @@ Page {
 
                         Icon {
                             anchors.fill: parent
-                            anchors.margins: units.gu(2)
-                            name: "find"
+                            anchors.margins: units.gu(1)
+                            name: "torch-on"
                         }
 
                         MouseArea {
                             id: solveMouseArea
                             anchors.fill: parent
                             onClicked: {
-                                gameEngine.solveBoard()
-                                PopupUtils.open(Qt.resolvedUrl("SolveDialog.qml"))
+                                if (!creator.board.showSolutionRunning) {
+                                    gameEngine.solveBoard()
+                                    PopupUtils.open(Qt.resolvedUrl("SolveDialog.qml"))
+                                }
                             }
                         }
                     }
                 }
 
                 Item {
-                    width: parent.width / 4
+                    width: parent.width / 5
                     height: width
 
                     visible: creator.board.solutionAvailable
@@ -212,7 +258,7 @@ Page {
 
                         Icon {
                             anchors.fill: parent
-                            anchors.margins: units.gu(2)
+                            anchors.margins: units.gu(1)
                             name: "save"
                         }
 
@@ -220,7 +266,38 @@ Page {
                             id: saveMouseArea
                             anchors.fill: parent
                             onClicked:  {
-                                 PopupUtils.open(Qt.resolvedUrl("SaveDialog.qml"))
+                                if (!gameEngine.solver.board.showSolutionRunning)
+                                    PopupUtils.open(Qt.resolvedUrl("SaveDialog.qml"))
+
+                            }
+                        }
+                    }
+                }
+
+                Item {
+                    width: parent.width / 5
+                    height: width
+
+                    visible: creator.board.solutionAvailable
+
+                    UbuntuShape {
+                        anchors.fill: parent
+                        anchors.margins: units.gu(0.5)
+                        backgroundColor: showSolutionMouseArea.pressed ? "#44444444" : "#88888888"
+
+                        Icon {
+                            anchors.fill: parent
+                            anchors.margins: units.gu(1)
+                            name: "torch-off"
+                        }
+
+                        MouseArea {
+                            id: showSolutionMouseArea
+                            anchors.fill: parent
+                            onClicked: {
+                                if (!creator.board.showSolutionRunning)
+                                    gameEngine.levelCreator.board.showSolution()
+
                             }
                         }
                     }
@@ -229,3 +306,4 @@ Page {
         }
     }
 }
+

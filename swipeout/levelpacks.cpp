@@ -35,6 +35,12 @@ QVariant LevelPacks::data(const QModelIndex &index, int role) const
     LevelPack *levelPack = m_levelPacks.at(index.row());
     if (role == NameRole) {
         return levelPack->name();
+    } else if (role == LevelCountRole) {
+        return levelPack->levelCount();
+    } else if (role == CompletedCountRole) {
+        return levelPack->completedCount();
+    } else if (role == CompletedPerfectCountRole) {
+        return levelPack->completedPerfectCount();
     }
 
     return QVariant();
@@ -51,6 +57,9 @@ QHash<int, QByteArray> LevelPacks::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[NameRole] = "name";
+    roles[LevelCountRole] = "levelCount";
+    roles[CompletedCountRole] = "completedCount";
+    roles[CompletedPerfectCountRole] = "completedPerfectCount";
     return roles;
 }
 

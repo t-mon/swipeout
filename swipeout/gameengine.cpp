@@ -39,7 +39,6 @@ GameEngine::GameEngine(QObject *parent) :
     m_watcher(new QFutureWatcher<QStack<Move> >(this)),
     m_solverRunning(false)
 {
-    qDebug() << "Created game engine";
     connect(m_watcher, SIGNAL(finished()), this, SLOT(onSolverFinished()));
 }
 
@@ -86,10 +85,8 @@ void GameEngine::loadLevelPack(const QString &name)
     }
 
     // check if already loaded
-    if (levelPack == m_levelPack) {
-        qWarning() << "Level pack" << name << "already loaded";
+    if (levelPack == m_levelPack)
         return;
-    }
 
     m_board->clearLevel();
 
@@ -199,7 +196,12 @@ void GameEngine::loadLevelPacks()
     QFileInfoList levelFiles = dir.entryInfoList();
     foreach (const QFileInfo &levelFileInfo, levelFiles) {
         qDebug() << levelFileInfo.fileName();
-        m_levelPacks->addLevelPack(new LevelPack(m_levelDir, levelFileInfo.fileName(), this));
+
+        LevelPack *levelPack = new LevelPack(m_levelDir, levelFileInfo.fileName(), this);
+        levelPack->loadLevels();
+        levelPack->unloadLevels();
+
+        m_levelPacks->addLevelPack(levelPack);
     }
 }
 

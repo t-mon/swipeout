@@ -34,15 +34,9 @@ Page {
     head.actions: [
         Action {
             id: settingsAction
-            iconName: "settings"
+            iconName: "help"
             text: i18n.tr("Debug")
             onTriggered: app.debug = !app.debug
-        },
-        Action {
-            id: addDeviceAction
-            iconName: "reload"
-            text: i18n.tr("Restart level")
-            onTriggered: gameEngine.board.restartLevel()
         }
     ]
 
@@ -56,11 +50,11 @@ Page {
             anchors.right: parent.right
             anchors.rightMargin: units.gu(1)
 
-            spacing: width / 3
+            spacing: width * 1 / 5
 
             UbuntuShape {
-                width: parent.width / 3
-                height: width * 3 / 5
+                width: parent.width * 2 / 5
+                height: width * 2 / 5
                 backgroundColor: "#88888888"
 
                 Column {
@@ -78,15 +72,15 @@ Page {
             }
 
             UbuntuShape {
-                width: parent.width / 3
-                height: width * 3 / 5
+                width: parent.width * 2 / 5
+                height: width * 2 / 5
                 backgroundColor: "#88888888"
 
                 Column {
                     anchors.centerIn: parent
                     Label {
                         anchors.horizontalCenter: parent.horizontalCenter
-                        text: i18n.tr("RECORD")
+                        text: i18n.tr("HIGHSCORE")
                     }
                     Label {
                         anchors.horizontalCenter: parent.horizontalCenter
@@ -109,7 +103,7 @@ Page {
                 id: boardArea
                 anchors.fill: parent
                 anchors.margins: borderWidth
-                backgroundColor: UbuntuColors.darkGrey
+                backgroundColor: "#33333333"
 
                 Rectangle {
                     id: exitShape
@@ -142,13 +136,13 @@ Page {
             anchors.rightMargin: units.gu(1)
 
             Item {
-                width: parent.width / 2
-                height: width / 3
+                width: parent.width / 3
+                height: width / 2
 
                 UbuntuShape {
                     anchors.fill: parent
                     anchors.margins: units.gu(0.5)
-                    backgroundColor: solveMouseArea.pressed ? "#44444444" : "#88888888"
+                    backgroundColor: undoMouseArea.pressed ? "#44444444" : "#88888888"
 
                     Icon {
                         anchors.fill: parent
@@ -157,7 +151,7 @@ Page {
                     }
 
                     MouseArea {
-                        id: solveMouseArea
+                        id: undoMouseArea
                         anchors.fill: parent
                         onClicked: {
                             if (!gameEngine.board.showSolutionRunning) {
@@ -168,10 +162,32 @@ Page {
                 }
             }
 
+            Item {
+                width: parent.width / 3
+                height: width / 2
+
+                UbuntuShape {
+                    anchors.fill: parent
+                    anchors.margins: units.gu(0.5)
+                    backgroundColor: restartMouseArea.pressed ? "#44444444" : "#88888888"
+
+                    Icon {
+                        anchors.fill: parent
+                        anchors.margins: units.gu(1)
+                        name: "reset"
+                    }
+
+                    MouseArea {
+                        id: restartMouseArea
+                        anchors.fill: parent
+                        onClicked: gameEngine.board.restartLevel()
+                    }
+                }
+            }
 
             Item {
-                width: parent.width / 2
-                height: width / 3
+                width: parent.width / 3
+                height: width / 2
                 visible: app.debug
 
                 UbuntuShape {
@@ -182,7 +198,7 @@ Page {
                     Icon {
                         anchors.fill: parent
                         anchors.margins: units.gu(1)
-                        name: "help"
+                        name: "torch-off"
                     }
 
                     MouseArea {
@@ -236,12 +252,12 @@ Page {
                     Icon {
                         anchors.fill: parent
                         anchors.margins: units.gu(2)
-                        name: "browser-tabs"
+                        name: "view-grid-symbolic"
                     }
 
                     onClicked: {
                         PopupUtils.close(completedDialog)
-                        pop()
+                        pageStack.pop()
                     }
                 }
 
@@ -261,15 +277,13 @@ Page {
                     }
                 }
             }
-
-
-
         }
     }
 
     Connections {
         target: gameEngine.board
         onLevelCompleted: {
+            gameEngine.levelPack.calculateStatistic()
             PopupUtils.open(completedComponent)
         }
     }

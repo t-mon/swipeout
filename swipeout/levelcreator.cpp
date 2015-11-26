@@ -424,7 +424,8 @@ QList<QPoint> LevelCreator::possiblePositions(Block *block)
 void LevelCreator::onGridChanged()
 {
     clearToolSelections();
-    m_board->clearSolution();
+    if (!m_board->showSolutionRunning())
+        m_board->clearSolution();
 }
 
 void LevelCreator::clearToolSelections()

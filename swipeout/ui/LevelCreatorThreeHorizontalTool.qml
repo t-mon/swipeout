@@ -41,7 +41,10 @@ Item {
 
         MouseArea {
             anchors.fill: parent
-            onClicked: gameEngine.levelCreator.threeHorizontalToolSelected = !selected
+            onClicked: {
+                if (!gameEngine.levelCreator.board.showSolutionRunning)
+                    gameEngine.levelCreator.threeHorizontalToolSelected = !selected
+            }
         }
     }
 }

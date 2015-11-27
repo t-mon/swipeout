@@ -37,9 +37,11 @@ GameEngine::GameEngine(QObject *parent) :
     m_board(new Board(this)),
     m_solver(new BoardSolver(this)),
     m_watcher(new QFutureWatcher<QStack<Move> >(this)),
+    m_settings(new Settings(this)),
     m_solverRunning(false)
 {
     connect(m_watcher, SIGNAL(finished()), this, SLOT(onSolverFinished()));
+    connect(m_settings, SIGNAL(showSolutionSpeedChanged()), this, SLOT(onShowSolutionSpeedChanged()));
 }
 
 QString GameEngine::levelDir() const
@@ -73,6 +75,11 @@ LevelCreator *GameEngine::levelCreator()
 Board *GameEngine::board()
 {
     return m_board;
+}
+
+Settings *GameEngine::settings()
+{
+    return m_settings;
 }
 
 void GameEngine::loadLevelPack(const QString &name)
@@ -246,5 +253,10 @@ void GameEngine::onSolverFinished()
     m_solverBoard->setSolution(solution);
 
     emit solutionReady(time.toString("mm:ss.zzz"));
+}
+
+void GameEngine::onShowSolutionSpeedChanged()
+{
+    m_board->setShowSolutionSpeed(m_settings->showSolutionSpeed());
 }
 

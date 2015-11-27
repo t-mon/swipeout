@@ -19,7 +19,8 @@ SOURCES += main.cpp \
     levelcreator.cpp \
     move.cpp \
     levelpack.cpp \
-    levelpacks.cpp
+    levelpacks.cpp \
+    settings.cpp
 
 RESOURCES += swipeout.qrc \
              images.qrc
@@ -47,5 +48,6 @@ HEADERS += \
     levelcreator.h \
     move.h \
     levelpack.h \
-    levelpacks.h
+    levelpacks.h \
+    settings.h
 

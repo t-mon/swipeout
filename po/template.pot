@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-25 08:08+0100\n"
+"POT-Creation-Date: 2015-11-27 21:08+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,37 +18,38 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:27
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:32
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:39
 msgid "About"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:38
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:39
-msgid "Debug"
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:39
+msgid "Help"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:44
-msgid "Restart level"
-msgstr ""
-
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:70
-msgid "MOVES"
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:45
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:33
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:28
+msgid "Settings"
 msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:89
-msgid "RECORD"
+msgid "MOVES"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:206
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:111
+msgid "HIGHSCORE"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:281
 msgid "Level completed!"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:45
-msgid "Clear board"
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:289
+msgid "You found the perfect solution!"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:51
-msgid "Create random level"
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:39
+msgid "Info"
 msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelPacksPage.qml:29
@@ -69,4 +70,12 @@ msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:33
 msgid "Do you want to save this level?"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:40
+msgid "Show solution speed [ms]"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:62
+msgid "Vibrations"
 msgstr ""

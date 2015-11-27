@@ -19,6 +19,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 import QtQuick 2.4
+import QtQuick.Layouts 1.1
 import Ubuntu.Components 1.3
 import Ubuntu.Components.Popups 1.3
 import Swipeout 1.0
@@ -29,119 +30,183 @@ Page {
 
     property var level: gameEngine.board.level
     property real borderWidth: units.gu(1.5)
-    property real cellSize: Math.min(width / level.width , height / level.height)
+    property real cellSize: Math.min(root.width / level.width , root.height / level.height)
 
     head.actions: [
         Action {
-            id: settingsAction
+            id: helpAction
             iconName: "help"
-            text: i18n.tr("Debug")
+            text: i18n.tr("Help")
             onTriggered: app.debug = !app.debug
+        },
+        Action {
+            id: settingsAction
+            iconName: "settings"
+            text: i18n.tr("Settings")
+            onTriggered: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
         }
     ]
 
-    Column {
+    GridLayout {
+        id: mainGrid
         anchors.centerIn: parent
-        spacing: units.gu(1)
+        Layout.fillHeight: app.landscape
+        Layout.fillWidth: !app.landscape
+        columns: app.landscape ? 3 : 1
 
-        Row {
-            anchors.left: parent.left
-            anchors.leftMargin: units.gu(1)
-            anchors.right: parent.right
-            anchors.rightMargin: units.gu(1)
+        // ###########################################
+        Item {
+            width: app.landscape ? root.height * 2 / 5 : root.width
+            height: app.landscape ? root.height : root.width * 2 / 5
+            Layout.maximumHeight: app.landscape ? height : units.gu(10)
+            Layout.maximumWidth: app.landscape ? units.gu(10) : width
+            Layout.fillHeight: app.landscape
+            Layout.fillWidth: !app.landscape
 
-            spacing: width * 1 / 5
-
-            UbuntuShape {
-                width: parent.width * 2 / 5
-                height: width * 2 / 5
-                backgroundColor: "#88888888"
-
-                Column {
-                    anchors.centerIn: parent
-                    Label {
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        text: i18n.tr("MOVES")
-                    }
-                    Label {
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        font.bold: true
-                        text: gameEngine.board.moveCount
-                    }
-                }
-            }
-
-            UbuntuShape {
-                width: parent.width * 2 / 5
-                height: width * 2 / 5
-                backgroundColor: "#88888888"
-
-                Column {
-                    anchors.centerIn: parent
-                    Label {
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        text: i18n.tr("HIGHSCORE")
-                    }
-                    Label {
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        font.bold: true
-                        text: (level.record != 0 ? level.record : "-") + " / " + level.solutionCount
-                    }
-                }
-            }
-        }
-
-
-        UbuntuShape {
-            id: boardBackground
-            width: level.width * cellSize
-            height: level.height * cellSize
-
-            backgroundColor: "#88888888"
-
-            UbuntuShape {
-                id: boardArea
+            Rectangle {
                 anchors.fill: parent
-                anchors.margins: borderWidth
-                backgroundColor: "#33333333"
+                color: "red"
+                opacity: 0.5
 
-                Rectangle {
-                    id: exitShape
-                    color: boardArea.backgroundColor
-                    width: 2 * borderWidth
-                    height: Math.min(parent.width / level.width , parent.height / level.height)
-                    anchors.right: parent.right
-                    anchors.rightMargin: -borderWidth
-                    anchors.top: parent.top
-                    anchors.topMargin: level.blocks.get(0).y * height
-                }
-
-                Repeater {
-                    id: blockRepeater
-                    anchors.fill: parent
-                    model: level.blocks
-                    delegate: BlockItem {
-                        cellSize: Math.min(boardArea.width / level.width , boardArea.height / level.height)
-                        board: gameEngine.board
-                        block: level.blocks.get(model.blockId)
-                    }
-                }
             }
-        }
 
-        Row {
-            anchors.left: parent.left
-            anchors.leftMargin: units.gu(1)
-            anchors.right: parent.right
-            anchors.rightMargin: units.gu(1)
-
-            Item {
-                width: parent.width / 3
-                height: width / 2
+            GridLayout {
+                anchors.fill: parent
+                columns: app.landscape ? 1 : 2
 
                 UbuntuShape {
+                    id: movesShape
+                    Layout.fillHeight: app.landscape
+                    Layout.fillWidth: !app.landscape
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+
+                    backgroundColor: "#88888888"
+
+                    Column {
+                        anchors.centerIn: parent
+                        Label {
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            text: i18n.tr("MOVES")
+                        }
+                        Label {
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            font.bold: true
+                            text: gameEngine.board.moveCount
+                        }
+                    }
+                }
+
+                UbuntuShape {
+                    id: highscoreShape
+                    Layout.fillHeight: app.landscape
+                    Layout.fillWidth: !app.landscape
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+
+                    backgroundColor: "#88888888"
+
+                    Column {
+                        anchors.centerIn: parent
+                        Label {
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            text: i18n.tr("HIGHSCORE")
+                        }
+                        Label {
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            font.bold: true
+                            text: (level.record != 0 ? level.record : "-") + " / " + level.solutionCount
+                        }
+                    }
+                }
+            }
+        }
+
+
+        // ###########################################
+        Item {
+            anchors.centerIn: parent
+
+            width: app.landscape ? root.height : root.width
+            height: app.landscape ? root.height : root.width
+            Layout.maximumWidth: width
+            Layout.maximumHeight: height
+
+
+            Rectangle {
+                anchors.fill: parent
+                color: "blue"
+                opacity: 0.5
+            }
+
+            UbuntuShape {
+                id: boardBackground
+                anchors.fill: parent
+                backgroundColor: boardBoarderColor
+
+                UbuntuShape {
+                    id: boardArea
                     anchors.fill: parent
-                    anchors.margins: units.gu(0.5)
+                    anchors.margins: borderWidth
+                    backgroundColor: boardColor
+
+
+                    Rectangle {
+                        id: exitShape
+                        color: boardArea.backgroundColor
+                        width: 2 * borderWidth
+                        height: Math.min(boardArea.width / level.width , boardArea.height / level.height)
+                        anchors.right: parent.right
+                        anchors.rightMargin: -borderWidth
+                        anchors.top: parent.top
+                        anchors.topMargin: level.blocks.get(0).y * height
+
+                        Image {
+                            anchors.top: parent.top
+                            anchors.bottom: parent.bottom
+                            anchors.right: parent.right
+                            width: borderWidth
+
+                            source: "qrc:///images/exit.svg"
+                        }
+                    }
+
+                    Repeater {
+                        id: blockRepeater
+                        anchors.fill: parent
+                        model: level.blocks
+                        delegate: BlockItem {
+                            cellSize: Math.min(boardArea.width / level.width , boardArea.height / level.height)
+                            board: gameEngine.board
+                            block: level.blocks.get(model.blockId)
+                        }
+                    }
+                }
+            }
+        }
+
+        // ###########################################
+        Item {
+            width: app.landscape ? root.height * 2 / 5 : root.width
+            height: app.landscape ? root.height : root.width * 2 / 5
+            Layout.maximumHeight: app.landscape ? height : units.gu(10)
+            Layout.maximumWidth: app.landscape ? units.gu(10) : width
+            Layout.fillHeight: app.landscape
+            Layout.fillWidth: !app.landscape
+
+            Rectangle {
+                anchors.fill: parent
+                color: "green"
+                opacity: 0.5
+            }
+
+            GridLayout {
+                anchors.fill: parent
+                columns: app.landscape ? 1 : 3
+
+                UbuntuShape {
+                    Layout.fillHeight: app.landscape
+                    Layout.fillWidth: !app.landscape
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+
                     backgroundColor: undoMouseArea.pressed ? "#44444444" : "#88888888"
 
                     Icon {
@@ -154,45 +219,42 @@ Page {
                         id: undoMouseArea
                         anchors.fill: parent
                         onClicked: {
-                            if (!gameEngine.board.showSolutionRunning) {
+                            if (!gameEngine.board.showSolutionRunning)
                                 gameEngine.board.undoMove()
-                            }
                         }
                     }
                 }
-            }
-
-            Item {
-                width: parent.width / 3
-                height: width / 2
 
                 UbuntuShape {
-                    anchors.fill: parent
-                    anchors.margins: units.gu(0.5)
+                    Layout.fillHeight: app.landscape
+                    Layout.fillWidth: !app.landscape
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+
                     backgroundColor: restartMouseArea.pressed ? "#44444444" : "#88888888"
 
                     Icon {
                         anchors.fill: parent
                         anchors.margins: units.gu(1)
-                        name: "reset"
+                        name: "reload"
                     }
 
                     MouseArea {
                         id: restartMouseArea
                         anchors.fill: parent
-                        onClicked: gameEngine.board.restartLevel()
+                        onClicked: {
+                            if (!gameEngine.board.showSolutionRunning)
+                                gameEngine.board.restartLevel()
+
+                        }
                     }
                 }
-            }
-
-            Item {
-                width: parent.width / 3
-                height: width / 2
-                visible: app.debug
 
                 UbuntuShape {
-                    anchors.fill: parent
-                    anchors.margins: units.gu(0.5)
+                    Layout.fillHeight: app.landscape
+                    Layout.fillWidth: !app.landscape
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+
+                    visible: app.debug
                     backgroundColor: showSolutionMouseArea.pressed ? "#44444444" : "#88888888"
 
                     Icon {
@@ -205,9 +267,9 @@ Page {
                         id: showSolutionMouseArea
                         anchors.fill: parent
                         onClicked: {
-                            if (!gameEngine.board.showSolutionRunning) {
+                            if (!gameEngine.board.showSolutionRunning)
                                 gameEngine.board.showSolution()
-                            }
+
                         }
                     }
                 }
@@ -222,13 +284,18 @@ Page {
             title: i18n.tr("Level completed!")
             text: gameEngine.board.moveCount + " / " + level.solutionCount
 
+            Text {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                height: units.gu(5)
+                visible: gameEngine.board.moveCount == level.solutionCount
+                text: i18n.tr("You found the perfect solution!")
+            }
 
-            Rectangle {
+            Item {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 height: parent.width / 4
-
-                color: "transparent"
 
                 Button {
                     anchors.left: parent.left

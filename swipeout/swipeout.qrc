@@ -17,6 +17,7 @@
         <file>ui/SolveDialog.qml</file>
         <file>ui/SaveDialog.qml</file>
         <file>ui/LevelPacksPage.qml</file>
+        <file>ui/SettingsPage.qml</file>
     </qresource>
 </RCC>
 

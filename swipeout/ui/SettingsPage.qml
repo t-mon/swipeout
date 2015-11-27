@@ -20,61 +20,58 @@
 
 import QtQuick 2.4
 import Ubuntu.Components 1.3
+import Ubuntu.Components.ListItems 1.3
 import Swipeout 1.0
 
 Page {
     id: root
-    title: i18n.tr("Swipeout")
-
-    head.actions: [
-        Action {
-            id: settingsAction
-            iconName: "settings"
-            text: i18n.tr("Settings")
-            onTriggered: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
-        },
-        Action {
-            id: infoAction
-            iconName: "info"
-            text: i18n.tr("About")
-            onTriggered: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
-        }
-    ]
+    title: i18n.tr("Settings")
 
     Column {
-        spacing: units.gu(3)
-        anchors.centerIn: parent
+        anchors.fill: parent
+        anchors.margins: units.gu(3)
 
-        Button {
-            text: "Play"
-            font.bold:true
-            color: "#88888888"
-            width: units.gu(20)
-            height: units.gu(7)
-            onClicked: {
-                push(Qt.resolvedUrl("LevelPacksPage.qml"))
+        spacing: units.gu(2)
+
+        ThinDivider { }
+
+        Label {
+            anchors.left: parent.left
+            text: i18n.tr("Show solution speed [ms]")
+        }
+
+        Slider {
+            id: speedSlider
+            width: parent.width
+            maximumValue: 1000
+            minimumValue: 250
+            onValueChanged: {
+                gameEngine.settings.showSolutionSpeed = speedSlider.value
+            }
+            Component.onCompleted: value = gameEngine.settings.showSolutionSpeed
+        }
+
+        ThinDivider { }
+
+        Item {
+            width: parent.width
+            height: units.gu(3)
+
+            Label {
+                anchors.left: parent.left
+                text: i18n.tr("Vibrations")
+            }
+
+            CheckBox {
+                id: vibrationCheckbox
+                anchors.right: parent.right
+                onCheckedChanged: {
+                    gameEngine.settings.vibrations = vibrationCheckbox.checked
+                }
+                Component.onCompleted: checked = gameEngine.settings.vibrations
             }
         }
 
-        Button {
-            text: "Load level"
-            color: "#88888888"
-            width: units.gu(20)
-            height: units.gu(7)
-            onClicked: {
-                gameEngine.loadCreatedLevels()
-                push(Qt.resolvedUrl("LoadLevelPage.qml"))
-            }
-        }
-
-        Button {
-            text: "Create level"
-            color: "#88888888"
-            width: units.gu(20)
-            height: units.gu(7)
-            onClicked: {
-                push(Qt.resolvedUrl("LevelCreator.qml"))
-            }
-        }
+        ThinDivider { }
     }
 }

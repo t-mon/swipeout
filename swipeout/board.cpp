@@ -60,7 +60,8 @@ Board::Board(QObject *parent, const bool &creatorBoard) :
     QObject(parent),
     m_creatorBoard(creatorBoard),
     m_level(0),
-    m_showSolutionRunning(false)
+    m_showSolutionRunning(false),
+    m_showSolutionSpeed(500)
 {
 }
 
@@ -218,7 +219,7 @@ void Board::showSolution()
     m_level->blocks()->resetBlockPositions();
 
     // start showing the solution
-    QTimer::singleShot(400, this, SLOT(automaticMove()));
+    QTimer::singleShot(m_showSolutionSpeed + 200, this, SLOT(automaticMove()));
 }
 
 bool Board::showSolutionRunning() const
@@ -229,6 +230,11 @@ bool Board::showSolutionRunning() const
 int Board::solutionCount() const
 {
     return m_solution.count();
+}
+
+void Board::setShowSolutionSpeed(const int &showSolutionSpeed)
+{
+    m_showSolutionSpeed = showSolutionSpeed;
 }
 
 bool Board::solutionAvailable() const
@@ -369,8 +375,8 @@ void Board::automaticMove()
         }
 
         Move move = m_solution.takeFirst();
-        moveBlock(move.id(), move.delta());
-        QTimer::singleShot(500, this, SLOT(automaticMove()));
+        moveBlock(move.id(), move.delta(), true);
+        QTimer::singleShot(m_showSolutionSpeed, this, SLOT(automaticMove()));
     } else {
         // finished, reset the position
         foreach (Block *block, m_level->blocks()->blocks()) {
@@ -390,6 +396,7 @@ void Board::onLevelCompleted()
     qDebug() << "Level completed with" << m_moveCount << "moves!!";
 
     QSettings settings;
+    settings.beginGroup("levelpacks");
     settings.beginGroup(m_level->levelPackName());
     settings.beginGroup(m_level->name());
 
@@ -411,6 +418,7 @@ void Board::onLevelCompleted()
         qDebug() << "New record!! " << m_level->record();
     }
 
+    settings.endGroup();
     settings.endGroup();
     settings.endGroup();
 

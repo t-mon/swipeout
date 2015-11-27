@@ -68,13 +68,14 @@ Item {
         target: blockShape
         onXChanged: {
             if (blockShape.x == elementMouseArea.drag.minimumX || blockShape.x == elementMouseArea.drag.maximumX)
-                rumbleEffect.start()
+                if (gameEngine.settings.vibrations)
+                    rumbleEffect.start()
         }
         onYChanged:  {
             if (blockShape.y == elementMouseArea.drag.minimumY || blockShape.y == elementMouseArea.drag.maximumY)
-                rumbleEffect.start()
+                if (gameEngine.settings.vibrations)
+                    rumbleEffect.start()
         }
-
     }
 
     UbuntuShape {
@@ -151,11 +152,11 @@ Item {
             }
         }
 
-//        Label {
-//            visible: app.debug
-//            anchors.centerIn: parent
-//            text: blockId
-//        }
+        //        Label {
+        //            visible: app.debug
+        //            anchors.centerIn: parent
+        //            text: blockId
+        //        }
 
     }
 }

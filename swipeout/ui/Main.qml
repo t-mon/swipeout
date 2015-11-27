@@ -30,10 +30,11 @@ MainView {
     property bool debug: false
     property bool landscape: height < width
 
+    property color boardBoarderColor: "#88888888"
+    property color boardColor: "#55555555"
     property color uncompletedColor: "#88888888"
     property color completedColor: "orange"
     property color completedPerfectColor: "green"
-
 
     height: units.gu(70)
     width: units.gu(40)

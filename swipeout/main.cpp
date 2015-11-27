@@ -54,6 +54,7 @@ int main(int argc, char *argv[])
     qmlRegisterUncreatableType<LevelCreator>("Swipeout", 1, 0, "LevelCreator", "Can't create this in QML. Get it from the GameEngine.");
     qmlRegisterUncreatableType<Block>("Swipeout", 1, 0, "Block", "Can't create this in QML. Get it from Blocks.");
     qmlRegisterUncreatableType<Blocks>("Swipeout", 1, 0, "Blocks", "Can't create this in QML. Get it from the Level.");
+    qmlRegisterUncreatableType<Settings>("Swipeout", 1, 0, "Settings", "Can't create this in QML. Get it from the GameEngine.");
 
     QQuickView view;
     if (!parser.positionalArguments().isEmpty()) {

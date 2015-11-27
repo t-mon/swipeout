@@ -75,15 +75,17 @@ public:
     Q_INVOKABLE void moveBlock(const int &id, const int &delta, const bool &fromUndo = false);
     Q_INVOKABLE void undoMove();
 
+    // solution
     Q_INVOKABLE void showSolution();
     bool showSolutionRunning() const;
 
     int solutionCount() const;
-
+    void setShowSolutionSpeed(const int &showSolutionSpeed);
     bool solutionAvailable() const;
     void setSolution(const QStack<Move> &solution);
     void clearSolution();
 
+    // board
     QVector<QVector<BoardCell> > boardGrid() const;
     void updateBoardGrid();
 
@@ -101,6 +103,7 @@ private:
     QHash<int, QPoint> m_currentPositions;
 
     bool m_showSolutionRunning;
+    int m_showSolutionSpeed;
 
     void moveBlockX(const int &id, const int &newX);
     void moveBlockY(const int &id, const int &newY);

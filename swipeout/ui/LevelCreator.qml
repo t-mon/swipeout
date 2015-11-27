@@ -87,13 +87,13 @@ Page {
             width: creator.width * cellSize
             height: creator.height * cellSize
 
-            backgroundColor: "#88888888"
+            backgroundColor: boardBoarderColor
 
             UbuntuShape {
                 id: boardArea
                 anchors.fill: parent
                 anchors.margins: borderWidth
-                backgroundColor: UbuntuColors.darkGrey
+                backgroundColor: boardColor
 
                 Rectangle {
                     id: exitShape
@@ -104,6 +104,14 @@ Page {
                     anchors.rightMargin: -borderWidth
                     anchors.top: parent.top
                     anchors.topMargin: 2 * height
+
+                    Image {
+                        anchors.top: parent.top
+                        anchors.bottom: parent.bottom
+                        anchors.right: parent.right
+                        width: borderWidth
+                        source: "qrc:///images/exit.svg"
+                    }
                 }
 
                 Repeater {

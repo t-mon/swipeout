@@ -100,10 +100,12 @@ void LevelPack::loadLevels()
 
         // load record / completed
         QSettings settings;
+        settings.beginGroup("levelpacks");
         settings.beginGroup(m_name);
         settings.beginGroup(level->name());
         level->setCompleted(settings.value("completed", false).toBool());
         level->setRecord(settings.value("record", 0).toInt());
+        settings.endGroup();
         settings.endGroup();
         settings.endGroup();
 

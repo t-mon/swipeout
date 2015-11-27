@@ -31,6 +31,7 @@
 #include "levelcreator.h"
 #include "board.h"
 #include "boardsolver.h"
+#include "settings.h"
 
 class GameEngine : public QObject
 {
@@ -40,6 +41,7 @@ class GameEngine : public QObject
     Q_PROPERTY(Levels *loadedLevels READ loadedLevels CONSTANT)
     Q_PROPERTY(LevelCreator *levelCreator READ levelCreator CONSTANT)
     Q_PROPERTY(Board *board READ board CONSTANT)
+    Q_PROPERTY(Settings *settings READ settings CONSTANT)
     Q_PROPERTY(QString levelDir READ levelDir WRITE setLevelDir NOTIFY levelDirChanged)
     Q_PROPERTY(bool solverRunning READ solverRunning NOTIFY solverRunningChanged)
 
@@ -53,6 +55,7 @@ public:
     LevelPacks *levelPacks();
     LevelCreator *levelCreator();
     Board *board();
+    Settings *settings();
 
     Q_INVOKABLE void loadLevelPack(const QString &name);
 
@@ -73,6 +76,7 @@ private:
     Board *m_board;
     BoardSolver *m_solver;
     QFutureWatcher<QStack<Move> > *m_watcher;
+    Settings *m_settings;
 
     QDateTime m_timestamp;
     bool m_solverRunning;
@@ -85,6 +89,7 @@ private:
 
 private slots:
     void onSolverFinished();
+    void onShowSolutionSpeedChanged();
 
 signals:
     void levelDirChanged();

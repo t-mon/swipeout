@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-27 22:37+0100\n"
+"POT-Creation-Date: 2015-11-27 23:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,19 +32,19 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:89
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:77
 msgid "MOVES"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:111
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:99
 msgid "HIGHSCORE"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:284
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:250
 msgid "Level completed!"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:292
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:258
 msgid "You found the perfect solution!"
 msgstr ""
 

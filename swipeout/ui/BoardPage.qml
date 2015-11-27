@@ -49,26 +49,14 @@ Page {
 
     GridLayout {
         id: mainGrid
-        anchors.centerIn: parent
-        Layout.fillHeight: app.landscape
-        Layout.fillWidth: !app.landscape
+        anchors.fill: parent
         columns: app.landscape ? 3 : 1
 
-        // ###########################################
         Item {
-            width: app.landscape ? root.height * 2 / 5 : root.width
-            height: app.landscape ? root.height : root.width * 2 / 5
-            Layout.maximumHeight: app.landscape ? height : units.gu(10)
-            Layout.maximumWidth: app.landscape ? units.gu(10) : width
-            Layout.fillHeight: app.landscape
-            Layout.fillWidth: !app.landscape
-
-            Rectangle {
-                anchors.fill: parent
-                color: "red"
-                opacity: 0.5
-
-            }
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.minimumHeight: units.gu(10)
+            Layout.minimumWidth: units.gu(10)
 
             GridLayout {
                 anchors.fill: parent
@@ -76,8 +64,8 @@ Page {
 
                 UbuntuShape {
                     id: movesShape
-                    Layout.fillHeight: app.landscape
-                    Layout.fillWidth: !app.landscape
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
                     backgroundColor: "#88888888"
@@ -98,8 +86,8 @@ Page {
 
                 UbuntuShape {
                     id: highscoreShape
-                    Layout.fillHeight: app.landscape
-                    Layout.fillWidth: !app.landscape
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
                     backgroundColor: "#88888888"
@@ -120,22 +108,9 @@ Page {
             }
         }
 
-
-        // ###########################################
         Item {
-            anchors.centerIn: parent
-
-            width: app.landscape ? root.height : root.width
-            height: app.landscape ? root.height : root.width
-            Layout.maximumWidth: width
-            Layout.maximumHeight: height
-
-
-            Rectangle {
-                anchors.fill: parent
-                color: "blue"
-                opacity: 0.5
-            }
+            Layout.preferredHeight: Math.min(parent.height, parent.width)
+            Layout.preferredWidth: Math.min(parent.height, parent.width)
 
             UbuntuShape {
                 id: boardBackground
@@ -183,20 +158,11 @@ Page {
             }
         }
 
-        // ###########################################
         Item {
-            width: app.landscape ? root.height * 2 / 5 : root.width
-            height: app.landscape ? root.height : root.width * 2 / 5
-            Layout.maximumHeight: app.landscape ? height : units.gu(10)
-            Layout.maximumWidth: app.landscape ? units.gu(10) : width
-            Layout.fillHeight: app.landscape
-            Layout.fillWidth: !app.landscape
-
-            Rectangle {
-                anchors.fill: parent
-                color: "green"
-                opacity: 0.5
-            }
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.minimumHeight: units.gu(10)
+            Layout.minimumWidth: units.gu(10)
 
             GridLayout {
                 anchors.fill: parent

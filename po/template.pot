@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-28 20:41+0100\n"
+"POT-Creation-Date: 2015-11-28 20:55+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,51 +70,59 @@ msgstr ""
 msgid "Creator help"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:49
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:53
+msgid ""
+"In the level creator you can create your own levels containig the perfect "
+"solution by using the solver. Only solved boards can be stored as level. The "
+"level number will increase automatically. You can load and play created "
+"levels from the main menu \"Load level\"."
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:58
 msgid "Block tools:"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:77
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:86
 msgid "Delete block"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:102
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:111
 msgid "Create 2 x 1 block"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:127
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:136
 msgid "Create 3 x 1 block"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:152
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:161
 msgid "Create 1 x 2 block"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:177
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:186
 msgid "Create 1 x 3 block"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:190
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:199
 msgid "Board tools:"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:219
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:228
 msgid "Clear board"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:246
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:255
 msgid "Create random level"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:273
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:282
 msgid "Solve board"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:300
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:309
 msgid "Save level"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:327
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:336
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:79
 msgid "Show solution"
 msgstr ""

@@ -44,6 +44,15 @@ Page {
                 anchors.right: parent.right
                 spacing: units.gu(1)
 
+                Text {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    wrapMode: Text.WordWrap
+                    color: "white"
+
+                    text: i18n.tr("In the level creator you can create your own levels containig the perfect solution by using the solver. Only solved boards can be stored as level. The level number will increase automatically. You can load and play created levels from the main menu \"Load level\".")
+                }
+
                 ThinDivider { }
                 Label {
                     text: i18n.tr("Block tools:")

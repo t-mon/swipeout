@@ -37,6 +37,7 @@ private:
     int m_id;
     int m_step;
     int m_delta;
+
 };
 
 bool compareMove(const Move &move1, const Move &move2);

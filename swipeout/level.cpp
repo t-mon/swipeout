@@ -31,7 +31,6 @@ Level::Level(QObject *parent) :
     m_completed(false),
     m_record(0)
 {
-
 }
 
 QVariantList Level::blockData() const

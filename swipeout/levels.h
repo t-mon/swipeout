@@ -64,5 +64,4 @@ private:
 
 bool compareLevel(Level *level1, Level *level2);
 
-
 #endif // LEVELS_H

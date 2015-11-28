@@ -38,6 +38,7 @@ Page {
             id: helpAction
             iconName: "help"
             text: i18n.tr("Help")
+            onTriggered: pageStack.push(Qt.resolvedUrl("HelpCreatorPage.qml"))
         },
         Action {
             id: settingsAction
@@ -326,7 +327,7 @@ Page {
                         anchors.fill: parent
                         onClicked: {
                             if (!creator.board.showSolutionRunning)
-                                gameEngine.levelCreator.board.showSolution()
+                                creator.board.showSolution()
 
                         }
                     }

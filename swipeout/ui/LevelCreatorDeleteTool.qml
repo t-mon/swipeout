@@ -33,8 +33,8 @@ Item {
 
         Icon {
             anchors.centerIn: parent
-            width: Math.min(parent.height, parent.width)
-            height: Math.min(parent.height, parent.width)
+            width: Math.min(parent.height, parent.width) - units.gu(1)
+            height: Math.min(parent.height, parent.width) - units.gu(1)
             name: "delete"
         }
 

@@ -19,6 +19,7 @@
         <file>ui/LevelPacksPage.qml</file>
         <file>ui/SettingsPage.qml</file>
         <file>ui/HelpMenuPage.qml</file>
+        <file>ui/HelpCreatorPage.qml</file>
     </qresource>
 </RCC>
 

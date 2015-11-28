@@ -107,7 +107,6 @@ private:
     void setHasNextLevel(const bool &hasNextLevel);
     void setHasPreviousLevel(const bool &hasPreviousLevel);
 
-
 private slots:
     void onSolverFinished();
     void onLevelCompleted();

@@ -25,7 +25,6 @@ Move::Move(const int &id, const int &step, const int &delta):
     m_step(step),
     m_delta(delta)
 {
-
 }
 
 int Move::id() const

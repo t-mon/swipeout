@@ -47,6 +47,7 @@ Dialog {
         onClicked: {
             creator.saveLevel()
             gameEngine.loadCreatedLevels()
+            creator.clearBoard()
             onClicked: PopupUtils.close(root)
         }
     }

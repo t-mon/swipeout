@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-28 14:47+0100\n"
+"POT-Creation-Date: 2015-11-28 20:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:28
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:39
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LoadLevelPage.qml:33
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:33
 msgid "About"
 msgstr ""
 
@@ -40,7 +41,11 @@ msgstr ""
 
 #. TRANSLATORS: Title of the settings page
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:45
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:33
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:46
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelPacksPage.qml:42
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelSelectorPage.qml:40
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LoadLevelPage.qml:39
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:39
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:30
 msgid "Settings"
 msgstr ""
@@ -59,6 +64,59 @@ msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:264
 msgid "You have found the perfect solution!"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:29
+msgid "Creator help"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:49
+msgid "Block tools:"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:77
+msgid "Delete block"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:102
+msgid "Create 2 x 1 block"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:127
+msgid "Create 3 x 1 block"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:152
+msgid "Create 1 x 2 block"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:177
+msgid "Create 1 x 3 block"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:190
+msgid "Board tools:"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:219
+msgid "Clear board"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:246
+msgid "Create random level"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:273
+msgid "Solve board"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:300
+msgid "Save level"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:327
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:79
+msgid "Show solution"
 msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpMenuPage.qml:54
@@ -107,7 +165,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:55
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:56
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:87
 msgid "Cancel"
 msgstr ""
@@ -156,10 +214,6 @@ msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:33
 msgid "Level solved!"
-msgstr ""
-
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:79
-msgid "Show solution"
 msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:87

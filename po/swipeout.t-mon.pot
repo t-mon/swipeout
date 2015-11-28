@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-28 19:50+0100\n"
+"POT-Creation-Date: 2015-11-28 20:05+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:28
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LoadLevelPage.qml:33
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:33
 msgid "About"
 msgstr ""
@@ -39,9 +40,10 @@ msgstr ""
 
 #. TRANSLATORS: Title of the settings page
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:45
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:45
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:46
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelPacksPage.qml:42
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelSelectorPage.qml:40
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LoadLevelPage.qml:39
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:39
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:30
 msgid "Settings"
@@ -97,7 +99,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:55
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:56
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:87
 msgid "Cancel"
 msgstr ""

@@ -47,7 +47,7 @@ Item {
             id: levelMouseArea
             anchors.fill: parent
             onClicked: {
-                gameEngine.board.loadLevel(level)
+                gameEngine.loadLevel(level)
                 pageStack.push(Qt.resolvedUrl("BoardPage.qml"))
             }
         }

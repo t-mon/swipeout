@@ -151,13 +151,6 @@ Item {
                 }
             }
         }
-
-        //        Label {
-        //            visible: app.debug
-        //            anchors.centerIn: parent
-        //            text: blockId
-        //        }
-
     }
 }
 

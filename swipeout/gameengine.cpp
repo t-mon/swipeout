@@ -38,8 +38,13 @@ GameEngine::GameEngine(QObject *parent) :
     m_solver(new BoardSolver(this)),
     m_watcher(new QFutureWatcher<QStack<Move> >(this)),
     m_settings(new Settings(this)),
-    m_solverRunning(false)
+    m_solverRunning(false),
+    m_nextLevel(0),
+    m_previousLevel(0),
+    m_hasNextLevel(false),
+    m_hasPreviousLevel(false)
 {
+    connect(m_board, SIGNAL(levelCompleted()), this, SLOT(onLevelCompleted()));
     connect(m_watcher, SIGNAL(finished()), this, SLOT(onSolverFinished()));
     connect(m_settings, SIGNAL(showSolutionSpeedChanged()), this, SLOT(onShowSolutionSpeedChanged()));
 }
@@ -106,6 +111,63 @@ void GameEngine::loadLevelPack(const QString &name)
     m_levelPack->loadLevels();
 }
 
+void GameEngine::loadLevel(Level *level)
+{
+    Levels *levels = 0;
+    if (m_createdLevels->levels().contains(level)) {
+        levels = m_createdLevels;
+    } else {
+        levels = m_levelPack->levels();
+    }
+
+    if (!levels)
+        return;
+
+    if (level == levels->levels().last()) {
+        m_nextLevel = 0;
+        setHasNextLevel(false);
+    } else {
+        int index = levels->levels().indexOf(level);
+        index += 1;
+        m_nextLevel = levels->levels().at(index);
+        qDebug() << "Next level" << m_nextLevel->id();
+        setHasNextLevel(true);
+    }
+
+    if (level == levels->levels().first()) {
+        m_previousLevel = 0;
+        setHasPreviousLevel(false);
+    } else {
+        int index = levels->levels().indexOf(level);
+        index -= 1;
+        m_previousLevel = levels->levels().at(index);
+        qDebug() << "Previouslevel" << m_previousLevel->id();
+        setHasPreviousLevel(true);
+    }
+
+    m_board->loadLevel(level);
+}
+
+void GameEngine::loadNextLevel()
+{
+    if (!m_nextLevel) {
+        qWarning() << "There is no next level";
+        return;
+    }
+    qDebug() << "Load next level" << m_nextLevel->id();
+    loadLevel(m_nextLevel);
+}
+
+void GameEngine::loadPreviousLevel()
+{
+    if (!m_previousLevel) {
+        qWarning() << "There is no previous level";
+        return;
+    }
+    qDebug() << "Load next level" << m_previousLevel->id();
+    loadLevel(m_previousLevel);
+}
+
 void GameEngine::solveBoard()
 {
     m_timestamp = QDateTime::currentDateTime();
@@ -122,6 +184,31 @@ void GameEngine::stopSolvingBoard()
 {
     qDebug() << "Cancel solving process.";
     m_solver->stopSolver();
+}
+
+void GameEngine::resetSettings()
+{
+    qDebug() << "Reset all settings";
+    m_settings->resetSettings();
+
+    if (!m_levelPack)
+        return;
+
+    foreach (LevelPack *pack, m_levelPacks->levelPacks()) {
+        pack->setCompletedCount(0);
+        pack->setCompletedPerfectCount(0);
+    }
+    m_levelPack->loadLevelSettings();
+}
+
+bool GameEngine::hasNextLevel() const
+{
+    return m_hasNextLevel;
+}
+
+bool GameEngine::hasPreviousLevel() const
+{
+    return m_hasPreviousLevel;
 }
 
 Levels *GameEngine::loadedLevels()
@@ -204,6 +291,8 @@ void GameEngine::loadLevelPacks()
     foreach (const QFileInfo &levelFileInfo, levelFiles) {
         qDebug() << levelFileInfo.fileName();
 
+        // TODO: find better way to know the statisitc without loadgin all levels
+
         LevelPack *levelPack = new LevelPack(m_levelDir, levelFileInfo.fileName(), this);
         levelPack->loadLevels();
         levelPack->unloadLevels();
@@ -226,6 +315,18 @@ void GameEngine::setSolverRunning(const bool &solverRunning)
 {
     m_solverRunning = solverRunning;
     emit solverRunningChanged();
+}
+
+void GameEngine::setHasNextLevel(const bool &hasNextLevel)
+{
+    m_hasNextLevel = hasNextLevel;
+    emit hasNextLevelChanged();
+}
+
+void GameEngine::setHasPreviousLevel(const bool &hasPreviousLevel)
+{
+    m_hasPreviousLevel = hasPreviousLevel;
+    emit hasPreviousLevelChanged();
 }
 
 void GameEngine::onSolverFinished()
@@ -253,6 +354,12 @@ void GameEngine::onSolverFinished()
     m_solverBoard->setSolution(solution);
 
     emit solutionReady(time.toString("mm:ss.zzz"));
+}
+
+void GameEngine::onLevelCompleted()
+{
+    if (m_levelPack)
+        m_levelPack->calculateStatistic();
 }
 
 void GameEngine::onShowSolutionSpeedChanged()

@@ -8,8 +8,8 @@ Settings::Settings(QObject *parent) :
 {
     QSettings settings;
     settings.beginGroup("Swipeout");
-    setVibrations(settings.value("vibrations", true).toBool());
     setShowSolutionSpeed(settings.value("showSolutionSpeed", 500).toInt());
+    setVibrations(settings.value("vibrations", true).toBool());
     settings.endGroup();
 }
 
@@ -47,6 +47,12 @@ void Settings::setShowSolutionSpeed(const int &showSolutionSpeed)
 
 void Settings::resetSettings()
 {
+    setShowSolutionSpeed(500);
+    setVibrations(false);
 
+    QSettings settings;
+    settings.beginGroup("levelpacks");
+    settings.remove("");
+    settings.endGroup();
 }
 

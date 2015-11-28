@@ -44,12 +44,17 @@ class GameEngine : public QObject
     Q_PROPERTY(Settings *settings READ settings CONSTANT)
     Q_PROPERTY(QString levelDir READ levelDir WRITE setLevelDir NOTIFY levelDirChanged)
     Q_PROPERTY(bool solverRunning READ solverRunning NOTIFY solverRunningChanged)
+    Q_PROPERTY(bool hasNextLevel READ hasNextLevel NOTIFY hasNextLevelChanged)
+    Q_PROPERTY(bool hasPreviousLevel READ hasPreviousLevel NOTIFY hasPreviousLevelChanged)
 
 public:
     explicit GameEngine(QObject *parent = 0);
 
     QString levelDir() const;
     void setLevelDir(const QString &levelDir);
+
+    bool hasNextLevel() const;
+    bool hasPreviousLevel() const;
 
     LevelPack *levelPack();
     LevelPacks *levelPacks();
@@ -59,8 +64,14 @@ public:
 
     Q_INVOKABLE void loadLevelPack(const QString &name);
 
+    Q_INVOKABLE void loadLevel(Level *level);
+    Q_INVOKABLE void loadNextLevel();
+    Q_INVOKABLE void loadPreviousLevel();
+
     Q_INVOKABLE void solveBoard();
     Q_INVOKABLE void stopSolvingBoard();
+
+    Q_INVOKABLE void resetSettings();
 
     Levels *loadedLevels();
     Q_INVOKABLE void loadCreatedLevels();
@@ -82,17 +93,30 @@ private:
     bool m_solverRunning;
     Board *m_solverBoard;
 
+    Level *m_nextLevel;
+    Level *m_previousLevel;
+
+    bool m_hasNextLevel;
+    bool m_hasPreviousLevel;
+
     void loadLevelPacks();
     bool levelAlreadyLoaded(const int &id);
 
     void setSolverRunning(const bool &solverRunning);
 
+    void setHasNextLevel(const bool &hasNextLevel);
+    void setHasPreviousLevel(const bool &hasPreviousLevel);
+
+
 private slots:
     void onSolverFinished();
+    void onLevelCompleted();
     void onShowSolutionSpeedChanged();
 
 signals:
     void levelDirChanged();
+    void hasNextLevelChanged();
+    void hasPreviousLevelChanged();
     void solverRunningChanged();
     void solutionReady(const QString &runTime);
     void levelPackChanged();

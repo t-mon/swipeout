@@ -29,12 +29,12 @@ Item {
 
     UbuntuShape {
         anchors.fill: parent
-        anchors.margins: units.gu(0.5)
         backgroundColor: selected ? "#44444444" : "#88888888"
 
         Icon {
-            anchors.fill: parent
-            anchors.margins: units.gu(1)
+            anchors.centerIn: parent
+            width: Math.min(parent.height, parent.width)
+            height: Math.min(parent.height, parent.width)
             name: "delete"
         }
 

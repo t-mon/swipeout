@@ -28,27 +28,33 @@ Page {
 
     head.actions: [
         Action {
-            id: settingsAction
-            iconName: "settings"
-            text: i18n.tr("Settings")
-            onTriggered: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
-        },
-        Action {
             id: infoAction
             iconName: "info"
             text: i18n.tr("About")
             onTriggered: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
+        },
+        Action {
+            id: settingsAction
+            iconName: "settings"
+            text: i18n.tr("Settings")
+            onTriggered: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
         }
     ]
+
+    Image {
+        anchors.fill: parent
+        opacity: 0.1
+        source: app.landscape ? "qrc:///images/menu-background-landscape.svg" :  "qrc:///images/menu-background-portrait.svg"
+    }
 
     Column {
         spacing: units.gu(3)
         anchors.centerIn: parent
 
         Button {
-            text: "Play"
+            text: i18n.tr("Play")
             font.bold:true
-            color: "#88888888"
+            color: "#ff888888"
             width: units.gu(20)
             height: units.gu(7)
             onClicked: {
@@ -57,8 +63,8 @@ Page {
         }
 
         Button {
-            text: "Load level"
-            color: "#88888888"
+            text: i18n.tr("Load level")
+            color: "#ff333333"
             width: units.gu(20)
             height: units.gu(7)
             onClicked: {
@@ -68,8 +74,8 @@ Page {
         }
 
         Button {
-            text: "Create level"
-            color: "#88888888"
+            text: i18n.tr("Create level")
+            color: "#ff333333"
             width: units.gu(20)
             height: units.gu(7)
             onClicked: {

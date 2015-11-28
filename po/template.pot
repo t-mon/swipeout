@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-27 23:35+0100\n"
+"POT-Creation-Date: 2015-11-28 14:47+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,51 +17,81 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:27
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:28
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:39
 msgid "About"
 msgstr ""
 
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:64
+msgid "Author:"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:75
+msgid "License:"
+msgstr ""
+
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:39
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpMenuPage.qml:28
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:40
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelPacksPage.qml:36
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelSelectorPage.qml:34
 msgid "Help"
 msgstr ""
 
+#. TRANSLATORS: Title of the settings page
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:45
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:33
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:28
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:30
 msgid "Settings"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:77
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:78
 msgid "MOVES"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:99
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:101
 msgid "HIGHSCORE"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:250
-msgid "Level completed!"
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:255
+msgid "completed!"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:258
-msgid "You found the perfect solution!"
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:264
+msgid "You have found the perfect solution!"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:39
-msgid "Info"
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpMenuPage.qml:54
+msgid "Not completed"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelPacksPage.qml:29
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpMenuPage.qml:74
+msgid "Completed"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpMenuPage.qml:94
+msgid "Completed perfect"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelPacksPage.qml:30
 msgid "Level Packs"
 msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/LoadLevelPage.qml:27
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:66
 msgid "Load level"
 msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:27
 msgid "Swipeout"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:55
+msgid "Play"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:77
+msgid "Create level"
 msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:29
@@ -72,10 +102,81 @@ msgstr ""
 msgid "Do you want to save this level?"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:40
-msgid "Show solution speed [ms]"
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:46
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:69
+msgid "Save"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:62
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:55
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:87
+msgid "Cancel"
+msgstr ""
+
+#. TRANSLATORS: In the settings page the slider description. Describes the speed of the animation while showing the solution.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:43
+msgid "Show solution speed"
+msgstr ""
+
+#. TRANSLATORS: In the settings page the vibrations checkbox description.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:66
 msgid "Vibrations"
+msgstr ""
+
+#. TRANSLATORS: Reset game button in the settings page.
+#. TRANSLATORS: Title of the reset dialog.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:84
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:95
+msgid "Reset game"
+msgstr ""
+
+#. TRANSLATORS: Reset warning message. Please insert also the "\n" in the middle of the text!
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:97
+msgid ""
+"Are you sure you want to reset all\n"
+"game settings and achievements?"
+msgstr ""
+
+#. TRANSLATORS: Reset button in the reset dialog
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:102
+msgid "Reset"
+msgstr ""
+
+#. TRANSLATORS: Button to cancel the reset request.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:112
+msgid "No"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:29
+msgid "Level Solver"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:33
+msgid "Solving..."
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:33
+msgid "Level solved!"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:79
+msgid "Show solution"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:87
+msgid "Close"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:99
+msgid "Runtime"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:102
+msgid "No solution!"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:105
+msgid ""
+"Solution found!\n"
+"\n"
+"Perfect solution:"
 msgstr ""

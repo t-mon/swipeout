@@ -19,6 +19,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 import QtQuick 2.4
+import QtQuick.Layouts 1.1
 import Ubuntu.Components 1.3
 import Ubuntu.Components.Popups 1.3
 import Swipeout 1.0
@@ -34,279 +35,299 @@ Page {
 
     head.actions: [
         Action {
+            id: helpAction
+            iconName: "help"
+            text: i18n.tr("Help")
+        },
+        Action {
             id: settingsAction
-            iconName: "info"
-            text: i18n.tr("Info")
-            onTriggered: app.debug = !app.debug
+            iconName: "settings"
+            text: i18n.tr("Settings")
+            onTriggered: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
         }
     ]
 
-    Column {
-        anchors.centerIn: parent
-        spacing: units.gu(1)
-        Row {
-            id: toolRow
-            anchors.left: parent.left
-            anchors.leftMargin: units.gu(1)
-            anchors.right: parent.right
-            anchors.rightMargin: units.gu(1)
+    GridLayout {
+        id: mainGrid
+        anchors.fill: parent
+        columns: app.landscape ? 3 : 1
 
-            LevelCreatorDeleteTool {
-                id: deleteTool
-                width: parent.width / 5
-                height: width
-            }
-            LevelCreatorTwoHorizontalTool {
-                id: twoHorizontalTool
-                width: parent.width / 5
-                height: width
-            }
+        Item {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.minimumHeight: units.gu(10)
+            Layout.minimumWidth: units.gu(10)
 
-            LevelCreatorThreeHorizontalTool {
-                id: threeHorizontalTool
-                width: parent.width / 5
-                height: width
-            }
-
-            LevelCreatorTwoVerticalTool {
-                id: twoVerticalTool
-                width: parent.width / 5
-                height: width
-            }
-
-            LevelCreatorThreeVerticalTool {
-                id: threeVerticalTool
-                width: parent.width / 5
-                height: width
-            }
-
-        }
-
-        UbuntuShape {
-            id: boardBackground
-            width: creator.width * cellSize
-            height: creator.height * cellSize
-
-            backgroundColor: boardBoarderColor
-
-            UbuntuShape {
-                id: boardArea
+            GridLayout {
                 anchors.fill: parent
-                anchors.margins: borderWidth
-                backgroundColor: boardColor
+                columns: app.landscape ? 1 : 5
 
-                Rectangle {
-                    id: exitShape
-                    color: boardArea.backgroundColor
-                    width: 2 * borderWidth
-                    height: Math.min(parent.width / creator.width , parent.height / creator.height)
-                    anchors.right: parent.right
-                    anchors.rightMargin: -borderWidth
-                    anchors.top: parent.top
-                    anchors.topMargin: 2 * height
-
-                    Image {
-                        anchors.top: parent.top
-                        anchors.bottom: parent.bottom
-                        anchors.right: parent.right
-                        width: borderWidth
-                        source: "qrc:///images/exit.svg"
-                    }
+                LevelCreatorDeleteTool {
+                    id: deleteTool
+                    Layout.fillHeight: app.landscape
+                    Layout.fillWidth: !app.landscape
+                    Layout.minimumHeight: app.landscape ? width / 5 : width
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                }
+                LevelCreatorTwoHorizontalTool {
+                    id: twoHorizontalTool
+                    Layout.fillHeight: app.landscape
+                    Layout.fillWidth: !app.landscape
+                    Layout.minimumHeight: app.landscape ? width / 5 : width
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 }
 
-                Repeater {
-                    id: blockRepeater
-                    anchors.fill: parent
-                    model: level.blocks
-                    delegate: BlockItem {
-                        cellSize: Math.min(boardArea.width / creator.width , boardArea.height / creator.height)
-                        board: creator.board
-                        block: level.blocks.get(model.blockId)
-                    }
+                LevelCreatorThreeHorizontalTool {
+                    id: threeHorizontalTool
+                    Layout.fillHeight: app.landscape
+                    Layout.fillWidth: !app.landscape
+                    Layout.minimumHeight: app.landscape ? width / 5 : width
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 }
-            }
 
-            UbuntuShape {
-                id: addingArea
-                anchors.fill: parent
-                anchors.margins: borderWidth
-                backgroundColor: "transparent"
+                LevelCreatorTwoVerticalTool {
+                    id: twoVerticalTool
+                    Layout.fillHeight: app.landscape
+                    Layout.fillWidth: !app.landscape
+                    Layout.minimumHeight: app.landscape ? width / 5 : width
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                }
 
-                Grid {
-                    columns: creator.width
-                    visible: gameEngine.levelCreator.addMode
-                    Repeater {
-                        id: fieldRepeater
-                        model: level.width * level.height
-                        delegate: Rectangle {
-                            height: Math.min(addingArea.width / creator.width , addingArea.height / creator.height)
-                            width: height
-                            color: "transparent"
-                            border.color: "#aaaaaaaa"
-
-                            MouseArea {
-                                anchors.fill: parent
-                                onClicked:  {
-                                    if (!creator.board.showSolutionRunning)
-                                        creator.createBlock(index)
-
-                                }
-                            }
-                        }
-                    }
+                LevelCreatorThreeVerticalTool {
+                    id: threeVerticalTool
+                    Layout.fillHeight: app.landscape
+                    Layout.fillWidth: !app.landscape
+                    Layout.minimumHeight: app.landscape ? width / 5 : width
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 }
             }
-
         }
 
         Item {
-            id: buttons
-            anchors.left: parent.left
-            anchors.leftMargin: units.gu(1)
-            anchors.right: parent.right
-            anchors.rightMargin: units.gu(1)
-            height: parent.width / 5
+            Layout.preferredHeight: Math.min(parent.height, parent.width)
+            Layout.preferredWidth: Math.min(parent.height, parent.width)
 
-            Row {
-                id: buttonRow
+            UbuntuShape {
+                id: boardBackground
                 anchors.fill: parent
 
-                Item {
-                    width: parent.width / 5
-                    height: width
+                backgroundColor: boardBoarderColor
 
-                    UbuntuShape {
-                        anchors.fill: parent
-                        anchors.margins: units.gu(0.5)
-                        backgroundColor: deleteMouseArea.pressed ? "#44444444" : "#88888888"
+                UbuntuShape {
+                    id: boardArea
+                    anchors.fill: parent
+                    anchors.margins: borderWidth
+                    backgroundColor: boardColor
 
-                        Icon {
-                            anchors.fill: parent
-                            anchors.margins: units.gu(1)
-                            name: "delete"
+                    Rectangle {
+                        id: exitShape
+                        color: boardArea.backgroundColor
+                        width: 2 * borderWidth
+                        height: Math.min(parent.width / creator.width , parent.height / creator.height)
+                        anchors.right: parent.right
+                        anchors.rightMargin: -borderWidth
+                        anchors.top: parent.top
+                        anchors.topMargin: 2 * height
+
+                        Image {
+                            anchors.top: parent.top
+                            anchors.bottom: parent.bottom
+                            anchors.right: parent.right
+                            width: borderWidth
+                            source: "qrc:///images/exit.svg"
                         }
+                    }
 
-                        MouseArea {
-                            id: deleteMouseArea
-                            anchors.fill: parent
-                            onClicked: {
-                                if (!creator.board.showSolutionRunning)
-                                    creator.clearBoard()
-
-                            }
+                    Repeater {
+                        id: blockRepeater
+                        anchors.fill: parent
+                        model: level.blocks
+                        delegate: BlockItem {
+                            cellSize: Math.min(boardArea.width / creator.width , boardArea.height / creator.height)
+                            board: creator.board
+                            block: level.blocks.get(model.blockId)
                         }
                     }
                 }
 
-                Item {
-                    width: parent.width / 5
-                    height: width
+                UbuntuShape {
+                    id: addingArea
+                    anchors.fill: parent
+                    anchors.margins: borderWidth
+                    backgroundColor: "transparent"
 
-                    UbuntuShape {
-                        anchors.fill: parent
-                        anchors.margins: units.gu(0.5)
-                        backgroundColor: createRandomLevelMouseArea.pressed ? "#44444444" : "#88888888"
+                    Grid {
+                        columns: creator.width
+                        visible: gameEngine.levelCreator.addMode
+                        Repeater {
+                            id: fieldRepeater
+                            model: level.width * level.height
+                            delegate: Rectangle {
+                                height: Math.min(addingArea.width / creator.width , addingArea.height / creator.height)
+                                width: height
+                                color: "transparent"
+                                border.color: "#aaaaaaaa"
 
-                        Icon {
-                            anchors.fill: parent
-                            anchors.margins: units.gu(1)
-                            name: "view-refresh"
-                        }
+                                MouseArea {
+                                    anchors.fill: parent
+                                    onClicked:  {
+                                        if (!creator.board.showSolutionRunning)
+                                            creator.createBlock(index)
 
-                        MouseArea {
-                            id: createRandomLevelMouseArea
-                            anchors.fill: parent
-                            onClicked: {
-                                if (!creator.board.showSolutionRunning)
-                                    creator.createRandomLevel()
-
-                            }
-                        }
-                    }
-                }
-
-                Item {
-                    width: parent.width / 5
-                    height: width
-
-                    UbuntuShape {
-                        anchors.fill: parent
-                        anchors.margins: units.gu(0.5)
-                        backgroundColor: solveMouseArea.pressed ? "#44444444" : "#88888888"
-
-                        Icon {
-                            anchors.fill: parent
-                            anchors.margins: units.gu(1)
-                            name: "torch-on"
-                        }
-
-                        MouseArea {
-                            id: solveMouseArea
-                            anchors.fill: parent
-                            onClicked: {
-                                if (!creator.board.showSolutionRunning) {
-                                    gameEngine.solveBoard()
-                                    PopupUtils.open(Qt.resolvedUrl("SolveDialog.qml"))
+                                    }
                                 }
                             }
                         }
                     }
                 }
+            }
+        }
 
-                Item {
-                    width: parent.width / 5
-                    height: width
+        Item {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            Layout.minimumHeight: units.gu(10)
+            Layout.minimumWidth: units.gu(10)
 
-                    visible: creator.board.solutionAvailable
+            GridLayout {
+                anchors.fill: parent
+                columns: app.landscape ? 1 : 5
 
-                    UbuntuShape {
+                UbuntuShape {
+                    Layout.fillHeight: app.landscape
+                    Layout.fillWidth: !app.landscape
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+
+                    backgroundColor: deleteMouseArea.pressed ? "#44ff4444" : "#88ff8888"
+
+                    Icon {
+                        anchors.centerIn: parent
+                        width: Math.min(parent.height, parent.width) - units.gu(1)
+                        height: Math.min(parent.height, parent.width) - units.gu(1)
+                        name: "delete"
+                    }
+
+                    MouseArea {
+                        id: deleteMouseArea
                         anchors.fill: parent
-                        anchors.margins: units.gu(0.5)
-                        backgroundColor: saveMouseArea.pressed ? "#44444444" : "#88888888"
+                        onClicked: {
+                            if (!creator.board.showSolutionRunning)
+                                creator.clearBoard()
 
-                        Icon {
-                            anchors.fill: parent
-                            anchors.margins: units.gu(1)
-                            name: "save"
                         }
+                    }
+                }
 
-                        MouseArea {
-                            id: saveMouseArea
-                            anchors.fill: parent
-                            onClicked:  {
-                                if (!gameEngine.solver.board.showSolutionRunning)
-                                    PopupUtils.open(Qt.resolvedUrl("SaveDialog.qml"))
 
+
+                UbuntuShape {
+                    Layout.fillHeight: app.landscape
+                    Layout.fillWidth: !app.landscape
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+
+                    backgroundColor: createRandomLevelMouseArea.pressed ? "#44444444" : "#88888888"
+
+                    Icon {
+                        anchors.centerIn: parent
+                        width: Math.min(parent.height, parent.width) - units.gu(1)
+                        height: Math.min(parent.height, parent.width) - units.gu(1)
+                        name: "view-refresh"
+                    }
+
+                    MouseArea {
+                        id: createRandomLevelMouseArea
+                        anchors.fill: parent
+                        onClicked: {
+                            if (!creator.board.showSolutionRunning)
+                                creator.createRandomLevel()
+
+                        }
+                    }
+                }
+
+
+
+                UbuntuShape {
+                    Layout.fillHeight: app.landscape
+                    Layout.fillWidth: !app.landscape
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+
+                    backgroundColor: solveMouseArea.pressed ? "#44444444" : "#88888888"
+
+                    Icon {
+                        anchors.centerIn: parent
+                        width: Math.min(parent.height, parent.width) - units.gu(1)
+                        height: Math.min(parent.height, parent.width) - units.gu(1)
+                        name: "torch-on"
+                    }
+
+                    MouseArea {
+                        id: solveMouseArea
+                        anchors.fill: parent
+                        onClicked: {
+                            if (!creator.board.showSolutionRunning) {
+                                gameEngine.solveBoard()
+                                PopupUtils.open(Qt.resolvedUrl("SolveDialog.qml"))
                             }
                         }
                     }
                 }
 
-                Item {
-                    width: parent.width / 5
-                    height: width
 
+
+
+                UbuntuShape {
                     visible: creator.board.solutionAvailable
 
-                    UbuntuShape {
+                    Layout.fillHeight: app.landscape
+                    Layout.fillWidth: !app.landscape
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+
+                    backgroundColor: saveMouseArea.pressed ? "#44444444" : "#88888888"
+
+                    Icon {
+                        anchors.centerIn: parent
+                        width: Math.min(parent.height, parent.width) - units.gu(1)
+                        height: Math.min(parent.height, parent.width) - units.gu(1)
+                        name: "save"
+                    }
+
+                    MouseArea {
+                        id: saveMouseArea
                         anchors.fill: parent
-                        anchors.margins: units.gu(0.5)
-                        backgroundColor: showSolutionMouseArea.pressed ? "#44444444" : "#88888888"
+                        onClicked:  {
+                            if (!creator.board.showSolutionRunning)
+                                PopupUtils.open(Qt.resolvedUrl("SaveDialog.qml"))
 
-                        Icon {
-                            anchors.fill: parent
-                            anchors.margins: units.gu(1)
-                            name: "torch-off"
                         }
+                    }
+                }
 
-                        MouseArea {
-                            id: showSolutionMouseArea
-                            anchors.fill: parent
-                            onClicked: {
-                                if (!creator.board.showSolutionRunning)
-                                    gameEngine.levelCreator.board.showSolution()
 
-                            }
+
+                UbuntuShape {
+                    visible: creator.board.solutionAvailable
+
+                    Layout.fillHeight: app.landscape
+                    Layout.fillWidth: !app.landscape
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+
+                    backgroundColor: showSolutionMouseArea.pressed ? "#44444444" : "#88888888"
+
+                    Icon {
+                        anchors.centerIn: parent
+                        width: Math.min(parent.height, parent.width) - units.gu(1)
+                        height: Math.min(parent.height, parent.width) - units.gu(1)
+                        name: "torch-off"
+                    }
+
+                    MouseArea {
+                        id: showSolutionMouseArea
+                        anchors.fill: parent
+                        onClicked: {
+                            if (!creator.board.showSolutionRunning)
+                                gameEngine.levelCreator.board.showSolution()
+
                         }
                     }
                 }

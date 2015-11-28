@@ -1,6 +1,6 @@
 {
     "name": "swipeout.t-mon",
-    "description": "description of swipeout",
+    "description": "Classic unblock game.",
     "architecture": "@CLICK_ARCH@",
     "title": "Swipeout",
     "hooks": {

@@ -21,10 +21,12 @@
 import QtQuick 2.4
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3
+import Ubuntu.Components.Popups 1.3
 import Swipeout 1.0
 
 Page {
     id: root
+    // TRANSLATORS: Title of the settings page
     title: i18n.tr("Settings")
 
     Column {
@@ -37,7 +39,8 @@ Page {
 
         Label {
             anchors.left: parent.left
-            text: i18n.tr("Show solution speed [ms]")
+            // TRANSLATORS: In the settings page the slider description. Describes the speed of the animation while showing the solution.
+            text: i18n.tr("Show solution speed")
         }
 
         Slider {
@@ -59,6 +62,7 @@ Page {
 
             Label {
                 anchors.left: parent.left
+                // TRANSLATORS: In the settings page the vibrations checkbox description.
                 text: i18n.tr("Vibrations")
             }
 
@@ -73,5 +77,44 @@ Page {
         }
 
         ThinDivider { }
+        Button {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            // TRANSLATORS: Reset game button in the settings page.
+            text: i18n.tr("Reset game")
+            onClicked: PopupUtils.open(resetComponent)
+        }
+
     }
+
+    Component {
+        id: resetComponent
+        Dialog {
+            id: resetDialog
+            // TRANSLATORS: Title of the reset dialog.
+            title: i18n.tr("Reset game")
+            // TRANSLATORS: Reset warning message. Please insert also the "\n" in the middle of the text!
+            text: i18n.tr("Are you sure you want to reset all\ngame settings and achievements?")
+
+            ThinDivider { }
+            Button {
+                // TRANSLATORS: Reset button in the reset dialog
+                text: i18n.tr("Reset")
+                color: "red"
+                onClicked: {
+                    gameEngine.resetSettings()
+                    PopupUtils.close(resetDialog)
+                }
+            }
+
+            Button {
+                // TRANSLATORS: Button to cancel the reset request.
+                text: i18n.tr("No")
+                onClicked: PopupUtils.close(resetDialog)
+            }
+            ThinDivider { }
+
+        }
+    }
+
 }

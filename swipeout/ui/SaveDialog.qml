@@ -43,7 +43,7 @@ Dialog {
     ThinDivider { }
 
     Button {
-        text: "Save"
+        text: i18n.tr("Save")
         onClicked: {
             creator.saveLevel()
             gameEngine.loadCreatedLevels()
@@ -52,7 +52,7 @@ Dialog {
     }
 
     Button {
-        text: "Cancel"
+        text: i18n.tr("Cancel")
         onClicked: PopupUtils.close(root)
     }
 

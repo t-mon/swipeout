@@ -66,9 +66,10 @@ Page {
                     id: movesShape
                     Layout.fillHeight: true
                     Layout.fillWidth: true
+                    Layout.maximumWidth: units.gu(15)
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
-                    backgroundColor: "#88888888"
+                    backgroundColor: "#44444444"
 
                     Column {
                         anchors.centerIn: parent
@@ -88,9 +89,10 @@ Page {
                     id: highscoreShape
                     Layout.fillHeight: true
                     Layout.fillWidth: true
+                    Layout.maximumWidth: units.gu(15)
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
-                    backgroundColor: "#88888888"
+                    backgroundColor: "#44444444"
 
                     Column {
                         anchors.centerIn: parent
@@ -171,9 +173,10 @@ Page {
                 UbuntuShape {
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
+                    Layout.minimumWidth: units.gu(10)
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
-                    backgroundColor: undoMouseArea.pressed ? "#44444444" : "#88888888"
+                    backgroundColor: undoMouseArea.pressed ? "#88888888": "#44444444"
 
                     Icon {
                         anchors.fill: parent
@@ -195,8 +198,9 @@ Page {
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                    Layout.minimumWidth: units.gu(10)
 
-                    backgroundColor: restartMouseArea.pressed ? "#44444444" : "#88888888"
+                    backgroundColor: restartMouseArea.pressed ? "#88888888": "#44444444"
 
                     Icon {
                         anchors.fill: parent
@@ -219,9 +223,10 @@ Page {
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                    Layout.minimumWidth: units.gu(10)
 
                     visible: app.debug
-                    backgroundColor: showSolutionMouseArea.pressed ? "#44444444" : "#88888888"
+                    backgroundColor: showSolutionMouseArea.pressed ? "#88888888": "#44444444"
 
                     Icon {
                         anchors.fill: parent
@@ -247,7 +252,7 @@ Page {
         id: completedComponent
         Dialog {
             id: completedDialog
-            title: i18n.tr("Level completed!")
+            title: level.name + " " + i18n.tr("completed!")
             text: gameEngine.board.moveCount + " / " + level.solutionCount
 
             Text {
@@ -255,7 +260,8 @@ Page {
                 anchors.right: parent.right
                 height: units.gu(5)
                 visible: gameEngine.board.moveCount == level.solutionCount
-                text: i18n.tr("You found the perfect solution!")
+                horizontalAlignment: Text.AlignHCenter
+                text: i18n.tr("You have found the perfect solution!")
             }
 
             Item {
@@ -264,6 +270,7 @@ Page {
                 height: parent.width / 4
 
                 Button {
+                    visible: gameEngine.hasPreviousLevel
                     anchors.left: parent.left
                     width: parent.width / 4
                     height: width
@@ -272,8 +279,8 @@ Page {
                         anchors.margins: units.gu(2)
                         name: "back"
                     }
-
                     onClicked: {
+                        gameEngine.loadPreviousLevel(level)
                         PopupUtils.close(completedDialog)
                     }
                 }
@@ -285,16 +292,17 @@ Page {
                     Icon {
                         anchors.fill: parent
                         anchors.margins: units.gu(2)
-                        name: "view-grid-symbolic"
+                        name: "reload"
                     }
 
                     onClicked: {
                         PopupUtils.close(completedDialog)
-                        pageStack.pop()
+                        gameEngine.board.restartLevel()
                     }
                 }
 
                 Button {
+                    visible: gameEngine.hasNextLevel
                     anchors.right: parent.right
                     width: parent.width / 4
                     height: width
@@ -304,8 +312,8 @@ Page {
                         anchors.margins: units.gu(2)
                         name: "next"
                     }
-
                     onClicked: {
+                        gameEngine.loadNextLevel(level)
                         PopupUtils.close(completedDialog)
                     }
                 }
@@ -316,7 +324,6 @@ Page {
     Connections {
         target: gameEngine.board
         onLevelCompleted: {
-            gameEngine.levelPack.calculateStatistic()
             PopupUtils.open(completedComponent)
         }
     }

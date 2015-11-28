@@ -1,6 +1,5 @@
 {
     "policy_groups": [
-        "networking",
         "keep-display-on"
     ],
     "policy_version": 1.3

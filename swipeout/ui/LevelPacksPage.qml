@@ -19,6 +19,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 import QtQuick 2.4
+import QtQuick.Layouts 1.1
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3
 
@@ -28,70 +29,91 @@ Page {
     id: root
     title: i18n.tr("Level Packs")
 
+    head.actions: [
+        Action {
+            id: helpAction
+            iconName: "help"
+            text: i18n.tr("Help")
+            onTriggered: pageStack.push(Qt.resolvedUrl("HelpMenuPage.qml"))
+        },
+        Action {
+            id: settingsAction
+            iconName: "settings"
+            text: i18n.tr("Settings")
+            onTriggered: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
+        }
+    ]
+
     UbuntuListView {
         id: levelGrid
         anchors.fill: parent
+        anchors.topMargin: units.gu(2)
         spacing: units.gu(2)
         model: gameEngine.levelPacks
 
-        delegate: UbuntuShape {
+        delegate: Item {
             anchors.left: parent.left
             anchors.leftMargin: units.gu(2)
             anchors.right: parent.right
             anchors.rightMargin: units.gu(2)
             height: units.gu(8)
 
-            backgroundColor: "#88888888"
-
             property var levelPack: gameEngine.levelPacks.get(model.name)
 
-            Label {
-                anchors.left: parent.left
-                anchors.leftMargin: units.gu(2)
-                anchors.verticalCenter: parent.verticalCenter
-                text: model.name
-                font.bold: true
-            }
-
-            Item {
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.right: parent.right
-
-                width: parent.width / 3
-
-                Column {
-                    anchors.fill: parent
+            RowLayout {
+                anchors.fill: parent
+                Item {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
 
                     UbuntuShape {
-                        width: parent.width
-                        height: parent.height / 2
-                        backgroundColor: completedColor
+                        anchors.fill: parent
+                        backgroundColor: levelPack.completedPerfectCount == levelPack.levelCount ?
+                                             completedPerfectColor : levelPack.completedCount == levelPack.levelCount && levelPack.completedPerfectCount != levelPack.levelCount ?
+                                                 completedColor : uncompletedColor
 
                         Label {
-                            anchors.centerIn: parent
-                            text: levelPack.completedCount + " / " + model.levelCount
+                            anchors.left: parent.left
+                            anchors.leftMargin: units.gu(2)
+                            anchors.verticalCenter: parent.verticalCenter
+                            text: model.name
+                            font.bold: true
                         }
                     }
+                }
+                Item {
+                    Layout.preferredHeight: parent.height
+                    Layout.preferredWidth: units.gu(10)
 
-                    UbuntuShape {
-                        width: parent.width
-                        height: parent.height / 2
-                        backgroundColor: completedPerfectColor
+                    Column {
+                        anchors.fill: parent
 
-                        Label {
-                            anchors.centerIn: parent
-                            text: levelPack.completedPerfectCount + " / " + model.levelCount
+                        UbuntuShape {
+                            width: parent.width
+                            height: parent.height / 2
+                            backgroundColor: completedColor
+
+                            Label {
+                                anchors.centerIn: parent
+                                text: levelPack.completedCount + " / " + model.levelCount
+                            }
+                        }
+
+                        UbuntuShape {
+                            width: parent.width
+                            height: parent.height / 2
+                            backgroundColor: completedPerfectColor
+
+                            Label {
+                                anchors.centerIn: parent
+                                text: levelPack.completedPerfectCount + " / " + model.levelCount
+                            }
                         }
                     }
                 }
 
 
-
-
             }
-
-
             MouseArea {
                 anchors.fill: parent
                 onClicked: {

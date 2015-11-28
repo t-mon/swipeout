@@ -5,6 +5,8 @@
         <file>images/threeVertical.svg</file>
         <file>images/threeHorizontal.svg</file>
         <file>images/exit.svg</file>
+        <file>images/menu-background-landscape.svg</file>
+        <file>images/menu-background-portrait.svg</file>
     </qresource>
 </RCC>
 

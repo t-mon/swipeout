@@ -26,6 +26,21 @@ Page {
     id: root
     title: i18n.tr("Load level")
 
+    head.actions: [
+        Action {
+            id: infoAction
+            iconName: "info"
+            text: i18n.tr("About")
+            onTriggered: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
+        },
+        Action {
+            id: settingsAction
+            iconName: "settings"
+            text: i18n.tr("Settings")
+            onTriggered: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
+        }
+    ]
+
     GridView {
         id: levelGrid
         anchors.fill: parent
@@ -38,7 +53,7 @@ Page {
             height: levelGrid.cellHeight
             level: gameEngine.loadedLevels.get(model.levelId)
             onSelected: {
-                gameEngine.board.loadLevel(gameEngine.loadedLevels.get(levelId))
+                gameEngine.loadLevel(gameEngine.loadedLevels.get(levelId))
                 pageStack.push(Qt.resolvedUrl("BoardPage.qml"))
             }
         }

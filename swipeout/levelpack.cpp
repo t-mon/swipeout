@@ -98,17 +98,6 @@ void LevelPack::loadLevels()
         level->setBlockData(levelData.value("blocks").toList());
         level->setLevelPackName(m_name);
 
-        // load record / completed
-        QSettings settings;
-        settings.beginGroup("levelpacks");
-        settings.beginGroup(m_name);
-        settings.beginGroup(level->name());
-        level->setCompleted(settings.value("completed", false).toBool());
-        level->setRecord(settings.value("record", 0).toInt());
-        settings.endGroup();
-        settings.endGroup();
-        settings.endGroup();
-
         // load solution moves
         QList<Move> moves;
         foreach (const QVariant &moveData, levelData.value("solution").toList()) {
@@ -125,7 +114,24 @@ void LevelPack::loadLevels()
         level->setSolution(solution);
         m_levels->addLevel(level);
     }
+    loadLevelSettings();
     calculateStatistic();
+}
+
+void LevelPack::loadLevelSettings()
+{
+    foreach (Level *level, m_levels->levels()) {
+        // load record / completed
+        QSettings settings;
+        settings.beginGroup("levelpacks");
+        settings.beginGroup(m_name);
+        settings.beginGroup(level->name());
+        level->setCompleted(settings.value("completed", false).toBool());
+        level->setRecord(settings.value("record", 0).toInt());
+        settings.endGroup();
+        settings.endGroup();
+        settings.endGroup();
+    }
 }
 
 void LevelPack::unloadLevels()

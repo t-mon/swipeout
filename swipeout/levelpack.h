@@ -32,6 +32,7 @@ public:
     void setCompletedPerfectCount(const int &completedPerfectCount);
 
     void loadLevels();
+    void loadLevelSettings();
     void unloadLevels();
 
     Q_INVOKABLE void calculateStatistic();

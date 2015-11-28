@@ -18,6 +18,7 @@
         <file>ui/SaveDialog.qml</file>
         <file>ui/LevelPacksPage.qml</file>
         <file>ui/SettingsPage.qml</file>
+        <file>ui/HelpMenuPage.qml</file>
     </qresource>
 </RCC>
 

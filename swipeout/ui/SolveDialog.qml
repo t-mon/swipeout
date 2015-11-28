@@ -26,11 +26,11 @@ import Swipeout 1.0
 
 Dialog {
     id: root
-    title: "Level Solver"
+    title: i18n.tr("Level Solver")
 
     property bool solutionFound: false
 
-    text: gameEngine.solverRunning ? "Solving..." : "Level solved!"
+    text: gameEngine.solverRunning ? i18n.tr("Solving...") : i18n.tr("Level solved!")
 
     ThinDivider { }
 
@@ -66,7 +66,7 @@ Dialog {
 
     Button {
         visible: !gameEngine.solverRunning && solutionFound
-        text: "Save"
+        text: i18n.tr("Save")
         onClicked: {
             gameEngine.levelCreator.saveLevel()
             gameEngine.loadCreatedLevels()
@@ -76,7 +76,7 @@ Dialog {
 
     Button {
         visible: !gameEngine.solverRunning && solutionFound
-        text: "Show solution"
+        text: i18n.tr("Show solution")
         onClicked: {
             PopupUtils.close(root)
             gameEngine.levelCreator.board.showSolution()
@@ -84,7 +84,7 @@ Dialog {
     }
 
     Button {
-        text: gameEngine.solverRunning ? "Cancel" : "Close"
+        text: gameEngine.solverRunning ? i18n.tr("Cancel") : i18n.tr("Close")
         onClicked: {
             if (gameEngine.solverRunning)
                 gameEngine.stopSolvingBoard()
@@ -96,13 +96,13 @@ Dialog {
     Connections {
         target: gameEngine
         onSolutionReady: {
-            runTimeText.text = "Runtime: " + runTime
+            runTimeText.text = i18n.tr("Runtime") + ": " + runTime
             var moveCount = gameEngine.levelCreator.board.level.solutionCount
             if (moveCount == 0) {
-                solutionText.text = "No solution!"
+                solutionText.text = i18n.tr("No solution!")
             } else {
                 solutionFound = true
-                solutionText.text = "Solution found!\n\nPerfect solution:"
+                solutionText.text = i18n.tr("Solution found!\n\nPerfect solution:")
                 moveText.text = moveCount
             }
         }

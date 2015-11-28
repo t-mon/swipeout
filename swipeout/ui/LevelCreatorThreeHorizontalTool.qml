@@ -29,13 +29,14 @@ Item {
 
     UbuntuShape {
         anchors.fill: parent
-        anchors.margins: units.gu(0.5)
         backgroundColor: !selected ? "#88888888" : "#55555555"
 
 
         Image {
             id: image
-            anchors.fill: parent
+            anchors.centerIn: parent
+            width: Math.min(parent.height, parent.width)
+            height: Math.min(parent.height, parent.width)
             source: "qrc:///images/threeHorizontal.svg"
         }
 

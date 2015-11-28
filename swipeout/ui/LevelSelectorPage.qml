@@ -27,6 +27,21 @@ Page {
     title: levelPack.name
     property var levelPack: gameEngine.levelPack
 
+    head.actions: [
+        Action {
+            id: helpAction
+            iconName: "help"
+            text: i18n.tr("Help")
+            onTriggered: pageStack.push(Qt.resolvedUrl("HelpMenuPage.qml"))
+        },
+        Action {
+            id: settingsAction
+            iconName: "settings"
+            text: i18n.tr("Settings")
+            onTriggered: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
+        }
+    ]
+
     GridView {
         id: levelGrid
         anchors.fill: parent

@@ -29,6 +29,7 @@ Item {
     signal selected()
 
     UbuntuShape {
+        id: shape
         anchors.fill: parent
         anchors.margins: units.gu(1)
         backgroundColor: level.completed && level.completedPerfect ? completedPerfectColor : level.completed ? completedColor : uncompletedColor
@@ -40,6 +41,7 @@ Item {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: level.id
                 font.bold: true
+                color: shape.backgroundColor == completedColor ? "black" : "white"
             }
         }
 

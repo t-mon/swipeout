@@ -67,6 +67,7 @@ Page {
                     Layout.fillHeight: true
 
                     UbuntuShape {
+                        id: shape
                         anchors.fill: parent
                         backgroundColor: levelPack.completedPerfectCount == levelPack.levelCount ?
                                              completedPerfectColor : levelPack.completedCount == levelPack.levelCount && levelPack.completedPerfectCount != levelPack.levelCount ?
@@ -78,6 +79,8 @@ Page {
                             anchors.verticalCenter: parent.verticalCenter
                             text: model.name
                             font.bold: true
+                            color: shape.backgroundColor == completedColor ? "black" : "white"
+
                         }
                     }
                 }
@@ -92,8 +95,8 @@ Page {
                             width: parent.width
                             height: parent.height / 2
                             backgroundColor: completedColor
-
                             Label {
+                                color: "black"
                                 anchors.centerIn: parent
                                 text: levelPack.completedCount + " / " + model.levelCount
                             }

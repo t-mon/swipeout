@@ -61,20 +61,23 @@ Page {
 
             GridLayout {
                 anchors.fill: parent
+                anchors.margins: units.gu(2)
                 columns: app.landscape ? 1 : 5
 
                 LevelCreatorDeleteTool {
                     id: deleteTool
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
-                    Layout.minimumHeight: app.landscape ? width / 5 : width
+                    Layout.preferredWidth: app.landscape ? parent.height / 5 : parent.width / 5
+                    Layout.preferredHeight: app.landscape ? parent.height / 5 : parent.width / 5
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 }
                 LevelCreatorTwoHorizontalTool {
                     id: twoHorizontalTool
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
-                    Layout.minimumHeight: app.landscape ? width / 5 : width
+                    Layout.preferredWidth: app.landscape ? parent.height / 5 : parent.width / 5
+                    Layout.preferredHeight: app.landscape ? parent.height / 5 : parent.width / 5
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 }
 
@@ -82,7 +85,8 @@ Page {
                     id: threeHorizontalTool
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
-                    Layout.minimumHeight: app.landscape ? width / 5 : width
+                    Layout.preferredWidth: app.landscape ? parent.height / 5 : parent.width / 5
+                    Layout.preferredHeight: app.landscape ? parent.height / 5 : parent.width / 5
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 }
 
@@ -90,7 +94,8 @@ Page {
                     id: twoVerticalTool
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
-                    Layout.minimumHeight: app.landscape ? width / 5 : width
+                    Layout.preferredWidth: app.landscape ? parent.height / 5 : parent.width / 5
+                    Layout.preferredHeight: app.landscape ? parent.height / 5 : parent.width / 5
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 }
 
@@ -98,7 +103,8 @@ Page {
                     id: threeVerticalTool
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
-                    Layout.minimumHeight: app.landscape ? width / 5 : width
+                    Layout.preferredWidth: app.landscape ? parent.height / 5 : parent.width / 5
+                    Layout.preferredHeight: app.landscape ? parent.height / 5 : parent.width / 5
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 }
             }
@@ -193,6 +199,7 @@ Page {
 
             GridLayout {
                 anchors.fill: parent
+                anchors.margins: units.gu(2)
                 columns: app.landscape ? 1 : 5
 
                 UbuntuShape {
@@ -301,7 +308,6 @@ Page {
                             if (!creator.board.showSolutionRunning) {
                                 PopupUtils.open(Qt.resolvedUrl("SaveDialog.qml"))
                             }
-
                         }
                     }
                 }

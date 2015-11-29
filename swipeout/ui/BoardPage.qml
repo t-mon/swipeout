@@ -60,13 +60,15 @@ Page {
 
             GridLayout {
                 anchors.fill: parent
+                anchors.margins: units.gu(2)
                 columns: app.landscape ? 1 : 2
 
                 UbuntuShape {
                     id: movesShape
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
-                    Layout.maximumWidth: units.gu(15)
+                    Layout.fillHeight: app.landscape
+                    Layout.fillWidth: !app.landscape
+                    Layout.preferredWidth: units.gu(15)
+                    Layout.preferredHeight: app.landscape ? height : units.gu(8)
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
                     backgroundColor: "#44444444"
@@ -80,6 +82,7 @@ Page {
                         Label {
                             anchors.horizontalCenter: parent.horizontalCenter
                             font.bold: true
+                            font.pixelSize: units.gu(2)
                             text: gameEngine.board.moveCount
                         }
                     }
@@ -87,9 +90,10 @@ Page {
 
                 UbuntuShape {
                     id: highscoreShape
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
-                    Layout.maximumWidth: units.gu(15)
+                    Layout.fillHeight: app.landscape
+                    Layout.fillWidth: !app.landscape
+                    Layout.preferredWidth: units.gu(15)
+                    Layout.preferredHeight: app.landscape ? height : units.gu(8)
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
                     backgroundColor: "#44444444"
@@ -103,6 +107,7 @@ Page {
                         Label {
                             anchors.horizontalCenter: parent.horizontalCenter
                             font.bold: true
+                            font.pixelSize: units.gu(2)
                             text: (level.record != 0 ? level.record : "-") + " / " + level.solutionCount
                         }
                     }
@@ -168,6 +173,7 @@ Page {
 
             GridLayout {
                 anchors.fill: parent
+                anchors.margins: units.gu(2)
                 columns: app.landscape ? 1 : 3
 
                 UbuntuShape {

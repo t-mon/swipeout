@@ -78,6 +78,7 @@ Page {
                         anchors.centerIn: parent
                         Label {
                             anchors.horizontalCenter: parent.horizontalCenter
+                            // TRANSLATORS: Moves rectangle in the play view.
                             text: i18n.tr("MOVES")
                         }
                         Label {
@@ -103,6 +104,7 @@ Page {
                         anchors.centerIn: parent
                         Label {
                             anchors.horizontalCenter: parent.horizontalCenter
+                            // TRANSLATORS: Highscore rectangle in the play view.
                             text: i18n.tr("HIGHSCORE")
                         }
                         Label {
@@ -260,6 +262,7 @@ Page {
         Dialog {
             id: completedDialog
             title: level.name
+            // TRANSLATORS: Level completed view.
             text: i18n.tr("Level completed!")
 
             ThinDivider { }
@@ -281,6 +284,7 @@ Page {
                 visible: gameEngine.board.moveCount <= level.solutionCount
                 horizontalAlignment: Text.AlignHCenter
                 font.bold: true
+                // TRANSLATORS: Level completed view.
                 text: i18n.tr("You have found the perfect solution!")
             }
 

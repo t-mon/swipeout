@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-29 16:32+0100\n"
+"POT-Creation-Date: 2015-11-29 17:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,11 +23,23 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:91
+#. TRANSLATORS: In the about screen.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:80
 msgid "License:"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:149
+#. TRANSLATORS: In the about screen.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:99
+msgid "Source code:"
+msgstr ""
+
+#. TRANSLATORS: In the about screen.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:119
+msgid "Bug tracker:"
+msgstr ""
+
+#. TRANSLATORS: Game description in the about screen.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:141
 msgid ""
 "Swipeout is a classic unblock game. A level can be completed by pushing the "
 "white block trough the right exit.\n"
@@ -53,19 +65,23 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:81
+#. TRANSLATORS: Moves rectangle in the play view.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:82
 msgid "MOVES"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:106
+#. TRANSLATORS: Highscore rectangle in the play view.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:108
 msgid "HIGHSCORE"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:263
+#. TRANSLATORS: Level completed view.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:266
 msgid "Level completed!"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:284
+#. TRANSLATORS: Level completed view.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:288
 msgid "You have found the perfect solution!"
 msgstr ""
 
@@ -74,7 +90,6 @@ msgid "Level Packs"
 msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/LoadLevelPage.qml:27
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:98
 msgid "Load level"
 msgstr ""
 
@@ -82,29 +97,41 @@ msgstr ""
 msgid "Swipeout"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:71
+#. TRANSLATORS: Play button in the main view.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:72
 msgid "Play"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:126
-msgid "Create level"
+#. TRANSLATORS: "Load Level" button in the main view.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:100
+msgid "Load Level"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:29
+#. TRANSLATORS: "Level Creator" button in the main view.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:129
+msgid "Level Creator"
+msgstr ""
+
+#. TRANSLATORS: Title of the save dialog.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:30
 msgid "Save Level"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:33
+#. TRANSLATORS: Save question.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:35
 msgid "Do you want to save this level?"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:46
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:69
+#. TRANSLATORS: Save the current board.
+#. TRANSLATORS: Save the solved level.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:49
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:72
 msgid "Save"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:56
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:88
+#. TRANSLATORS: Cancel the save process.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:60
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:92
 msgid "Cancel"
 msgstr ""
 
@@ -142,34 +169,40 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:29
+#. TRANSLATORS: Title of the solver dialog
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:30
 msgid "Level Solver"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:33
+#. TRANSLATORS: Status of the solver
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:35
 msgid "Solving..."
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:33
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:35
 msgid "Finished!"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:80
+#. TRANSLATORS: Show the solution moves on the board.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:84
 msgid "Show solution"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:88
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:92
 msgid "Close"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:100
+#. TRANSLATORS: The runtime of the solver once he is finished.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:105
 msgid "Runtime"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:103
+#. TRANSLATORS: The message that this board cannot be solved (in the solver view).
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:109
 msgid "This board can't be solved."
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:106
+#. TRANSLATORS: Description of the solver result.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:113
 msgid "Perfect solution:"
 msgstr ""

@@ -26,6 +26,7 @@ import Swipeout 1.0
 
 Page {
     id: root
+    // TRANSLATORS: Title of the Level Creator help screen.
     title: i18n.tr("Creator help")
 
     Flickable {
@@ -49,12 +50,13 @@ Page {
                     anchors.right: parent.right
                     wrapMode: Text.WordWrap
                     color: "white"
-
+                    // TRANSLATORS: Level creator description in the help screen.
                     text: i18n.tr("In the level creator you can create your own levels containig the perfect solution by using the solver. Only solved boards can be stored as level. The level number will increase automatically. You can load and play created levels from the main menu \"Load level\".")
                 }
 
                 ThinDivider { }
                 Label {
+                    // TRANSLATORS: Sub title of the creator help screen for the block tools
                     text: i18n.tr("Block tools:")
                     font.bold: true
                     font.pixelSize: units.gu(3)
@@ -83,6 +85,7 @@ Page {
 
                     Label {
                         anchors.verticalCenter: parent.verticalCenter
+                        // TRANSLATORS: Tool description in the Creator Help view.
                         text: i18n.tr("Delete block")
                     }
                 }
@@ -108,6 +111,7 @@ Page {
 
                     Label {
                         anchors.verticalCenter: parent.verticalCenter
+                        // TRANSLATORS: Tool description in the Creator Help view.
                         text: i18n.tr("Create 2 x 1 block")
                     }
                 }
@@ -133,6 +137,7 @@ Page {
 
                     Label {
                         anchors.verticalCenter: parent.verticalCenter
+                        // TRANSLATORS: Tool description in the Creator Help view.
                         text: i18n.tr("Create 3 x 1 block")
                     }
                 }
@@ -158,6 +163,7 @@ Page {
 
                     Label {
                         anchors.verticalCenter: parent.verticalCenter
+                        // TRANSLATORS: Tool description in the Creator Help view.
                         text: i18n.tr("Create 1 x 2 block")
                     }
                 }
@@ -183,6 +189,7 @@ Page {
 
                     Label {
                         anchors.verticalCenter: parent.verticalCenter
+                        // TRANSLATORS: Tool description in the Creator Help view.
                         text: i18n.tr("Create 1 x 3 block")
                     }
                 }
@@ -196,6 +203,7 @@ Page {
 
                 ThinDivider { }
                 Label {
+                    // TRANSLATORS: Sub title of the creator help screen for the board tools
                     text: i18n.tr("Board tools:")
                     font.bold: true
                     font.pixelSize: units.gu(3)
@@ -225,6 +233,7 @@ Page {
 
                     Label {
                         anchors.verticalCenter: parent.verticalCenter
+                        // TRANSLATORS: Tool description in the Creator Help view.
                         text: i18n.tr("Clear board")
                     }
                 }
@@ -252,6 +261,7 @@ Page {
 
                     Label {
                         anchors.verticalCenter: parent.verticalCenter
+                        // TRANSLATORS: Tool description in the Creator Help view.
                         text: i18n.tr("Create random level")
                     }
                 }
@@ -279,6 +289,7 @@ Page {
 
                     Label {
                         anchors.verticalCenter: parent.verticalCenter
+                        // TRANSLATORS: Tool description in the Creator Help view.
                         text: i18n.tr("Solve board")
                     }
                 }
@@ -306,6 +317,7 @@ Page {
 
                     Label {
                         anchors.verticalCenter: parent.verticalCenter
+                        // TRANSLATORS: Tool description in the Creator Help view.
                         text: i18n.tr("Save level")
                     }
                 }
@@ -333,6 +345,7 @@ Page {
 
                     Label {
                         anchors.verticalCenter: parent.verticalCenter
+                        // TRANSLATORS: Tool description in the Creator Help view.
                         text: i18n.tr("Show solution")
                     }
                 }

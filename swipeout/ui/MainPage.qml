@@ -68,6 +68,7 @@ Page {
             }
 
             Button {
+                // TRANSLATORS: Play button in the main view.
                 text: i18n.tr("Play")
                 font.bold:true
                 anchors.fill: parent
@@ -95,7 +96,8 @@ Page {
             }
 
             Button {
-                text: i18n.tr("Load level")
+                // TRANSLATORS: "Load Level" button in the main view.
+                text: i18n.tr("Load Level")
                 font.bold:true
                 anchors.fill: parent
                 color: "transparent"
@@ -123,7 +125,8 @@ Page {
             }
 
             Button {
-                text: i18n.tr("Create level")
+                // TRANSLATORS: "Level Creator" button in the main view.
+                text: i18n.tr("Level Creator")
                 font.bold:true
                 anchors.fill: parent
                 color: "transparent"

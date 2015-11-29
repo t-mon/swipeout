@@ -26,10 +26,12 @@ import Swipeout 1.0
 
 Dialog {
     id: root
+    // TRANSLATORS: Title of the save dialog.
     title: i18n.tr("Save Level")
 
     property int levelId : gameEngine.levelCreator.board.level.id
 
+    // TRANSLATORS: Save question.
     text: i18n.tr("Do you want to save this level?")
 
     ThinDivider { }
@@ -43,6 +45,7 @@ Dialog {
     ThinDivider { }
 
     Button {
+        // TRANSLATORS: Save the current board.
         text: i18n.tr("Save")
         onClicked: {
             creator.saveLevel()
@@ -53,6 +56,7 @@ Dialog {
     }
 
     Button {
+        // TRANSLATORS: Cancel the save process.
         text: i18n.tr("Cancel")
         onClicked: PopupUtils.close(root)
     }

@@ -66,7 +66,6 @@ Page {
                 ThinDivider { }
             }
 
-
             Column {
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -77,6 +76,7 @@ Page {
                     anchors.leftMargin: units.gu(5)
                     spacing: units.gu(2)
                     Label {
+                        // TRANSLATORS: In the about screen.
                         text: i18n.tr("License:")
                         font.bold: true
                     }
@@ -95,7 +95,8 @@ Page {
                     anchors.leftMargin: units.gu(2)
                     spacing: units.gu(2)
                     Label {
-                        text: "Source code:"
+                        // TRANSLATORS: In the about screen.
+                        text: i18n.tr("Source code:")
                         font.bold: true
                     }
                     Label {
@@ -114,7 +115,8 @@ Page {
                     anchors.leftMargin: units.gu(2)
                     spacing: units.gu(2)
                     Label {
-                        text: "Bug tracker:"
+                        // TRANSLATORS: In the about screen.
+                        text: i18n.tr("Bug tracker:")
                         font.bold: true
                     }
                     Label {
@@ -135,6 +137,7 @@ Page {
                     anchors.right: parent.right
                     wrapMode: Text.WordWrap
                     color: "white"
+                    // TRANSLATORS: Game description in the about screen.
                     text: i18n.tr("Swipeout is a classic unblock game. A level can be completed by pushing the white block trough the right exit.\nHorizontal blocks can only be pushed \"left\" and \"right\", vertical blocks only \"up\" and \"down\".")
                 }
 

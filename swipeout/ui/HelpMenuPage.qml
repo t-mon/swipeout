@@ -51,6 +51,7 @@ Page {
 
                 Label {
                     anchors.verticalCenter: parent.verticalCenter
+                    // TRANSLATORS: Color description in the menu help screen for not completed levels.
                     text: i18n.tr("Not completed")
                 }
             }
@@ -71,6 +72,7 @@ Page {
 
                 Label {
                     anchors.verticalCenter: parent.verticalCenter
+                    // TRANSLATORS: Color description in the menu help screen for completed levels.
                     text: i18n.tr("Completed")
                 }
             }
@@ -91,6 +93,7 @@ Page {
 
                 Label {
                     anchors.verticalCenter: parent.verticalCenter
+                    // TRANSLATORS: Color description in the menu help screen for completed perfect levels.
                     text: i18n.tr("Completed perfect")
                 }
             }

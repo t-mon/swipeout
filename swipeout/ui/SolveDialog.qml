@@ -26,10 +26,12 @@ import Swipeout 1.0
 
 Dialog {
     id: root
+    // TRANSLATORS: Title of the solver dialog
     title: i18n.tr("Level Solver")
 
     property bool solutionFound: false
 
+    // TRANSLATORS: Status of the solver
     text: gameEngine.solverRunning ? i18n.tr("Solving...") : i18n.tr("Finished!")
 
     ThinDivider { }
@@ -66,6 +68,7 @@ Dialog {
 
     Button {
         visible: !gameEngine.solverRunning && solutionFound
+        // TRANSLATORS: Save the solved level.
         text: i18n.tr("Save")
         onClicked: {
             gameEngine.levelCreator.saveLevel()
@@ -77,6 +80,7 @@ Dialog {
 
     Button {
         visible: !gameEngine.solverRunning && solutionFound
+        // TRANSLATORS: Show the solution moves on the board.
         text: i18n.tr("Show solution")
         onClicked: {
             PopupUtils.close(root)
@@ -97,12 +101,15 @@ Dialog {
     Connections {
         target: gameEngine
         onSolutionReady: {
+            // TRANSLATORS: The runtime of the solver once he is finished.
             runTimeText.text = i18n.tr("Runtime") + ": " + runTime
             var moveCount = gameEngine.levelCreator.board.level.solutionCount
             if (moveCount == 0) {
+                // TRANSLATORS: The message that this board cannot be solved (in the solver view).
                 solutionText.text = i18n.tr("This board can't be solved.")
             } else {
                 solutionFound = true
+                // TRANSLATORS: Description of the solver result.
                 solutionText.text = i18n.tr("Perfect solution:")
                 moveText.text = moveCount
             }

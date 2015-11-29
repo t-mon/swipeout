@@ -163,6 +163,14 @@ Page {
                     anchors.margins: borderWidth
                     backgroundColor: "transparent"
 
+                    Rectangle {
+                        visible: gameEngine.levelCreator.addMode
+                        anchors.fill: parent
+                        color: "transparent"
+                        border.color: "#aaaaaaaa"
+                        border.width: units.gu(0.2)
+                    }
+
                     Grid {
                         columns: creator.width
                         visible: gameEngine.levelCreator.addMode
@@ -171,10 +179,12 @@ Page {
                             id: fieldRepeater
                             model: level.width * level.height
                             delegate: Rectangle {
+                                anchors.margins: border.width / 2
                                 height: Math.min(addingArea.width / creator.width , addingArea.height / creator.height)
                                 width: height
                                 color: "transparent"
                                 border.color: "#aaaaaaaa"
+                                border.width: units.gu(0.1)
 
                                 MouseArea {
                                     anchors.fill: parent

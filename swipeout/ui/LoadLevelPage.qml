@@ -44,7 +44,9 @@ Page {
     GridView {
         id: levelGrid
         anchors.fill: parent
-        cellWidth: width / 4
+        anchors.leftMargin: units.gu(0.5)
+        anchors.rightMargin: units.gu(0.5)
+        cellWidth: app.landscape ? width / 8 : width / 4
         cellHeight: cellWidth
         model: gameEngine.loadedLevels
 

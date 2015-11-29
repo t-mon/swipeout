@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-29 15:10+0100\n"
+"POT-Creation-Date: 2015-11-29 16:32+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,18 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:28
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:29
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/LoadLevelPage.qml:33
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:33
 msgid "About"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:64
-msgid "Author:"
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:91
+msgid "License:"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:75
-msgid "License:"
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:149
+msgid ""
+"Swipeout is a classic unblock game. A level can be completed by pushing the "
+"white block trough the right exit.\n"
+"Horizontal blocks can only be pushed \"left\" and \"right\", vertical blocks "
+"only \"up\" and \"down\"."
 msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:40
@@ -70,7 +74,7 @@ msgid "Level Packs"
 msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/LoadLevelPage.qml:27
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:66
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:98
 msgid "Load level"
 msgstr ""
 
@@ -78,11 +82,11 @@ msgstr ""
 msgid "Swipeout"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:55
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:71
 msgid "Play"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:77
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:126
 msgid "Create level"
 msgstr ""
 
@@ -147,7 +151,7 @@ msgid "Solving..."
 msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:33
-msgid "Level solved!"
+msgid "Finished!"
 msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:80
@@ -163,12 +167,9 @@ msgid "Runtime"
 msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:103
-msgid "No solution!"
+msgid "This board can't be solved."
 msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:106
-msgid ""
-"Solution found!\n"
-"\n"
-"Perfect solution:"
+msgid "Perfect solution:"
 msgstr ""

@@ -51,35 +51,83 @@ Page {
         spacing: units.gu(3)
         anchors.centerIn: parent
 
-        Button {
-            text: i18n.tr("Play")
-            font.bold:true
-            color: "#ff888888"
+        Item {
             width: units.gu(20)
             height: units.gu(7)
-            onClicked: {
-                push(Qt.resolvedUrl("LevelPacksPage.qml"))
+
+            UbuntuShape {
+                anchors.fill: parent
+                anchors.margins: units.gu(0.3)
+                backgroundColor: "#8d8d8d"
+            }
+
+            UbuntuShape {
+                anchors.fill: parent
+                backgroundColor: "#8d8d8d"
+                opacity: 0.6
+            }
+
+            Button {
+                text: i18n.tr("Play")
+                font.bold:true
+                anchors.fill: parent
+                color: "transparent"
+                onClicked: {
+                    push(Qt.resolvedUrl("LevelPacksPage.qml"))
+                }
             }
         }
 
-        Button {
-            text: i18n.tr("Load level")
-            color: "#ff333333"
+        Item {
             width: units.gu(20)
             height: units.gu(7)
-            onClicked: {
-                gameEngine.loadCreatedLevels()
-                push(Qt.resolvedUrl("LoadLevelPage.qml"))
+
+            UbuntuShape {
+                anchors.fill: parent
+                anchors.margins: units.gu(0.3)
+                backgroundColor: "#ff333333"
+            }
+
+            UbuntuShape {
+                anchors.fill: parent
+                backgroundColor: "#ff333333"
+                opacity: 0.6
+            }
+
+            Button {
+                text: i18n.tr("Load level")
+                font.bold:true
+                anchors.fill: parent
+                color: "transparent"
+                onClicked: {
+                    gameEngine.loadCreatedLevels()
+                    push(Qt.resolvedUrl("LoadLevelPage.qml"))
+                }
             }
         }
 
-        Button {
-            text: i18n.tr("Create level")
-            color: "#ff333333"
+        Item {
             width: units.gu(20)
             height: units.gu(7)
-            onClicked: {
-                push(Qt.resolvedUrl("LevelCreator.qml"))
+
+            UbuntuShape {
+                anchors.fill: parent
+                anchors.margins: units.gu(0.3)
+                backgroundColor: "#ff333333"
+            }
+
+            UbuntuShape {
+                anchors.fill: parent
+                backgroundColor: "#ff333333"
+                opacity: 0.6
+            }
+
+            Button {
+                text: i18n.tr("Create level")
+                font.bold:true
+                anchors.fill: parent
+                color: "transparent"
+                onClicked: push(Qt.resolvedUrl("LevelCreator.qml"))
             }
         }
     }

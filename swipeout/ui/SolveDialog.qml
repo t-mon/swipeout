@@ -30,7 +30,7 @@ Dialog {
 
     property bool solutionFound: false
 
-    text: gameEngine.solverRunning ? i18n.tr("Solving...") : i18n.tr("Level solved!")
+    text: gameEngine.solverRunning ? i18n.tr("Solving...") : i18n.tr("Finished!")
 
     ThinDivider { }
 
@@ -100,10 +100,10 @@ Dialog {
             runTimeText.text = i18n.tr("Runtime") + ": " + runTime
             var moveCount = gameEngine.levelCreator.board.level.solutionCount
             if (moveCount == 0) {
-                solutionText.text = i18n.tr("No solution!")
+                solutionText.text = i18n.tr("This board can't be solved.")
             } else {
                 solutionFound = true
-                solutionText.text = i18n.tr("Solution found!\n\nPerfect solution:")
+                solutionText.text = i18n.tr("Perfect solution:")
                 moveText.text = moveCount
             }
         }

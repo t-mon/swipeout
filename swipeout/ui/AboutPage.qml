@@ -19,6 +19,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 import QtQuick 2.4
+import QtQuick.Layouts 1.1
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3
 import Swipeout 1.0
@@ -27,85 +28,118 @@ Page {
     id: root
     title: i18n.tr("About")
 
-    Column {
-        anchors.fill: parent
-        spacing: units.gu(3)
 
-        Column {
+    Flickable {
+        anchors.fill: parent
+        anchors.margins: units.gu(2)
+        contentHeight: columnLayout.height
+
+        ColumnLayout {
+            id: columnLayout
             anchors.left: parent.left
             anchors.right: parent.right
             spacing: units.gu(2)
-            Label {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: "Swipeout"
-                font.bold: true
-                font.pixelSize: units.gu(5)
-            }
 
-            Label {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: version
-                font.bold: true
-                font.pixelSize: units.gu(3)
-            }
-
-            ThinDivider { }
-        }
-
-
-        Column {
-            spacing: units.gu(1)
-
-            Row {
+            Column {
                 anchors.left: parent.left
-                anchors.leftMargin: units.gu(5)
+                anchors.right: parent.right
                 spacing: units.gu(2)
                 Label {
-                    text: i18n.tr("Author:")
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: "Swipeout"
                     font.bold: true
+                    font.pixelSize: units.gu(5)
                 }
-                Label { text: "Simon Stürz" }
+
+                Label {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: version
+                    font.bold: true
+                    font.pixelSize: units.gu(3)
+                }
+
+                Label {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: "2015 © Simon Stürz"
+                }
+
+                ThinDivider { }
             }
 
-            Row {
+
+            Column {
                 anchors.left: parent.left
-                anchors.leftMargin: units.gu(5)
-                spacing: units.gu(2)
-                Label {
-                    text: i18n.tr("License:")
-                    font.bold: true
-                }
-                Label {
-                    text: "GPLv3"
-                    font.underline: true
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: Qt.openUrlExternally("https://www.gnu.org/licenses/gpl-3.0.html")
+                anchors.right: parent.right
+                spacing: units.gu(1)
+
+                Row {
+                    anchors.left: parent.left
+                    anchors.leftMargin: units.gu(5)
+                    spacing: units.gu(2)
+                    Label {
+                        text: i18n.tr("License:")
+                        font.bold: true
+                    }
+                    Label {
+                        text: "GPLv3"
+                        font.underline: true
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: Qt.openUrlExternally("https://www.gnu.org/licenses/gpl-3.0.html")
+                        }
                     }
                 }
-            }
 
-            Row {
-                anchors.left: parent.left
-                anchors.leftMargin: units.gu(2)
-                spacing: units.gu(2)
-                Label {
-                    text: "Source code:"
-                    font.bold: true
-                }
-                Label {
-                    font.underline: true
-                    text: app.landscape ? "https://github.com/t-mon/swipeout" : "https://github.com/t-mon/\nswipeout"
+                Row {
+                    anchors.left: parent.left
+                    anchors.leftMargin: units.gu(2)
+                    spacing: units.gu(2)
+                    Label {
+                        text: "Source code:"
+                        font.bold: true
+                    }
+                    Label {
+                        text: "GitHub"
+                        font.underline: true
 
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: Qt.openUrlExternally("https://github.com/t-mon/swipeout")
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: Qt.openUrlExternally("https://github.com/t-mon/swipeout")
+                        }
                     }
                 }
+
+                Row {
+                    anchors.left: parent.left
+                    anchors.leftMargin: units.gu(2)
+                    spacing: units.gu(2)
+                    Label {
+                        text: "Bug tracker:"
+                        font.bold: true
+                    }
+                    Label {
+                        text: "GitHub"
+                        font.underline: true
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: Qt.openUrlExternally("https://github.com/t-mon/swipeout/issues")
+                        }
+                    }
+                }
+
+                ThinDivider { }
+
+                Text {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    wrapMode: Text.WordWrap
+                    color: "white"
+                    text: i18n.tr("Swipeout is a classic unblock game. A level can be completed by pushing the white block trough the right exit.\nHorizontal blocks can only be pushed \"left\" and \"right\", vertical blocks only \"up\" and \"down\".")
+                }
+
+                ThinDivider { }
             }
         }
-
-        ThinDivider { }
-
     }
 }

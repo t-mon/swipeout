@@ -30,8 +30,8 @@ MainView {
     property bool debug: false
     property bool landscape: height < width
 
-    property color boardBoarderColor: "#88888888"
-    property color boardColor: "#55555555"
+    property color boardBoarderColor: "#333333"
+    property color boardColor: "#ff555555"
     property color uncompletedColor: "#88888888"
     property color completedColor: "#aaffd040"
     property color completedPerfectColor: "#aa6ad709"

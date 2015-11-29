@@ -78,11 +78,23 @@ Item {
         }
     }
 
-    UbuntuShape {
+    Item {
         id: blockShape
         width: block.width * cellSize
         height: block.height * cellSize
-        backgroundColor: block.color
+
+
+        UbuntuShape {
+            anchors.fill: parent
+            anchors.margins: units.gu(0.3)
+            backgroundColor: block.color
+        }
+
+        UbuntuShape {
+            anchors.fill: parent
+            backgroundColor: block.color
+            opacity: 0.6
+        }
 
         x: block.x * cellSize
         y: block.y * cellSize

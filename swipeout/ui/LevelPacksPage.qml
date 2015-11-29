@@ -80,7 +80,7 @@ Page {
                             anchors.verticalCenter: parent.verticalCenter
                             text: model.name
                             font.bold: true
-                            color: shape.backgroundColor == completedColor ? "black" : "white"
+                            color: shape.backgroundColor == uncompletedColor ? "white" : "black"
                         }
                     }
                 }
@@ -110,6 +110,7 @@ Page {
                             backgroundColor: completedPerfectColor
 
                             Label {
+                                color: "black"
                                 anchors.centerIn: parent
                                 text: levelPack.completedPerfectCount + " / " + model.levelCount
                             }

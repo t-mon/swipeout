@@ -41,7 +41,7 @@ Item {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: level.id
                 font.bold: true
-                color: shape.backgroundColor == completedColor ? "black" : "white"
+                color: shape.backgroundColor == uncompletedColor ? "white" : "black"
             }
         }
 

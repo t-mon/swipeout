@@ -393,7 +393,7 @@ void Board::automaticMove()
 
 void Board::onLevelCompleted()
 {
-    qDebug() << "Level completed with" << m_moveCount << "moves!!";
+    qDebug() << "Level completed with" << m_moveCount << "/" << m_level->solutionCount() << "moves!!";
 
     QSettings settings;
     settings.beginGroup("levelpacks");
@@ -404,7 +404,6 @@ void Board::onLevelCompleted()
     if (!settings.value("completed", false).toBool()) {
         m_level->setCompleted(true);
         settings.setValue("completed", true);
-        qDebug() << "Level completed first time!! " << m_level->record();
     }
 
     // set record
@@ -415,7 +414,13 @@ void Board::onLevelCompleted()
     if (m_moveCount < record) {
         m_level->setRecord(m_moveCount);
         settings.setValue("record", m_moveCount);
-        qDebug() << "New record!! " << m_level->record();
+        qDebug() << "New record:" << m_level->record();
+    }
+
+    if (m_moveCount <= m_level->solutionCount()) {
+        qDebug() << "Completed perfect!";
+        m_level->setCompletedPerfect(true);
+        settings.setValue("completedPerfect", true);
     }
 
     settings.endGroup();

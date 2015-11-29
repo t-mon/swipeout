@@ -199,6 +199,7 @@ void GameEngine::resetSettings()
         pack->setCompletedPerfectCount(0);
     }
     m_levelPack->loadLevelSettings();
+    reloadLevelPackStatistic();
 }
 
 bool GameEngine::hasNextLevel() const
@@ -289,13 +290,47 @@ void GameEngine::loadLevelPacks()
 
     QFileInfoList levelFiles = dir.entryInfoList();
     foreach (const QFileInfo &levelFileInfo, levelFiles) {
-        qDebug() << levelFileInfo.fileName();
-
-        // TODO: find better way to know the statisitc without loadgin all levels
 
         LevelPack *levelPack = new LevelPack(m_levelDir, levelFileInfo.fileName(), this);
-        levelPack->loadLevels();
-        levelPack->unloadLevels();
+
+        // calculate statistic
+        QDir dir(m_levelDir + levelFileInfo.fileName());
+        dir.setFilter(QDir::Files);
+        dir.setSorting(QDir::Name);
+        QFileInfoList levelFiles = dir.entryInfoList();
+        levelPack->setLevelCount(levelFiles.count());
+
+        // count completed / completed perfect
+        int completedCount = 0;
+        int completedPerfectCount = 0;
+
+        QSettings settings;
+        settings.beginGroup("levelpacks");
+        settings.beginGroup(levelFileInfo.fileName());
+
+        foreach (const QString &level, settings.childGroups()) {
+            settings.beginGroup(level);
+
+            if (settings.value("completed", false).toBool())
+                completedCount += 1;
+
+            if (settings.value("completedPerfect", false).toBool())
+                completedPerfectCount += 1;
+
+            settings.endGroup();
+        }
+        settings.endGroup();
+        settings.endGroup();
+
+        levelPack->setCompletedCount(completedCount);
+        levelPack->setCompletedPerfectCount(completedPerfectCount);
+
+        qDebug() << "--------------------------------------";
+        qDebug() << "Level pack:" << levelFileInfo.fileName();
+        qDebug() << "--------------------------------------";
+        qDebug() << "    -> levels:" << levelPack->levelCount();
+        qDebug() << "    -> completed:" << levelPack->completedCount();
+        qDebug() << "    -> completed perfect:" << levelPack->completedPerfectCount();
 
         m_levelPacks->addLevelPack(levelPack);
     }
@@ -309,6 +344,47 @@ bool GameEngine::levelAlreadyLoaded(const int &id)
         }
     }
     return false;
+}
+
+void GameEngine::reloadLevelPackStatistic()
+{
+    foreach (LevelPack *levelPack, m_levelPacks->levelPacks()) {
+        // calculate statistic
+        QDir dir(m_levelDir + levelPack->name());
+        dir.setFilter(QDir::Files);
+        dir.setSorting(QDir::Name);
+        QFileInfoList levelFiles = dir.entryInfoList();
+        levelPack->setLevelCount(levelFiles.count());
+
+        // count completed / completed perfect
+        int completedCount = 0;
+        int completedPerfectCount = 0;
+
+        QSettings settings;
+        settings.beginGroup("levelpacks");
+        settings.beginGroup(levelPack->name());
+
+        foreach (const QString &level, settings.childGroups()) {
+            settings.beginGroup(level);
+
+            if (settings.value("completed", false).toBool())
+                completedCount++;
+
+            if (settings.value("completedPerfect", false).toBool())
+                completedPerfectCount++;
+
+        }
+
+        levelPack->setCompletedCount(completedCount);
+        levelPack->setCompletedPerfectCount(completedPerfectCount);
+
+        qDebug() << "--------------------------------------";
+        qDebug() << "Level pack:" << levelPack->name();
+        qDebug() << "--------------------------------------";
+        qDebug() << "    -> levels:" << levelPack->levelCount();
+        qDebug() << "    -> completed:" << levelPack->completedCount();
+        qDebug() << "    -> completed perfect:" << levelPack->completedPerfectCount();
+    }
 }
 
 void GameEngine::setSolverRunning(const bool &solverRunning)

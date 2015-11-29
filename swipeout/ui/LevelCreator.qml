@@ -205,6 +205,8 @@ Page {
                 UbuntuShape {
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
+                    Layout.preferredWidth: app.landscape ? parent.height / 5 : parent.width / 5
+                    Layout.preferredHeight: app.landscape ? parent.height / 5 : parent.width / 5
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
                     backgroundColor: deleteMouseArea.pressed ? "#44ff4444" : "#88ff8888"
@@ -232,6 +234,8 @@ Page {
                 UbuntuShape {
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
+                    Layout.preferredWidth: app.landscape ? parent.height / 5 : parent.width / 5
+                    Layout.preferredHeight: app.landscape ? parent.height / 5 : parent.width / 5
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
                     backgroundColor: createRandomLevelMouseArea.pressed ? "#44444444" : "#88888888"
@@ -259,6 +263,8 @@ Page {
                 UbuntuShape {
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
+                    Layout.preferredWidth: app.landscape ? parent.height / 5 : parent.width / 5
+                    Layout.preferredHeight: app.landscape ? parent.height / 5 : parent.width / 5
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
                     backgroundColor: solveMouseArea.pressed ? "#44444444" : "#88888888"
@@ -290,6 +296,8 @@ Page {
 
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
+                    Layout.preferredWidth: app.landscape ? parent.height / 5 : parent.width / 5
+                    Layout.preferredHeight: app.landscape ? parent.height / 5 : parent.width / 5
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
                     backgroundColor: saveMouseArea.pressed ? "#44444444" : "#88888888"
@@ -319,6 +327,8 @@ Page {
 
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
+                    Layout.preferredWidth: app.landscape ? parent.height / 5 : parent.width / 5
+                    Layout.preferredHeight: app.landscape ? parent.height / 5 : parent.width / 5
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
                     backgroundColor: showSolutionMouseArea.pressed ? "#44444444" : "#88888888"

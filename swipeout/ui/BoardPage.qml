@@ -22,6 +22,7 @@ import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import Ubuntu.Components 1.3
 import Ubuntu.Components.Popups 1.3
+import Ubuntu.Components.ListItems 1.3
 import Swipeout 1.0
 
 Page {
@@ -258,17 +259,32 @@ Page {
         id: completedComponent
         Dialog {
             id: completedDialog
-            title: level.name + " " + i18n.tr("completed!")
-            text: gameEngine.board.moveCount + " / " + level.solutionCount
+            title: level.name
+            text: i18n.tr("Level completed!")
+
+            ThinDivider { }
 
             Text {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 height: units.gu(5)
-                visible: gameEngine.board.moveCount == level.solutionCount
                 horizontalAlignment: Text.AlignHCenter
+                font.bold: true
+                font.pixelSize: units.gu(3)
+                text: gameEngine.board.moveCount + " / " + level.solutionCount
+            }
+
+            Text {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                height: units.gu(5)
+                visible: gameEngine.board.moveCount <= level.solutionCount
+                horizontalAlignment: Text.AlignHCenter
+                font.bold: true
                 text: i18n.tr("You have found the perfect solution!")
             }
+
+            ThinDivider { }
 
             Item {
                 anchors.left: parent.left

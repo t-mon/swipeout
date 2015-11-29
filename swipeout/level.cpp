@@ -126,15 +126,21 @@ bool Level::completed() const
     return m_completed;
 }
 
-bool Level::completedPerfect() const
-{
-    return m_solution.count() <= m_record;
-}
-
 void Level::setCompleted(const bool &completed)
 {
     m_completed = completed;
     emit completedChanged();
+}
+
+bool Level::completedPerfect() const
+{
+    return m_completedPerfect;
+}
+
+void Level::setCompletedPerfect(const bool &completedPerfect)
+{
+    m_completedPerfect = completedPerfect;
+    emit completedPerfectChanged();
 }
 
 int Level::record() const
@@ -146,7 +152,6 @@ void Level::setRecord(const int &record)
 {
     m_record = record;
     emit recordChanged();
-    emit completedPerfectChanged();
 }
 
 QStack<Move> Level::solution() const

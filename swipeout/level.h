@@ -68,8 +68,10 @@ public:
     void setHeight(const int &height);
 
     bool completed() const;
-    bool completedPerfect() const;
     void setCompleted(const bool &completed);
+
+    bool completedPerfect() const;
+    void setCompletedPerfect(const bool &completedPerfect);
 
     int record() const;
     void setRecord(const int &record);
@@ -91,6 +93,7 @@ private:
     int m_height;
 
     bool m_completed;
+    bool m_completedPerfect;
     int m_record;
 
 signals:

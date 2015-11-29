@@ -102,6 +102,8 @@ private:
     void loadLevelPacks();
     bool levelAlreadyLoaded(const int &id);
 
+    void reloadLevelPackStatistic();
+
     void setSolverRunning(const bool &solverRunning);
 
     void setHasNextLevel(const bool &hasNextLevel);

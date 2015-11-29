@@ -82,6 +82,7 @@ Page {
             anchors.right: parent.right
             // TRANSLATORS: Reset game button in the settings page.
             text: i18n.tr("Reset game")
+            color: "red"
             onClicked: PopupUtils.open(resetComponent)
         }
 

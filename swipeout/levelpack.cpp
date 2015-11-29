@@ -147,6 +147,7 @@ void LevelPack::loadLevelSettings()
         settings.beginGroup(m_name);
         settings.beginGroup(level->name());
         level->setCompleted(settings.value("completed", false).toBool());
+        level->setCompletedPerfect(settings.value("completedPerfect", false).toBool());
         level->setRecord(settings.value("record", 0).toInt());
         settings.endGroup();
         settings.endGroup();

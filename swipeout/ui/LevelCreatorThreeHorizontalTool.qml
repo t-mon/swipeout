@@ -31,7 +31,6 @@ Item {
         anchors.fill: parent
         backgroundColor: !selected ? "#88888888" : "#55555555"
 
-
         Image {
             id: image
             anchors.centerIn: parent
@@ -45,6 +44,7 @@ Item {
             onClicked: {
                 if (!gameEngine.levelCreator.board.showSolutionRunning)
                     gameEngine.levelCreator.threeHorizontalToolSelected = !selected
+
             }
         }
     }

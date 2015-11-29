@@ -128,7 +128,7 @@ bool Level::completed() const
 
 bool Level::completedPerfect() const
 {
-    return m_solution.count() == m_record;
+    return m_solution.count() <= m_record;
 }
 
 void Level::setCompleted(const bool &completed)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-28 22:10+0100\n"
+"POT-Creation-Date: 2015-11-29 11:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -100,7 +100,7 @@ msgid "Save"
 msgstr ""
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:56
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:87
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:88
 msgid "Cancel"
 msgstr ""
 
@@ -150,23 +150,23 @@ msgstr ""
 msgid "Level solved!"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:79
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:80
 msgid "Show solution"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:87
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:88
 msgid "Close"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:99
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:100
 msgid "Runtime"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:102
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:103
 msgid "No solution!"
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:105
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:106
 msgid ""
 "Solution found!\n"
 "\n"

@@ -244,7 +244,7 @@ void GameEngine::loadCreatedLevels()
 
         QVariantMap levelData = jsonDoc.toVariant().toMap();
         if (levelAlreadyLoaded(levelData.value("id").toInt())) {
-            qWarning() << "Level" << levelData.value("id").toInt() << "already loaded -> skipping";
+            //qWarning() << "Level" << levelData.value("id").toInt() << "already loaded -> skipping";
             continue;
         }
 

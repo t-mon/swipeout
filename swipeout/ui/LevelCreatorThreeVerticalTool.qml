@@ -44,6 +44,7 @@ Item {
             onClicked: {
                 if (!gameEngine.levelCreator.board.showSolutionRunning)
                     gameEngine.levelCreator.threeVerticalToolSelected = !selected
+
             }
         }
     }

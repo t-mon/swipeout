@@ -62,6 +62,7 @@ Page {
 
             RowLayout {
                 anchors.fill: parent
+
                 Item {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
@@ -80,10 +81,10 @@ Page {
                             text: model.name
                             font.bold: true
                             color: shape.backgroundColor == completedColor ? "black" : "white"
-
                         }
                     }
                 }
+
                 Item {
                     Layout.preferredHeight: parent.height
                     Layout.preferredWidth: units.gu(10)
@@ -95,6 +96,7 @@ Page {
                             width: parent.width
                             height: parent.height / 2
                             backgroundColor: completedColor
+
                             Label {
                                 color: "black"
                                 anchors.centerIn: parent
@@ -114,9 +116,8 @@ Page {
                         }
                     }
                 }
-
-
             }
+
             MouseArea {
                 anchors.fill: parent
                 onClicked: {

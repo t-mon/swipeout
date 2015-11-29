@@ -274,14 +274,15 @@ Page {
                     anchors.left: parent.left
                     width: parent.width / 4
                     height: width
+                    onClicked: {
+                        gameEngine.loadPreviousLevel(level)
+                        PopupUtils.close(completedDialog)
+                    }
+
                     Icon {
                         anchors.fill: parent
                         anchors.margins: units.gu(2)
                         name: "back"
-                    }
-                    onClicked: {
-                        gameEngine.loadPreviousLevel(level)
-                        PopupUtils.close(completedDialog)
                     }
                 }
 
@@ -289,15 +290,15 @@ Page {
                     anchors.centerIn: parent
                     width: parent.width / 4
                     height: width
+                    onClicked: {
+                        PopupUtils.close(completedDialog)
+                        gameEngine.board.restartLevel()
+                    }
+
                     Icon {
                         anchors.fill: parent
                         anchors.margins: units.gu(2)
                         name: "reload"
-                    }
-
-                    onClicked: {
-                        PopupUtils.close(completedDialog)
-                        gameEngine.board.restartLevel()
                     }
                 }
 
@@ -306,15 +307,15 @@ Page {
                     anchors.right: parent.right
                     width: parent.width / 4
                     height: width
+                    onClicked: {
+                        gameEngine.loadNextLevel(level)
+                        PopupUtils.close(completedDialog)
+                    }
 
                     Icon {
                         anchors.fill: parent
                         anchors.margins: units.gu(2)
                         name: "next"
-                    }
-                    onClicked: {
-                        gameEngine.loadNextLevel(level)
-                        PopupUtils.close(completedDialog)
                     }
                 }
             }

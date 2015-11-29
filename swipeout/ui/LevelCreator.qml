@@ -160,6 +160,7 @@ Page {
                     Grid {
                         columns: creator.width
                         visible: gameEngine.levelCreator.addMode
+
                         Repeater {
                             id: fieldRepeater
                             model: level.width * level.height
@@ -297,8 +298,9 @@ Page {
                         id: saveMouseArea
                         anchors.fill: parent
                         onClicked:  {
-                            if (!creator.board.showSolutionRunning)
+                            if (!creator.board.showSolutionRunning) {
                                 PopupUtils.open(Qt.resolvedUrl("SaveDialog.qml"))
+                            }
 
                         }
                     }

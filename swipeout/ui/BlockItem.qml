@@ -115,8 +115,6 @@ Item {
             }
         }
 
-
-
         MouseArea {
             id: elementMouseArea
             anchors.fill: parent

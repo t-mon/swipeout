@@ -52,25 +52,26 @@ Page {
         id: mainGrid
         anchors.fill: parent
         columns: app.landscape ? 3 : 1
-
+        columnSpacing: 0
         Item {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            Layout.minimumHeight: units.gu(10)
-            Layout.minimumWidth: units.gu(10)
+            Layout.minimumHeight: units.gu(8)
+            Layout.minimumWidth: units.gu(8)
+
 
             GridLayout {
                 anchors.fill: parent
-                anchors.margins: units.gu(2)
+                anchors.margins: units.gu(1)
                 columns: app.landscape ? 1 : 2
 
                 UbuntuShape {
                     id: movesShape
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
-                    Layout.preferredWidth: units.gu(15)
-                    Layout.preferredHeight: app.landscape ? height : units.gu(8)
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                    Layout.preferredWidth: units.gu(12)
+                    Layout.preferredHeight: app.landscape ? height : units.gu(7)
+                    Layout.alignment: !app.landscape ? Qt.AlignBottom : Qt.AlignVCenter | Qt.AlignHCenter
 
                     backgroundColor: "#44444444"
 
@@ -94,9 +95,9 @@ Page {
                     id: highscoreShape
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
-                    Layout.preferredWidth: units.gu(15)
-                    Layout.preferredHeight: app.landscape ? height : units.gu(8)
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                    Layout.preferredWidth: units.gu(12)
+                    Layout.preferredHeight: app.landscape ? height : units.gu(7)
+                    Layout.alignment: !app.landscape ? Qt.AlignBottom : Qt.AlignVCenter | Qt.AlignHCenter
 
                     backgroundColor: "#44444444"
 
@@ -171,19 +172,20 @@ Page {
         Item {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            Layout.minimumHeight: units.gu(10)
-            Layout.minimumWidth: units.gu(10)
+            Layout.minimumHeight: units.gu(8)
+            Layout.minimumWidth: units.gu(8)
 
             GridLayout {
                 anchors.fill: parent
-                anchors.margins: units.gu(2)
+                anchors.margins: units.gu(1)
                 columns: app.landscape ? 1 : 3
 
                 UbuntuShape {
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
-                    Layout.minimumWidth: units.gu(10)
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                    Layout.minimumWidth: units.gu(8)
+                    Layout.preferredHeight: app.landscape ? height : units.gu(7)
+                    Layout.alignment: !app.landscape ? Qt.AlignTop | Qt.AlignHCenter : Qt.AlignVCenter | Qt.AlignHCenter
 
                     backgroundColor: undoMouseArea.pressed ? "#88888888": "#44444444"
 
@@ -206,8 +208,9 @@ Page {
                 UbuntuShape {
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-                    Layout.minimumWidth: units.gu(10)
+                    Layout.minimumWidth: units.gu(8)
+                    Layout.preferredHeight: app.landscape ? height : units.gu(7)
+                    Layout.alignment: !app.landscape ? Qt.AlignTop | Qt.AlignHCenter : Qt.AlignVCenter | Qt.AlignHCenter
 
                     backgroundColor: restartMouseArea.pressed ? "#88888888": "#44444444"
 
@@ -231,8 +234,9 @@ Page {
                 UbuntuShape {
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-                    Layout.minimumWidth: units.gu(10)
+                    Layout.minimumWidth: units.gu(8)
+                    Layout.preferredHeight: app.landscape ? height : units.gu(7)
+                    Layout.alignment: !app.landscape ? Qt.AlignTop | Qt.AlignHCenter : Qt.AlignVCenter | Qt.AlignHCenter
 
                     visible: app.debug
                     backgroundColor: showSolutionMouseArea.pressed ? "#88888888": "#44444444"

@@ -138,7 +138,7 @@ Page {
                     wrapMode: Text.WordWrap
                     color: "white"
                     // TRANSLATORS: Game description in the about screen.
-                    text: i18n.tr("Swipeout is a classic unblock game. A level can be completed by pushing the white block trough the right exit.\nHorizontal blocks can only be pushed \"left\" and \"right\", vertical blocks only \"up\" and \"down\".")
+                    text: i18n.tr("Swipeout is a classic unblock game. A level can be completed by pushing the white block through the right exit.\nHorizontal blocks can only be pushed \"left\" and \"right\", vertical blocks only \"up\" and \"down\".")
                 }
 
                 ThinDivider { }

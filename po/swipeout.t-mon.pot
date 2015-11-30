@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-29 17:13+0100\n"
+"POT-Creation-Date: 2015-11-30 21:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,7 +42,7 @@ msgstr ""
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:141
 msgid ""
 "Swipeout is a classic unblock game. A level can be completed by pushing the "
-"white block trough the right exit.\n"
+"white block through the right exit.\n"
 "Horizontal blocks can only be pushed \"left\" and \"right\", vertical blocks "
 "only \"up\" and \"down\"."
 msgstr ""
@@ -66,22 +66,22 @@ msgid "Settings"
 msgstr ""
 
 #. TRANSLATORS: Moves rectangle in the play view.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:82
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:83
 msgid "MOVES"
 msgstr ""
 
 #. TRANSLATORS: Highscore rectangle in the play view.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:108
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:109
 msgid "HIGHSCORE"
 msgstr ""
 
 #. TRANSLATORS: Level completed view.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:266
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:270
 msgid "Level completed!"
 msgstr ""
 
 #. TRANSLATORS: Level completed view.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:288
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:292
 msgid "You have found the perfect solution!"
 msgstr ""
 

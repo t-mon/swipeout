@@ -26,7 +26,7 @@ import Swipeout 1.0
 
 Page {
     id: root
-    title: "Level " + level.id
+    title: "Creator - Level " + level.id
 
     property var creator: gameEngine.levelCreator
     property var level: creator.board.level
@@ -56,12 +56,12 @@ Page {
         Item {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            Layout.minimumHeight: units.gu(10)
-            Layout.minimumWidth: units.gu(10)
+            Layout.minimumHeight: units.gu(8)
+            Layout.minimumWidth: units.gu(8)
 
             GridLayout {
                 anchors.fill: parent
-                anchors.margins: units.gu(2)
+                anchors.margins: units.gu(1)
                 columns: app.landscape ? 1 : 5
 
                 LevelCreatorDeleteTool {
@@ -70,7 +70,7 @@ Page {
                     Layout.fillWidth: !app.landscape
                     Layout.preferredWidth: app.landscape ? parent.height / 5 : parent.width / 5
                     Layout.preferredHeight: app.landscape ? parent.height / 5 : parent.width / 5
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                    Layout.alignment: !app.landscape ? Qt.AlignBottom : Qt.AlignVCenter | Qt.AlignHCenter
                 }
                 LevelCreatorTwoHorizontalTool {
                     id: twoHorizontalTool
@@ -78,7 +78,7 @@ Page {
                     Layout.fillWidth: !app.landscape
                     Layout.preferredWidth: app.landscape ? parent.height / 5 : parent.width / 5
                     Layout.preferredHeight: app.landscape ? parent.height / 5 : parent.width / 5
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                    Layout.alignment: !app.landscape ? Qt.AlignBottom : Qt.AlignVCenter | Qt.AlignHCenter
                 }
 
                 LevelCreatorThreeHorizontalTool {
@@ -87,7 +87,7 @@ Page {
                     Layout.fillWidth: !app.landscape
                     Layout.preferredWidth: app.landscape ? parent.height / 5 : parent.width / 5
                     Layout.preferredHeight: app.landscape ? parent.height / 5 : parent.width / 5
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                    Layout.alignment: !app.landscape ? Qt.AlignBottom : Qt.AlignVCenter | Qt.AlignHCenter
                 }
 
                 LevelCreatorTwoVerticalTool {
@@ -96,7 +96,7 @@ Page {
                     Layout.fillWidth: !app.landscape
                     Layout.preferredWidth: app.landscape ? parent.height / 5 : parent.width / 5
                     Layout.preferredHeight: app.landscape ? parent.height / 5 : parent.width / 5
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                    Layout.alignment: !app.landscape ? Qt.AlignBottom : Qt.AlignVCenter | Qt.AlignHCenter
                 }
 
                 LevelCreatorThreeVerticalTool {
@@ -105,7 +105,7 @@ Page {
                     Layout.fillWidth: !app.landscape
                     Layout.preferredWidth: app.landscape ? parent.height / 5 : parent.width / 5
                     Layout.preferredHeight: app.landscape ? parent.height / 5 : parent.width / 5
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                    Layout.alignment: !app.landscape ? Qt.AlignBottom : Qt.AlignVCenter | Qt.AlignHCenter
                 }
             }
         }
@@ -204,12 +204,12 @@ Page {
         Item {
             Layout.fillHeight: true
             Layout.fillWidth: true
-            Layout.minimumHeight: units.gu(10)
-            Layout.minimumWidth: units.gu(10)
+            Layout.minimumHeight: units.gu(8)
+            Layout.minimumWidth: units.gu(8)
 
             GridLayout {
                 anchors.fill: parent
-                anchors.margins: units.gu(2)
+                anchors.margins: units.gu(1)
                 columns: app.landscape ? 1 : 5
 
                 UbuntuShape {
@@ -217,7 +217,7 @@ Page {
                     Layout.fillWidth: !app.landscape
                     Layout.preferredWidth: app.landscape ? parent.height / 5 : parent.width / 5
                     Layout.preferredHeight: app.landscape ? parent.height / 5 : parent.width / 5
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                    Layout.alignment: !app.landscape ? Qt.AlignTop | Qt.AlignHCenter : Qt.AlignVCenter | Qt.AlignHCenter
 
                     backgroundColor: deleteMouseArea.pressed ? "#44ff4444" : "#88ff8888"
 
@@ -246,7 +246,7 @@ Page {
                     Layout.fillWidth: !app.landscape
                     Layout.preferredWidth: app.landscape ? parent.height / 5 : parent.width / 5
                     Layout.preferredHeight: app.landscape ? parent.height / 5 : parent.width / 5
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                    Layout.alignment: !app.landscape ? Qt.AlignTop | Qt.AlignHCenter : Qt.AlignVCenter | Qt.AlignHCenter
 
                     backgroundColor: createRandomLevelMouseArea.pressed ? "#44444444" : "#88888888"
 
@@ -275,7 +275,7 @@ Page {
                     Layout.fillWidth: !app.landscape
                     Layout.preferredWidth: app.landscape ? parent.height / 5 : parent.width / 5
                     Layout.preferredHeight: app.landscape ? parent.height / 5 : parent.width / 5
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                    Layout.alignment: !app.landscape ? Qt.AlignTop | Qt.AlignHCenter : Qt.AlignVCenter | Qt.AlignHCenter
 
                     backgroundColor: solveMouseArea.pressed ? "#44444444" : "#88888888"
 
@@ -298,9 +298,6 @@ Page {
                     }
                 }
 
-
-
-
                 UbuntuShape {
                     visible: creator.board.solutionAvailable
 
@@ -308,7 +305,7 @@ Page {
                     Layout.fillWidth: !app.landscape
                     Layout.preferredWidth: app.landscape ? parent.height / 5 : parent.width / 5
                     Layout.preferredHeight: app.landscape ? parent.height / 5 : parent.width / 5
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                    Layout.alignment: !app.landscape ? Qt.AlignTop | Qt.AlignHCenter : Qt.AlignVCenter | Qt.AlignHCenter
 
                     backgroundColor: saveMouseArea.pressed ? "#44444444" : "#88888888"
 
@@ -339,7 +336,7 @@ Page {
                     Layout.fillWidth: !app.landscape
                     Layout.preferredWidth: app.landscape ? parent.height / 5 : parent.width / 5
                     Layout.preferredHeight: app.landscape ? parent.height / 5 : parent.width / 5
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                    Layout.alignment: !app.landscape ? Qt.AlignTop | Qt.AlignHCenter : Qt.AlignVCenter | Qt.AlignHCenter
 
                     backgroundColor: showSolutionMouseArea.pressed ? "#44444444" : "#88888888"
 

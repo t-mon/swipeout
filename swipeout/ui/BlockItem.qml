@@ -67,9 +67,13 @@ Item {
     Connections {
         target: blockShape
         onXChanged: {
-            if (blockShape.x == elementMouseArea.drag.minimumX || blockShape.x == elementMouseArea.drag.maximumX)
+            if (blockShape.x == elementMouseArea.drag.minimumX || blockShape.x == elementMouseArea.drag.maximumX) {
                 if (gameEngine.settings.vibrations)
                     rumbleEffect.start()
+
+                if (gameEngine.settings.vibrations)
+                    soundEffect.play()
+            }
         }
         onYChanged:  {
             if (blockShape.y == elementMouseArea.drag.minimumY || blockShape.y == elementMouseArea.drag.maximumY)

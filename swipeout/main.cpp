@@ -64,8 +64,11 @@ int main(int argc, char *argv[])
             exit(-1);
         }
         view.engine()->rootContext()->setContextProperty("levelDirectory", dataDir.path() + "/");
+        dataDir.cdUp();
+        view.engine()->rootContext()->setContextProperty("soundDirectory", dataDir.path() + "/sounds/");
     } else {
         view.engine()->rootContext()->setContextProperty("levelDirectory",QCoreApplication::applicationDirPath() + "/../../../swipeout/levels/");
+        view.engine()->rootContext()->setContextProperty("soundDirectory",QCoreApplication::applicationDirPath() + "/../../../swipeout/sounds/");
     }
     view.engine()->rootContext()->setContextProperty("version", app.applicationVersion());
     view.setSource(QUrl(QStringLiteral("qrc:///ui/Main.qml")));

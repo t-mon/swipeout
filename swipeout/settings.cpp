@@ -30,6 +30,7 @@ Settings::Settings(QObject *parent) :
     settings.beginGroup("Swipeout");
     setShowSolutionSpeed(settings.value("showSolutionSpeed", 500).toInt());
     setVibrations(settings.value("vibrations", true).toBool());
+    setSounds(settings.value("sounds", true).toBool());
     settings.endGroup();
 }
 
@@ -47,6 +48,22 @@ void Settings::setVibrations(const bool &vibrations)
     settings.setValue("vibrations", vibrations);
     settings.endGroup();
     emit vibrationsChanged();
+}
+
+bool Settings::sounds() const
+{
+    return m_sounds;
+}
+
+void Settings::setSounds(const bool &sounds)
+{
+    m_sounds = sounds;
+    qDebug() << "sounds = " << sounds;
+    QSettings settings;
+    settings.beginGroup("Swipeout");
+    settings.setValue("sounds", sounds);
+    settings.endGroup();
+    emit soundsChanged();
 }
 
 int Settings::showSolutionSpeed() const
@@ -68,7 +85,8 @@ void Settings::setShowSolutionSpeed(const int &showSolutionSpeed)
 void Settings::resetSettings()
 {
     setShowSolutionSpeed(500);
-    setVibrations(false);
+    setVibrations(true);
+    setVibrations(true);
 
     QSettings settings;
     settings.beginGroup("levelpacks");

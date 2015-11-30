@@ -3,7 +3,7 @@ TARGET = swipeout
 
 load(ubuntu-click)
 
-QT += qml quick
+QT += qml quick multimedia
 
 QMAKE_CXXFLAGS += -Werror
 CONFIG += c++11

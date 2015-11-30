@@ -37,9 +37,13 @@ CONF_FILES +=  swipeout.apparmor \
 levels.files = levels/
 levels.path = /swipeout
 
+sounds.files = sounds/
+sounds.path = /swipeout
+
 #show all the files in QtCreator
 OTHER_FILES += $${CONF_FILES} \
-               levels
+               levels \
+               sounds
 
 #specify where the config files are installed to
 config_files.path = /swipeout

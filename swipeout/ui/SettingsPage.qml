@@ -19,6 +19,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 import QtQuick 2.4
+import QtQuick.Layouts 1.1
 import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.3
 import Ubuntu.Components.Popups 1.3
@@ -29,63 +30,102 @@ Page {
     // TRANSLATORS: Title of the settings page
     title: i18n.tr("Settings")
 
-    Column {
+    Flickable {
         anchors.fill: parent
-        anchors.margins: units.gu(3)
+        anchors.margins: units.gu(2)
+        contentHeight: columnLayout.height
+        enabled: height < columnLayout.height
 
-        spacing: units.gu(2)
-
-        ThinDivider { }
-
-        Label {
-            anchors.left: parent.left
-            // TRANSLATORS: In the settings page the slider description. Describes the speed of the animation while showing the solution.
-            text: i18n.tr("Show solution speed")
-        }
-
-        Slider {
-            id: speedSlider
-            width: parent.width
-            maximumValue: 1000
-            minimumValue: 250
-            onValueChanged: {
-                gameEngine.settings.showSolutionSpeed = speedSlider.value
-            }
-            Component.onCompleted: value = gameEngine.settings.showSolutionSpeed
-        }
-
-        ThinDivider { }
-
-        Item {
-            width: parent.width
-            height: units.gu(3)
-
-            Label {
-                anchors.left: parent.left
-                // TRANSLATORS: In the settings page the vibrations checkbox description.
-                text: i18n.tr("Vibrations")
-            }
-
-            CheckBox {
-                id: vibrationCheckbox
-                anchors.right: parent.right
-                onCheckedChanged: {
-                    gameEngine.settings.vibrations = vibrationCheckbox.checked
-                }
-                Component.onCompleted: checked = gameEngine.settings.vibrations
-            }
-        }
-
-        ThinDivider { }
-        Button {
+        ColumnLayout {
+            id: columnLayout
+            anchors.top: parent.top
             anchors.left: parent.left
             anchors.right: parent.right
-            // TRANSLATORS: Reset game button in the settings page.
-            text: i18n.tr("Reset game")
-            color: "red"
-            onClicked: PopupUtils.open(resetComponent)
-        }
+            spacing: units.gu(2)
 
+
+            Column {
+                anchors.fill: parent
+                anchors.margins: units.gu(3)
+
+                spacing: units.gu(2)
+
+                ThinDivider { }
+
+                Label {
+                    anchors.left: parent.left
+                    // TRANSLATORS: In the settings page the slider description. Describes the speed of the animation while showing the solution.
+                    text: i18n.tr("Show solution speed")
+                }
+
+                Slider {
+                    id: speedSlider
+                    width: parent.width
+                    maximumValue: 1000
+                    minimumValue: 250
+                    onValueChanged: {
+                        gameEngine.settings.showSolutionSpeed = speedSlider.value
+                    }
+                    Component.onCompleted: value = gameEngine.settings.showSolutionSpeed
+                }
+
+                ThinDivider { }
+
+                Item {
+                    width: parent.width
+                    height: units.gu(3)
+
+                    Label {
+                        anchors.left: parent.left
+                        // TRANSLATORS: In the settings page the vibrations checkbox description.
+                        text: i18n.tr("Vibrations")
+                    }
+
+                    CheckBox {
+                        id: vibrationCheckbox
+                        anchors.right: parent.right
+                        onCheckedChanged: {
+                            gameEngine.settings.vibrations = vibrationCheckbox.checked
+                        }
+                        Component.onCompleted: checked = gameEngine.settings.vibrations
+                    }
+                }
+
+                ThinDivider { }
+                Item {
+                    width: parent.width
+                    height: units.gu(3)
+
+                    Label {
+                        anchors.left: parent.left
+                        // TRANSLATORS: In the settings page the sound effect checkbox description.
+                        text: i18n.tr("Sound effects")
+                    }
+
+                    CheckBox {
+                        id: soundsCheckbox
+                        anchors.right: parent.right
+                        onCheckedChanged: {
+                            gameEngine.settings.sounds = soundsCheckbox.checked
+                        }
+                        Component.onCompleted: checked = gameEngine.settings.sounds
+                    }
+                }
+
+                ThinDivider { }
+
+                Button {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    // TRANSLATORS: Reset game button in the settings page.
+                    text: i18n.tr("Reset game")
+                    color: "red"
+                    onClicked: PopupUtils.open(resetComponent)
+                }
+
+                ThinDivider { }
+            }
+        }
     }
 
     Component {

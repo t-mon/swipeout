@@ -1,6 +1,7 @@
 {
     "policy_groups": [
-        "keep-display-on"
+        "keep-display-on",
+        "audio"
     ],
     "policy_version": 1.3
 }

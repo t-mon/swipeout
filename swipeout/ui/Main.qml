@@ -19,6 +19,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 import QtQuick 2.4
+import QtMultimedia 5.4
 import Ubuntu.Components 1.3
 import Swipeout 1.0
 
@@ -44,9 +45,19 @@ MainView {
         Theme.name = "Ubuntu.Components.Themes.SuruDark"
     }
 
+    SoundEffect {
+        id: soundEffect
+        source: "/home/timon/development/swipeout/swipeout/sounds/pop.wav"//soundDirectory + "pop.wav"
+        Component.onCompleted: console.log(source)
+    }
+
     GameEngine {
         id: gameEngine
         levelDir: levelDirectory
+        Component.onCompleted: {
+            console.log(levelDirectory)
+            console.log(soundDirectory)
+        }
     }
 
     PageStack {

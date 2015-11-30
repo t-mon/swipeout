@@ -28,11 +28,11 @@ Page {
     id: root
     title: i18n.tr("About")
 
-
     Flickable {
         anchors.fill: parent
         anchors.margins: units.gu(2)
         contentHeight: columnLayout.height
+        enabled: height < columnLayout.height
 
         ColumnLayout {
             id: columnLayout

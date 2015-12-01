@@ -32,6 +32,7 @@ Settings::Settings(QObject *parent) :
     setVibrations(settings.value("vibrations", true).toBool());
     setSounds(settings.value("sounds", true).toBool());
     setSoundsVolume(settings.value("soundsVolume", 50).toInt());
+    setBlockTheme(settings.value("blockTheme", "Dark").toString());
     settings.endGroup();
 }
 
@@ -97,6 +98,22 @@ void Settings::setShowSolutionSpeed(const int &showSolutionSpeed)
     settings.setValue("showSolutionSpeed", showSolutionSpeed);
     settings.endGroup();
     emit showSolutionSpeedChanged();
+}
+
+QString Settings::blockTheme() const
+{
+    return m_blockTheme;
+}
+
+void Settings::setBlockTheme(const QString &blockTheme)
+{
+    m_blockTheme = blockTheme;
+    qDebug() << "block theme = " << blockTheme;
+    QSettings settings;
+    settings.beginGroup("Swipeout");
+    settings.setValue("blockTheme", blockTheme);
+    settings.endGroup();
+    emit blockThemeChanged();
 }
 
 void Settings::resetSettings()

@@ -26,10 +26,12 @@
 class Settings : public QObject
 {
     Q_OBJECT
+    Q_ENUMS(BlockTheme)
     Q_PROPERTY(bool vibrations READ vibrations WRITE setVibrations NOTIFY vibrationsChanged)
     Q_PROPERTY(bool sounds READ sounds WRITE setSounds NOTIFY soundsChanged)
     Q_PROPERTY(int soundsVolume READ soundsVolume WRITE setSoundsVolume NOTIFY soundsVolumeChanged)
     Q_PROPERTY(int showSolutionSpeed READ showSolutionSpeed WRITE setShowSolutionSpeed NOTIFY showSolutionSpeedChanged)
+    Q_PROPERTY(QString blockTheme READ blockTheme WRITE setBlockTheme NOTIFY blockThemeChanged)
 
 public:
     explicit Settings(QObject *parent = 0);
@@ -46,6 +48,9 @@ public:
     int showSolutionSpeed() const;
     void setShowSolutionSpeed(const int &showSolutionSpeed);
 
+    QString blockTheme() const;
+    void setBlockTheme(const QString &blockTheme);
+
     void resetSettings();
 
 private:
@@ -53,12 +58,14 @@ private:
     bool m_sounds;
     int m_soundsVolume;
     int m_showSolutionSpeed;
+    QString m_blockTheme;
 
 signals:
     void vibrationsChanged();
     void soundsChanged();
     void soundsVolumeChanged();
     void showSolutionSpeedChanged();
+    void blockThemeChanged();
 
 };
 

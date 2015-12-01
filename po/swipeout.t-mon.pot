@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-01 15:00+0100\n"
+"POT-Creation-Date: 2015-12-01 22:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -227,47 +227,52 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
+#. TRANSLATORS: In the settings page the color theme value selector description.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:55
+msgid "Block Color Theme"
+msgstr ""
+
 #. TRANSLATORS: In the settings page the slider description. Describes the speed of the animation while showing the solution.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:57
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:64
 msgid "Show solution speed"
 msgstr ""
 
 #. TRANSLATORS: In the settings page the vibrations checkbox description.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:80
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:87
 msgid "Vibrations"
 msgstr ""
 
 #. TRANSLATORS: In the settings page the sound effect checkbox description.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:101
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:108
 msgid "Sound effects"
 msgstr ""
 
 #. TRANSLATORS: In the settings page the slider description.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:118
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:125
 msgid "Sound volume"
 msgstr ""
 
 #. TRANSLATORS: Reset game button in the settings page.
 #. TRANSLATORS: Title of the reset dialog.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:140
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:154
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:147
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:161
 msgid "Reset game"
 msgstr ""
 
 #. TRANSLATORS: Reset warning message. Please insert also the "\n" in the middle of the text!
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:156
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:163
 msgid ""
 "Are you sure you want to reset all\n"
 "game settings and achievements?"
 msgstr ""
 
 #. TRANSLATORS: Reset button in the reset dialog
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:161
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:168
 msgid "Reset"
 msgstr ""
 
 #. TRANSLATORS: Button to cancel the reset request.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:171
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:178
 msgid "No"
 msgstr ""
 

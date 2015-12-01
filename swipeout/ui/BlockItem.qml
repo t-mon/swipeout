@@ -29,14 +29,17 @@ Item {
     property var block: null
     property var board: null
 
-    Component.onCompleted: createAnimation.start()
+    Component.onCompleted: {
+        block.setBlockTheme(gameEngine.settings.blockTheme)
+        createAnimation.start()
+    }
 
     NumberAnimation on opacity {
         id: createAnimation
         from: 0
         to: 1
         easing.type: Easing.OutQuad
-        duration: 300
+        duration: 500
     }
 
     HapticsEffect {
@@ -60,6 +63,13 @@ Item {
         }
         onYChanged: {
             blockShape.y = block.y * cellSize
+        }
+    }
+
+    Connections {
+        target: gameEngine.settings
+        onBlockThemeChanged: {
+            block.setBlockTheme(gameEngine.settings.blockTheme)
         }
     }
 
@@ -92,7 +102,6 @@ Item {
         width: block.width * cellSize
         height: block.height * cellSize
 
-
         UbuntuShape {
             anchors.fill: parent
             anchors.margins: units.gu(0.3)
@@ -122,6 +131,12 @@ Item {
                 duration: 100
                 easing.type: Easing.InOutCubic
             }
+        }
+
+        Label {
+            visible: app.debug
+            anchors.centerIn: parent
+            text: block.id
         }
 
         MouseArea {

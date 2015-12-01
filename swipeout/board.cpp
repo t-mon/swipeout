@@ -90,7 +90,6 @@ void Board::restartLevel()
 
 void Board::loadLevel(Level *level)
 {
-
     if (m_creatorBoard) {
         qDebug() << "Set creator level" << level->id();
         m_level = level;
@@ -98,7 +97,6 @@ void Board::loadLevel(Level *level)
     } else {
         clearLevel();
         qDebug() << "Start level" << level->id();
-
         m_level = level;
         m_level->loadBlocks();
         emit levelChanged();

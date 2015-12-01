@@ -20,6 +20,8 @@
 
 #include "block.h"
 
+#include <QDebug>
+
 Block::Block(const int &id, const int &x, const int &y, const int &height, const int &width, QObject *parent) :
     QObject(parent),
     m_id(id),
@@ -133,6 +135,12 @@ QColor Block::color() const
     return m_color;
 }
 
+void Block::setBlockTheme(const QString &blockTheme)
+{
+    m_blockTheme = blockTheme;
+    setColor();
+}
+
 void Block::resetPosition()
 {
     setX(m_startX);
@@ -142,94 +150,143 @@ void Block::resetPosition()
 
 void Block::setColor()
 {
-    if (m_id == 0) {
-        m_color = QColor("#8d8d8d");
+
+    if (m_blockTheme == "Warm Colors") {
+        switch (m_id) {
+        case 0:
+            m_color = QColor("#eee4da");
+            break;
+        case 1:
+            m_color = QColor("#ede0c8");
+            break;
+        case 2:
+            m_color = QColor("#f2b179");
+            break;
+        case 3:
+            m_color = QColor("#f59563");
+            break;
+        case 4:
+            m_color = QColor("#f67c5f");
+            break;
+        case 5:
+            m_color = QColor("#f65e3b");
+            break;
+        case 6:
+            m_color = QColor("#edcf72");
+            break;
+        case 7:
+            m_color = QColor("#edcc61");
+            break;
+        case 8:
+            m_color = QColor("#edc850");
+            break;
+        case 9:
+            m_color = QColor("#edc53f");
+            break;
+        case 10:
+            m_color = QColor("#edc22e");
+            break;
+        default:
+            m_color = QColor("#edcf72");
+            break;
+        }
+    } else if (m_blockTheme == "Colors") {
+        switch (m_id) {
+        case 0:
+            m_color = QColor("#c8c8382b");
+            break;
+        case 1:
+            m_color = QColor("#c8fcc307");
+            break;
+        case 2:
+            m_color = QColor("#c8bce807");
+            break;
+        case 3:
+            m_color = QColor("#c84bbbfb");
+            break;
+        case 4:
+            m_color = QColor("#dc7ef407");
+            break;
+        case 5:
+            m_color = QColor("#c8ec817e");
+            break;
+        case 6:
+            m_color = QColor("#c8ae7d00");
+            break;
+        case 7:
+            m_color = QColor("#c8fcff46");
+            break;
+        case 8:
+            m_color = QColor("#dc2695ff");
+            break;
+        case 9:
+            m_color = QColor("#c83eba07");
+            break;
+        case 10:
+            m_color = QColor("#c8ff8614");
+            break;
+        case 11:
+            m_color = QColor("#c8f7ba07");
+            break;
+        case 12:
+            m_color = QColor("#cd037dff");
+            break;
+        case 13:
+            m_color = QColor("#c8f15a49");
+            break;
+        default:
+            m_color = QColor("#c84bbbfb");
+            break;
+        }
+    } else if (m_blockTheme == "Ubuntu Colors") {
+        switch (m_id) {
+        case 0:
+            m_color = QColor("#DD4814");
+            break;
+        case 1:
+            m_color = QColor("#9E7D96");
+            break;
+        case 2:
+            m_color = QColor("#411934");
+            break;
+        case 3:
+            m_color = QColor("#77216F");
+            break;
+        case 4:
+            m_color = QColor("#6E3C61");
+            break;
+        case 5:
+            m_color = QColor("#5E2750");
+            break;
+        case 6:
+            m_color = QColor("#77216F");
+            break;
+        case 7:
+            m_color = QColor("#772953");
+            break;
+        case 8:
+            m_color = QColor("#F1B5A1");
+            break;
+        case 9:
+            m_color = QColor("#BB90B7");
+            break;
+        case 10:
+            m_color = QColor("#EA9172");
+            break;
+        case 11:
+            m_color = QColor("#F4C8B8");
+            break;
+        default:
+            m_color = QColor("#5E2750");
+            break;
+        }
     } else {
-        m_color = QColor("#333333");
+        if (m_id == 0) {
+            m_color = QColor("#8d8d8d");
+        } else {
+            m_color = QColor("#333333");
+        }
     }
-    return;
-
-    switch (m_id) {
-    case 0:
-        m_color = QColor("#eee4da");
-        break;
-    case 1:
-        m_color = QColor("#ede0c8");
-        break;
-    case 2:
-        m_color = QColor("#f2b179");
-        break;
-    case 3:
-        m_color = QColor("#f59563");
-        break;
-    case 4:
-        m_color = QColor("#f67c5f");
-        break;
-    case 5:
-        m_color = QColor("#f65e3b");
-        break;
-    case 6:
-        m_color = QColor("#edcf72");
-        break;
-    case 7:
-        m_color = QColor("#edcc61");
-        break;
-    case 8:
-        m_color = QColor("#edc850");
-        break;
-    case 9:
-        m_color = QColor("#edc53f");
-        break;
-    case 10:
-        m_color = QColor("#edc22e");
-        break;
-    case 11:
-        m_color = QColor("#3c3a32");
-        break;
-    default:
-        break;
-    }
-
-//    switch (m_id) {
-//    case 0:
-//        m_color = QColor("#DD4814");
-//        break;
-//    case 1:
-//        m_color = QColor("#9E7D96");
-//        break;
-//    case 2:
-//        m_color = QColor("#411934");
-//        break;
-//    case 3:
-//        m_color = QColor("#77216F");
-//        break;
-//    case 4:
-//        m_color = QColor("#6E3C61");
-//        break;
-//    case 5:
-//        m_color = QColor("#5E2750");
-//        break;
-//    case 6:
-//        m_color = QColor("#77216F");
-//        break;
-//    case 7:
-//        m_color = QColor("#772953");
-//        break;
-//    case 8:
-//        m_color = QColor("#F1B5A1");
-//        break;
-//    case 9:
-//        m_color = QColor("#BB90B7");
-//        break;
-//    case 10:
-//        m_color = QColor("#EA9172");
-//        break;
-//    case 11:
-//        m_color = QColor("#F4C8B8");
-//        break;
-//    default:
-//        break;
-//    }
 
     emit colorChanged();
 }

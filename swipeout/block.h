@@ -70,6 +70,8 @@ public:
 
     QColor color() const;
 
+    Q_INVOKABLE void setBlockTheme(const QString &blockTheme);
+
     void resetPosition();
 
 private:
@@ -82,6 +84,7 @@ private:
     int m_width;
 
     QColor m_color;
+    QString m_blockTheme;
 
     void setColor();
 

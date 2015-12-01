@@ -1,6 +1,6 @@
 {
     "name": "swipeout.t-mon",
-    "description": "Classic unblock game.",
+    "description": "A classic unblock game.",
     "architecture": "@CLICK_ARCH@",
     "title": "Swipeout",
     "hooks": {
@@ -9,7 +9,7 @@
             "desktop": "swipeout/swipeout.desktop"
         }
     },
-    "version": "0.2.0",
+    "version": "0.3.0",
     "maintainer": "Simon Stürz <stuerz.simon@gmail.com>",
     "framework": "ubuntu-sdk-15.04"
 }

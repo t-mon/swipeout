@@ -42,7 +42,6 @@ Page {
             anchors.right: parent.right
             spacing: units.gu(2)
 
-
             Column {
                 anchors.fill: parent
                 anchors.margins: units.gu(2)
@@ -50,6 +49,14 @@ Page {
                 spacing: units.gu(2)
 
                 ThinDivider { }
+
+                ValueSelector {
+                    // TRANSLATORS: In the settings page the color theme value selector description.
+                    text: i18n.tr("Block Color Theme")
+                    values: ["Dark", "Ubuntu Colors", "Colors", "Warm Colors"]
+                    onSelectedIndexChanged: gameEngine.settings.blockTheme = values[selectedIndex]
+                    Component.onCompleted: selectedIndex = values.indexOf(gameEngine.settings.blockTheme)
+                }
 
                 Label {
                     anchors.left: parent.left

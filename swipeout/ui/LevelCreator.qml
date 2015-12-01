@@ -155,6 +155,12 @@ Page {
                             block: level.blocks.get(model.blockId)
                         }
                     }
+
+                    // Fix the block positions if the board size changed
+                    onWidthChanged: {
+                        blockRepeater.model = null
+                        blockRepeater.model = level.blocks
+                    }
                 }
 
                 UbuntuShape {

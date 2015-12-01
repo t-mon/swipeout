@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
     app.setApplicationName("Swipeout");
-    app.setApplicationVersion("0.1.0");
+    app.setApplicationVersion("0.2.0");
 
     // command line parser
     QCommandLineParser parser;
@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
     parser.setApplicationDescription(QString("\nClassic swipe out game.\n\n"
                                              "Copyright %1 2015 Simon Stürz <stuerz.simon@gmail.com>\n"
                                              "Released under the GNU GPLv3.").arg(QChar(0xA9)));
-    parser.addPositionalArgument("levelPath", "The relative file path where the \"levels\" folders can be found (optional).", "[levelPath]");
+    parser.addPositionalArgument("dataPath", "The relative file path where the \"data\" folders can be found (optional).", "[dataPath]");
     parser.process(app);
 
     qmlRegisterType<GameEngine>("Swipeout", 1, 0, "GameEngine");
@@ -63,12 +63,9 @@ int main(int argc, char *argv[])
             qWarning() << dataDir.path() << "does not exist.";
             exit(-1);
         }
-        view.engine()->rootContext()->setContextProperty("levelDirectory", dataDir.path() + "/");
-        dataDir.cdUp();
-        view.engine()->rootContext()->setContextProperty("soundDirectory", dataDir.path() + "/sounds/");
+        view.engine()->rootContext()->setContextProperty("dataDirectory", dataDir.path() + "/");
     } else {
-        view.engine()->rootContext()->setContextProperty("levelDirectory",QCoreApplication::applicationDirPath() + "/../../../swipeout/levels/");
-        view.engine()->rootContext()->setContextProperty("soundDirectory",QCoreApplication::applicationDirPath() + "/../../../swipeout/sounds/");
+        view.engine()->rootContext()->setContextProperty("dataDirectory", QCoreApplication::applicationDirPath() + "/../../../swipeout/data/");
     }
     view.engine()->rootContext()->setContextProperty("version", app.applicationVersion());
     view.setSource(QUrl(QStringLiteral("qrc:///ui/Main.qml")));

@@ -29,7 +29,6 @@ Item {
     property var block: null
     property var board: null
 
-
     Component.onCompleted: createAnimation.start()
 
     NumberAnimation on opacity {
@@ -68,17 +67,23 @@ Item {
         target: blockShape
         onXChanged: {
             if (blockShape.x == elementMouseArea.drag.minimumX || blockShape.x == elementMouseArea.drag.maximumX) {
-                if (gameEngine.settings.vibrations)
+                if (gameEngine.settings.vibrations && !board.showSolutionRunning)
                     rumbleEffect.start()
 
-                if (gameEngine.settings.vibrations)
+                if (gameEngine.settings.sounds && !board.showSolutionRunning)
                     soundEffect.play()
+
             }
         }
         onYChanged:  {
-            if (blockShape.y == elementMouseArea.drag.minimumY || blockShape.y == elementMouseArea.drag.maximumY)
-                if (gameEngine.settings.vibrations)
+            if (blockShape.y == elementMouseArea.drag.minimumY || blockShape.y == elementMouseArea.drag.maximumY) {
+                if (gameEngine.settings.vibrations && !board.showSolutionRunning)
                     rumbleEffect.start()
+
+                if (gameEngine.settings.sounds && !board.showSolutionRunning)
+                    soundEffect.play()
+
+            }
         }
     }
 
@@ -107,7 +112,7 @@ Item {
             id: xBehavior
             NumberAnimation {
                 duration: 100
-                easing.type: Easing.OutQuad
+                easing.type: Easing.InOutCubic
             }
         }
 
@@ -115,7 +120,7 @@ Item {
             id: yBehavior
             NumberAnimation {
                 duration: 100
-                easing.type: Easing.OutQuad
+                easing.type: Easing.InOutCubic
             }
         }
 

@@ -42,7 +42,7 @@ class GameEngine : public QObject
     Q_PROPERTY(LevelCreator *levelCreator READ levelCreator CONSTANT)
     Q_PROPERTY(Board *board READ board CONSTANT)
     Q_PROPERTY(Settings *settings READ settings CONSTANT)
-    Q_PROPERTY(QString levelDir READ levelDir WRITE setLevelDir NOTIFY levelDirChanged)
+    Q_PROPERTY(QString dataDir READ dataDir WRITE setDataDir NOTIFY dataDirChanged)
     Q_PROPERTY(bool solverRunning READ solverRunning NOTIFY solverRunningChanged)
     Q_PROPERTY(bool hasNextLevel READ hasNextLevel NOTIFY hasNextLevelChanged)
     Q_PROPERTY(bool hasPreviousLevel READ hasPreviousLevel NOTIFY hasPreviousLevelChanged)
@@ -50,8 +50,8 @@ class GameEngine : public QObject
 public:
     explicit GameEngine(QObject *parent = 0);
 
-    QString levelDir() const;
-    void setLevelDir(const QString &levelDir);
+    QString dataDir() const;
+    void setDataDir(const QString &dataDir);
 
     bool hasNextLevel() const;
     bool hasPreviousLevel() const;
@@ -79,7 +79,7 @@ public:
     bool solverRunning() const;
 
 private:
-    QString m_levelDir;
+    QString m_dataDir;
     LevelPack *m_levelPack;
     LevelPacks *m_levelPacks;
     Levels *m_createdLevels;
@@ -115,7 +115,7 @@ private slots:
     void onShowSolutionSpeedChanged();
 
 signals:
-    void levelDirChanged();
+    void dataDirChanged();
     void hasNextLevelChanged();
     void hasPreviousLevelChanged();
     void solverRunningChanged();

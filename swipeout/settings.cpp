@@ -31,6 +31,7 @@ Settings::Settings(QObject *parent) :
     setShowSolutionSpeed(settings.value("showSolutionSpeed", 500).toInt());
     setVibrations(settings.value("vibrations", true).toBool());
     setSounds(settings.value("sounds", true).toBool());
+    setSoundsVolume(settings.value("soundsVolume", 50).toInt());
     settings.endGroup();
 }
 
@@ -64,6 +65,22 @@ void Settings::setSounds(const bool &sounds)
     settings.setValue("sounds", sounds);
     settings.endGroup();
     emit soundsChanged();
+}
+
+int Settings::soundsVolume() const
+{
+    return m_soundsVolume;
+}
+
+void Settings::setSoundsVolume(const int &volume)
+{
+    m_soundsVolume = volume;
+    qDebug() << "sounds volume = " << volume;
+    QSettings settings;
+    settings.beginGroup("Swipeout");
+    settings.setValue("soundsVolume", volume);
+    settings.endGroup();
+    emit soundsVolumeChanged();
 }
 
 int Settings::showSolutionSpeed() const

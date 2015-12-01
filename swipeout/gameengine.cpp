@@ -49,17 +49,17 @@ GameEngine::GameEngine(QObject *parent) :
     connect(m_settings, SIGNAL(showSolutionSpeedChanged()), this, SLOT(onShowSolutionSpeedChanged()));
 }
 
-QString GameEngine::levelDir() const
+QString GameEngine::dataDir() const
 {
-    return m_levelDir;
+    return m_dataDir;
 }
 
-void GameEngine::setLevelDir(const QString &levelDir)
+void GameEngine::setDataDir(const QString &dataDir)
 {
-    m_levelDir = levelDir;
+    m_dataDir = dataDir;
     loadLevelPacks();
     loadCreatedLevels();
-    emit levelDirChanged();
+    emit dataDirChanged();
 }
 
 LevelPack *GameEngine::levelPack()
@@ -283,18 +283,18 @@ bool GameEngine::solverRunning() const
 
 void GameEngine::loadLevelPacks()
 {
-    qDebug() << "Loading level packs" << m_levelDir;
-    QDir dir(m_levelDir);
-    dir.setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
-    dir.setSorting(QDir::Name);
+    qDebug() << "Loading level packs" << m_dataDir + "levels";
+    QDir levelDir(m_dataDir + "levels/");
+    levelDir.setFilter(QDir::NoDotAndDotDot | QDir::AllDirs);
+    levelDir.setSorting(QDir::Name);
 
-    QFileInfoList levelFiles = dir.entryInfoList();
+    QFileInfoList levelFiles = levelDir.entryInfoList();
     foreach (const QFileInfo &levelFileInfo, levelFiles) {
 
-        LevelPack *levelPack = new LevelPack(m_levelDir, levelFileInfo.fileName(), this);
+        LevelPack *levelPack = new LevelPack(levelDir.path(), levelFileInfo.fileName(), this);
 
         // calculate statistic
-        QDir dir(m_levelDir + levelFileInfo.fileName());
+        QDir dir(levelDir.path() + "/" + levelFileInfo.fileName());
         dir.setFilter(QDir::Files);
         dir.setSorting(QDir::Name);
         QFileInfoList levelFiles = dir.entryInfoList();
@@ -350,10 +350,10 @@ void GameEngine::reloadLevelPackStatistic()
 {
     foreach (LevelPack *levelPack, m_levelPacks->levelPacks()) {
         // calculate statistic
-        QDir dir(m_levelDir + levelPack->name());
-        dir.setFilter(QDir::Files);
-        dir.setSorting(QDir::Name);
-        QFileInfoList levelFiles = dir.entryInfoList();
+        QDir levelDir(m_dataDir + "levels/" + levelPack->name());
+        levelDir.setFilter(QDir::Files);
+        levelDir.setSorting(QDir::Name);
+        QFileInfoList levelFiles = levelDir.entryInfoList();
         levelPack->setLevelCount(levelFiles.count());
 
         // count completed / completed perfect

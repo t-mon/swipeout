@@ -47,17 +47,14 @@ MainView {
 
     SoundEffect {
         id: soundEffect
-        source: "/home/timon/development/swipeout/swipeout/sounds/pop.wav"//soundDirectory + "pop.wav"
-        Component.onCompleted: console.log(source)
+        source: "file://" + dataDirectory + "sounds/pop.wav"
+        volume: gameEngine.settings.soundsVolume / 100
+        Component.onCompleted: console.log("Sound effect: " + dataDirectory + "sounds/pop.wav")
     }
 
     GameEngine {
         id: gameEngine
-        levelDir: levelDirectory
-        Component.onCompleted: {
-            console.log(levelDirectory)
-            console.log(soundDirectory)
-        }
+        dataDir: dataDirectory
     }
 
     PageStack {

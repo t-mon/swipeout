@@ -32,9 +32,8 @@ Page {
 
     Flickable {
         anchors.fill: parent
-        anchors.margins: units.gu(2)
         contentHeight: columnLayout.height
-        enabled: height < columnLayout.height
+        //enabled: height < columnLayout.height
 
         ColumnLayout {
             id: columnLayout
@@ -46,7 +45,7 @@ Page {
 
             Column {
                 anchors.fill: parent
-                anchors.margins: units.gu(3)
+                anchors.margins: units.gu(2)
 
                 spacing: units.gu(2)
 
@@ -111,6 +110,26 @@ Page {
                         Component.onCompleted: checked = gameEngine.settings.sounds
                     }
                 }
+                ThinDivider { }
+
+                Label {
+                    anchors.left: parent.left
+                    // TRANSLATORS: In the settings page the slider description.
+                    text: i18n.tr("Sound volume")
+                }
+
+                Slider {
+                    id: volumeSlider
+                    width: parent.width
+
+                    maximumValue: 100
+                    minimumValue: 0
+                    onValueChanged: {
+                        gameEngine.settings.soundsVolume = volumeSlider.value
+                    }
+                    Component.onCompleted: value = gameEngine.settings.soundsVolume
+                }
+
 
                 ThinDivider { }
 
@@ -122,7 +141,6 @@ Page {
                     color: "red"
                     onClicked: PopupUtils.open(resetComponent)
                 }
-
                 ThinDivider { }
             }
         }

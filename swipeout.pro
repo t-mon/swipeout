@@ -34,16 +34,12 @@ CONF_FILES +=  swipeout.apparmor \
                swipeout.desktop
 
 # install level files
-levels.files = levels/
-levels.path = /swipeout
-
-sounds.files = sounds/
-sounds.path = /swipeout
+dataFolder.files = data/
+dataFolder.path = /swipeout
 
 #show all the files in QtCreator
 OTHER_FILES += $${CONF_FILES} \
-               levels \
-               sounds
+               dataFolder
 
 #specify where the config files are installed to
 config_files.path = /swipeout
@@ -55,4 +51,4 @@ desktop_file.path = /swipeout
 desktop_file.files = swipeout.desktop
 desktop_file.CONFIG += no_check_exist
 
-INSTALLS += desktop_file config_files levels
+INSTALLS += desktop_file config_files dataFolder

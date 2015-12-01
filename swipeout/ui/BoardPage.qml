@@ -165,6 +165,11 @@ Page {
                             block: level.blocks.get(model.blockId)
                         }
                     }
+                    // Fix the block positions if the board size changed
+                    onWidthChanged: {
+                        blockRepeater.model = null
+                        blockRepeater.model = level.blocks
+                    }
                 }
             }
         }
@@ -184,7 +189,7 @@ Page {
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
                     Layout.minimumWidth: units.gu(8)
-                    Layout.preferredHeight: app.landscape ? height : units.gu(7)
+                    Layout.preferredHeight: app.landscape ? parent.height / 3 : units.gu(7)
                     Layout.alignment: !app.landscape ? Qt.AlignTop | Qt.AlignHCenter : Qt.AlignVCenter | Qt.AlignHCenter
 
                     backgroundColor: undoMouseArea.pressed ? "#88888888": "#44444444"
@@ -209,7 +214,7 @@ Page {
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
                     Layout.minimumWidth: units.gu(8)
-                    Layout.preferredHeight: app.landscape ? height : units.gu(7)
+                    Layout.preferredHeight: app.landscape ? parent.height / 3 : units.gu(7)
                     Layout.alignment: !app.landscape ? Qt.AlignTop | Qt.AlignHCenter : Qt.AlignVCenter | Qt.AlignHCenter
 
                     backgroundColor: restartMouseArea.pressed ? "#88888888": "#44444444"
@@ -235,7 +240,7 @@ Page {
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
                     Layout.minimumWidth: units.gu(8)
-                    Layout.preferredHeight: app.landscape ? height : units.gu(7)
+                    Layout.preferredHeight: app.landscape ? parent.height / 3 : units.gu(7)
                     Layout.alignment: !app.landscape ? Qt.AlignTop | Qt.AlignHCenter : Qt.AlignVCenter | Qt.AlignHCenter
 
                     visible: app.debug

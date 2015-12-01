@@ -28,6 +28,7 @@ class Settings : public QObject
     Q_OBJECT
     Q_PROPERTY(bool vibrations READ vibrations WRITE setVibrations NOTIFY vibrationsChanged)
     Q_PROPERTY(bool sounds READ sounds WRITE setSounds NOTIFY soundsChanged)
+    Q_PROPERTY(int soundsVolume READ soundsVolume WRITE setSoundsVolume NOTIFY soundsVolumeChanged)
     Q_PROPERTY(int showSolutionSpeed READ showSolutionSpeed WRITE setShowSolutionSpeed NOTIFY showSolutionSpeedChanged)
 
 public:
@@ -39,6 +40,9 @@ public:
     bool sounds() const;
     void setSounds(const bool &sounds);
 
+    int soundsVolume() const;
+    void setSoundsVolume(const int &volume);
+
     int showSolutionSpeed() const;
     void setShowSolutionSpeed(const int &showSolutionSpeed);
 
@@ -47,11 +51,13 @@ public:
 private:
     bool m_vibrations;
     bool m_sounds;
+    int m_soundsVolume;
     int m_showSolutionSpeed;
 
 signals:
     void vibrationsChanged();
     void soundsChanged();
+    void soundsVolumeChanged();
     void showSolutionSpeedChanged();
 
 };

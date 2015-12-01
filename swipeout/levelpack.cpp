@@ -86,7 +86,8 @@ void LevelPack::loadLevels()
 {
     qDebug() << "Loading level pack"<< m_name <<  "from" << m_levelDir;
 
-    QDir dir(m_levelDir + m_name);
+    QDir dir(m_levelDir + "/" + m_name);
+    qDebug() << "Loading level pack" << dir.path();
     dir.setFilter(QDir::Files);
     dir.setSorting(QDir::Name);
 
@@ -128,9 +129,9 @@ void LevelPack::loadLevels()
         qSort(moves.begin(), moves.end(), compareMove);
 
         QStack<Move> solution;
-        for (int i = 0; i < moves.count(); i++) {
+        for (int i = 0; i < moves.count(); i++)
             solution.push(moves.at(i));
-        }
+
         level->setSolution(solution);
         m_levels->addLevel(level);
     }

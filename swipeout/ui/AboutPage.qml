@@ -30,6 +30,7 @@ Page {
 
     Flickable {
         anchors.fill: parent
+        anchors.margins: units.gu(2)
         contentHeight: columnLayout.height
         enabled: height < columnLayout.height
 

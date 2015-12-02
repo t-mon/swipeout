@@ -133,12 +133,6 @@ Item {
             }
         }
 
-        Label {
-            visible: app.debug
-            anchors.centerIn: parent
-            text: block.id
-        }
-
         MouseArea {
             id: elementMouseArea
             anchors.fill: parent

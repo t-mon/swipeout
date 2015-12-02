@@ -104,9 +104,10 @@ void Blocks::removeBlock(Block *block)
 
 void Blocks::deleteAllBlocks()
 {
-    foreach (Block *block, m_blocks) {
-        removeBlock(block);
-    }
+    beginResetModel();
+    qDeleteAll(m_blocks);
+    m_blocks.clear();
+    endResetModel();
 }
 
 QHash<int, QByteArray> Blocks::roleNames() const

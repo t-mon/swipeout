@@ -48,6 +48,16 @@ Page {
         }
     ]
 
+    Connections {
+        target: gameEngine.board
+        onLevelChanged: {
+            console.log("Level changed")
+            blockRepeater.model = null
+            blockRepeater.model = level.blocks
+        }
+
+    }
+
     GridLayout {
         id: mainGrid
         anchors.fill: parent
@@ -165,6 +175,7 @@ Page {
                             block: level.blocks.get(model.blockId)
                         }
                     }
+
                     // Fix the block positions if the board size changed
                     onWidthChanged: {
                         blockRepeater.model = null

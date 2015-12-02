@@ -144,7 +144,7 @@ void GameEngine::loadLevel(Level *level)
         qDebug() << "Previouslevel" << m_previousLevel->id();
         setHasPreviousLevel(true);
     }
-
+    m_board->clearLevel();
     m_board->loadLevel(level);
 }
 

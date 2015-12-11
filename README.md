@@ -14,6 +14,9 @@ exit.Horizontal blocks can only be pushed "left" and "right", vertical blocks on
 
 You can find more information in the [uApp Explorer](https://uappexplorer.com/app/swipeout.t-mon).
 
+*Architectures:* i386, amd64, armhf
+
+*Support:* Works on Ubuntu phone, tablet and desktop environments. 
 
 ## License
 --------------------------------------------

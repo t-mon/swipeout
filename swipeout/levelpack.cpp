@@ -29,7 +29,8 @@ LevelPack::LevelPack(const QString &levelDir, const QString &name, QObject *pare
     QObject(parent),
     m_levelDir(levelDir),
     m_name(name),
-    m_levels(new Levels(this))
+    m_levels(new Levels(this)),
+    m_difficulty(0)
 {
 
 }
@@ -47,6 +48,16 @@ void LevelPack::setName(const QString &name)
 Levels *LevelPack::levels()
 {
     return m_levels;
+}
+
+int LevelPack::difficulty() const
+{
+    return m_difficulty;
+}
+
+void LevelPack::setDifficulty(const int &difficulty)
+{
+    m_difficulty = difficulty;
 }
 
 int LevelPack::levelCount() const

@@ -32,7 +32,7 @@ Page {
         anchors.fill: parent
         anchors.margins: units.gu(2)
         contentHeight: columnLayout.height
-        enabled: height < columnLayout.height
+        //enabled: height < columnLayout.height
 
         ColumnLayout {
             id: columnLayout
@@ -120,7 +120,7 @@ Page {
                         font.bold: true
                     }
                     Label {
-                        text: "GitHub"
+                        text: "GitHub issues"
                         font.underline: true
 
                         MouseArea {
@@ -128,6 +128,49 @@ Page {
                             onClicked: Qt.openUrlExternally("https://github.com/t-mon/swipeout/issues")
                         }
                     }
+                }
+                Row {
+                    anchors.left: parent.left
+                    anchors.leftMargin: units.gu(2)
+                    spacing: units.gu(2)
+                    Label {
+                        // TRANSLATORS: In the about screen.
+                        text: i18n.tr("Mail:")
+                        font.bold: true
+                    }
+                    Label {
+                        text: "stuerz.simon@gmail.com"
+                        font.underline: true
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: Qt.openUrlExternally("mailto:stuerz.simon@gmail.com")
+                        }
+                    }
+                }
+
+                ThinDivider { }
+
+                Label {
+                    // TRANSLATORS: Donate button description
+                    text: i18n.tr("Enjoying the game?")
+                    font.bold: true
+                    wrapMode: Text.WordWrap
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
+
+                Button {
+                    id: donateButton
+                    anchors.left: parent.left
+                    anchors.leftMargin: units.gu(4)
+                    anchors.right: parent.right
+                    anchors.rightMargin: units.gu(4)
+                    // TRANSLATORS: Donate button
+                    color: "green"
+                    iconName: "thumb-up"
+                    iconPosition: "right"
+                    text: i18n.tr("Donate via PayPal")
+                    onClicked: Qt.openUrlExternally("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MTXAYC3R425NG")
                 }
 
                 ThinDivider { }

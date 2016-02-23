@@ -50,7 +50,6 @@ public:
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
 
     void addLevel(Level* level);
-    void resetLevelSettings();
     void sortLevels();
     void deleteAllLevels();
 

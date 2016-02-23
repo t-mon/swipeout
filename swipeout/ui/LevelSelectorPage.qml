@@ -29,6 +29,12 @@ Page {
 
     head.actions: [
         Action {
+            id: infoAction
+            iconName: "info"
+            text: i18n.tr("About")
+            onTriggered: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
+        },
+        Action {
             id: helpAction
             iconName: "help"
             text: i18n.tr("Help")

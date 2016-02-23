@@ -46,6 +46,7 @@ public:
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
 
     void addLevelPack(LevelPack *levelPack);
+    void sortLevelPacks();
 
 protected:
     QHash<int, QByteArray> roleNames() const;
@@ -54,5 +55,7 @@ private:
     QList<LevelPack *> m_levelPacks;
 
 };
+
+bool compareLevelPacks(LevelPack *levelPack1, LevelPack *levelPack2);
 
 #endif // LEVELPACKS_H

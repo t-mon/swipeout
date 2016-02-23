@@ -325,9 +325,18 @@ void GameEngine::loadLevelPacks()
         levelPack->setCompletedCount(completedCount);
         levelPack->setCompletedPerfectCount(completedPerfectCount);
 
+        if (levelPack->name() == "Easy") {
+            levelPack->setDifficulty(1);
+        } else if(levelPack->name() == "Medium") {
+            levelPack->setDifficulty(2);
+        } else if(levelPack->name() == "Hard") {
+            levelPack->setDifficulty(3);
+        }
+
         qDebug() << "--------------------------------------";
         qDebug() << "Level pack:" << levelFileInfo.fileName();
         qDebug() << "--------------------------------------";
+        qDebug() << "    -> difficulty:" << levelPack->difficulty();
         qDebug() << "    -> levels:" << levelPack->levelCount();
         qDebug() << "    -> completed:" << levelPack->completedCount();
         qDebug() << "    -> completed perfect:" << levelPack->completedPerfectCount();

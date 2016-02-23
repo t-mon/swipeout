@@ -26,6 +26,7 @@
 Settings::Settings(QObject *parent) :
     QObject(parent)
 {
+    qDebug() << "Load game settings" << endl << "--------------------------------------";
     QSettings settings;
     settings.beginGroup("Swipeout");
     setShowSolutionSpeed(settings.value("showSolutionSpeed", 500).toInt());

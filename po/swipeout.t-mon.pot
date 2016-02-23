@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-02 09:14+0100\n"
+"POT-Creation-Date: 2016-02-23 20:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:29
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:40
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:40
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelPacksPage.qml:36
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelSelectorPage.qml:34
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/LoadLevelPage.qml:33
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:33
 msgid "About"
@@ -38,8 +42,22 @@ msgstr ""
 msgid "Bug tracker:"
 msgstr ""
 
+#. TRANSLATORS: In the about screen.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:138
+msgid "Mail:"
+msgstr ""
+
+#. TRANSLATORS: Donate button description
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:156
+msgid "Enjoying the game?"
+msgstr ""
+
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:172
+msgid "Donate via PayPal"
+msgstr ""
+
 #. TRANSLATORS: Game description in the about screen.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:141
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:184
 msgid ""
 "Swipeout is a classic unblock game. A level can be completed by pushing the "
 "white block through the right exit.\n"
@@ -47,19 +65,19 @@ msgid ""
 "only \"up\" and \"down\"."
 msgstr ""
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:40
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:46
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpMenuPage.qml:28
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:40
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelPacksPage.qml:36
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelSelectorPage.qml:34
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:46
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelPacksPage.qml:42
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelSelectorPage.qml:40
 msgid "Help"
 msgstr ""
 
 #. TRANSLATORS: Title of the settings page
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:46
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:46
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelPacksPage.qml:42
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelSelectorPage.qml:40
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:52
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:52
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelPacksPage.qml:48
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelSelectorPage.qml:46
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/LoadLevelPage.qml:39
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:39
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:31
@@ -67,22 +85,22 @@ msgid "Settings"
 msgstr ""
 
 #. TRANSLATORS: Moves rectangle in the play view.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:93
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:99
 msgid "MOVES"
 msgstr ""
 
 #. TRANSLATORS: Highscore rectangle in the play view.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:119
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:125
 msgid "HIGHSCORE"
 msgstr ""
 
 #. TRANSLATORS: Level completed view.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:286
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:292
 msgid "Level completed!"
 msgstr ""
 
 #. TRANSLATORS: Level completed view.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:308
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:314
 msgid "You have found the perfect solution!"
 msgstr ""
 

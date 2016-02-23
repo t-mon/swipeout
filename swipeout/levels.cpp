@@ -83,11 +83,6 @@ void Levels::addLevel(Level *level)
     sortLevels();
 }
 
-void Levels::resetLevelSettings()
-{
-
-}
-
 void Levels::sortLevels()
 {
     beginResetModel();

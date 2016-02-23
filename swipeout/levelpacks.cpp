@@ -71,6 +71,14 @@ void LevelPacks::addLevelPack(LevelPack *levelPack)
     beginInsertRows(QModelIndex(), m_levelPacks.count(), m_levelPacks.count());
     m_levelPacks.append(levelPack);
     endInsertRows();
+    sortLevelPacks();
+}
+
+void LevelPacks::sortLevelPacks()
+{
+    beginResetModel();
+    qSort(m_levelPacks.begin(), m_levelPacks.end(), compareLevelPacks);
+    endResetModel();
 }
 
 QHash<int, QByteArray> LevelPacks::roleNames() const
@@ -83,3 +91,8 @@ QHash<int, QByteArray> LevelPacks::roleNames() const
     return roles;
 }
 
+
+bool compareLevelPacks(LevelPack *levelPack1, LevelPack *levelPack2)
+{
+    return levelPack1->difficulty() < levelPack2->difficulty();
+}

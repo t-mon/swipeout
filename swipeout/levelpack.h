@@ -30,6 +30,7 @@ class LevelPack : public QObject
     Q_OBJECT
     Q_PROPERTY(QString name READ name CONSTANT)
     Q_PROPERTY(Levels *levels READ levels CONSTANT)
+    Q_PROPERTY(int difficulty READ difficulty CONSTANT)
     Q_PROPERTY(int levelCount READ levelCount WRITE setLevelCount NOTIFY levelCountChanged)
     Q_PROPERTY(int completedCount READ completedCount WRITE setCompletedCount NOTIFY completedCountChanged)
     Q_PROPERTY(int completedPerfectCount READ completedPerfectCount WRITE setCompletedPerfectCount NOTIFY completedPerfectCountChanged)
@@ -41,6 +42,9 @@ public:
     void setName(const QString &name);
 
     Levels *levels();
+
+    int difficulty() const;
+    void setDifficulty(const int &difficulty);
 
     int levelCount() const;
     void setLevelCount(const int &levelCount);
@@ -62,6 +66,7 @@ private:
     QString m_name;
     Levels *m_levels;
 
+    int m_difficulty;
     int m_levelCount;
     int m_completedCount;
     int m_completedPerfectCount;

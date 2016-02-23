@@ -162,14 +162,15 @@ Page {
                 Button {
                     id: donateButton
                     anchors.left: parent.left
-                    anchors.leftMargin: units.gu(4)
+                    anchors.leftMargin: units.gu(5)
                     anchors.right: parent.right
-                    anchors.rightMargin: units.gu(4)
+                    anchors.rightMargin: units.gu(5)
                     // TRANSLATORS: Donate button
                     color: "green"
                     iconName: "thumb-up"
                     iconPosition: "right"
                     text: i18n.tr("Donate via PayPal")
+                    font.underline: true
                     onClicked: Qt.openUrlExternally("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MTXAYC3R425NG")
                 }
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-23 20:41+0100\n"
+"POT-Creation-Date: 2016-02-23 22:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,7 +57,7 @@ msgid "Donate via PayPal"
 msgstr ""
 
 #. TRANSLATORS: Game description in the about screen.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:184
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:185
 msgid ""
 "Swipeout is a classic unblock game. A level can be completed by pushing the "
 "white block through the right exit.\n"

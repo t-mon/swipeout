@@ -27,7 +27,7 @@ import Swipeout 1.0
 Page {
     id: root
     // TRANSLATORS: Title of the Level Creator help screen.
-    title: i18n.tr("Creator help")
+    title: i18n.tr("Level creator help")
 
     Flickable {
         anchors.fill: parent

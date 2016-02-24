@@ -61,7 +61,7 @@ Page {
                 Label {
                     anchors.left: parent.left
                     // TRANSLATORS: In the settings page the slider description. Describes the speed of the animation while showing the solution.
-                    text: i18n.tr("Show solution speed")
+                    text: i18n.tr("Show solution delay") + " [ " + Math.round(speedSlider.value) + " ms ]"
                 }
 
                 Slider {
@@ -159,10 +159,11 @@ Page {
             id: resetDialog
             // TRANSLATORS: Title of the reset dialog.
             title: i18n.tr("Reset game")
-            // TRANSLATORS: Reset warning message. Please insert also the "\n" in the middle of the text!
-            text: i18n.tr("Are you sure you want to reset all\ngame settings and achievements?")
+            // TRANSLATORS: Reset warning message.
+            text: i18n.tr("Are you sure you want to reset all game settings and achievements?")
 
             ThinDivider { }
+
             Button {
                 // TRANSLATORS: Reset button in the reset dialog
                 text: i18n.tr("Reset")

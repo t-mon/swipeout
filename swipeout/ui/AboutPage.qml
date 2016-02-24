@@ -32,7 +32,6 @@ Page {
         anchors.fill: parent
         anchors.margins: units.gu(2)
         contentHeight: columnLayout.height
-        //enabled: height < columnLayout.height
 
         ColumnLayout {
             id: columnLayout
@@ -152,6 +151,23 @@ Page {
                 ThinDivider { }
 
                 Label {
+                    // TRANSLATORS: Thank you very much for helping with the translations!! :)
+                    text: i18n.tr("Thanks to all translators!")
+                    font.underline: true
+                    wrapMode: Text.WordWrap
+                    anchors.left: parent.left
+                    anchors.leftMargin: units.gu(2)
+                    anchors.right: parent.right
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: Qt.openUrlExternally("https://translations.launchpad.net/swipeout")
+                    }
+                }
+
+                ThinDivider { }
+
+                Label {
                     // TRANSLATORS: Donate button description
                     text: i18n.tr("Enjoying the game?")
                     font.bold: true
@@ -165,10 +181,8 @@ Page {
                     anchors.leftMargin: units.gu(5)
                     anchors.right: parent.right
                     anchors.rightMargin: units.gu(5)
-                    // TRANSLATORS: Donate button
                     color: "green"
-                    iconName: "thumb-up"
-                    iconPosition: "right"
+                    // TRANSLATORS: Text in the Donate button
                     text: i18n.tr("Donate via PayPal")
                     font.underline: true
                     onClicked: Qt.openUrlExternally("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MTXAYC3R425NG")

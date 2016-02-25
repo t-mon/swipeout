@@ -21,9 +21,7 @@ UBUNTU_TRANSLATION_DOMAIN="swipeout.t-mon"
 # template is created in po/template.pot, to create a
 # translation copy the template to e.g. de.po and edit the sources
 UBUNTU_TRANSLATION_SOURCES+= \
-    $$files(*.qml,true) \
-    $$files(*.js,true) \
-    $$files(*.desktop,true)
+    $$files(*.qml,true)
 
 # specifies all translations files and makes sure they are
 # compiled and installed into the right place in the click package
@@ -51,4 +49,5 @@ desktop_file.path = /swipeout
 desktop_file.files = swipeout.desktop
 desktop_file.CONFIG += no_check_exist
 
+target.path = $${UBUNTU_CLICK_BINARY_PATH}
 INSTALLS += desktop_file config_files dataFolder

@@ -22,21 +22,6 @@ SOURCES += main.cpp \
     levelpacks.cpp \
     settings.cpp
 
-RESOURCES += swipeout.qrc \
-             images.qrc
-
-QML_FILES += $$files(*.qml,true) \
-             $$files(*.js,true)
-
-OTHER_FILES += $${QML_FILES} \
-
-# Default rules for deployment.
-target.path = $${UBUNTU_CLICK_BINARY_PATH}
-INSTALLS+=target
-
-DISTFILES += \
-    ui/SwipeElement.qml
-
 HEADERS += \
     gameengine.h \
     level.h \
@@ -51,3 +36,14 @@ HEADERS += \
     levelpacks.h \
     settings.h
 
+RESOURCES += swipeout.qrc \
+             images.qrc
+
+QML_FILES += $$files(*.qml,true) \
+             $$files(*.js,true)
+
+OTHER_FILES += $${QML_FILES} \
+
+# Default rules for deployment.
+target.path = $${UBUNTU_CLICK_BINARY_PATH}
+INSTALLS+=target

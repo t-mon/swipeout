@@ -61,8 +61,9 @@ MainView {
         id: pageLayout
         anchors.fill: parent
         primaryPageSource: Qt.resolvedUrl("MainPage.qml")
+        // Needed for tablet views to prevent splitting the screen
         layouts: PageColumnsLayout {
-            when: width > units.gu(80)
+            when: width > 0
             PageColumn {
                 fillWidth: true
             }

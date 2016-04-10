@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: swipeout\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2016-04-10 18:31+0200\n"
-"PO-Revision-Date: 2016-02-25 09:24+0000\n"
+"PO-Revision-Date: 2016-04-10 16:56+0000\n"
 "Last-Translator: Simon Stürz <stuerz.simon@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-04-10 16:40+0000\n"
+"X-Launchpad-Export-Date: 2016-04-10 17:00+0000\n"
 "X-Generator: Launchpad (build 17990)\n"
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:31
@@ -30,12 +30,12 @@ msgstr "Impressum"
 #. TRANSLATORS: In the about screen.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:84
 msgid "License:"
-msgstr "Lizenz"
+msgstr "Lizenz:"
 
 #. TRANSLATORS: In the about screen.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:103
 msgid "Source code:"
-msgstr "Quellcode"
+msgstr "Quellcode:"
 
 #. TRANSLATORS: In the about screen.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:123
@@ -45,7 +45,7 @@ msgstr "Bugtracker:"
 #. TRANSLATORS: In the about screen.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:142
 msgid "Mail:"
-msgstr "E-Mail"
+msgstr "Mail:"
 
 #. TRANSLATORS: Thank you very much for helping with the translations!! :)
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:160
@@ -70,7 +70,7 @@ msgid ""
 "Horizontal blocks can only be pushed \"left\" and \"right\", vertical blocks "
 "only \"up\" and \"down\"."
 msgstr ""
-"Swipeout ist ein klassisches Puzzle-Spiel. Ein Level kann gelöst werden "
+"Swipeout ist ein klassisches Puzzle-Spiel. Ein Level kann gelöst werden, "
 "indem man den weißen Block durch die rechte Öffnung des Spielfelds schiebt. "
 "Um dies zu erreichen müssen die Blöcke so verschoben werden, dass der Weg "
 "zur Öffnung frei wird.\n"

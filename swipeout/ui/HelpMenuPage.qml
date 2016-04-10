@@ -25,11 +25,16 @@ import Swipeout 1.0
 
 Page {
     id: root
-    title: i18n.tr("Help")
+    header: PageHeader {
+        id: pageHeader
+        title: i18n.tr("Help")
+    }
 
     Column {
         anchors.fill: parent
-        anchors.margins: units.gu(2)
+        anchors.topMargin: pageHeader.height + units.gu(2)
+        anchors.leftMargin: units.gu(2)
+        anchors.rightMargin: units.gu(2)
         spacing: units.gu(3)
 
         Column {

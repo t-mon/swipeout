@@ -27,32 +27,35 @@ import Swipeout 1.0
 
 Page {
     id: root
-    title: i18n.tr(level.name)
 
     property var level: gameEngine.board.level
     property real borderWidth: units.gu(1.5)
     property real cellSize: Math.min(root.width / level.width , root.height / level.height)
 
-    head.actions: [
-        Action {
-            id: infoAction
-            iconName: "info"
-            text: i18n.tr("About")
-            onTriggered: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
-        },
-        Action {
-            id: helpAction
-            iconName: "help"
-            text: i18n.tr("Help")
-            onTriggered: app.debug = !app.debug
-        },
-        Action {
-            id: settingsAction
-            iconName: "settings"
-            text: i18n.tr("Settings")
-            onTriggered: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
-        }
-    ]
+    header: PageHeader {
+        id: pageHeader
+        title: i18n.tr(level.name)
+        trailingActionBar.actions: [
+            Action {
+                id: infoAction
+                iconName: "info"
+                text: i18n.tr("About")
+                onTriggered: pageLayout.addPageToCurrentColumn(root, Qt.resolvedUrl("AboutPage.qml"))
+            },
+            Action {
+                id: helpAction
+                iconName: "help"
+                text: i18n.tr("Help")
+                onTriggered: app.debug = !app.debug
+            },
+            Action {
+                id: settingsAction
+                iconName: "settings"
+                text: i18n.tr("Settings")
+                onTriggered: pageLayout.addPageToCurrentColumn(root, Qt.resolvedUrl("SettingsPage.qml"))
+            }
+        ]
+    }
 
     Connections {
         target: gameEngine.board
@@ -67,6 +70,7 @@ Page {
     GridLayout {
         id: mainGrid
         anchors.fill: parent
+        anchors.topMargin: pageHeader.height + units.gu(2)
         columns: app.landscape ? 3 : 1
         columnSpacing: 0
         Item {
@@ -293,7 +297,7 @@ Page {
 
             ThinDivider { }
 
-            Text {
+            Label {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 height: units.gu(5)
@@ -303,7 +307,7 @@ Page {
                 text: gameEngine.board.moveCount + " / " + level.solutionCount
             }
 
-            Text {
+            Label {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 height: units.gu(5)

@@ -39,7 +39,7 @@ public:
     int blockId() const;
     void setBlockId(const int &blockId);
 
-    bool operator==(const BoardCell &other);
+    bool operator==(const BoardCell &other) const;
 
 private:
     int m_x;

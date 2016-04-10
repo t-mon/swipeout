@@ -58,7 +58,7 @@ public:
 
     QVector<QVector<BoardCell> > boardGrid() const;
 
-    bool operator==(Node *other);
+    bool operator==(Node *other) const;
 
 private:
     Move m_move;

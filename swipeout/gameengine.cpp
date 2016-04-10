@@ -38,15 +38,21 @@ GameEngine::GameEngine(QObject *parent) :
     m_solver(new BoardSolver(this)),
     m_watcher(new QFutureWatcher<QStack<Move> >(this)),
     m_settings(new Settings(this)),
+    m_solverTimer(new QTimer(this)),
+    m_solverTime("00:00:00"),
     m_solverRunning(false),
     m_nextLevel(0),
     m_previousLevel(0),
     m_hasNextLevel(false),
     m_hasPreviousLevel(false)
 {
+    m_solverTimer->setInterval(1000);
+    m_solverTimer->setSingleShot(false);
+
     connect(m_board, SIGNAL(levelCompleted()), this, SLOT(onLevelCompleted()));
     connect(m_watcher, SIGNAL(finished()), this, SLOT(onSolverFinished()));
     connect(m_settings, SIGNAL(showSolutionSpeedChanged()), this, SLOT(onShowSolutionSpeedChanged()));
+    connect(m_solverTimer, SIGNAL(timeout()), this, SLOT(onSolverTimerTimout()));
 }
 
 QString GameEngine::dataDir() const
@@ -60,6 +66,11 @@ void GameEngine::setDataDir(const QString &dataDir)
     loadLevelPacks();
     loadCreatedLevels();
     emit dataDirChanged();
+}
+
+QString GameEngine::solverTime() const
+{
+    return m_solverTime;
 }
 
 LevelPack *GameEngine::levelPack()
@@ -170,7 +181,8 @@ void GameEngine::loadPreviousLevel()
 
 void GameEngine::solveBoard()
 {
-    m_timestamp = QDateTime::currentDateTime();
+    m_solverStartTime = QDateTime::currentDateTime();
+    setSolverTime("00:00:00");
     setSolverRunning(true);
     m_solverBoard = m_levelCreator->board();
     foreach (Block *block, m_solverBoard->level()->blocks()->blocks()) {
@@ -183,6 +195,7 @@ void GameEngine::solveBoard()
 void GameEngine::stopSolvingBoard()
 {
     qDebug() << "Cancel solving process.";
+    setSolverRunning(false);
     m_solver->stopSolver();
 }
 
@@ -398,8 +411,20 @@ void GameEngine::reloadLevelPackStatistic()
 
 void GameEngine::setSolverRunning(const bool &solverRunning)
 {
+    if (solverRunning) {
+        m_solverTimer->start();
+    } else {
+        m_solverTimer->stop();
+    }
+
     m_solverRunning = solverRunning;
     emit solverRunningChanged();
+}
+
+void GameEngine::setSolverTime(const QString &solverTime)
+{
+    m_solverTime = solverTime;
+    emit solverTimeChanged();
 }
 
 void GameEngine::setHasNextLevel(const bool &hasNextLevel)
@@ -417,12 +442,12 @@ void GameEngine::setHasPreviousLevel(const bool &hasPreviousLevel)
 void GameEngine::onSolverFinished()
 {
     setSolverRunning(false);
-    QDateTime time = QDateTime::fromMSecsSinceEpoch(QDateTime::currentMSecsSinceEpoch() - m_timestamp.toMSecsSinceEpoch());
+    QTime time = QTime::fromMSecsSinceStartOfDay(QDateTime::currentMSecsSinceEpoch() - m_solverStartTime.toMSecsSinceEpoch());
     QStack<Move> solution = m_watcher->future().result();
     if (solution.isEmpty()) {
         qDebug() << "----------------------------------";
         qDebug() << "No solution found";
-        qDebug() << "Process time:" << time.toString("mm:ss.zzz");
+        qDebug() << "Process time:" << time.toString("hh:mm:ss.zzz");
         qDebug() << "----------------------------------";
     } else {
         qDebug() << "----------------------------------";
@@ -432,13 +457,13 @@ void GameEngine::onSolverFinished()
         }
         qDebug() << "----------------------------------";
         qDebug() << "Solvable in" <<  solution.count() << "moves!";
-        qDebug() << "Process time:" << time.toString("mm:ss.zzz");
+        qDebug() << "Process time:" << time.toString("hh:mm:ss.zzz");
         qDebug() << "----------------------------------";
     }
     m_solverBoard->level()->setSolution(solution);
     m_solverBoard->setSolution(solution);
 
-    emit solutionReady(time.toString("mm:ss.zzz"));
+    emit solutionReady(time.toString("hh:mm:ss.zzz"));
 }
 
 void GameEngine::onLevelCompleted()
@@ -450,5 +475,11 @@ void GameEngine::onLevelCompleted()
 void GameEngine::onShowSolutionSpeedChanged()
 {
     m_board->setShowSolutionSpeed(m_settings->showSolutionSpeed());
+}
+
+void GameEngine::onSolverTimerTimout()
+{
+    QTime time = QTime::fromMSecsSinceStartOfDay(QDateTime::currentMSecsSinceEpoch() - m_solverStartTime.toMSecsSinceEpoch());
+    setSolverTime(time.toString("hh:mm:ss"));
 }
 

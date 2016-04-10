@@ -26,9 +26,14 @@ import Swipeout 1.0
 
 Page {
     id: root
-    title: i18n.tr("About")
+    header: PageHeader {
+        id: pageHeader
+        title: i18n.tr("About")
+        flickable: aboutFlickable
+    }
 
     Flickable {
+        id: aboutFlickable
         anchors.fill: parent
         anchors.margins: units.gu(2)
         contentHeight: columnLayout.height
@@ -59,7 +64,7 @@ Page {
 
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    text: "2015 © Simon Stürz"
+                    text: "2015 - 2016 © Simon Stürz"
                 }
 
                 ThinDivider { }

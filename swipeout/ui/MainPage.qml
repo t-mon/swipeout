@@ -24,22 +24,24 @@ import Swipeout 1.0
 
 Page {
     id: root
-    title: i18n.tr("Swipeout")
-
-    head.actions: [
-        Action {
-            id: infoAction
-            iconName: "info"
-            text: i18n.tr("About")
-            onTriggered: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
-        },
-        Action {
-            id: settingsAction
-            iconName: "settings"
-            text: i18n.tr("Settings")
-            onTriggered: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
-        }
-    ]
+    header: PageHeader {
+        id: pageHeader
+        title: "Swipeout"
+        trailingActionBar.actions: [
+            Action {
+                id: infoAction
+                iconName: "info"
+                text: i18n.tr("About")
+                onTriggered: pageLayout.addPageToCurrentColumn(root, Qt.resolvedUrl("AboutPage.qml"))
+            },
+            Action {
+                id: settingsAction
+                iconName: "settings"
+                text: i18n.tr("Settings")
+                onTriggered: pageLayout.addPageToCurrentColumn(root, Qt.resolvedUrl("SettingsPage.qml"))
+            }
+        ]
+    }
 
     Image {
         anchors.fill: parent
@@ -73,9 +75,7 @@ Page {
                 font.bold:true
                 anchors.fill: parent
                 color: "transparent"
-                onClicked: {
-                    push(Qt.resolvedUrl("LevelPacksPage.qml"))
-                }
+                onClicked: pageLayout.addPageToCurrentColumn(root, Qt.resolvedUrl("LevelPacksPage.qml"))
             }
         }
 
@@ -96,14 +96,14 @@ Page {
             }
 
             Button {
-                // TRANSLATORS: "Load Level" button in the main view.
-                text: i18n.tr("Load Level")
+                // TRANSLATORS: "Load level" button in the main view.
+                text: i18n.tr("Load level")
                 font.bold:true
                 anchors.fill: parent
                 color: "transparent"
                 onClicked: {
                     gameEngine.loadCreatedLevels()
-                    push(Qt.resolvedUrl("LoadLevelPage.qml"))
+                    pageLayout.addPageToCurrentColumn(root, Qt.resolvedUrl("LoadLevelPage.qml"))
                 }
             }
         }
@@ -130,7 +130,7 @@ Page {
                 font.bold:true
                 anchors.fill: parent
                 color: "transparent"
-                onClicked: push(Qt.resolvedUrl("LevelCreator.qml"))
+                onClicked: pageLayout.addPageToCurrentColumn(root, Qt.resolvedUrl("LevelCreator.qml"))
             }
         }
     }

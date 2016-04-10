@@ -27,28 +27,33 @@ import Swipeout 1.0
 
 Page {
     id: root
-    title: i18n.tr("Level Packs")
 
-    head.actions: [
-        Action {
-            id: infoAction
-            iconName: "info"
-            text: i18n.tr("About")
-            onTriggered: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
-        },
-        Action {
-            id: helpAction
-            iconName: "help"
-            text: i18n.tr("Help")
-            onTriggered: pageStack.push(Qt.resolvedUrl("HelpMenuPage.qml"))
-        },
-        Action {
-            id: settingsAction
-            iconName: "settings"
-            text: i18n.tr("Settings")
-            onTriggered: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
-        }
-    ]
+    header: PageHeader {
+        id: pageHeader
+        title: i18n.tr("Level Packs")
+        trailingActionBar.actions: [
+            Action {
+                id: infoAction
+                iconName: "info"
+                text: i18n.tr("About")
+                onTriggered: pageLayout.addPageToCurrentColumn(root, Qt.resolvedUrl("AboutPage.qml"))
+            },
+            Action {
+                id: helpAction
+                iconName: "help"
+                text: i18n.tr("Help")
+                onTriggered: pageLayout.addPageToCurrentColumn(root, Qt.resolvedUrl("HelpMenuPage.qml"))
+            },
+            Action {
+                id: settingsAction
+                iconName: "settings"
+                text: i18n.tr("Settings")
+                onTriggered: pageLayout.addPageToCurrentColumn(root, Qt.resolvedUrl("SettingsPage.qml"))
+            }
+        ]
+
+        flickable: levelGrid
+    }
 
     ListView {
         id: levelGrid
@@ -129,7 +134,7 @@ Page {
                 anchors.fill: parent
                 onClicked: {
                     gameEngine.loadLevelPack(model.name)
-                    pageStack.push(Qt.resolvedUrl("LevelSelectorPage.qml"))
+                    pageLayout.addPageToCurrentColumn(root, Qt.resolvedUrl("LevelSelectorPage.qml"))
                 }
             }
         }

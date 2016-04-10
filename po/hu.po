@@ -7,63 +7,63 @@ msgid ""
 msgstr ""
 "Project-Id-Version: swipeout\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-02-24 09:22+0100\n"
-"PO-Revision-Date: 2016-02-25 11:19+0000\n"
+"POT-Creation-Date: 2016-04-10 18:31+0200\n"
+"PO-Revision-Date: 2016-02-25 18:21+0000\n"
 "Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-02-25 17:16+0000\n"
-"X-Generator: Launchpad (build 17925)\n"
+"X-Launchpad-Export-Date: 2016-04-10 16:40+0000\n"
+"X-Generator: Launchpad (build 17990)\n"
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:29
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:40
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:40
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelPacksPage.qml:36
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelSelectorPage.qml:34
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LoadLevelPage.qml:33
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:33
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:31
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:42
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:42
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelPacksPage.qml:38
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelSelectorPage.qml:38
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LoadLevelPage.qml:34
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:34
 msgid "About"
 msgstr "Névjegy"
 
 #. TRANSLATORS: In the about screen.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:79
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:84
 msgid "License:"
 msgstr "Licenc:"
 
 #. TRANSLATORS: In the about screen.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:98
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:103
 msgid "Source code:"
 msgstr "Forráskód:"
 
 #. TRANSLATORS: In the about screen.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:118
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:123
 msgid "Bug tracker:"
-msgstr "Hibajelentő:"
+msgstr "Hibabejelentő:"
 
 #. TRANSLATORS: In the about screen.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:137
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:142
 msgid "Mail:"
 msgstr "E-mail:"
 
 #. TRANSLATORS: Thank you very much for helping with the translations!! :)
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:155
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:160
 msgid "Thanks to all translators!"
 msgstr "Köszönet minden fordítónak!"
 
 #. TRANSLATORS: Donate button description
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:172
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:177
 msgid "Enjoying the game?"
 msgstr "Élvezi a játékot?"
 
 #. TRANSLATORS: Text in the Donate button
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:186
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:191
 msgid "Donate via PayPal"
 msgstr "Támogatás PayPallel"
 
 #. TRANSLATORS: Game description in the about screen.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:199
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:204
 msgid ""
 "Swipeout is a classic unblock game. A level can be completed by pushing the "
 "white block through the right exit.\n"
@@ -75,166 +75,159 @@ msgstr ""
 "A függőleges blokkok csak felfelé és lefelé, a vízszintes blokkok csak balra "
 "és jobbra mozgathatók."
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:46
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpMenuPage.qml:28
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:46
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelPacksPage.qml:42
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelSelectorPage.qml:40
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:48
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpMenuPage.qml:30
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:48
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelPacksPage.qml:44
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelSelectorPage.qml:44
 msgid "Help"
 msgstr "Súgó"
 
 #. TRANSLATORS: Title of the settings page
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:52
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:52
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelPacksPage.qml:48
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelSelectorPage.qml:46
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LoadLevelPage.qml:39
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:39
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:31
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:54
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelCreator.qml:54
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelPacksPage.qml:50
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelSelectorPage.qml:50
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LoadLevelPage.qml:40
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:40
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:33
 msgid "Settings"
 msgstr "Beállítások"
 
 #. TRANSLATORS: Moves rectangle in the play view.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:99
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:103
 msgid "MOVES"
 msgstr "LÉPÉSEK"
 
 #. TRANSLATORS: Highscore rectangle in the play view.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:125
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:129
 msgid "HIGHSCORE"
 msgstr "EREDMÉNYEK"
 
 #. TRANSLATORS: Level completed view.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:292
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:296
 msgid "Level completed!"
 msgstr "Pálya teljesítve!"
 
 #. TRANSLATORS: Level completed view.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:314
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:318
 msgid "You have found the perfect solution!"
 msgstr "Megtalálta a tökéletes megoldást!"
 
 #. TRANSLATORS: Title of the Level Creator help screen.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:30
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:33
 msgid "Level creator help"
 msgstr "Pályakészítő súgó"
 
 #. TRANSLATORS: Level creator description in the help screen.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:54
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:60
 msgid ""
 "In the level creator you can create your own levels containig the perfect "
 "solution by using the solver. Only solved boards can be stored as level. The "
 "level number will increase automatically. You can load and play created "
 "levels from the main menu \"Load level\"."
 msgstr ""
-"A pályaszerkesztőben létrehozhatja a saját pályáit, majd ellenőrizheti a "
+"A pályakeszítőben létrehozhatja a saját pályáit, majd ellenőrizheti a "
 "tökéletes megoldáshoz szükséges lépéseket. Csak a megoldható táblák "
 "menthetőek el pályaként. A pályák száma automatikusan növekszik. A „Pálya "
 "betöltése” menü alatt töltheti be az elkészített pályákat."
 
 #. TRANSLATORS: Sub title of the creator help screen for the block tools
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:60
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:67
 msgid "Block tools:"
 msgstr "Blokk eszközök:"
 
 #. TRANSLATORS: Tool description in the Creator Help view.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:89
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:97
 msgid "Delete block"
 msgstr "Blokk törlése"
 
 #. TRANSLATORS: Tool description in the Creator Help view.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:115
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:123
 msgid "Create 2 x 1 block"
 msgstr "2 x 1-es blokk létrehozása"
 
 #. TRANSLATORS: Tool description in the Creator Help view.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:141
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:149
 msgid "Create 3 x 1 block"
 msgstr "3 x 1-es blokk létrehozása"
 
 #. TRANSLATORS: Tool description in the Creator Help view.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:167
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:175
 msgid "Create 1 x 2 block"
 msgstr "1 x 2-es blokk létrehozása"
 
 #. TRANSLATORS: Tool description in the Creator Help view.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:193
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:201
 msgid "Create 1 x 3 block"
-msgstr "1 x 3-es blokk létrehozása"
+msgstr "1 x 3-as blokk létrehozása"
 
 #. TRANSLATORS: Sub title of the creator help screen for the board tools
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:207
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:216
 msgid "Board tools:"
 msgstr "Tábla eszközök:"
 
 #. TRANSLATORS: Tool description in the Creator Help view.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:237
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:247
 msgid "Clear board"
 msgstr "Tábla törlése"
 
 #. TRANSLATORS: Tool description in the Creator Help view.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:265
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:274
 msgid "Create random level"
 msgstr "Véletlenszerű pálya készítése"
 
 #. TRANSLATORS: Tool description in the Creator Help view.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:293
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:301
 msgid "Solve board"
-msgstr "Tálba megoldása"
+msgstr "Tábla megoldása"
 
 #. TRANSLATORS: Tool description in the Creator Help view.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:321
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:328
 msgid "Save level"
 msgstr "Pálya mentése"
 
 #. TRANSLATORS: Tool description in the Creator Help view.
 #. TRANSLATORS: Show the solution moves on the board.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:349
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:84
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:355
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:91
 msgid "Show solution"
 msgstr "Megoldás megjelenítése"
 
 #. TRANSLATORS: Color description in the menu help screen for not completed levels.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpMenuPage.qml:55
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpMenuPage.qml:60
 msgid "Not completed"
 msgstr "Nincs befejezve"
 
 #. TRANSLATORS: Color description in the menu help screen for completed levels.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpMenuPage.qml:76
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpMenuPage.qml:81
 msgid "Completed"
 msgstr "Megoldva"
 
 #. TRANSLATORS: Color description in the menu help screen for completed perfect levels.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpMenuPage.qml:97
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpMenuPage.qml:102
 msgid "Completed perfect"
 msgstr "Tökéletesen megoldva"
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelPacksPage.qml:30
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelPacksPage.qml:33
 msgid "Level Packs"
 msgstr "Pályacsomagok"
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/LoadLevelPage.qml:27
+#. TRANSLATORS: "Load level" button in the main view.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/LoadLevelPage.qml:29
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:100
 msgid "Load level"
 msgstr "Pálya beöltése"
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:27
-msgid "Swipeout"
-msgstr "Swipeout"
-
 #. TRANSLATORS: Play button in the main view.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:72
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:74
 msgid "Play"
 msgstr "Játék"
-
-#. TRANSLATORS: "Load Level" button in the main view.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:100
-msgid "Load Level"
-msgstr "Pálya betöltése"
 
 #. TRANSLATORS: "Level Creator" button in the main view.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:129
 msgid "Level Creator"
-msgstr "Pályaszerkesztő"
+msgstr "Pályakeszítő"
 
 #. TRANSLATORS: Title of the save dialog.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:30
@@ -249,62 +242,62 @@ msgstr "Elszeretné menteni ezt a pályát?"
 #. TRANSLATORS: Save the current board.
 #. TRANSLATORS: Save the solved level.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:49
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:72
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:79
 msgid "Save"
 msgstr "Mentés"
 
 #. TRANSLATORS: Cancel the save process.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:60
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:92
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:99
 msgid "Cancel"
 msgstr "Mégse"
 
 #. TRANSLATORS: In the settings page the color theme value selector description.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:55
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:57
 msgid "Block Color Theme"
 msgstr "Blokk színtémája"
 
 #. TRANSLATORS: In the settings page the slider description. Describes the speed of the animation while showing the solution.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:64
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:70
 msgid "Show solution delay"
 msgstr "Megoldásmegjelenítés késleltetése"
 
 #. TRANSLATORS: In the settings page the vibrations checkbox description.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:87
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:95
 msgid "Vibrations"
 msgstr "Rezgések"
 
 #. TRANSLATORS: In the settings page the sound effect checkbox description.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:108
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:117
 msgid "Sound effects"
 msgstr "Hangeffektusok"
 
 #. TRANSLATORS: In the settings page the slider description.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:125
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:139
 msgid "Sound volume"
 msgstr "Hangerő"
 
 #. TRANSLATORS: Reset game button in the settings page.
 #. TRANSLATORS: Title of the reset dialog.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:147
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:161
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:176
 msgid "Reset game"
 msgstr "Játék visszaállítása"
 
 #. TRANSLATORS: Reset warning message.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:163
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:178
 msgid "Are you sure you want to reset all game settings and achievements?"
 msgstr ""
 "Biztos benne, hogy visszaállítja a játékbeállításait és a teljesített "
 "pályákat az alapértelmezettre?"
 
 #. TRANSLATORS: Reset button in the reset dialog
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:169
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:184
 msgid "Reset"
 msgstr "Visszaállítás"
 
 #. TRANSLATORS: Button to cancel the reset request.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:179
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:194
 msgid "No"
 msgstr "Nem"
 
@@ -322,21 +315,27 @@ msgstr "Megoldás…"
 msgid "Finished!"
 msgstr "Kész!"
 
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:92
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:99
 msgid "Close"
 msgstr "Bezárás"
 
 #. TRANSLATORS: The runtime of the solver once he is finished.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:105
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:112
 msgid "Runtime"
 msgstr "Futásidő"
 
 #. TRANSLATORS: The message that this board cannot be solved (in the solver view).
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:109
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:116
 msgid "This board can't be solved."
 msgstr "Ez a tábla nem megoldható"
 
 #. TRANSLATORS: Description of the solver result.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:113
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:120
 msgid "Perfect solution:"
 msgstr "Tökéletes megoldás:"
+
+#~ msgid "Load Level"
+#~ msgstr "Pálya betöltése"
+
+#~ msgid "Swipeout"
+#~ msgstr "Swipeout"

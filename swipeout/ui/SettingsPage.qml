@@ -27,10 +27,15 @@ import Swipeout 1.0
 
 Page {
     id: root
-    // TRANSLATORS: Title of the settings page
-    title: i18n.tr("Settings")
+    header: PageHeader {
+        id: pageHeader
+        // TRANSLATORS: Title of the settings page
+        title: i18n.tr("Settings")
+        flickable: settingsFlickable
+    }
 
     Flickable {
+        id: settingsFlickable
         anchors.fill: parent
         contentHeight: columnLayout.height
         //enabled: height < columnLayout.height
@@ -45,10 +50,7 @@ Page {
             Column {
                 anchors.fill: parent
                 anchors.margins: units.gu(2)
-
                 spacing: units.gu(2)
-
-                ThinDivider { }
 
                 ValueSelector {
                     // TRANSLATORS: In the settings page the color theme value selector description.
@@ -58,21 +60,27 @@ Page {
                     Component.onCompleted: selectedIndex = values.indexOf(gameEngine.settings.blockTheme)
                 }
 
-                Label {
+                Column {
                     anchors.left: parent.left
-                    // TRANSLATORS: In the settings page the slider description. Describes the speed of the animation while showing the solution.
-                    text: i18n.tr("Show solution delay") + " [ " + Math.round(speedSlider.value) + " ms ]"
-                }
+                    anchors.right: parent.right
 
-                Slider {
-                    id: speedSlider
-                    width: parent.width
-                    maximumValue: 1000
-                    minimumValue: 250
-                    onValueChanged: {
-                        gameEngine.settings.showSolutionSpeed = speedSlider.value
+                    Label {
+                        anchors.left: parent.left
+                        // TRANSLATORS: In the settings page the slider description. Describes the speed of the animation while showing the solution.
+                        text: i18n.tr("Show solution delay") + " [ " + Math.round(speedSlider.value) + " ms ]"
                     }
-                    Component.onCompleted: value = gameEngine.settings.showSolutionSpeed
+
+                    Slider {
+                        id: speedSlider
+                        width: parent.width
+                        maximumValue: 1000
+                        minimumValue: 250
+                        onValueChanged: {
+                            gameEngine.settings.showSolutionSpeed = speedSlider.value
+                        }
+
+                        Component.onCompleted: value = gameEngine.settings.showSolutionSpeed
+                    }
                 }
 
                 ThinDivider { }
@@ -93,11 +101,12 @@ Page {
                         onCheckedChanged: {
                             gameEngine.settings.vibrations = vibrationCheckbox.checked
                         }
+
                         Component.onCompleted: checked = gameEngine.settings.vibrations
                     }
                 }
 
-                ThinDivider { }
+                //ThinDivider { }
                 Item {
                     width: parent.width
                     height: units.gu(3)
@@ -114,29 +123,34 @@ Page {
                         onCheckedChanged: {
                             gameEngine.settings.sounds = soundsCheckbox.checked
                         }
+
                         Component.onCompleted: checked = gameEngine.settings.sounds
                     }
                 }
-                ThinDivider { }
+                //ThinDivider { }
 
-                Label {
+                Column {
                     anchors.left: parent.left
-                    // TRANSLATORS: In the settings page the slider description.
-                    text: i18n.tr("Sound volume")
-                }
+                    anchors.right: parent.right
 
-                Slider {
-                    id: volumeSlider
-                    width: parent.width
-
-                    maximumValue: 100
-                    minimumValue: 0
-                    onValueChanged: {
-                        gameEngine.settings.soundsVolume = volumeSlider.value
+                    Label {
+                        anchors.left: parent.left
+                        // TRANSLATORS: In the settings page the slider description.
+                        text: i18n.tr("Sound volume") + " ( " + Math.round(volumeSlider.value) + "% )"
                     }
-                    Component.onCompleted: value = gameEngine.settings.soundsVolume
-                }
 
+                    Slider {
+                        id: volumeSlider
+                        width: parent.width
+                        maximumValue: 100
+                        minimumValue: 0
+                        onValueChanged: {
+                            gameEngine.settings.soundsVolume = volumeSlider.value
+                        }
+
+                        Component.onCompleted: value = gameEngine.settings.soundsVolume
+                    }
+                }
 
                 ThinDivider { }
 
@@ -148,6 +162,7 @@ Page {
                     color: "red"
                     onClicked: PopupUtils.open(resetComponent)
                 }
+
                 ThinDivider { }
             }
         }
@@ -179,9 +194,8 @@ Page {
                 text: i18n.tr("No")
                 onClicked: PopupUtils.close(resetDialog)
             }
-            ThinDivider { }
 
+            ThinDivider { }
         }
     }
-
 }

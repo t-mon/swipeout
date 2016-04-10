@@ -25,7 +25,7 @@ import Swipeout 1.0
 Item {
     id: root
     property var level: null
-
+    property var sourcePage
     signal selected()
 
     UbuntuShape {
@@ -50,7 +50,7 @@ Item {
             anchors.fill: parent
             onClicked: {
                 gameEngine.loadLevel(level)
-                pageStack.push(Qt.resolvedUrl("BoardPage.qml"))
+                pageLayout.addPageToCurrentColumn(sourcePage, Qt.resolvedUrl("BoardPage.qml"))
             }
         }
     }

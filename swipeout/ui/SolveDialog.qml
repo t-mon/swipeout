@@ -36,27 +36,34 @@ Dialog {
 
     ThinDivider { }
 
-    Text {
+    Label {
         id: runTimeText
         visible: !gameEngine.solverRunning && solutionFound
         horizontalAlignment: Text.AlignHCenter
         text: ""
     }
 
-    Text {
+    Label {
         id: solutionText
         visible: !gameEngine.solverRunning
         horizontalAlignment: Text.AlignHCenter
         text: ""
     }
 
-    Text {
+    Label {
         id: moveText
         visible: !gameEngine.solverRunning
         horizontalAlignment: Text.AlignHCenter
         font.pixelSize: units.gu(5)
         font.bold: true
         text: ""
+    }
+
+    Label {
+        id: solverTimeLabel
+        visible: gameEngine.solverRunning
+        horizontalAlignment: Text.AlignHCenter
+        text: gameEngine.solverTime
     }
 
     ActivityIndicator {
@@ -106,7 +113,7 @@ Dialog {
             var moveCount = gameEngine.levelCreator.board.level.solutionCount
             if (moveCount == 0) {
                 // TRANSLATORS: The message that this board cannot be solved (in the solver view).
-                solutionText.text = i18n.tr("This board can't be solved.")
+                solutionText.text = i18n.tr("This board can't be solved.") + "\n" + gameEngine.solverTime
             } else {
                 solutionFound = true
                 // TRANSLATORS: Description of the solver result.

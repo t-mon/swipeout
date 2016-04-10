@@ -26,37 +26,41 @@ import Swipeout 1.0
 
 Page {
     id: root
-    title: "Creator - Level " + level.id
 
     property var creator: gameEngine.levelCreator
     property var level: creator.board.level
     property real borderWidth: units.gu(1.5)
     property real cellSize: Math.min(width / creator.width , height / creator.height)
 
-    head.actions: [
-        Action {
-            id: infoAction
-            iconName: "info"
-            text: i18n.tr("About")
-            onTriggered: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
-        },
-        Action {
-            id: helpAction
-            iconName: "help"
-            text: i18n.tr("Help")
-            onTriggered: pageStack.push(Qt.resolvedUrl("HelpCreatorPage.qml"))
-        },
-        Action {
-            id: settingsAction
-            iconName: "settings"
-            text: i18n.tr("Settings")
-            onTriggered: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
-        }
-    ]
+    header: PageHeader {
+        id: pageHeader
+        title: "Creator - Level " + level.id
+        trailingActionBar.actions: [
+            Action {
+                id: infoAction
+                iconName: "info"
+                text: i18n.tr("About")
+                onTriggered: pageLayout.addPageToCurrentColumn(root, Qt.resolvedUrl("AboutPage.qml"))
+            },
+            Action {
+                id: helpAction
+                iconName: "help"
+                text: i18n.tr("Help")
+                onTriggered: pageLayout.addPageToCurrentColumn(root, Qt.resolvedUrl("HelpCreatorPage.qml"))
+            },
+            Action {
+                id: settingsAction
+                iconName: "settings"
+                text: i18n.tr("Settings")
+                onTriggered: pageLayout.addPageToCurrentColumn(root, Qt.resolvedUrl("SettingsPage.qml"))
+            }
+        ]
+    }
 
     GridLayout {
         id: mainGrid
         anchors.fill: parent
+        anchors.topMargin: pageHeader.height
         columns: app.landscape ? 3 : 1
 
         Item {
@@ -78,6 +82,7 @@ Page {
                     Layout.preferredHeight: app.landscape ? parent.height / 5 : parent.width / 5
                     Layout.alignment: !app.landscape ? Qt.AlignBottom : Qt.AlignVCenter | Qt.AlignHCenter
                 }
+
                 LevelCreatorTwoHorizontalTool {
                     id: twoHorizontalTool
                     Layout.fillHeight: app.landscape
@@ -200,10 +205,10 @@ Page {
 
                                 MouseArea {
                                     anchors.fill: parent
-                                    onClicked:  {
-                                        if (!creator.board.showSolutionRunning)
+                                    onClicked: {
+                                        if (!creator.board.showSolutionRunning) {
                                             creator.createBlock(index)
-
+                                        }
                                     }
                                 }
                             }
@@ -244,14 +249,12 @@ Page {
                         id: deleteMouseArea
                         anchors.fill: parent
                         onClicked: {
-                            if (!creator.board.showSolutionRunning)
+                            if (!creator.board.showSolutionRunning) {
                                 creator.clearBoard()
-
+                            }
                         }
                     }
                 }
-
-
 
                 UbuntuShape {
                     Layout.fillHeight: app.landscape
@@ -279,8 +282,6 @@ Page {
                         }
                     }
                 }
-
-
 
                 UbuntuShape {
                     Layout.fillHeight: app.landscape
@@ -339,8 +340,6 @@ Page {
                     }
                 }
 
-
-
                 UbuntuShape {
                     visible: creator.board.solutionAvailable
 
@@ -363,9 +362,9 @@ Page {
                         id: showSolutionMouseArea
                         anchors.fill: parent
                         onClicked: {
-                            if (!creator.board.showSolutionRunning)
+                            if (!creator.board.showSolutionRunning) {
                                 creator.board.showSolution()
-
+                            }
                         }
                     }
                 }

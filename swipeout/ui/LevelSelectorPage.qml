@@ -24,29 +24,34 @@ import Swipeout 1.0
 
 Page {
     id: root
-    title: levelPack.name
+
     property var levelPack: gameEngine.levelPack
 
-    head.actions: [
-        Action {
-            id: infoAction
-            iconName: "info"
-            text: i18n.tr("About")
-            onTriggered: pageStack.push(Qt.resolvedUrl("AboutPage.qml"))
-        },
-        Action {
-            id: helpAction
-            iconName: "help"
-            text: i18n.tr("Help")
-            onTriggered: pageStack.push(Qt.resolvedUrl("HelpMenuPage.qml"))
-        },
-        Action {
-            id: settingsAction
-            iconName: "settings"
-            text: i18n.tr("Settings")
-            onTriggered: pageStack.push(Qt.resolvedUrl("SettingsPage.qml"))
-        }
-    ]
+    header: PageHeader {
+        id: pageHeader
+        title: levelPack.name
+        flickable: levelGrid
+        trailingActionBar.actions: [
+            Action {
+                id: infoAction
+                iconName: "info"
+                text: i18n.tr("About")
+                onTriggered: pageLayout.addPageToCurrentColumn(root, Qt.resolvedUrl("AboutPage.qml"))
+            },
+            Action {
+                id: helpAction
+                iconName: "help"
+                text: i18n.tr("Help")
+                onTriggered: pageLayout.addPageToCurrentColumn(root, Qt.resolvedUrl("HelpMenuPage.qml"))
+            },
+            Action {
+                id: settingsAction
+                iconName: "settings"
+                text: i18n.tr("Settings")
+                onTriggered: pageLayout.addPageToCurrentColumn(root, Qt.resolvedUrl("SettingsPage.qml"))
+            }
+        ]
+    }
 
     GridView {
         id: levelGrid
@@ -56,10 +61,10 @@ Page {
         cellWidth: app.landscape ? width / 8 : width / 4
         cellHeight: cellWidth
         model: levelPack.levels
-
         delegate: LevelSelectorItem {
             width: levelGrid.cellWidth
             height: levelGrid.cellHeight
+            sourcePage: root
             level: levelPack.levels.get(model.levelId)
         }
     }

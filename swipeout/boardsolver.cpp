@@ -129,12 +129,10 @@ QVector<QVector<BoardCell> > Node::boardGrid() const
     return m_boardGrid;
 }
 
-bool Node::operator==(Node *other)
+bool Node::operator==(Node *other) const
 {
-    return other->boardGrid() == boardGrid();
+    return other->boardGrid() == m_boardGrid;
 }
-
-
 
 BoardSolver::BoardSolver(QObject *parent) :
     QObject(parent)

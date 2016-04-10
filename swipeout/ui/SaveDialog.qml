@@ -36,7 +36,7 @@ Dialog {
 
     ThinDivider { }
 
-    Text {
+    Label {
         id: pathText
         horizontalAlignment: Text.AlignHCenter
         text: "level-" + levelId + ".json"

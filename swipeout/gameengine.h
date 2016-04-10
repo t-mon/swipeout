@@ -24,6 +24,7 @@
 #include <QObject>
 #include <QFuture>
 #include <QDateTime>
+#include <QTimer>
 
 #include "levels.h"
 #include "levelpack.h"
@@ -43,6 +44,7 @@ class GameEngine : public QObject
     Q_PROPERTY(Board *board READ board CONSTANT)
     Q_PROPERTY(Settings *settings READ settings CONSTANT)
     Q_PROPERTY(QString dataDir READ dataDir WRITE setDataDir NOTIFY dataDirChanged)
+    Q_PROPERTY(QString solverTime READ solverTime NOTIFY solverTimeChanged)
     Q_PROPERTY(bool solverRunning READ solverRunning NOTIFY solverRunningChanged)
     Q_PROPERTY(bool hasNextLevel READ hasNextLevel NOTIFY hasNextLevelChanged)
     Q_PROPERTY(bool hasPreviousLevel READ hasPreviousLevel NOTIFY hasPreviousLevelChanged)
@@ -52,6 +54,8 @@ public:
 
     QString dataDir() const;
     void setDataDir(const QString &dataDir);
+
+    QString solverTime() const;
 
     bool hasNextLevel() const;
     bool hasPreviousLevel() const;
@@ -89,7 +93,9 @@ private:
     QFutureWatcher<QStack<Move> > *m_watcher;
     Settings *m_settings;
 
-    QDateTime m_timestamp;
+    QTimer *m_solverTimer;
+    QDateTime m_solverStartTime;
+    QString m_solverTime;
     bool m_solverRunning;
     Board *m_solverBoard;
 
@@ -105,6 +111,7 @@ private:
     void reloadLevelPackStatistic();
 
     void setSolverRunning(const bool &solverRunning);
+    void setSolverTime(const QString &solverTime);
 
     void setHasNextLevel(const bool &hasNextLevel);
     void setHasPreviousLevel(const bool &hasPreviousLevel);
@@ -113,11 +120,13 @@ private slots:
     void onSolverFinished();
     void onLevelCompleted();
     void onShowSolutionSpeedChanged();
+    void onSolverTimerTimout();
 
 signals:
     void dataDirChanged();
     void hasNextLevelChanged();
     void hasPreviousLevelChanged();
+    void solverTimeChanged();
     void solverRunningChanged();
     void solutionReady(const QString &runTime);
     void levelPackChanged();

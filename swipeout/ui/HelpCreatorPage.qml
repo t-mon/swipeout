@@ -26,10 +26,16 @@ import Swipeout 1.0
 
 Page {
     id: root
-    // TRANSLATORS: Title of the Level Creator help screen.
-    title: i18n.tr("Level creator help")
+
+    header: PageHeader {
+        id: pageHeader
+        // TRANSLATORS: Title of the Level Creator help screen.
+        title: i18n.tr("Level creator help")
+        flickable: helpFlickable
+    }
 
     Flickable {
+        id: helpFlickable
         anchors.fill: parent
         anchors.margins: units.gu(2)
         contentHeight: columnLayout.height
@@ -55,12 +61,14 @@ Page {
                 }
 
                 ThinDivider { }
+
                 Label {
                     // TRANSLATORS: Sub title of the creator help screen for the block tools
                     text: i18n.tr("Block tools:")
                     font.bold: true
                     font.pixelSize: units.gu(3)
                 }
+
                 ThinDivider { }
 
                 Row {
@@ -202,12 +210,14 @@ Page {
                 spacing: units.gu(1)
 
                 ThinDivider { }
+
                 Label {
                     // TRANSLATORS: Sub title of the creator help screen for the board tools
                     text: i18n.tr("Board tools:")
                     font.bold: true
                     font.pixelSize: units.gu(3)
                 }
+
                 ThinDivider { }
 
                 Row {
@@ -238,7 +248,6 @@ Page {
                     }
                 }
 
-
                 Row {
                     anchors.left: parent.left
                     anchors.leftMargin: units.gu(2)
@@ -265,7 +274,6 @@ Page {
                         text: i18n.tr("Create random level")
                     }
                 }
-
 
                 Row {
                     anchors.left: parent.left
@@ -294,7 +302,6 @@ Page {
                     }
                 }
 
-
                 Row {
                     anchors.left: parent.left
                     anchors.leftMargin: units.gu(2)
@@ -321,7 +328,6 @@ Page {
                         text: i18n.tr("Save level")
                     }
                 }
-
 
                 Row {
                     anchors.left: parent.left

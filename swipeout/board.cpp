@@ -51,7 +51,7 @@ void BoardCell::setBlockId(const int &blockId)
     m_blockId = blockId;
 }
 
-bool BoardCell::operator==(const BoardCell &other)
+bool BoardCell::operator==(const BoardCell &other) const
 {
     return x() == other.x() && y() == other.y() && blockId() == other.blockId();
 }

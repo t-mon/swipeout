@@ -33,14 +33,14 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
     app.setApplicationName("Swipeout");
-    app.setApplicationVersion("0.5.0");
+    app.setApplicationVersion("0.5.2");
 
     // command line parser
     QCommandLineParser parser;
     parser.addHelpOption();
     parser.addVersionOption();
-    parser.setApplicationDescription(QString("\nClassic swipe out game.\n\n"
-                                             "Copyright %1 2015 Simon Stürz <stuerz.simon@gmail.com>\n"
+    parser.setApplicationDescription(QString("\nClassic unblocking game.\n\n"
+                                             "Copyright %1 2015 - 2016 Simon Stürz <stuerz.simon@gmail.com>\n"
                                              "Released under the GNU GPLv3.").arg(QChar(0xA9)));
     parser.addPositionalArgument("dataPath", "The relative file path where the \"data\" folders can be found (optional).", "[dataPath]");
     parser.process(app);

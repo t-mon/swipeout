@@ -57,10 +57,16 @@ MainView {
         dataDir: dataDirectory
     }
 
-    PageStack {
-        id: pageStack
+    AdaptivePageLayout {
+        id: pageLayout
         anchors.fill: parent
-        Component.onCompleted: push(Qt.resolvedUrl("MainPage.qml"))
+        primaryPageSource: Qt.resolvedUrl("MainPage.qml")
+        layouts: PageColumnsLayout {
+            when: width > units.gu(80)
+            PageColumn {
+                fillWidth: true
+            }
+        }
     }
 }
 

@@ -41,7 +41,7 @@ msgstr "Code source :"
 #. TRANSLATORS: In the about screen.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:123
 msgid "Bug tracker:"
-msgstr "Rapports de bogues :"
+msgstr "Rapports d'anomalies :"
 
 #. TRANSLATORS: In the about screen.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:142
@@ -93,7 +93,7 @@ msgstr "Aide"
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:40
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:33
 msgid "Settings"
-msgstr "Réglages"
+msgstr "Paramètres"
 
 #. TRANSLATORS: Moves rectangle in the play view.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:103
@@ -129,9 +129,9 @@ msgid ""
 "levels from the main menu \"Load level\"."
 msgstr ""
 "Dans l'éditeur de niveau, vous pouvez créer votre propres niveaux avec la "
-"meilleur solution en utilisant le solveur. Seules les grilles solubles "
+"meilleure solution en utilisant le solveur. Seules les grilles solubles "
 "peuvent être enregistrées comme niveau. Le numéro de niveau sera ajouté "
-"automatiquement. Vous pouvez charger et jouer au niveaux créés depuis le "
+"automatiquement. Vous pouvez charger et jouer aux niveaux créés depuis le "
 "menu « Charger un niveau »."
 
 #. TRANSLATORS: Sub title of the creator help screen for the block tools
@@ -187,7 +187,7 @@ msgstr "Résoudre la grille"
 #. TRANSLATORS: Tool description in the Creator Help view.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:328
 msgid "Save level"
-msgstr "Sauvegarder le niveau"
+msgstr "Enregistrer le niveau"
 
 #. TRANSLATORS: Tool description in the Creator Help view.
 #. TRANSLATORS: Show the solution moves on the board.
@@ -239,7 +239,7 @@ msgstr "Enregistrer le niveau"
 #. TRANSLATORS: Save question.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:35
 msgid "Do you want to save this level?"
-msgstr "Voulez vous enregistrer ce niveau ?"
+msgstr "Voulez-vous enregistrer ce niveau ?"
 
 #. TRANSLATORS: Save the current board.
 #. TRANSLATORS: Save the solved level.
@@ -284,14 +284,14 @@ msgstr "Volume du son"
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:161
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:176
 msgid "Reset game"
-msgstr "Réinitilialiser le jeux"
+msgstr "Réinitilialiser le jeu"
 
 #. TRANSLATORS: Reset warning message.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:178
 msgid "Are you sure you want to reset all game settings and achievements?"
 msgstr ""
-"Voulez-vous vraiment réinitialiser les réglages du jeux et les "
-"accomplissements ?"
+"Voulez-vous vraiment réinitialiser les paramètres du jeu et les "
+"résultats ?"
 
 #. TRANSLATORS: Reset button in the reset dialog
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:184

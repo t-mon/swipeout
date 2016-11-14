@@ -52,36 +52,62 @@ Page {
                 anchors.margins: units.gu(2)
                 spacing: units.gu(2)
 
-                ValueSelector {
+
+                OptionSelector {
+                    model: ["Dark", "Ubuntu Colors", "Colors", "Warm Colors"]
                     // TRANSLATORS: In the settings page the color theme value selector description.
                     text: i18n.tr("Block Color Theme")
-                    values: ["Dark", "Ubuntu Colors", "Colors", "Warm Colors"]
-                    onSelectedIndexChanged: gameEngine.settings.blockTheme = values[selectedIndex]
-                    Component.onCompleted: selectedIndex = values.indexOf(gameEngine.settings.blockTheme)
+                    onSelectedIndexChanged: gameEngine.settings.blockTheme = model[selectedIndex]
+                    Component.onCompleted: selectedIndex = model.indexOf(gameEngine.settings.blockTheme)
                 }
 
-                Column {
+                ThinDivider { }
+
+                Label {
+                    anchors.left: parent.left
+                    // TRANSLATORS: In the settings page the slider description. Describes the speed of the animation while showing the solution.
+                    text: i18n.tr("Show solution delay") + " [ " + Math.round(speedSlider.value) + " ms ]"
+                }
+
+                RowLayout {
                     anchors.left: parent.left
                     anchors.right: parent.right
 
-                    Label {
-                        anchors.left: parent.left
-                        // TRANSLATORS: In the settings page the slider description. Describes the speed of the animation while showing the solution.
-                        text: i18n.tr("Show solution delay") + " [ " + Math.round(speedSlider.value) + " ms ]"
+                    Icon {
+                        Layout.minimumWidth: units.gu(3)
+                        implicitHeight: units.gu(3)
+                        implicitWidth: width
+                        name: "remove"
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: speedSlider.value = speedSlider.minimumValue
+                        }
                     }
 
                     Slider {
                         id: speedSlider
-                        width: parent.width
+                        Layout.fillWidth: true
                         maximumValue: 1000
                         minimumValue: 250
-                        onValueChanged: {
-                            gameEngine.settings.showSolutionSpeed = speedSlider.value
-                        }
+                        onValueChanged: gameEngine.settings.showSolutionSpeed = speedSlider.value
 
                         Component.onCompleted: value = gameEngine.settings.showSolutionSpeed
                     }
+
+                    Icon {
+                        Layout.minimumWidth: units.gu(3)
+                        implicitHeight: units.gu(3)
+                        implicitWidth: width
+                        name: "add"
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: speedSlider.value = speedSlider.maximumValue
+                        }
+                    }
                 }
+
 
                 ThinDivider { }
 
@@ -98,15 +124,14 @@ Page {
                     CheckBox {
                         id: vibrationCheckbox
                         anchors.right: parent.right
-                        onCheckedChanged: {
-                            gameEngine.settings.vibrations = vibrationCheckbox.checked
-                        }
+                        onCheckedChanged: gameEngine.settings.vibrations = vibrationCheckbox.checked
 
                         Component.onCompleted: checked = gameEngine.settings.vibrations
                     }
                 }
 
-                //ThinDivider { }
+                ThinDivider { }
+
                 Item {
                     width: parent.width
                     height: units.gu(3)
@@ -120,35 +145,56 @@ Page {
                     CheckBox {
                         id: soundsCheckbox
                         anchors.right: parent.right
-                        onCheckedChanged: {
-                            gameEngine.settings.sounds = soundsCheckbox.checked
-                        }
+                        onCheckedChanged: gameEngine.settings.sounds = soundsCheckbox.checked
 
                         Component.onCompleted: checked = gameEngine.settings.sounds
                     }
                 }
-                //ThinDivider { }
 
-                Column {
+                ThinDivider { }
+
+                Label {
+                    anchors.left: parent.left
+                    // TRANSLATORS: In the settings page the slider description.
+                    text: i18n.tr("Sound volume") + " ( " + Math.round(volumeSlider.value) + "% )"
+                }
+
+                RowLayout {
                     anchors.left: parent.left
                     anchors.right: parent.right
 
-                    Label {
-                        anchors.left: parent.left
-                        // TRANSLATORS: In the settings page the slider description.
-                        text: i18n.tr("Sound volume") + " ( " + Math.round(volumeSlider.value) + "% )"
+                    Icon {
+                        Layout.minimumWidth: units.gu(3)
+                        implicitHeight: units.gu(3)
+                        implicitWidth: width
+                        name: "audio-speakers-muted-symbolic"
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: volumeSlider.value = volumeSlider.minimumValue
+                        }
                     }
 
                     Slider {
                         id: volumeSlider
-                        width: parent.width
+                        Layout.fillWidth: true
                         maximumValue: 100
                         minimumValue: 0
-                        onValueChanged: {
-                            gameEngine.settings.soundsVolume = volumeSlider.value
-                        }
+                        onValueChanged: gameEngine.settings.soundsVolume = volumeSlider.value
 
                         Component.onCompleted: value = gameEngine.settings.soundsVolume
+                    }
+
+                    Icon {
+                        Layout.minimumWidth: units.gu(3)
+                        implicitHeight: units.gu(3)
+                        implicitWidth: width
+                        name: "audio-speakers-symbolic"
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: volumeSlider.value = volumeSlider.maximumValue
+                        }
                     }
                 }
 

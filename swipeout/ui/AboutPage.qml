@@ -44,15 +44,36 @@ Page {
             anchors.right: parent.right
             spacing: units.gu(2)
 
+
             Column {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 spacing: units.gu(2)
-                Label {
+
+                Item {
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    height: units.gu(7)
+
+                    Label {
+                        anchors.centerIn: parent
+                        text: "Guitar tools"
+                        font.bold: true
+                        font.pixelSize: units.gu(5)
+                    }
+                }
+
+
+                UbuntuShape {
+                    id: iconImage
                     anchors.horizontalCenter: parent.horizontalCenter
-                    text: "Swipeout"
-                    font.bold: true
-                    font.pixelSize: units.gu(5)
+                    width: units.gu(10)
+                    height: width
+                    radius: "medium"
+                    source: Image {
+                        anchors.fill: parent
+                        source: "qrc:///images/swipeout.svg"
+                    }
                 }
 
                 Label {
@@ -64,7 +85,7 @@ Page {
 
                 Label {
                     anchors.horizontalCenter: parent.horizontalCenter
-                    text: "2015 - 2016 © Simon Stürz"
+                    text: "2016 © Simon Stürz"
                 }
 
                 ThinDivider { }
@@ -160,9 +181,7 @@ Page {
                     text: i18n.tr("Thanks to all translators!")
                     font.underline: true
                     wrapMode: Text.WordWrap
-                    anchors.left: parent.left
-                    anchors.leftMargin: units.gu(2)
-                    anchors.right: parent.right
+                    anchors.horizontalCenter: parent.horizontalCenter
 
                     MouseArea {
                         anchors.fill: parent

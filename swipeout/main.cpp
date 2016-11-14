@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
     app.setApplicationName("Swipeout");
-    app.setApplicationVersion("0.5.2");
+    app.setApplicationVersion("0.5.3");
 
     // command line parser
     QCommandLineParser parser;

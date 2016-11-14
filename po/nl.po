@@ -1,22 +1,17 @@
-# Polish translation for swipeout
-# Copyright (c) 2016 Rosetta Contributors and Canonical Ltd 2016
-# This file is distributed under the same license as the swipeout package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: swipeout\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-10 19:01+0200\n"
-"PO-Revision-Date: 2016-04-10 20:59+0000\n"
-"Last-Translator: Michal Predotka <mpredotka@gmail.com>\n"
-"Language-Team: Polish <pl@li.org>\n"
-"Language: pl\n"
+"PO-Revision-Date: 2016-04-29 16:05+0000\n"
+"Last-Translator: Sander <Unknown>\n"
+"Language-Team: Dutch <NL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2016-04-11 06:16+0000\n"
-"X-Generator: Launchpad (build 17990)\n"
+"X-Launchpad-Export-Date: 2016-06-02 06:24+0000\n"
+"X-Generator: Launchpad (build 18053)\n"
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:31
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:42
@@ -26,42 +21,42 @@ msgstr ""
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/LoadLevelPage.qml:34
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:34
 msgid "About"
-msgstr "Informacje"
+msgstr "Over"
 
 #. TRANSLATORS: In the about screen.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:84
 msgid "License:"
-msgstr "Licencja:"
+msgstr "Licentie:"
 
 #. TRANSLATORS: In the about screen.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:103
 msgid "Source code:"
-msgstr "Kod źródłowy:"
+msgstr "Broncode:"
 
 #. TRANSLATORS: In the about screen.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:123
 msgid "Bug tracker:"
-msgstr "Zgłaszanie błędów:"
+msgstr "Bug tracker:"
 
 #. TRANSLATORS: In the about screen.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:142
 msgid "Mail:"
-msgstr "Email:"
+msgstr "Mail:"
 
 #. TRANSLATORS: Thank you very much for helping with the translations!! :)
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:160
 msgid "Thanks to all translators!"
-msgstr "Podziękowania dla tłumaczy!"
+msgstr "Dank aan alle vertalers!"
 
 #. TRANSLATORS: Donate button description
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:177
 msgid "Enjoying the game?"
-msgstr "Lubisz grę?"
+msgstr "Vind je het spel leuk?"
 
 #. TRANSLATORS: Text in the Donate button
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:191
 msgid "Donate via PayPal"
-msgstr "Wspomóż przez PayPal"
+msgstr "Doneren via PayPal"
 
 #. TRANSLATORS: Game description in the about screen.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:204
@@ -71,10 +66,10 @@ msgid ""
 "Horizontal blocks can only be pushed \"left\" and \"right\", vertical blocks "
 "only \"up\" and \"down\"."
 msgstr ""
-"Swipeout to klasyczna gra mająca na celu odblokowanie oznaczonego bloku i "
-"wypchnięcie go przez właściwe wyjście.\n"
-"Bloki poziome mogą być przesuwane jedynie w lewo lub w prawo, bloki pionowe "
-"jedynie w górę i w dół."
+"Swipeout is een klassiek unblock spel. Een level kan worden voltooid door "
+"het witte blok door de rechter uitgang te duwen.\n"
+"Horizontale blokken kunnen alleen naar \"links\" en \"rechts\" worden "
+"geduwd, verticale blokken alleen \"omhoog\" en naar \"beneden\"."
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:48
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpMenuPage.qml:30
@@ -82,7 +77,7 @@ msgstr ""
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelPacksPage.qml:44
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelSelectorPage.qml:44
 msgid "Help"
-msgstr "Pomoc"
+msgstr "Help"
 
 #. TRANSLATORS: Title of the settings page
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:54
@@ -93,32 +88,32 @@ msgstr "Pomoc"
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:40
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:33
 msgid "Settings"
-msgstr "Ustawienia"
+msgstr "Instellingen"
 
 #. TRANSLATORS: Moves rectangle in the play view.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:103
 msgid "MOVES"
-msgstr "RUCHY"
+msgstr "ZETTEN"
 
 #. TRANSLATORS: Highscore rectangle in the play view.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:129
 msgid "HIGHSCORE"
-msgstr "REKORD"
+msgstr "HIGHSCORE"
 
 #. TRANSLATORS: Level completed view.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:296
 msgid "Level completed!"
-msgstr "Plansza ukończona!"
+msgstr "Level voltooid!"
 
 #. TRANSLATORS: Level completed view.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/BoardPage.qml:318
 msgid "You have found the perfect solution!"
-msgstr "To było perfekcyjne rozwiązanie!"
+msgstr "Je hebt de perfecte oplossing gevonden!"
 
 #. TRANSLATORS: Title of the Level Creator help screen.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:33
 msgid "Level creator help"
-msgstr "Informacje o tworzeniu plansz"
+msgstr "Level creator help"
 
 #. TRANSLATORS: Level creator description in the help screen.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:60
@@ -128,208 +123,208 @@ msgid ""
 "level number will increase automatically. You can load and play created "
 "levels from the main menu \"Load level\"."
 msgstr ""
-"Przed zapisaniem utworzonej planszy należy upewnić się, że może być ona "
-"rozwiązana przez wybranie ikony opisanej „Rozwiąż planszę”. Jedynie plansze, "
-"które da się rozwiązać mogą być zapisane. Numer planszy jest ustawiany "
-"automatycznie. Dostęp do gry na utworzonych planszach można uzyskać "
-"wybierając „Wczytaj planszę” z głównego menu."
+"In de level creator kan je je eigen levels maken, inclusief de perfecte "
+"oplossing door de 'solver' te gebruiken. Alleen oplosbare levels kunnen "
+"worden opgeslagen. Het level nummer zal automatisch oplopen. Je kan "
+"zelfgemaakte levels laden en spelen vanuit het hoofdmenu \"Load level\"."
 
 #. TRANSLATORS: Sub title of the creator help screen for the block tools
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:67
 msgid "Block tools:"
-msgstr "Narzędzia bloków:"
+msgstr "Blok gereedschap:"
 
 #. TRANSLATORS: Tool description in the Creator Help view.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:97
 msgid "Delete block"
-msgstr "Usuń blok"
+msgstr "Verwijder blok"
 
 #. TRANSLATORS: Tool description in the Creator Help view.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:123
 msgid "Create 2 x 1 block"
-msgstr "Utwórz blok 2 x 1"
+msgstr "Maak 2 x 1 blok"
 
 #. TRANSLATORS: Tool description in the Creator Help view.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:149
 msgid "Create 3 x 1 block"
-msgstr "Utwórz blok 3 x 1"
+msgstr "Maak 3 x 1 blok"
 
 #. TRANSLATORS: Tool description in the Creator Help view.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:175
 msgid "Create 1 x 2 block"
-msgstr "Utwórz blok 1 x 2"
+msgstr "Maak 1 x 2 blok"
 
 #. TRANSLATORS: Tool description in the Creator Help view.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:201
 msgid "Create 1 x 3 block"
-msgstr "Utwórz blok 1 x 3"
+msgstr "Maak 1 x 3 blok"
 
 #. TRANSLATORS: Sub title of the creator help screen for the board tools
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:216
 msgid "Board tools:"
-msgstr "Narzędzia planszy:"
+msgstr "Bord gereedschap:"
 
 #. TRANSLATORS: Tool description in the Creator Help view.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:247
 msgid "Clear board"
-msgstr "Wyczyść planszę"
+msgstr "Verwijder bord"
 
 #. TRANSLATORS: Tool description in the Creator Help view.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:274
 msgid "Create random level"
-msgstr "Utwórz losową planszę"
+msgstr "Creëer willekeurig level"
 
 #. TRANSLATORS: Tool description in the Creator Help view.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:301
 msgid "Solve board"
-msgstr "Rozwiąż planszę"
+msgstr "Level oplossen"
 
 #. TRANSLATORS: Tool description in the Creator Help view.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:328
 msgid "Save level"
-msgstr "Zapisz planszę"
+msgstr "Level opslaan"
 
 #. TRANSLATORS: Tool description in the Creator Help view.
 #. TRANSLATORS: Show the solution moves on the board.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpCreatorPage.qml:355
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:91
 msgid "Show solution"
-msgstr "Pokaż rozwiązanie"
+msgstr "Toon oplossing"
 
 #. TRANSLATORS: Color description in the menu help screen for not completed levels.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpMenuPage.qml:60
 msgid "Not completed"
-msgstr "Nie ukończone"
+msgstr "Niet voltooid"
 
 #. TRANSLATORS: Color description in the menu help screen for completed levels.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpMenuPage.qml:81
 msgid "Completed"
-msgstr "Ukończone"
+msgstr "Voltooid"
 
 #. TRANSLATORS: Color description in the menu help screen for completed perfect levels.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/HelpMenuPage.qml:102
 msgid "Completed perfect"
-msgstr "Ukończone perfekcyjnie"
+msgstr "Perfect voltooid"
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/LevelPacksPage.qml:33
 msgid "Level Packs"
-msgstr "Zestawy plansz"
+msgstr "Level Packs"
 
 #. TRANSLATORS: "Load level" button in the main view.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/LoadLevelPage.qml:29
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:100
 msgid "Load level"
-msgstr "Wczytaj planszę"
+msgstr "Level laden"
 
 #. TRANSLATORS: Play button in the main view.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:74
 msgid "Play"
-msgstr "Graj"
+msgstr "Speel"
 
 #. TRANSLATORS: "Level Creator" button in the main view.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/MainPage.qml:129
 msgid "Level Creator"
-msgstr "Tworzenie plansz"
+msgstr "Level Creator"
 
 #. TRANSLATORS: Title of the save dialog.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:30
 msgid "Save Level"
-msgstr "Zapisz planszę"
+msgstr "Level Opslaan"
 
 #. TRANSLATORS: Save question.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:35
 msgid "Do you want to save this level?"
-msgstr "Zapisać tę planszę?"
+msgstr "Wil je dit level opslaan?"
 
 #. TRANSLATORS: Save the current board.
 #. TRANSLATORS: Save the solved level.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:49
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:79
 msgid "Save"
-msgstr "Zapisz"
+msgstr "Opslaan"
 
 #. TRANSLATORS: Cancel the save process.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SaveDialog.qml:60
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:99
 msgid "Cancel"
-msgstr "Anuluj"
+msgstr "Annuleren"
 
 #. TRANSLATORS: In the settings page the color theme value selector description.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:57
 msgid "Block Color Theme"
-msgstr "Styl bloków"
+msgstr "Blok Kleuren Thema"
 
 #. TRANSLATORS: In the settings page the slider description. Describes the speed of the animation while showing the solution.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:70
 msgid "Show solution delay"
-msgstr "Opóźnienie wyświetlania rozwiązania"
+msgstr "Oplossing snelheid"
 
 #. TRANSLATORS: In the settings page the vibrations checkbox description.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:95
 msgid "Vibrations"
-msgstr "Wibracje"
+msgstr "Trillingen"
 
 #. TRANSLATORS: In the settings page the sound effect checkbox description.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:117
 msgid "Sound effects"
-msgstr "Efekty dźwiękowe"
+msgstr "Geluidseffecten"
 
 #. TRANSLATORS: In the settings page the slider description.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:139
 msgid "Sound volume"
-msgstr "Głośność"
+msgstr "Geluidsvolume"
 
 #. TRANSLATORS: Reset game button in the settings page.
 #. TRANSLATORS: Title of the reset dialog.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:161
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:176
 msgid "Reset game"
-msgstr "Zresetuj grę"
+msgstr "Herstel spel"
 
 #. TRANSLATORS: Reset warning message.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:178
 msgid "Are you sure you want to reset all game settings and achievements?"
-msgstr "Zresetować wszystkie ustawienia gry oraz zdobyte osiągnięcia?"
+msgstr ""
+"Weet je zeker dat je alle spel instellingen en prestaties wilt herstellen?"
 
 #. TRANSLATORS: Reset button in the reset dialog
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:184
 msgid "Reset"
-msgstr "Resetuj"
+msgstr "Herstellen"
 
 #. TRANSLATORS: Button to cancel the reset request.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SettingsPage.qml:194
 msgid "No"
-msgstr "Anuluj"
+msgstr "Nee"
 
 #. TRANSLATORS: Title of the solver dialog
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:30
 msgid "Level Solver"
-msgstr "Rozwiązywanie planszy"
+msgstr "Level Oplosser"
 
 #. TRANSLATORS: Status of the solver
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:35
 msgid "Solving..."
-msgstr "Rozwiązywanie..."
+msgstr "Oplossen..."
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:35
 msgid "Finished!"
-msgstr "Zakończono!"
+msgstr "Voltooid!"
 
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:99
 msgid "Close"
-msgstr "Zamknij"
+msgstr "Sluiten"
 
 #. TRANSLATORS: The runtime of the solver once he is finished.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:112
 msgid "Runtime"
-msgstr "Czas działania"
+msgstr "Speelduur"
 
 #. TRANSLATORS: The message that this board cannot be solved (in the solver view).
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:116
 msgid "This board can't be solved."
-msgstr "Tej planszy nie da się rozwiązać."
+msgstr "Dit level kan niet worden voltooid."
 
 #. TRANSLATORS: Description of the solver result.
 #: /home/timon/development/swipeout/swipeout/swipeout/ui/SolveDialog.qml:120
 msgid "Perfect solution:"
-msgstr "Perfekcyjne rozwiązanie:"
+msgstr "Perfecte oplossing:"

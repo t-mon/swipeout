@@ -12,11 +12,14 @@ exit.Horizontal blocks can only be pushed "left" and "right", vertical blocks on
 * Different color schemes
 * Sound and haptic feedback
 
-You can find more information in the [uApp Explorer](https://uappexplorer.com/app/swipeout.t-mon).
+You can find more information in the [OpenStore](https://open-store.io/app/swipeout.t-mon).
 
 *Architectures:* i386, amd64, armhf
 
 *Support:* Works on Ubuntu phone, tablet and desktop environments. 
+
+## Building
+Install [clickable](https://github.com/bhdouglass/clickable), which is used to build the app. Simply run `clickable` from the app directory. See [clickable documentation](http://clickable.bhdouglass.com/) for details. 
 
 ## Donate
 --------------------------------------------

@@ -57,7 +57,7 @@ Page {
 
                     Label {
                         anchors.centerIn: parent
-                        text: "Guitar tools"
+                        text: "Swipeout"
                         font.bold: true
                         font.pixelSize: units.gu(5)
                     }

@@ -57,7 +57,7 @@ Page {
 
                     Label {
                         anchors.centerIn: parent
-                        text: "Guitar tools"
+                        text: "Swipeout"
                         font.bold: true
                         font.pixelSize: units.gu(5)
                     }
@@ -171,6 +171,23 @@ Page {
                             anchors.fill: parent
                             onClicked: Qt.openUrlExternally("mailto:stuerz.simon@gmail.com")
                         }
+                    }
+                }
+
+                ThinDivider { }
+
+                Row {
+                    anchors.left: parent.left
+                    anchors.leftMargin: units.gu(2)
+                    spacing: units.gu(2)
+                    Label {
+                        // TRANSLATORS: In the about screen.
+                        text: i18n.tr("Click packaging:")
+                        font.bold: true
+                    }
+
+                    Label {
+                        text: "Jonatan Hatakeyama Zeidler"
                     }
                 }
 

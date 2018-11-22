@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: swipeout\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-14 20:59+0100\n"
+"POT-Creation-Date: 2018-11-22 07:46+0000\n"
 "PO-Revision-Date: 2016-02-25 18:21+0000\n"
 "Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -48,23 +48,28 @@ msgstr "Hibabejelentő:"
 msgid "Mail:"
 msgstr "E-mail:"
 
+#. TRANSLATORS: In the about screen.
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:185
+msgid "Click packaging:"
+msgstr ""
+
 #. TRANSLATORS: Thank you very much for helping with the translations!! :)
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:181
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:198
 msgid "Thanks to all translators!"
 msgstr "Köszönet minden fordítónak!"
 
 #. TRANSLATORS: Donate button description
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:196
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:213
 msgid "Enjoying the game?"
 msgstr "Élvezi a játékot?"
 
 #. TRANSLATORS: Text in the Donate button
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:210
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:227
 msgid "Donate via PayPal"
 msgstr "Támogatás PayPallel"
 
 #. TRANSLATORS: Game description in the about screen.
-#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:223
+#: /home/timon/development/swipeout/swipeout/swipeout/ui/AboutPage.qml:240
 msgid ""
 "Swipeout is a classic unblock game. A level can be completed by pushing the "
 "white block through the right exit.\n"

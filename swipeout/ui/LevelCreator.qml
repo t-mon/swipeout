@@ -20,8 +20,8 @@
 
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
-import Ubuntu.Components 1.3
-import Ubuntu.Components.Popups 1.3
+import Lomiri.Components 1.3
+import Lomiri.Components.Popups 1.3
 import Swipeout 1.0
 
 Page {
@@ -125,13 +125,13 @@ Page {
             Layout.preferredHeight: Math.min(parent.height, parent.width)
             Layout.preferredWidth: Math.min(parent.height, parent.width)
 
-            UbuntuShape {
+            LomiriShape {
                 id: boardBackground
                 anchors.fill: parent
 
                 backgroundColor: boardBoarderColor
 
-                UbuntuShape {
+                LomiriShape {
                     id: boardArea
                     anchors.fill: parent
                     anchors.margins: borderWidth
@@ -174,7 +174,7 @@ Page {
                     }
                 }
 
-                UbuntuShape {
+                LomiriShape {
                     id: addingArea
                     anchors.fill: parent
                     anchors.margins: borderWidth
@@ -229,7 +229,7 @@ Page {
                 anchors.margins: units.gu(1)
                 columns: app.landscape ? 1 : 5
 
-                UbuntuShape {
+                LomiriShape {
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
                     Layout.preferredWidth: app.landscape ? parent.height / 5 : parent.width / 5
@@ -256,7 +256,7 @@ Page {
                     }
                 }
 
-                UbuntuShape {
+                LomiriShape {
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
                     Layout.preferredWidth: app.landscape ? parent.height / 5 : parent.width / 5
@@ -283,7 +283,7 @@ Page {
                     }
                 }
 
-                UbuntuShape {
+                LomiriShape {
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
                     Layout.preferredWidth: app.landscape ? parent.height / 5 : parent.width / 5
@@ -311,7 +311,7 @@ Page {
                     }
                 }
 
-                UbuntuShape {
+                LomiriShape {
                     visible: creator.board.solutionAvailable
 
                     Layout.fillHeight: app.landscape
@@ -340,7 +340,7 @@ Page {
                     }
                 }
 
-                UbuntuShape {
+                LomiriShape {
                     visible: creator.board.solutionAvailable
 
                     Layout.fillHeight: app.landscape

@@ -19,8 +19,8 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 import QtQuick 2.4
-import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3
+import Lomiri.Components 1.3
+import Lomiri.Components.ListItems 1.3
 import Swipeout 1.0
 
 Page {
@@ -48,7 +48,7 @@ Page {
 
                 spacing: units.gu(2)
 
-                UbuntuShape {
+                LomiriShape {
                     width: units.gu(5)
                     height: width
                     backgroundColor: uncompletedColor
@@ -69,7 +69,7 @@ Page {
 
                 spacing: units.gu(2)
 
-                UbuntuShape {
+                LomiriShape {
                     width: units.gu(5)
                     height: width
                     backgroundColor: completedColor
@@ -90,7 +90,7 @@ Page {
 
                 spacing: units.gu(2)
 
-                UbuntuShape {
+                LomiriShape {
                     width: units.gu(5)
                     height: width
                     backgroundColor: completedPerfectColor

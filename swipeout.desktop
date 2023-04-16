@@ -4,5 +4,5 @@ Exec=swipeout
 Icon=swipeout/swipeout.png
 Terminal=false
 Type=Application
-X-Ubuntu-Touch=true
+X-Lomiri-Touch=true
 

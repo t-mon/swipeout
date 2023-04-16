@@ -20,8 +20,8 @@
 
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
-import Ubuntu.Components 1.3
-import Ubuntu.Components.ListItems 1.3
+import Lomiri.Components 1.3
+import Lomiri.Components.ListItems 1.3
 
 import Swipeout 1.0
 
@@ -78,7 +78,7 @@ Page {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
 
-                    UbuntuShape {
+                    LomiriShape {
                         id: shape
                         anchors.fill: parent
                         backgroundColor: levelPack.completedPerfectCount == levelPack.levelCount ?
@@ -103,7 +103,7 @@ Page {
                     Column {
                         anchors.fill: parent
 
-                        UbuntuShape {
+                        LomiriShape {
                             width: parent.width
                             height: parent.height / 2
                             backgroundColor: completedColor
@@ -115,7 +115,7 @@ Page {
                             }
                         }
 
-                        UbuntuShape {
+                        LomiriShape {
                             width: parent.width
                             height: parent.height / 2
                             backgroundColor: completedPerfectColor

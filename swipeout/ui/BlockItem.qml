@@ -20,7 +20,7 @@
 
 import QtQuick 2.4
 import QtFeedback 5.0
-import Ubuntu.Components 1.3
+import Lomiri.Components 1.3
 import Swipeout 1.0
 
 Item {
@@ -102,13 +102,13 @@ Item {
         width: block.width * cellSize
         height: block.height * cellSize
 
-        UbuntuShape {
+        LomiriShape {
             anchors.fill: parent
             anchors.margins: units.gu(0.3)
             backgroundColor: block.color
         }
 
-        UbuntuShape {
+        LomiriShape {
             anchors.fill: parent
             backgroundColor: block.color
             opacity: 0.6

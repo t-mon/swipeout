@@ -19,7 +19,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 import QtQuick 2.4
-import Ubuntu.Components 1.3
+import Lomiri.Components 1.3
 import Swipeout 1.0
 
 Page {
@@ -57,13 +57,13 @@ Page {
             width: units.gu(20)
             height: units.gu(7)
 
-            UbuntuShape {
+            LomiriShape {
                 anchors.fill: parent
                 anchors.margins: units.gu(0.3)
                 backgroundColor: "#8d8d8d"
             }
 
-            UbuntuShape {
+            LomiriShape {
                 anchors.fill: parent
                 backgroundColor: "#8d8d8d"
                 opacity: 0.6
@@ -83,13 +83,13 @@ Page {
             width: units.gu(20)
             height: units.gu(7)
 
-            UbuntuShape {
+            LomiriShape {
                 anchors.fill: parent
                 anchors.margins: units.gu(0.3)
                 backgroundColor: "#ff333333"
             }
 
-            UbuntuShape {
+            LomiriShape {
                 anchors.fill: parent
                 backgroundColor: "#ff333333"
                 opacity: 0.6
@@ -112,13 +112,13 @@ Page {
             width: units.gu(20)
             height: units.gu(7)
 
-            UbuntuShape {
+            LomiriShape {
                 anchors.fill: parent
                 anchors.margins: units.gu(0.3)
                 backgroundColor: "#ff333333"
             }
 
-            UbuntuShape {
+            LomiriShape {
                 anchors.fill: parent
                 backgroundColor: "#ff333333"
                 opacity: 0.6

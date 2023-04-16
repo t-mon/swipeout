@@ -20,9 +20,9 @@
 
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
-import Ubuntu.Components 1.3
-import Ubuntu.Components.Popups 1.3
-import Ubuntu.Components.ListItems 1.3
+import Lomiri.Components 1.3
+import Lomiri.Components.Popups 1.3
+import Lomiri.Components.ListItems 1.3
 import Swipeout 1.0
 
 Page {
@@ -85,7 +85,7 @@ Page {
                 anchors.margins: units.gu(1)
                 columns: app.landscape ? 1 : 2
 
-                UbuntuShape {
+                LomiriShape {
                     id: movesShape
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
@@ -111,7 +111,7 @@ Page {
                     }
                 }
 
-                UbuntuShape {
+                LomiriShape {
                     id: highscoreShape
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
@@ -143,12 +143,12 @@ Page {
             Layout.preferredHeight: Math.min(parent.height, parent.width)
             Layout.preferredWidth: Math.min(parent.height, parent.width)
 
-            UbuntuShape {
+            LomiriShape {
                 id: boardBackground
                 anchors.fill: parent
                 backgroundColor: boardBoarderColor
 
-                UbuntuShape {
+                LomiriShape {
                     id: boardArea
                     anchors.fill: parent
                     anchors.margins: borderWidth
@@ -206,7 +206,7 @@ Page {
                 anchors.margins: units.gu(1)
                 columns: app.landscape ? 1 : 3
 
-                UbuntuShape {
+                LomiriShape {
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
                     Layout.minimumWidth: units.gu(8)
@@ -231,7 +231,7 @@ Page {
                     }
                 }
 
-                UbuntuShape {
+                LomiriShape {
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
                     Layout.minimumWidth: units.gu(8)
@@ -257,7 +257,7 @@ Page {
                     }
                 }
 
-                UbuntuShape {
+                LomiriShape {
                     Layout.fillHeight: app.landscape
                     Layout.fillWidth: !app.landscape
                     Layout.minimumWidth: units.gu(8)

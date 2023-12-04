@@ -20,7 +20,7 @@
 
 import QtQuick 2.4
 import QtMultimedia 5.4
-import Ubuntu.Components 1.3
+import Lomiri.Components 1.3
 import Swipeout 1.0
 
 MainView {
@@ -42,7 +42,7 @@ MainView {
 
     Component.onCompleted: {
         i18n.domain = "swipeout.t-mon"
-        Theme.name = "Ubuntu.Components.Themes.SuruDark"
+        Theme.name = "Lomiri.Components.Themes.SuruDark"
     }
 
     SoundEffect {

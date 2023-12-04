@@ -19,7 +19,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 import QtQuick 2.4
-import Ubuntu.Components 1.3
+import Lomiri.Components 1.3
 import Swipeout 1.0
 
 Item {
@@ -28,7 +28,7 @@ Item {
     property var sourcePage
     signal selected()
 
-    UbuntuShape {
+    LomiriShape {
         id: shape
         anchors.fill: parent
         anchors.margins: units.gu(1)

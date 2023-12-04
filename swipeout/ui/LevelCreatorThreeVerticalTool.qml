@@ -19,7 +19,7 @@
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 import QtQuick 2.4
-import Ubuntu.Components 1.3
+import Lomiri.Components 1.3
 import Swipeout 1.0
 
 Item {
@@ -27,7 +27,7 @@ Item {
 
     property bool selected: gameEngine.levelCreator.threeVerticalToolSelected
 
-    UbuntuShape {
+    LomiriShape {
         anchors.fill: parent
         backgroundColor: !selected ? "#88888888" : "#55555555"
 
